@@ -1,0 +1,1731 @@
+{
+  "schemaVersion": "1.2.0",
+  "rules": {
+    "fixedStepHz": 60,
+    "gravity": 20,
+    "runSpeed": 6,
+    "jumpVelocity": 8,
+    "jumpBufferSeconds": 0.12,
+    "coyoteSeconds": 0.1,
+    "slideSeconds": 0.7,
+    "vaultMaxHeight": 1.2,
+    "bodySize": [
+      0.6,
+      1.8
+    ],
+    "slideBodySize": [
+      0.6,
+      0.8
+    ],
+    "enabledAbilities": [
+      "jump",
+      "slide",
+      "vault",
+      "dashGrapple",
+      "swingGrapple",
+      "zipline",
+      "jumpPad"
+    ],
+    "bindings": [
+      {
+        "action": "jump",
+        "keys": [
+          "Space",
+          "ArrowUp"
+        ],
+        "behaviour": "press"
+      },
+      {
+        "action": "slide",
+        "keys": [
+          "KeyS",
+          "ArrowDown"
+        ],
+        "behaviour": "press"
+      },
+      {
+        "action": "dashGrapple",
+        "keys": [
+          "KeyE"
+        ],
+        "behaviour": "press"
+      },
+      {
+        "action": "swingGrapple",
+        "keys": [
+          "KeyQ"
+        ],
+        "behaviour": "hold"
+      },
+      {
+        "action": "zipline",
+        "keys": [
+          "KeyF"
+        ],
+        "behaviour": "press"
+      },
+      {
+        "action": "pause",
+        "keys": [
+          "Escape"
+        ],
+        "behaviour": "press"
+      },
+      {
+        "action": "retry",
+        "keys": [
+          "KeyR"
+        ],
+        "behaviour": "press"
+      }
+    ],
+    "groundAcceleration": 24,
+    "airAcceleration": 6,
+    "maxHorizontalSpeed": 24,
+    "maxFallSpeed": 25,
+    "groundProbeDistance": 0.08,
+    "collisionSkin": 0.02,
+    "standClearancePadding": 0.05,
+    "vaultMaxWidth": 2,
+    "vaultAcquisitionDistance": 1.2,
+    "vaultDurationSeconds": 0.8,
+    "vaultExitSpeed": 6,
+    "landingRecoverySeconds": 0.1,
+    "maxBufferedActions": 32,
+    "camera": {
+      "targetScreenX": 0.32,
+      "lookAheadSeconds": 0.28,
+      "minLookAhead": 0.8,
+      "maxLookAhead": 4,
+      "deadZoneSize": [
+        3,
+        2
+      ],
+      "verticalLookAheadSeconds": 0.15,
+      "maxVerticalOffset": 3,
+      "smoothingSeconds": 0.18,
+      "maxCatchUpSpeed": 48,
+      "baseViewHeight": 12,
+      "minViewHeight": 10,
+      "maxViewHeight": 24,
+      "zoomSmoothingSeconds": 0.3,
+      "reactionBudgetSeconds": 0.75
+    },
+    "contextInputSeconds": 0.5,
+    "vaultTrajectory": [
+      [
+        0,
+        0,
+        0
+      ],
+      [
+        0.15,
+        0.18,
+        0.35
+      ],
+      [
+        0.32,
+        0.38,
+        1.1
+      ],
+      [
+        0.78,
+        1,
+        1.1
+      ],
+      [
+        1,
+        1,
+        0
+      ]
+    ],
+    "gripOffset": [
+      0,
+      2.3
+    ]
+  },
+  "profiles": [
+    {
+      "id": "dash-basic",
+      "kind": "dashGrapple",
+      "range": 10,
+      "coneRadians": 1.4,
+      "speed": 18,
+      "arrivalRadius": 0.8,
+      "cooldownSeconds": 0.5,
+      "exitSpeed": 8
+    },
+    {
+      "id": "swing-basic",
+      "kind": "swingGrapple",
+      "range": 12,
+      "minLength": 2,
+      "maxLength": 12,
+      "maxSpeed": 20,
+      "cooldownSeconds": 0.3,
+      "coneRadians": 2.8
+    },
+    {
+      "id": "zip-basic",
+      "kind": "zipline",
+      "captureRadius": 1,
+      "speed": 10,
+      "exitJumpVelocity": 5
+    },
+    {
+      "id": "pad-basic",
+      "kind": "jumpPad",
+      "launchVelocity": [
+        6,
+        10
+      ],
+      "rearmSeconds": 0.25,
+      "velocityPolicy": "replace"
+    }
+  ],
+  "contentRevision": "motion-lab-03-prefabs",
+  "physicsVersion": "lab-02",
+  "generatorVersion": "not-enabled",
+  "modules": [
+    {
+      "id": "unit-jump",
+      "size": [
+        32,
+        18
+      ],
+      "difficulty": 0,
+      "tags": [
+        "prefab",
+        "jump",
+        "authored",
+        "unqualified-for-endless"
+      ],
+      "entities": [
+        {
+          "id": "floor-start",
+          "kind": "surface",
+          "rect": [
+            0,
+            -2,
+            13,
+            2
+          ],
+          "oneWay": false,
+          "vaultable": false
+        },
+        {
+          "id": "floor-middle",
+          "kind": "surface",
+          "rect": [
+            16,
+            -2,
+            16,
+            2
+          ],
+          "oneWay": false,
+          "vaultable": false
+        },
+        {
+          "id": "pit-marker",
+          "kind": "hazard",
+          "rect": [
+            0,
+            -8,
+            32,
+            1
+          ]
+        }
+      ],
+      "sockets": [
+        {
+          "id": "entry",
+          "role": "entry",
+          "position": [
+            2,
+            0
+          ],
+          "contract": {
+            "postures": [
+              "grounded"
+            ],
+            "vxRange": [
+              0,
+              24
+            ],
+            "vyRange": [
+              0,
+              0
+            ],
+            "clearance": [
+              1,
+              2.5
+            ],
+            "requiredAbilities": []
+          }
+        },
+        {
+          "id": "exit",
+          "role": "exit",
+          "position": [
+            32,
+            0
+          ],
+          "contract": {
+            "postures": [
+              "grounded"
+            ],
+            "vxRange": [
+              0,
+              24
+            ],
+            "vyRange": [
+              0,
+              0
+            ],
+            "clearance": [
+              1,
+              2.5
+            ],
+            "requiredAbilities": []
+          }
+        }
+      ],
+      "routes": [
+        {
+          "id": "route",
+          "entrySocketId": "entry",
+          "exitSocketId": "exit",
+          "requiredAbilities": [
+            "jump"
+          ],
+          "witnessActions": [],
+          "maxTicks": 6000
+        }
+      ],
+      "sceneActions": [
+        {
+          "id": "gap-jump",
+          "entityId": "floor-start",
+          "kind": "jump",
+          "input": "jump",
+          "edge": "end",
+          "startOffset": -2,
+          "leadDistance": 2.0,
+          "lateDistance": 0.35,
+          "priority": 10,
+          "heightRange": [
+            -0.1,
+            0.2
+          ]
+        }
+      ]
+    },
+    {
+      "id": "unit-slide",
+      "size": [
+        32,
+        18
+      ],
+      "difficulty": 0,
+      "tags": [
+        "prefab",
+        "slide",
+        "authored",
+        "unqualified-for-endless"
+      ],
+      "entities": [
+        {
+          "id": "floor-middle",
+          "kind": "surface",
+          "rect": [
+            0,
+            -2,
+            32,
+            2
+          ],
+          "oneWay": false,
+          "vaultable": false
+        },
+        {
+          "id": "low-tunnel",
+          "kind": "surface",
+          "rect": [
+            7,
+            1.12,
+            10,
+            1.15
+          ],
+          "oneWay": false,
+          "vaultable": false
+        },
+        {
+          "id": "pit-marker",
+          "kind": "hazard",
+          "rect": [
+            0,
+            -8,
+            32,
+            1
+          ]
+        }
+      ],
+      "sockets": [
+        {
+          "id": "entry",
+          "role": "entry",
+          "position": [
+            0,
+            0
+          ],
+          "contract": {
+            "postures": [
+              "grounded"
+            ],
+            "vxRange": [
+              0,
+              24
+            ],
+            "vyRange": [
+              0,
+              0
+            ],
+            "clearance": [
+              1,
+              2.5
+            ],
+            "requiredAbilities": []
+          }
+        },
+        {
+          "id": "exit",
+          "role": "exit",
+          "position": [
+            32,
+            0
+          ],
+          "contract": {
+            "postures": [
+              "grounded"
+            ],
+            "vxRange": [
+              0,
+              24
+            ],
+            "vyRange": [
+              0,
+              0
+            ],
+            "clearance": [
+              1,
+              2.5
+            ],
+            "requiredAbilities": []
+          }
+        }
+      ],
+      "routes": [
+        {
+          "id": "route",
+          "entrySocketId": "entry",
+          "exitSocketId": "exit",
+          "requiredAbilities": [
+            "slide"
+          ],
+          "witnessActions": [],
+          "maxTicks": 6000
+        }
+      ],
+      "sceneActions": [
+        {
+          "id": "tunnel-slide",
+          "entityId": "low-tunnel",
+          "kind": "slide",
+          "input": "slide",
+          "edge": "start",
+          "startOffset": -1.6,
+          "leadDistance": 2,
+          "lateDistance": 0.4,
+          "priority": 10,
+          "heightRange": [
+            -0.1,
+            0.3
+          ]
+        }
+      ]
+    },
+    {
+      "id": "unit-vault",
+      "size": [
+        32,
+        18
+      ],
+      "difficulty": 0,
+      "tags": [
+        "prefab",
+        "vault",
+        "authored",
+        "unqualified-for-endless"
+      ],
+      "entities": [
+        {
+          "id": "floor-middle",
+          "kind": "surface",
+          "rect": [
+            0,
+            -2,
+            32,
+            2
+          ],
+          "oneWay": false,
+          "vaultable": false
+        },
+        {
+          "id": "vault-block",
+          "kind": "surface",
+          "rect": [
+            7,
+            0,
+            1.25,
+            0.85
+          ],
+          "oneWay": false,
+          "vaultable": true
+        },
+        {
+          "id": "pit-marker",
+          "kind": "hazard",
+          "rect": [
+            0,
+            -8,
+            32,
+            1
+          ]
+        }
+      ],
+      "sockets": [
+        {
+          "id": "entry",
+          "role": "entry",
+          "position": [
+            0,
+            0
+          ],
+          "contract": {
+            "postures": [
+              "grounded"
+            ],
+            "vxRange": [
+              0,
+              24
+            ],
+            "vyRange": [
+              0,
+              0
+            ],
+            "clearance": [
+              1,
+              2.5
+            ],
+            "requiredAbilities": []
+          }
+        },
+        {
+          "id": "exit",
+          "role": "exit",
+          "position": [
+            32,
+            0
+          ],
+          "contract": {
+            "postures": [
+              "grounded"
+            ],
+            "vxRange": [
+              0,
+              24
+            ],
+            "vyRange": [
+              0,
+              0
+            ],
+            "clearance": [
+              1,
+              2.5
+            ],
+            "requiredAbilities": []
+          }
+        }
+      ],
+      "routes": [
+        {
+          "id": "route",
+          "entrySocketId": "entry",
+          "exitSocketId": "exit",
+          "requiredAbilities": [
+            "vault"
+          ],
+          "witnessActions": [],
+          "maxTicks": 6000
+        }
+      ],
+      "sceneActions": [
+        {
+          "id": "block-vault",
+          "entityId": "vault-block",
+          "kind": "vault",
+          "input": "jump",
+          "edge": "start",
+          "startOffset": -1.8,
+          "leadDistance": 2,
+          "lateDistance": 0.35,
+          "priority": 30,
+          "heightRange": [
+            -0.1,
+            0.2
+          ]
+        }
+      ]
+    },
+    {
+      "id": "unit-dash",
+      "size": [
+        32,
+        18
+      ],
+      "difficulty": 0,
+      "tags": [
+        "prefab",
+        "dash",
+        "authored",
+        "unqualified-for-endless"
+      ],
+      "entities": [
+        {
+          "id": "floor-middle",
+          "kind": "surface",
+          "rect": [
+            0,
+            -2,
+            13,
+            2
+          ],
+          "oneWay": false,
+          "vaultable": false
+        },
+        {
+          "id": "floor-dash-landing",
+          "kind": "surface",
+          "rect": [
+            23,
+            -2,
+            9,
+            2
+          ],
+          "oneWay": false,
+          "vaultable": false
+        },
+        {
+          "id": "dash-anchor",
+          "kind": "anchor",
+          "position": [
+            21,
+            4
+          ],
+          "profileId": "dash-basic"
+        },
+        {
+          "id": "pit-marker",
+          "kind": "hazard",
+          "rect": [
+            0,
+            -8,
+            32,
+            1
+          ]
+        }
+      ],
+      "sockets": [
+        {
+          "id": "entry",
+          "role": "entry",
+          "position": [
+            0,
+            0
+          ],
+          "contract": {
+            "postures": [
+              "grounded"
+            ],
+            "vxRange": [
+              0,
+              24
+            ],
+            "vyRange": [
+              0,
+              0
+            ],
+            "clearance": [
+              1,
+              2.5
+            ],
+            "requiredAbilities": []
+          }
+        },
+        {
+          "id": "exit",
+          "role": "exit",
+          "position": [
+            32,
+            0
+          ],
+          "contract": {
+            "postures": [
+              "grounded"
+            ],
+            "vxRange": [
+              0,
+              24
+            ],
+            "vyRange": [
+              0,
+              0
+            ],
+            "clearance": [
+              1,
+              2.5
+            ],
+            "requiredAbilities": []
+          }
+        }
+      ],
+      "routes": [
+        {
+          "id": "route",
+          "entrySocketId": "entry",
+          "exitSocketId": "exit",
+          "requiredAbilities": [
+            "dashGrapple"
+          ],
+          "witnessActions": [],
+          "maxTicks": 6000
+        }
+      ],
+      "sceneActions": [
+        {
+          "id": "dash-capture",
+          "entityId": "dash-anchor",
+          "kind": "dashGrapple",
+          "input": "dashGrapple",
+          "edge": "start",
+          "startOffset": -9.6,
+          "leadDistance": 1.8,
+          "lateDistance": 2,
+          "priority": 10,
+          "heightRange": [
+            -0.5,
+            4
+          ]
+        }
+      ]
+    },
+    {
+      "id": "unit-swing",
+      "size": [
+        32,
+        18
+      ],
+      "difficulty": 0,
+      "tags": [
+        "prefab",
+        "swing",
+        "authored",
+        "unqualified-for-endless"
+      ],
+      "entities": [
+        {
+          "id": "floor-dash-landing",
+          "kind": "surface",
+          "rect": [
+            0,
+            -2,
+            8,
+            2
+          ],
+          "oneWay": false,
+          "vaultable": false
+        },
+        {
+          "id": "floor-swing-landing",
+          "kind": "surface",
+          "rect": [
+            20,
+            -2,
+            12,
+            2
+          ],
+          "oneWay": false,
+          "vaultable": false
+        },
+        {
+          "id": "swing-anchor",
+          "kind": "anchor",
+          "position": [
+            14,
+            12
+          ],
+          "profileId": "swing-basic"
+        },
+        {
+          "id": "pit-marker",
+          "kind": "hazard",
+          "rect": [
+            0,
+            -8,
+            32,
+            1
+          ]
+        }
+      ],
+      "sockets": [
+        {
+          "id": "entry",
+          "role": "entry",
+          "position": [
+            0,
+            0
+          ],
+          "contract": {
+            "postures": [
+              "grounded"
+            ],
+            "vxRange": [
+              0,
+              24
+            ],
+            "vyRange": [
+              0,
+              0
+            ],
+            "clearance": [
+              1,
+              2.5
+            ],
+            "requiredAbilities": []
+          }
+        },
+        {
+          "id": "exit",
+          "role": "exit",
+          "position": [
+            32,
+            0
+          ],
+          "contract": {
+            "postures": [
+              "grounded"
+            ],
+            "vxRange": [
+              0,
+              24
+            ],
+            "vyRange": [
+              0,
+              0
+            ],
+            "clearance": [
+              1,
+              2.5
+            ],
+            "requiredAbilities": []
+          }
+        }
+      ],
+      "routes": [
+        {
+          "id": "route",
+          "entrySocketId": "entry",
+          "exitSocketId": "exit",
+          "requiredAbilities": [
+            "jump",
+            "swingGrapple"
+          ],
+          "witnessActions": [],
+          "maxTicks": 6000
+        }
+      ],
+      "sceneActions": [
+        {
+          "id": "swing-capture",
+          "entityId": "swing-anchor",
+          "kind": "swingGrapple",
+          "input": "swingGrapple",
+          "edge": "start",
+          "startOffset": -6,
+          "leadDistance": 1.8,
+          "lateDistance": 2,
+          "priority": 10,
+          "heightRange": [
+            -0.5,
+            6
+          ]
+        }
+      ]
+    },
+    {
+      "id": "unit-cable",
+      "size": [
+        32,
+        18
+      ],
+      "difficulty": 0,
+      "tags": [
+        "prefab",
+        "cable",
+        "authored",
+        "unqualified-for-endless"
+      ],
+      "entities": [
+        {
+          "id": "floor-swing-landing",
+          "kind": "surface",
+          "rect": [
+            0,
+            -2,
+            32,
+            2
+          ],
+          "oneWay": false,
+          "vaultable": false
+        },
+        {
+          "id": "cable-approach",
+          "kind": "surface",
+          "rect": [
+            5,
+            0,
+            5,
+            1.2
+          ],
+          "oneWay": false,
+          "vaultable": false
+        },
+        {
+          "id": "descent-cable",
+          "kind": "zipline",
+          "points": [
+            [
+              6,
+              4
+            ],
+            [
+              16,
+              4.6
+            ],
+            [
+              27,
+              3
+            ]
+          ],
+          "profileId": "zip-basic"
+        },
+        {
+          "id": "pit-marker",
+          "kind": "hazard",
+          "rect": [
+            0,
+            -8,
+            32,
+            1
+          ]
+        }
+      ],
+      "sockets": [
+        {
+          "id": "entry",
+          "role": "entry",
+          "position": [
+            0,
+            0
+          ],
+          "contract": {
+            "postures": [
+              "grounded"
+            ],
+            "vxRange": [
+              0,
+              24
+            ],
+            "vyRange": [
+              0,
+              0
+            ],
+            "clearance": [
+              1,
+              2.5
+            ],
+            "requiredAbilities": []
+          }
+        },
+        {
+          "id": "exit",
+          "role": "exit",
+          "position": [
+            32,
+            0
+          ],
+          "contract": {
+            "postures": [
+              "grounded"
+            ],
+            "vxRange": [
+              0,
+              24
+            ],
+            "vyRange": [
+              0,
+              0
+            ],
+            "clearance": [
+              1,
+              2.5
+            ],
+            "requiredAbilities": []
+          }
+        }
+      ],
+      "routes": [
+        {
+          "id": "route",
+          "entrySocketId": "entry",
+          "exitSocketId": "exit",
+          "requiredAbilities": [
+            "jump",
+            "zipline"
+          ],
+          "witnessActions": [],
+          "maxTicks": 6000
+        }
+      ],
+      "sceneActions": [
+        {
+          "id": "cable-capture",
+          "entityId": "descent-cable",
+          "kind": "zipline",
+          "input": "zipline",
+          "edge": "start",
+          "startOffset": -1.3,
+          "leadDistance": 1.8,
+          "lateDistance": 3,
+          "priority": 10,
+          "heightRange": [
+            0.5,
+            6
+          ]
+        }
+      ]
+    },
+    {
+      "id": "unit-pad",
+      "size": [
+        32,
+        18
+      ],
+      "difficulty": 0,
+      "tags": [
+        "prefab",
+        "pad",
+        "authored",
+        "unqualified-for-endless"
+      ],
+      "entities": [
+        {
+          "id": "floor-swing-landing",
+          "kind": "surface",
+          "rect": [
+            0,
+            -2,
+            15,
+            2
+          ],
+          "oneWay": false,
+          "vaultable": false
+        },
+        {
+          "id": "floor-pad-landing",
+          "kind": "surface",
+          "rect": [
+            15,
+            -2,
+            7,
+            3
+          ],
+          "oneWay": false,
+          "vaultable": false
+        },
+        {
+          "id": "floor-home",
+          "kind": "surface",
+          "rect": [
+            22,
+            -2,
+            10,
+            2
+          ],
+          "oneWay": false,
+          "vaultable": false
+        },
+        {
+          "id": "launch-pad",
+          "kind": "jumpPad",
+          "rect": [
+            10,
+            -0.2,
+            1.8000000000000114,
+            0.2
+          ],
+          "profileId": "pad-basic"
+        },
+        {
+          "id": "pit-marker",
+          "kind": "hazard",
+          "rect": [
+            0,
+            -8,
+            32,
+            1
+          ]
+        }
+      ],
+      "sockets": [
+        {
+          "id": "entry",
+          "role": "entry",
+          "position": [
+            0,
+            0
+          ],
+          "contract": {
+            "postures": [
+              "grounded"
+            ],
+            "vxRange": [
+              0,
+              24
+            ],
+            "vyRange": [
+              0,
+              0
+            ],
+            "clearance": [
+              1,
+              2.5
+            ],
+            "requiredAbilities": []
+          }
+        },
+        {
+          "id": "exit",
+          "role": "exit",
+          "position": [
+            32,
+            0
+          ],
+          "contract": {
+            "postures": [
+              "grounded"
+            ],
+            "vxRange": [
+              0,
+              24
+            ],
+            "vyRange": [
+              0,
+              0
+            ],
+            "clearance": [
+              1,
+              2.5
+            ],
+            "requiredAbilities": []
+          }
+        }
+      ],
+      "routes": [
+        {
+          "id": "route",
+          "entrySocketId": "entry",
+          "exitSocketId": "exit",
+          "requiredAbilities": [
+            "jumpPad"
+          ],
+          "witnessActions": [],
+          "maxTicks": 6000
+        }
+      ],
+      "sceneActions": [
+        {
+          "id": "pad-contact",
+          "entityId": "launch-pad",
+          "kind": "jumpPad",
+          "input": "automatic",
+          "edge": "center",
+          "startOffset": 0,
+          "leadDistance": 1,
+          "lateDistance": 1,
+          "priority": 10,
+          "heightRange": [
+            -0.1,
+            0.2
+          ]
+        }
+      ]
+    },
+    {
+      "id": "unit-chain",
+      "size": [
+        48,
+        18
+      ],
+      "difficulty": 0,
+      "tags": [
+        "prefab",
+        "chain",
+        "authored",
+        "unqualified-for-endless"
+      ],
+      "entities": [
+        {
+          "id": "floor-home",
+          "kind": "surface",
+          "rect": [
+            0,
+            -2,
+            48,
+            2
+          ],
+          "oneWay": false,
+          "vaultable": false
+        },
+        {
+          "id": "chain-pad",
+          "kind": "jumpPad",
+          "rect": [
+            7,
+            -0.2,
+            1.8000000000000114,
+            0.2
+          ],
+          "profileId": "pad-basic"
+        },
+        {
+          "id": "chain-swing",
+          "kind": "anchor",
+          "position": [
+            16,
+            10
+          ],
+          "profileId": "swing-basic"
+        },
+        {
+          "id": "chain-dash",
+          "kind": "anchor",
+          "position": [
+            26,
+            4
+          ],
+          "profileId": "dash-basic"
+        },
+        {
+          "id": "chain-cable",
+          "kind": "zipline",
+          "points": [
+            [
+              22,
+              4.2
+            ],
+            [
+              31,
+              3.9
+            ],
+            [
+              40,
+              2.8
+            ]
+          ],
+          "profileId": "zip-basic"
+        },
+        {
+          "id": "pit-marker",
+          "kind": "hazard",
+          "rect": [
+            0,
+            -8,
+            48,
+            1
+          ]
+        }
+      ],
+      "sockets": [
+        {
+          "id": "entry",
+          "role": "entry",
+          "position": [
+            0,
+            0
+          ],
+          "contract": {
+            "postures": [
+              "grounded"
+            ],
+            "vxRange": [
+              0,
+              24
+            ],
+            "vyRange": [
+              0,
+              0
+            ],
+            "clearance": [
+              1,
+              2.5
+            ],
+            "requiredAbilities": []
+          }
+        },
+        {
+          "id": "exit",
+          "role": "exit",
+          "position": [
+            48,
+            0
+          ],
+          "contract": {
+            "postures": [
+              "grounded"
+            ],
+            "vxRange": [
+              0,
+              24
+            ],
+            "vyRange": [
+              0,
+              0
+            ],
+            "clearance": [
+              1,
+              2.5
+            ],
+            "requiredAbilities": []
+          }
+        }
+      ],
+      "routes": [
+        {
+          "id": "route",
+          "entrySocketId": "entry",
+          "exitSocketId": "exit",
+          "requiredAbilities": [
+            "jumpPad",
+            "swingGrapple",
+            "dashGrapple",
+            "zipline"
+          ],
+          "witnessActions": [],
+          "maxTicks": 6000
+        }
+      ],
+      "sceneActions": [
+        {
+          "id": "chain-pad-contact",
+          "entityId": "chain-pad",
+          "kind": "jumpPad",
+          "input": "automatic",
+          "edge": "center",
+          "startOffset": 0,
+          "leadDistance": 1,
+          "lateDistance": 1,
+          "priority": 10,
+          "heightRange": [
+            -0.1,
+            0.2
+          ]
+        },
+        {
+          "id": "chain-swing-capture",
+          "entityId": "chain-swing",
+          "kind": "swingGrapple",
+          "input": "swingGrapple",
+          "edge": "start",
+          "startOffset": -4,
+          "leadDistance": 1.5,
+          "lateDistance": 2,
+          "priority": 10,
+          "heightRange": [
+            -0.5,
+            6
+          ]
+        },
+        {
+          "id": "chain-dash-capture",
+          "entityId": "chain-dash",
+          "kind": "dashGrapple",
+          "input": "dashGrapple",
+          "edge": "start",
+          "startOffset": -8,
+          "leadDistance": 1.5,
+          "lateDistance": 2,
+          "priority": 10,
+          "heightRange": [
+            -0.5,
+            4
+          ]
+        },
+        {
+          "id": "chain-cable-capture",
+          "entityId": "chain-cable",
+          "kind": "zipline",
+          "input": "zipline",
+          "edge": "start",
+          "startOffset": -1.3,
+          "leadDistance": 1.5,
+          "lateDistance": 3,
+          "priority": 10,
+          "heightRange": [
+            0.5,
+            6
+          ]
+        }
+      ]
+    },
+    {
+      "id": "unit-recovery",
+      "size": [
+        50,
+        18
+      ],
+      "difficulty": 0,
+      "tags": [
+        "prefab",
+        "recovery",
+        "authored",
+        "unqualified-for-endless"
+      ],
+      "entities": [
+        {
+          "id": "floor-home",
+          "kind": "surface",
+          "rect": [
+            0,
+            -2,
+            50,
+            2
+          ],
+          "oneWay": false,
+          "vaultable": false
+        },
+        {
+          "id": "thin-wall",
+          "kind": "surface",
+          "rect": [
+            7,
+            0,
+            0.12000000000000455,
+            1.3
+          ],
+          "oneWay": false,
+          "vaultable": false
+        },
+        {
+          "id": "one-way",
+          "kind": "surface",
+          "rect": [
+            21,
+            1.2,
+            5,
+            0.18
+          ],
+          "oneWay": true,
+          "vaultable": false
+        },
+        {
+          "id": "blocked-anchor",
+          "kind": "anchor",
+          "position": [
+            12,
+            0.9
+          ],
+          "profileId": "dash-basic"
+        },
+        {
+          "id": "pit-marker",
+          "kind": "hazard",
+          "rect": [
+            0,
+            -8,
+            50,
+            1
+          ]
+        }
+      ],
+      "sockets": [
+        {
+          "id": "entry",
+          "role": "entry",
+          "position": [
+            0,
+            0
+          ],
+          "contract": {
+            "postures": [
+              "grounded"
+            ],
+            "vxRange": [
+              0,
+              24
+            ],
+            "vyRange": [
+              0,
+              0
+            ],
+            "clearance": [
+              1,
+              2.5
+            ],
+            "requiredAbilities": []
+          }
+        },
+        {
+          "id": "exit",
+          "role": "exit",
+          "position": [
+            46,
+            0
+          ],
+          "contract": {
+            "postures": [
+              "grounded"
+            ],
+            "vxRange": [
+              0,
+              24
+            ],
+            "vyRange": [
+              0,
+              0
+            ],
+            "clearance": [
+              1,
+              2.5
+            ],
+            "requiredAbilities": []
+          }
+        }
+      ],
+      "routes": [
+        {
+          "id": "route",
+          "entrySocketId": "entry",
+          "exitSocketId": "exit",
+          "requiredAbilities": [
+            "jump"
+          ],
+          "witnessActions": [],
+          "maxTicks": 6000
+        }
+      ],
+      "sceneActions": []
+    }
+  ],
+  "finiteLevels": [
+    {
+      "id": "motion-lab",
+      "instances": [
+        {
+          "id": "jump",
+          "moduleId": "unit-jump",
+          "position": [
+            0,
+            0
+          ]
+        },
+        {
+          "id": "slide",
+          "moduleId": "unit-slide",
+          "position": [
+            32,
+            0
+          ]
+        },
+        {
+          "id": "vault",
+          "moduleId": "unit-vault",
+          "position": [
+            64,
+            0
+          ]
+        },
+        {
+          "id": "dash",
+          "moduleId": "unit-dash",
+          "position": [
+            96,
+            0
+          ]
+        },
+        {
+          "id": "swing",
+          "moduleId": "unit-swing",
+          "position": [
+            128,
+            0
+          ]
+        },
+        {
+          "id": "cable",
+          "moduleId": "unit-cable",
+          "position": [
+            160,
+            0
+          ]
+        },
+        {
+          "id": "pad",
+          "moduleId": "unit-pad",
+          "position": [
+            192,
+            0
+          ]
+        },
+        {
+          "id": "chain",
+          "moduleId": "unit-chain",
+          "position": [
+            224,
+            0
+          ]
+        },
+        {
+          "id": "recovery",
+          "moduleId": "unit-recovery",
+          "position": [
+            272,
+            0
+          ]
+        }
+      ],
+      "connections": [
+        {
+          "from": {
+            "instanceId": "jump",
+            "socketId": "exit"
+          },
+          "to": {
+            "instanceId": "slide",
+            "socketId": "entry"
+          }
+        },
+        {
+          "from": {
+            "instanceId": "slide",
+            "socketId": "exit"
+          },
+          "to": {
+            "instanceId": "vault",
+            "socketId": "entry"
+          }
+        },
+        {
+          "from": {
+            "instanceId": "vault",
+            "socketId": "exit"
+          },
+          "to": {
+            "instanceId": "dash",
+            "socketId": "entry"
+          }
+        },
+        {
+          "from": {
+            "instanceId": "dash",
+            "socketId": "exit"
+          },
+          "to": {
+            "instanceId": "swing",
+            "socketId": "entry"
+          }
+        },
+        {
+          "from": {
+            "instanceId": "swing",
+            "socketId": "exit"
+          },
+          "to": {
+            "instanceId": "cable",
+            "socketId": "entry"
+          }
+        },
+        {
+          "from": {
+            "instanceId": "cable",
+            "socketId": "exit"
+          },
+          "to": {
+            "instanceId": "pad",
+            "socketId": "entry"
+          }
+        },
+        {
+          "from": {
+            "instanceId": "pad",
+            "socketId": "exit"
+          },
+          "to": {
+            "instanceId": "chain",
+            "socketId": "entry"
+          }
+        },
+        {
+          "from": {
+            "instanceId": "chain",
+            "socketId": "exit"
+          },
+          "to": {
+            "instanceId": "recovery",
+            "socketId": "entry"
+          }
+        }
+      ],
+      "spawn": {
+        "instanceId": "jump",
+        "socketId": "entry"
+      },
+      "finish": {
+        "instanceId": "recovery",
+        "socketId": "exit"
+      }
+    }
+  ],
+  "endlessPresets": [
+    {
+      "id": "not-certified",
+      "startModuleId": "unit-jump",
+      "fallbackModuleId": "unit-slide",
+      "modulePool": [
+        {
+          "moduleId": "unit-jump",
+          "weight": 1,
+          "minDifficulty": 0,
+          "maxDifficulty": 0
+        }
+      ],
+      "startTier": 0,
+      "maxTier": 0,
+      "tierEveryModules": 1,
+      "repeatWindow": 0,
+      "maxAttempts": 1,
+      "lookaheadModules": 1,
+      "maxActiveModules": 3,
+      "retireBehindDistance": 30
+    }
+  ]
+}

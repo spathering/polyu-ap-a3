@@ -1,0 +1,486 @@
+{
+  "schemaVersion": "1.2.0",
+  "contentRevision": "design-fixture-02-3c",
+  "physicsVersion": "proposal-02",
+  "generatorVersion": "proposal-01",
+  "rules": {
+    "fixedStepHz": 60,
+    "gravity": 20,
+    "runSpeed": 6,
+    "jumpVelocity": 8,
+    "jumpBufferSeconds": 0.12,
+    "coyoteSeconds": 0.1,
+    "slideSeconds": 0.7,
+    "vaultMaxHeight": 1.2,
+    "bodySize": [
+      0.6,
+      1.8
+    ],
+    "slideBodySize": [
+      0.6,
+      0.8
+    ],
+    "enabledAbilities": [
+      "jump",
+      "slide",
+      "vault",
+      "dashGrapple",
+      "swingGrapple",
+      "zipline",
+      "jumpPad"
+    ],
+    "bindings": [
+      {
+        "action": "jump",
+        "keys": [
+          "Space",
+          "ArrowUp"
+        ],
+        "behaviour": "press"
+      },
+      {
+        "action": "slide",
+        "keys": [
+          "KeyS",
+          "ArrowDown"
+        ],
+        "behaviour": "press"
+      },
+      {
+        "action": "dashGrapple",
+        "keys": [
+          "KeyE"
+        ],
+        "behaviour": "press"
+      },
+      {
+        "action": "swingGrapple",
+        "keys": [
+          "KeyQ"
+        ],
+        "behaviour": "hold"
+      },
+      {
+        "action": "zipline",
+        "keys": [
+          "KeyF"
+        ],
+        "behaviour": "press"
+      },
+      {
+        "action": "pause",
+        "keys": [
+          "Escape"
+        ],
+        "behaviour": "press"
+      },
+      {
+        "action": "retry",
+        "keys": [
+          "KeyR"
+        ],
+        "behaviour": "press"
+      }
+    ],
+    "groundAcceleration": 24,
+    "airAcceleration": 6,
+    "maxHorizontalSpeed": 24,
+    "maxFallSpeed": 25,
+    "groundProbeDistance": 0.08,
+    "collisionSkin": 0.02,
+    "standClearancePadding": 0.05,
+    "vaultMaxWidth": 2,
+    "vaultAcquisitionDistance": 1.2,
+    "vaultDurationSeconds": 0.8,
+    "vaultExitSpeed": 6,
+    "landingRecoverySeconds": 0.1,
+    "maxBufferedActions": 32,
+    "camera": {
+      "targetScreenX": 0.32,
+      "lookAheadSeconds": 0.28,
+      "minLookAhead": 0.8,
+      "maxLookAhead": 4,
+      "deadZoneSize": [
+        3,
+        2
+      ],
+      "verticalLookAheadSeconds": 0.15,
+      "maxVerticalOffset": 3,
+      "smoothingSeconds": 0.18,
+      "maxCatchUpSpeed": 48,
+      "baseViewHeight": 12,
+      "minViewHeight": 10,
+      "maxViewHeight": 18,
+      "zoomSmoothingSeconds": 0.3,
+      "reactionBudgetSeconds": 0.75
+    },
+    "contextInputSeconds": 0.5,
+    "vaultTrajectory": [
+      [
+        0,
+        0,
+        0
+      ],
+      [
+        0.15,
+        0.18,
+        0.35
+      ],
+      [
+        0.32,
+        0.38,
+        1.1
+      ],
+      [
+        0.78,
+        1,
+        1.1
+      ],
+      [
+        1,
+        1,
+        0
+      ]
+    ],
+    "gripOffset": [
+      0,
+      2.3
+    ]
+  },
+  "profiles": [
+    {
+      "id": "dash-basic",
+      "kind": "dashGrapple",
+      "range": 10,
+      "coneRadians": 1.4,
+      "speed": 18,
+      "arrivalRadius": 0.8,
+      "cooldownSeconds": 0.5,
+      "exitSpeed": 8
+    },
+    {
+      "id": "swing-basic",
+      "kind": "swingGrapple",
+      "range": 11,
+      "minLength": 2,
+      "maxLength": 12,
+      "maxSpeed": 20,
+      "cooldownSeconds": 0.3,
+      "coneRadians": 1.8
+    },
+    {
+      "id": "zip-basic",
+      "kind": "zipline",
+      "captureRadius": 1,
+      "speed": 10,
+      "exitJumpVelocity": 5
+    },
+    {
+      "id": "pad-basic",
+      "kind": "jumpPad",
+      "launchVelocity": [
+        6,
+        10
+      ],
+      "rearmSeconds": 0.25,
+      "velocityPolicy": "replace"
+    }
+  ],
+  "modules": [
+    {
+      "id": "safe-straight",
+      "size": [
+        24,
+        12
+      ],
+      "difficulty": 0,
+      "tags": [
+        "schema-fixture",
+        "unverified"
+      ],
+      "entities": [
+        {
+          "id": "floor",
+          "kind": "surface",
+          "rect": [
+            0,
+            0,
+            24,
+            1
+          ],
+          "oneWay": false,
+          "vaultable": false
+        }
+      ],
+      "sockets": [
+        {
+          "id": "entry",
+          "role": "entry",
+          "position": [
+            0,
+            1
+          ],
+          "contract": {
+            "postures": [
+              "grounded"
+            ],
+            "vxRange": [
+              5,
+              7
+            ],
+            "vyRange": [
+              0,
+              0
+            ],
+            "clearance": [
+              1,
+              2.5
+            ],
+            "requiredAbilities": []
+          }
+        },
+        {
+          "id": "exit",
+          "role": "exit",
+          "position": [
+            24,
+            1
+          ],
+          "contract": {
+            "postures": [
+              "grounded"
+            ],
+            "vxRange": [
+              5,
+              7
+            ],
+            "vyRange": [
+              0,
+              0
+            ],
+            "clearance": [
+              1,
+              2.5
+            ],
+            "requiredAbilities": []
+          }
+        }
+      ],
+      "routes": [
+        {
+          "id": "main",
+          "entrySocketId": "entry",
+          "exitSocketId": "exit",
+          "requiredAbilities": [],
+          "witnessActions": [],
+          "maxTicks": 1200
+        }
+      ]
+    },
+    {
+      "id": "traversal-lab",
+      "size": [
+        48,
+        12
+      ],
+      "difficulty": 0,
+      "tags": [
+        "schema-fixture",
+        "unverified"
+      ],
+      "entities": [
+        {
+          "id": "floor",
+          "kind": "surface",
+          "rect": [
+            0,
+            0,
+            48,
+            1
+          ],
+          "oneWay": false,
+          "vaultable": false
+        },
+        {
+          "id": "dash-anchor",
+          "kind": "anchor",
+          "position": [
+            12,
+            6
+          ],
+          "profileId": "dash-basic"
+        },
+        {
+          "id": "swing-anchor",
+          "kind": "anchor",
+          "position": [
+            22,
+            7
+          ],
+          "profileId": "swing-basic"
+        },
+        {
+          "id": "cable",
+          "kind": "zipline",
+          "points": [
+            [
+              28,
+              6
+            ],
+            [
+              43,
+              3
+            ]
+          ],
+          "profileId": "zip-basic"
+        },
+        {
+          "id": "pad",
+          "kind": "jumpPad",
+          "rect": [
+            5,
+            1,
+            1.5,
+            0.2
+          ],
+          "profileId": "pad-basic"
+        }
+      ],
+      "sockets": [
+        {
+          "id": "entry",
+          "role": "entry",
+          "position": [
+            0,
+            1
+          ],
+          "contract": {
+            "postures": [
+              "grounded"
+            ],
+            "vxRange": [
+              5,
+              7
+            ],
+            "vyRange": [
+              0,
+              0
+            ],
+            "clearance": [
+              1,
+              2.5
+            ],
+            "requiredAbilities": []
+          }
+        },
+        {
+          "id": "exit",
+          "role": "exit",
+          "position": [
+            48,
+            1
+          ],
+          "contract": {
+            "postures": [
+              "grounded"
+            ],
+            "vxRange": [
+              5,
+              7
+            ],
+            "vyRange": [
+              0,
+              0
+            ],
+            "clearance": [
+              1,
+              2.5
+            ],
+            "requiredAbilities": []
+          }
+        }
+      ],
+      "routes": [
+        {
+          "id": "main",
+          "entrySocketId": "entry",
+          "exitSocketId": "exit",
+          "requiredAbilities": [
+            "dashGrapple",
+            "swingGrapple",
+            "zipline",
+            "jumpPad"
+          ],
+          "witnessActions": [],
+          "maxTicks": 1200
+        }
+      ]
+    }
+  ],
+  "finiteLevels": [
+    {
+      "id": "finite-fixture",
+      "instances": [
+        {
+          "id": "start",
+          "moduleId": "safe-straight",
+          "position": [
+            0,
+            0
+          ]
+        },
+        {
+          "id": "lab",
+          "moduleId": "traversal-lab",
+          "position": [
+            24,
+            0
+          ]
+        }
+      ],
+      "connections": [
+        {
+          "from": {
+            "instanceId": "start",
+            "socketId": "exit"
+          },
+          "to": {
+            "instanceId": "lab",
+            "socketId": "entry"
+          }
+        }
+      ],
+      "spawn": {
+        "instanceId": "start",
+        "socketId": "entry"
+      },
+      "finish": {
+        "instanceId": "lab",
+        "socketId": "exit"
+      }
+    }
+  ],
+  "endlessPresets": [
+    {
+      "id": "endless-fixture",
+      "startModuleId": "safe-straight",
+      "fallbackModuleId": "safe-straight",
+      "modulePool": [
+        {
+          "moduleId": "safe-straight",
+          "weight": 1,
+          "minDifficulty": 0,
+          "maxDifficulty": 0
+        }
+      ],
+      "startTier": 0,
+      "maxTier": 0,
+      "tierEveryModules": 5,
+      "repeatWindow": 0,
+      "maxAttempts": 4,
+      "lookaheadModules": 2,
+      "maxActiveModules": 8,
+      "retireBehindDistance": 30
+    }
+  ]
+}

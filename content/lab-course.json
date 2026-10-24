@@ -1,0 +1,699 @@
+{
+  "version": "1.0.0",
+  "levelId": "motion-lab",
+  "title": "Motion lab",
+  "fallLimit": -6,
+  "maxFrameSeconds": 0.1,
+  "maxStepsPerFrame": 6,
+  "stations": [
+    {
+      "id": "jump",
+      "name": "Jump & landing",
+      "range": [
+        0,
+        32
+      ],
+      "hint": "Press SPACE in the approach zone: the queued jump starts at the gap takeoff mark. Outside a marked context, SPACE is a normal buffered jump.",
+      "keys": "SPACE / UP",
+      "checks": [
+        "Run",
+        "Jump",
+        "Rise",
+        "Fall",
+        "Land"
+      ],
+      "cueX": 10.5,
+      "useLevelSpawn": true
+    },
+    {
+      "id": "slide",
+      "name": "Low clearance",
+      "range": [
+        32,
+        64
+      ],
+      "spawn": [
+        34,
+        0
+      ],
+      "hint": "Press S in the approach zone. Keep running while the request waits for the tunnel entry mark; stay low until the exit is clear.",
+      "keys": "S / DOWN",
+      "checks": [
+        "Slide",
+        "CrouchHold",
+        "Stand"
+      ],
+      "cueX": 37
+    },
+    {
+      "id": "vault",
+      "name": "Context vault",
+      "range": [
+        64,
+        96
+      ],
+      "spawn": [
+        66,
+        0
+      ],
+      "hint": "Press SPACE early in the marked approach. The vault waits for alignment, locks its contact phase to the block, then recovers. No input means no automatic vault.",
+      "keys": "SPACE / QUEUE VAULT",
+      "checks": [
+        "ActionQueued",
+        "ActionAligned",
+        "Vault",
+        "Land"
+      ],
+      "cueX": 69
+    },
+    {
+      "id": "dash",
+      "name": "Dash grapple",
+      "range": [
+        96,
+        128
+      ],
+      "spawn": [
+        102,
+        0
+      ],
+      "hint": "E when the cyan anchor preview lights up. The pull uses collision sweeps; arrival releases into flight.",
+      "keys": "E",
+      "checks": [
+        "DashGrapple",
+        "DashRelease"
+      ],
+      "cueX": 106
+    },
+    {
+      "id": "swing",
+      "name": "Swing & release",
+      "range": [
+        128,
+        160
+      ],
+      "spawn": [
+        130,
+        0
+      ],
+      "hint": "Jump just before the ledge. When the overhead Q target lights up, press and HOLD Q; release on the rising forward arc.",
+      "keys": "SPACE → HOLD Q → RELEASE",
+      "checks": [
+        "SwingGrapple",
+        "SwingRelease"
+      ],
+      "cueX": 134.5
+    },
+    {
+      "id": "cable",
+      "name": "Cable traversal",
+      "range": [
+        160,
+        192
+      ],
+      "spawn": [
+        161,
+        0
+      ],
+      "hint": "Jump, then F near the cable. Try SPACE jump-off, F detach, and a fresh run to the cable endpoint.",
+      "keys": "SPACE → F",
+      "checks": [
+        "Zipline",
+        "ZiplineJump",
+        "ZiplineRelease",
+        "ZiplineEnd"
+      ],
+      "cueX": 163
+    },
+    {
+      "id": "pad",
+      "name": "Jump-pad impulse",
+      "range": [
+        192,
+        224
+      ],
+      "spawn": [
+        196,
+        0
+      ],
+      "hint": "Run onto the amber pad. Launch fires once per contact; observe the airborne arc and raised landing.",
+      "keys": "CONTACT",
+      "checks": [
+        "JumpPad",
+        "Rise",
+        "Fall",
+        "Land"
+      ],
+      "cueX": 200
+    },
+    {
+      "id": "chain",
+      "name": "Linked traversal",
+      "range": [
+        224,
+        272
+      ],
+      "spawn": [
+        226,
+        0
+      ],
+      "hint": "Pad → Q swing → release → F cable. You can also try E toward the next anchor. Detach before acquiring another mode.",
+      "keys": "Q / E / F",
+      "checks": [
+        "JumpPad",
+        "SwingGrapple",
+        "SwingRelease",
+        "Zipline",
+        "DashGrapple"
+      ],
+      "cueX": 230
+    },
+    {
+      "id": "recovery",
+      "name": "Collision & recovery",
+      "range": [
+        272,
+        322
+      ],
+      "spawn": [
+        274,
+        0
+      ],
+      "hint": "E at the low anchor tests occlusion. Jump over the thin wall, test the one-way platform, then pass the lap gate. R retries; ESC pauses.",
+      "keys": "E / SPACE / R / ESC",
+      "checks": [
+        "Rejected",
+        "Failed",
+        "Paused",
+        "Retry",
+        "Lap"
+      ],
+      "cueX": 276
+    }
+  ],
+  "coverage": [
+    {
+      "id": "Run",
+      "label": "Run"
+    },
+    {
+      "id": "Jump",
+      "label": "Jump"
+    },
+    {
+      "id": "Rise",
+      "label": "Rising"
+    },
+    {
+      "id": "Fall",
+      "label": "Falling"
+    },
+    {
+      "id": "Land",
+      "label": "Landing"
+    },
+    {
+      "id": "Slide",
+      "label": "Slide"
+    },
+    {
+      "id": "CrouchHold",
+      "label": "Crouch hold"
+    },
+    {
+      "id": "Stand",
+      "label": "Stand recovery"
+    },
+    {
+      "id": "Vault",
+      "label": "Vault"
+    },
+    {
+      "id": "DashGrapple",
+      "label": "Dash attach"
+    },
+    {
+      "id": "DashRelease",
+      "label": "Dash exit"
+    },
+    {
+      "id": "SwingGrapple",
+      "label": "Swing attach"
+    },
+    {
+      "id": "SwingRelease",
+      "label": "Swing release"
+    },
+    {
+      "id": "Zipline",
+      "label": "Cable attach"
+    },
+    {
+      "id": "ZiplineJump",
+      "label": "Cable jump-off"
+    },
+    {
+      "id": "ZiplineRelease",
+      "label": "Cable detach"
+    },
+    {
+      "id": "ZiplineEnd",
+      "label": "Cable endpoint"
+    },
+    {
+      "id": "JumpPad",
+      "label": "Pad launch"
+    },
+    {
+      "id": "Rejected",
+      "label": "Rejected action"
+    },
+    {
+      "id": "Failed",
+      "label": "Failure"
+    },
+    {
+      "id": "Paused",
+      "label": "Pause / focus"
+    },
+    {
+      "id": "Retry",
+      "label": "Retry"
+    },
+    {
+      "id": "Lap",
+      "label": "Lap return"
+    },
+    {
+      "id": "ActionQueued",
+      "label": "Input queued"
+    },
+    {
+      "id": "ActionAligned",
+      "label": "Scene aligned"
+    },
+    {
+      "id": "ActionCancelled",
+      "label": "Queue cancelled"
+    }
+  ],
+  "witnesses": [
+    {
+      "id": "jump",
+      "stationId": "jump",
+      "frames": 220,
+      "actions": [
+        {
+          "frame": 98,
+          "action": "jump",
+          "phase": "press"
+        }
+      ],
+      "expect": [
+        "Run",
+        "Jump",
+        "Rise",
+        "Fall",
+        "Land"
+      ]
+    },
+    {
+      "id": "slide",
+      "stationId": "slide",
+      "frames": 220,
+      "actions": [
+        {
+          "frame": 42,
+          "action": "slide",
+          "phase": "press"
+        }
+      ],
+      "expect": [
+        "Slide",
+        "CrouchHold",
+        "Stand"
+      ]
+    },
+    {
+      "id": "vault",
+      "stationId": "vault",
+      "frames": 190,
+      "actions": [
+        {
+          "frame": 20,
+          "action": "jump",
+          "phase": "press"
+        }
+      ],
+      "expect": [
+        "Vault",
+        "Land"
+      ]
+    },
+    {
+      "id": "dash",
+      "stationId": "dash",
+      "frames": 180,
+      "actions": [
+        {
+          "frame": 44,
+          "action": "dashGrapple",
+          "phase": "press"
+        }
+      ],
+      "expect": [
+        "DashGrapple",
+        "DashRelease"
+      ]
+    },
+    {
+      "id": "swing",
+      "stationId": "swing",
+      "frames": 290,
+      "actions": [
+        {
+          "frame": 53,
+          "action": "jump",
+          "phase": "press"
+        },
+        {
+          "frame": 59,
+          "action": "swingGrapple",
+          "phase": "press"
+        },
+        {
+          "frame": 165,
+          "action": "swingGrapple",
+          "phase": "release"
+        }
+      ],
+      "expect": [
+        "SwingGrapple",
+        "SwingRelease",
+        "Land"
+      ]
+    },
+    {
+      "id": "cable-end",
+      "stationId": "cable",
+      "frames": 240,
+      "actions": [
+        {
+          "frame": 23,
+          "action": "jump",
+          "phase": "press"
+        },
+        {
+          "frame": 28,
+          "action": "zipline",
+          "phase": "press"
+        }
+      ],
+      "expect": [
+        "Zipline",
+        "ZiplineEnd"
+      ]
+    },
+    {
+      "id": "cable-jump",
+      "stationId": "cable",
+      "frames": 160,
+      "actions": [
+        {
+          "frame": 23,
+          "action": "jump",
+          "phase": "press"
+        },
+        {
+          "frame": 28,
+          "action": "zipline",
+          "phase": "press"
+        },
+        {
+          "frame": 77,
+          "action": "jump",
+          "phase": "press"
+        }
+      ],
+      "expect": [
+        "Zipline",
+        "ZiplineJump"
+      ]
+    },
+    {
+      "id": "cable-detach",
+      "stationId": "cable",
+      "frames": 160,
+      "actions": [
+        {
+          "frame": 23,
+          "action": "jump",
+          "phase": "press"
+        },
+        {
+          "frame": 28,
+          "action": "zipline",
+          "phase": "press"
+        },
+        {
+          "frame": 77,
+          "action": "zipline",
+          "phase": "press"
+        }
+      ],
+      "expect": [
+        "Zipline",
+        "ZiplineRelease"
+      ]
+    },
+    {
+      "id": "pad",
+      "stationId": "pad",
+      "frames": 210,
+      "actions": [],
+      "expect": [
+        "JumpPad",
+        "Land"
+      ]
+    },
+    {
+      "id": "chain",
+      "stationId": "chain",
+      "frames": 320,
+      "actions": [
+        {
+          "frame": 93,
+          "action": "swingGrapple",
+          "phase": "press"
+        },
+        {
+          "frame": 167,
+          "action": "swingGrapple",
+          "phase": "release"
+        },
+        {
+          "frame": 168,
+          "action": "zipline",
+          "phase": "press"
+        }
+      ],
+      "expect": [
+        "JumpPad",
+        "SwingGrapple",
+        "SwingRelease",
+        "Zipline",
+        "ZiplineEnd"
+      ]
+    },
+    {
+      "id": "recovery",
+      "stationId": "recovery",
+      "frames": 520,
+      "actions": [
+        {
+          "frame": 27,
+          "action": "dashGrapple",
+          "phase": "press"
+        },
+        {
+          "frame": 32,
+          "action": "jump",
+          "phase": "press"
+        },
+        {
+          "frame": 177,
+          "action": "jump",
+          "phase": "press"
+        }
+      ],
+      "expect": [
+        "Rejected",
+        "Jump",
+        "Lap"
+      ]
+    },
+    {
+      "id": "failure",
+      "stationId": "jump",
+      "frames": 240,
+      "actions": [],
+      "expect": [
+        "Failed"
+      ]
+    },
+    {
+      "id": "session",
+      "stationId": "jump",
+      "frames": 55,
+      "actions": [
+        {
+          "frame": 15,
+          "action": "pause",
+          "phase": "press"
+        },
+        {
+          "frame": 30,
+          "action": "pause",
+          "phase": "press"
+        },
+        {
+          "frame": 40,
+          "action": "retry",
+          "phase": "press"
+        }
+      ],
+      "expect": [
+        "Paused",
+        "Retry"
+      ]
+    },
+    {
+      "id": "full-loop",
+      "stationId": "jump",
+      "frames": 2897,
+      "actions": [
+        {
+          "frame": 98,
+          "action": "jump",
+          "phase": "press"
+        },
+        {
+          "frame": 363,
+          "action": "slide",
+          "phase": "press"
+        },
+        {
+          "frame": 664,
+          "action": "jump",
+          "phase": "press"
+        },
+        {
+          "frame": 1059,
+          "action": "dashGrapple",
+          "phase": "press"
+        },
+        {
+          "frame": 1281,
+          "action": "jump",
+          "phase": "press"
+        },
+        {
+          "frame": 1287,
+          "action": "swingGrapple",
+          "phase": "press"
+        },
+        {
+          "frame": 1393,
+          "action": "swingGrapple",
+          "phase": "release"
+        },
+        {
+          "frame": 1552,
+          "action": "jump",
+          "phase": "press"
+        },
+        {
+          "frame": 1557,
+          "action": "zipline",
+          "phase": "press"
+        },
+        {
+          "frame": 2170,
+          "action": "swingGrapple",
+          "phase": "press"
+        },
+        {
+          "frame": 2244,
+          "action": "swingGrapple",
+          "phase": "release"
+        },
+        {
+          "frame": 2245,
+          "action": "zipline",
+          "phase": "press"
+        },
+        {
+          "frame": 2477,
+          "action": "dashGrapple",
+          "phase": "press"
+        },
+        {
+          "frame": 2482,
+          "action": "jump",
+          "phase": "press"
+        },
+        {
+          "frame": 2627,
+          "action": "jump",
+          "phase": "press"
+        }
+      ],
+      "expect": [
+        "Jump",
+        "Slide",
+        "CrouchHold",
+        "Vault",
+        "DashGrapple",
+        "SwingGrapple",
+        "SwingRelease",
+        "Zipline",
+        "JumpPad",
+        "Lap"
+      ]
+    },
+    {
+      "id": "context-cancel",
+      "stationId": "swing",
+      "frames": 75,
+      "actions": [
+        {
+          "frame": 53,
+          "action": "jump",
+          "phase": "press"
+        },
+        {
+          "frame": 59,
+          "action": "swingGrapple",
+          "phase": "press"
+        },
+        {
+          "frame": 61,
+          "action": "swingGrapple",
+          "phase": "release"
+        }
+      ],
+      "expect": [
+        "ActionQueued",
+        "ActionCancelled"
+      ]
+    }
+  ],
+  "art": {
+    "mode": "sprites",
+    "manifest": "assets/character/animations.json"
+  },
+  "diagnostics": {
+    "historySize": 8,
+    "wallWarningSeconds": 0.6
+  }
+}

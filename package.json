@@ -1,0 +1,17 @@
+{
+  "name": "polyu-ap-a3",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Data-driven parkour character and camera test circuit",
+  "scripts": {
+    "dev": "node tools/serve.mjs",
+    "check": "node tools/check-content.mjs",
+    "test": "node --test",
+    "rehearse": "node tools/rehearse.mjs",
+    "prepare:reference": "node tools/prepare-reference-art.mjs"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}

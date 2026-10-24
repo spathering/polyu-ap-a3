@@ -1,0 +1,11 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import fs from 'node:fs';
+import {SemanticInput} from '../src/input.js';
+const rules=JSON.parse(fs.readFileSync(new URL('../content/parkour.json',import.meta.url))).rules;
+globalThis.window=new EventTarget();globalThis.document=new EventTarget();document.hidden=false;
+const key=(code,repeat=false,tagName='CANVAS')=>({code,repeat,target:{tagName},preventDefault(){}});
+test('keyboard aliases and OS repeats produce one semantic edge',()=>{const i=new SemanticInput(rules.bindings,()=>null,()=>{},32);i.keydown(key('Space'));i.keydown(key('Space',true));i.keydown(key('ArrowUp'));assert.equal(i.consume(32).pressed.length,1);i.keyup(key('Space'));assert.ok(i.held.has('jump'));i.keyup(key('ArrowUp'));assert.equal(i.held.has('jump'),false);i.destroy();});
+test('text inputs suppress gameplay actions',()=>{const i=new SemanticInput(rules.bindings,()=>null,()=>{},32);i.keydown(key('Space',false,'INPUT'));assert.equal(i.consume(32).pressed.length,0);i.destroy();});
+test('press captures target ID and bounded queue drops old events',()=>{const i=new SemanticInput(rules.bindings,()=>({id:'course/dash-anchor'}),()=>{},rules.maxBufferedActions);i.keydown(key('KeyE'));assert.equal(i.consume(32).pressed[0].targetId,'course/dash-anchor');for(let n=0;n<200;n++)i.enqueue({phase:'press',command:{action:'jump'}});assert.equal(i.queue.length,rules.maxBufferedActions);i.destroy();});
+test('pointer/keyboard share one hold and focus loss clears all input',()=>{let blurred=0;const i=new SemanticInput(rules.bindings,()=>null,()=>blurred++,32);i.keydown(key('KeyQ'));i.holdAction('swingGrapple',true);i.keyup(key('KeyQ'));assert.ok(i.held.has('swingGrapple'));i.holdAction('swingGrapple',false);assert.equal(i.held.has('swingGrapple'),false);i.holdAction('swingGrapple',false);assert.equal(i.consume(32).released.length,1);i.keydown(key('Space'));i.blur();assert.equal(blurred,1);assert.deepEqual(i.consume(32),{pressed:[],released:[],held:[]});i.destroy();});

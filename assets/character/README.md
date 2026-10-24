@@ -1,0 +1,11 @@
+# Character animation catalogue
+
+`animations.json` is the single runtime owner of crops, sequences, visual scale and anchors. Default presentation uses 60-Hz local reference derivatives plus three generated traversal sheets. See [scene synchronization](../../Documents/Current/scene-action-synchronization.md).
+
+Baseline segments cover idle, run, slide entry/loop/exit, rise, fall, landing, vault and an adapted dash pose: ten segments from nine source clips. Nominal 20-Hz skeletal samples are linearly interpolated to 60 Hz before local rasterization with the original body painter, producing 465 poses on 11 pages. Original bytes and existing PNGs are unchanged; original painter code is not in the runtime bundle.
+
+Reference segments use a calibrated skeletal-chain scale, visible-foot ground anchors and a stable airborne pelvis. Generated frames use explicit estimated head/pelvis landmarks; bounding-box height is not forced constant across crouched and stretched poses. Movement rules own the grip offset, and image hands attach to that point. Run phase uses travelled distance and presentation position is interpolated. Swing/cable use stable hanging poses with continuous physical motion, avoiding rapid switches between inconsistent generated silhouettes. Pad/release frames remain staged key poses; full production blending is pending.
+
+`npm run prepare:reference` hash-checks and copies eleven already prepared local reference pages into ignored `assets/local-reference/`; it makes no network request. Derivatives are in workspace `.midwork/assignment3/reference-assets/vector-character-animation-runtime-v2/`, adjacent to the original archive; the local rebuild tool is `.midwork/assignment3/tools/build-smooth-lab-sprites.mjs`. Source provenance is in [extraction research](../../Documents/Plans/Research/vector-character-frames.md). Nekki's original and derived artwork remains local research material outside Git/Pages. Missing images show explicit status and use the rig fallback.
+
+The three generated sheets have separate [provenance](../generated/README.md), and their landmarks remain visual estimates. Animation owns neither position/velocity nor collision; the single simulator owns the action trajectory and start alignment.

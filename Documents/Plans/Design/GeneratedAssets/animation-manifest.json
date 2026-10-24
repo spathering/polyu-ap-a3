@@ -1,0 +1,1073 @@
+{
+  "schemaVersion": "1.0.0",
+  "createdOn": "2026-10-24",
+  "version": "trial-01",
+  "origin": "AI-generated action key poses using supplied local silhouette images as visual references",
+  "generationTool": "image_gen.imagegen (built-in)",
+  "status": "Art trial; not runtime animation or source-game extraction",
+  "sourceReferenceArchive": "../../reference-assets/vector-character-animation",
+  "promptFile": "prompts.json",
+  "frameNaming": "frame-0000.png",
+  "sheetNaming": "sheet-00.png",
+  "render": {
+    "width": 512,
+    "height": 512,
+    "pivotPixels": [
+      256,
+      288
+    ],
+    "pivotKind": "Visually estimated pelvis; manual source-image annotations, not recovered skeleton joints",
+    "processing": "Lossless crop and integer translation; no resampling, redraw, interpolation or alpha removal",
+    "previewFps": 6,
+    "loop": false,
+    "worldMotion": "Owned by gameplay; not encoded as animation displacement"
+  },
+  "clips": [
+    {
+      "id": "jump_pad_launch",
+      "action": "JumpPadLaunch",
+      "category": "11-jump-pad",
+      "frameCount": 8,
+      "directory": "frames/11-jump-pad/jump_pad_launch",
+      "source": {
+        "file": "source/jump_pad_launch.png",
+        "width": 1774,
+        "height": 887,
+        "sha256": "f91d50451686db4988c61bfd7fdfc84bc157408495570143c16fdc9728fb99f5"
+      },
+      "width": 512,
+      "height": 512,
+      "pivotPixels": [
+        256,
+        288
+      ],
+      "previewFps": 6,
+      "loop": false,
+      "frames": [
+        {
+          "frame": 0,
+          "file": "frame-0000.png",
+          "phase": "approach",
+          "sheet": 0,
+          "rect": [
+            0,
+            0,
+            512,
+            512
+          ],
+          "sourceRect": [
+            63,
+            127,
+            304,
+            288
+          ],
+          "sourcePelvisEstimate": [
+            210,
+            275
+          ],
+          "sourceTranslation": [
+            46,
+            13
+          ],
+          "attachmentPointEstimate": null,
+          "annotationAccuracy": "Visual estimate only; retarget and confirm in gameplay before production use",
+          "alphaBoundsInclusive": [
+            114,
+            146,
+            412,
+            421
+          ],
+          "visiblePixels": 26688,
+          "transparentPixels": 235456,
+          "sha256": "7c3843703e63ae02ee5ea7963def87776fbaa16bda04b3ad7dd5b2495c3c8191"
+        },
+        {
+          "frame": 1,
+          "file": "frame-0001.png",
+          "phase": "compression",
+          "sheet": 0,
+          "rect": [
+            512,
+            0,
+            512,
+            512
+          ],
+          "sourceRect": [
+            571,
+            165,
+            235,
+            252
+          ],
+          "sourcePelvisEstimate": [
+            661,
+            294
+          ],
+          "sourceTranslation": [
+            -405,
+            -6
+          ],
+          "attachmentPointEstimate": null,
+          "annotationAccuracy": "Visual estimate only; retarget and confirm in gameplay before production use",
+          "alphaBoundsInclusive": [
+            171,
+            165,
+            394,
+            405
+          ],
+          "visiblePixels": 21992,
+          "transparentPixels": 240152,
+          "sha256": "363fedf0fb5b2e21ad0e9322829c25c811d266902d3a386dd6b9dec19bc1739b"
+        },
+        {
+          "frame": 2,
+          "file": "frame-0002.png",
+          "phase": "push-off",
+          "sheet": 0,
+          "rect": [
+            1024,
+            0,
+            512,
+            512
+          ],
+          "sourceRect": [
+            963,
+            63,
+            308,
+            358
+          ],
+          "sourcePelvisEstimate": [
+            1090,
+            282
+          ],
+          "sourceTranslation": [
+            -834,
+            6
+          ],
+          "attachmentPointEstimate": null,
+          "annotationAccuracy": "Visual estimate only; retarget and confirm in gameplay before production use",
+          "alphaBoundsInclusive": [
+            135,
+            74,
+            430,
+            421
+          ],
+          "visiblePixels": 24617,
+          "transparentPixels": 237527,
+          "sha256": "efd06a22df2075c3c3e5abd0470e1f31657899374ce15c4d1410eab2dd91a927"
+        },
+        {
+          "frame": 3,
+          "file": "frame-0003.png",
+          "phase": "launch-extension",
+          "sheet": 0,
+          "rect": [
+            1536,
+            0,
+            512,
+            512
+          ],
+          "sourceRect": [
+            1413,
+            54,
+            316,
+            322
+          ],
+          "sourcePelvisEstimate": [
+            1540,
+            224
+          ],
+          "sourceTranslation": [
+            -1284,
+            64
+          ],
+          "attachmentPointEstimate": null,
+          "annotationAccuracy": "Visual estimate only; retarget and confirm in gameplay before production use",
+          "alphaBoundsInclusive": [
+            134,
+            124,
+            439,
+            433
+          ],
+          "visiblePixels": 18731,
+          "transparentPixels": 243413,
+          "sha256": "31b13f8d003179a91395d3fa4e8743e79a0ca535ebd99838fa55f0f014e979ad"
+        },
+        {
+          "frame": 4,
+          "file": "frame-0004.png",
+          "phase": "rising-tuck",
+          "sheet": 0,
+          "rect": [
+            0,
+            512,
+            512,
+            512
+          ],
+          "sourceRect": [
+            85,
+            491,
+            261,
+            299
+          ],
+          "sourcePelvisEstimate": [
+            205,
+            641
+          ],
+          "sourceTranslation": [
+            51,
+            -353
+          ],
+          "attachmentPointEstimate": null,
+          "annotationAccuracy": "Visual estimate only; retarget and confirm in gameplay before production use",
+          "alphaBoundsInclusive": [
+            142,
+            144,
+            390,
+            431
+          ],
+          "visiblePixels": 26433,
+          "transparentPixels": 235711,
+          "sha256": "9d59b02cf8a21ccd142cea0ac384f4bd3ea06e4081b0509ea4c565a84adc5a4c"
+        },
+        {
+          "frame": 5,
+          "file": "frame-0005.png",
+          "phase": "apex",
+          "sheet": 0,
+          "rect": [
+            512,
+            512,
+            512,
+            512
+          ],
+          "sourceRect": [
+            615,
+            487,
+            202,
+            268
+          ],
+          "sourcePelvisEstimate": [
+            678,
+            640
+          ],
+          "sourceTranslation": [
+            -422,
+            -352
+          ],
+          "attachmentPointEstimate": null,
+          "annotationAccuracy": "Visual estimate only; retarget and confirm in gameplay before production use",
+          "alphaBoundsInclusive": [
+            199,
+            141,
+            389,
+            396
+          ],
+          "visiblePixels": 20574,
+          "transparentPixels": 241570,
+          "sha256": "894601395ca6bf61ff78a372904f28ab7f570b88edb996532e9863214eb76ebe"
+        },
+        {
+          "frame": 6,
+          "file": "frame-0006.png",
+          "phase": "descent-ready",
+          "sheet": 0,
+          "rect": [
+            1024,
+            512,
+            512,
+            512
+          ],
+          "sourceRect": [
+            983,
+            513,
+            272,
+            327
+          ],
+          "sourcePelvisEstimate": [
+            1095,
+            692
+          ],
+          "sourceTranslation": [
+            -839,
+            -404
+          ],
+          "attachmentPointEstimate": null,
+          "annotationAccuracy": "Visual estimate only; retarget and confirm in gameplay before production use",
+          "alphaBoundsInclusive": [
+            149,
+            115,
+            410,
+            430
+          ],
+          "visiblePixels": 26879,
+          "transparentPixels": 235265,
+          "sha256": "deee873c57a746cf2d03cc518c19041790fade2093c16a90c6966a1f86895053"
+        },
+        {
+          "frame": 7,
+          "file": "frame-0007.png",
+          "phase": "landing-recovery",
+          "sheet": 0,
+          "rect": [
+            1536,
+            512,
+            512,
+            512
+          ],
+          "sourceRect": [
+            1458,
+            573,
+            240,
+            275
+          ],
+          "sourcePelvisEstimate": [
+            1545,
+            713
+          ],
+          "sourceTranslation": [
+            -1289,
+            -425
+          ],
+          "attachmentPointEstimate": null,
+          "annotationAccuracy": "Visual estimate only; retarget and confirm in gameplay before production use",
+          "alphaBoundsInclusive": [
+            175,
+            153,
+            402,
+            416
+          ],
+          "visiblePixels": 28512,
+          "transparentPixels": 233632,
+          "sha256": "b101f93f9f29dbfa4af6aca3d933d94b7817894be368723dacd645d8aef89e0d"
+        }
+      ],
+      "sheets": [
+        {
+          "file": "sheet-00.png",
+          "width": 2048,
+          "height": 1024,
+          "sha256": "d5caf0d00787c38dac6df9f35ad256aa7250d7393a90929422b01a4d63d4aac6"
+        }
+      ],
+      "metadataSha256": "d97cd76861d61a13d58c6d7b48adaa32fd2bb5491c36ae26ccfef4ada3ddc5d4"
+    },
+    {
+      "id": "zipline_traverse",
+      "action": "ZiplineTraverse",
+      "category": "12-zipline",
+      "frameCount": 8,
+      "directory": "frames/12-zipline/zipline_traverse",
+      "source": {
+        "file": "source/zipline_traverse.png",
+        "width": 1774,
+        "height": 887,
+        "sha256": "c0788605fd66e820f5394d20614244ccea39f587f85240c35e6fd60ac3f02fe7"
+      },
+      "width": 512,
+      "height": 512,
+      "pivotPixels": [
+        256,
+        288
+      ],
+      "previewFps": 6,
+      "loop": false,
+      "frames": [
+        {
+          "frame": 0,
+          "file": "frame-0000.png",
+          "phase": "reach",
+          "sheet": 0,
+          "rect": [
+            0,
+            0,
+            512,
+            512
+          ],
+          "sourceRect": [
+            100,
+            27,
+            291,
+            405
+          ],
+          "sourcePelvisEstimate": [
+            242,
+            287
+          ],
+          "sourceTranslation": [
+            14,
+            1
+          ],
+          "attachmentPointEstimate": null,
+          "annotationAccuracy": "Visual estimate only; retarget and confirm in gameplay before production use",
+          "alphaBoundsInclusive": [
+            119,
+            33,
+            398,
+            427
+          ],
+          "visiblePixels": 26257,
+          "transparentPixels": 235887,
+          "sha256": "9076fbef0c55ea4df5642f990e691ecda04505c6bc8d19c20027a223946ca8ba"
+        },
+        {
+          "frame": 1,
+          "file": "frame-0001.png",
+          "phase": "attach",
+          "sheet": 0,
+          "rect": [
+            512,
+            0,
+            512,
+            512
+          ],
+          "sourceRect": [
+            592,
+            35,
+            192,
+            340
+          ],
+          "sourcePelvisEstimate": [
+            684,
+            278
+          ],
+          "sourceTranslation": [
+            -428,
+            10
+          ],
+          "attachmentPointEstimate": [
+            276,
+            65
+          ],
+          "annotationAccuracy": "Visual estimate only; retarget and confirm in gameplay before production use",
+          "alphaBoundsInclusive": [
+            169,
+            50,
+            350,
+            380
+          ],
+          "visiblePixels": 23164,
+          "transparentPixels": 238980,
+          "sha256": "bf9afa7edee46f3bc44bda12f27b23a48b0160b6cbb7084ffe8bc8612364c315"
+        },
+        {
+          "frame": 2,
+          "file": "frame-0002.png",
+          "phase": "hang",
+          "sheet": 0,
+          "rect": [
+            1024,
+            0,
+            512,
+            512
+          ],
+          "sourceRect": [
+            1085,
+            36,
+            172,
+            370
+          ],
+          "sourcePelvisEstimate": [
+            1157,
+            278
+          ],
+          "sourceTranslation": [
+            -901,
+            10
+          ],
+          "attachmentPointEstimate": [
+            227,
+            65
+          ],
+          "annotationAccuracy": "Visual estimate only; retarget and confirm in gameplay before production use",
+          "alphaBoundsInclusive": [
+            189,
+            52,
+            349,
+            409
+          ],
+          "visiblePixels": 23798,
+          "transparentPixels": 238346,
+          "sha256": "8fb11c063edea36b20642786bbf9eefdf78b47a6c52ed6d0a883caa75db67ff4"
+        },
+        {
+          "frame": 3,
+          "file": "frame-0003.png",
+          "phase": "glide-trailing",
+          "sheet": 0,
+          "rect": [
+            1536,
+            0,
+            512,
+            512
+          ],
+          "sourceRect": [
+            1401,
+            36,
+            241,
+            384
+          ],
+          "sourcePelvisEstimate": [
+            1570,
+            275
+          ],
+          "sourceTranslation": [
+            -1314,
+            13
+          ],
+          "attachmentPointEstimate": [
+            263,
+            68
+          ],
+          "annotationAccuracy": "Visual estimate only; retarget and confirm in gameplay before production use",
+          "alphaBoundsInclusive": [
+            93,
+            55,
+            322,
+            426
+          ],
+          "visiblePixels": 24744,
+          "transparentPixels": 237400,
+          "sha256": "abb1b72b4c7b444dff9a8cbfbb8a9f8f6b93b5d7d88729944f82929a79ccb34f"
+        },
+        {
+          "frame": 4,
+          "file": "frame-0004.png",
+          "phase": "glide-forward",
+          "sheet": 0,
+          "rect": [
+            0,
+            512,
+            512,
+            512
+          ],
+          "sourceRect": [
+            175,
+            480,
+            298,
+            329
+          ],
+          "sourcePelvisEstimate": [
+            271,
+            717
+          ],
+          "sourceTranslation": [
+            -15,
+            -429
+          ],
+          "attachmentPointEstimate": [
+            207,
+            72
+          ],
+          "annotationAccuracy": "Visual estimate only; retarget and confirm in gameplay before production use",
+          "alphaBoundsInclusive": [
+            166,
+            56,
+            451,
+            373
+          ],
+          "visiblePixels": 24957,
+          "transparentPixels": 237187,
+          "sha256": "760c1a6382c1b6325b2c2586066669d9ffaa8cffaebfef197eccc57bf8265897"
+        },
+        {
+          "frame": 5,
+          "file": "frame-0005.png",
+          "phase": "release-prepare",
+          "sheet": 0,
+          "rect": [
+            512,
+            512,
+            512,
+            512
+          ],
+          "sourceRect": [
+            621,
+            481,
+            139,
+            285
+          ],
+          "sourcePelvisEstimate": [
+            681,
+            684
+          ],
+          "sourceTranslation": [
+            -425,
+            -396
+          ],
+          "attachmentPointEstimate": [
+            261,
+            105
+          ],
+          "annotationAccuracy": "Visual estimate only; retarget and confirm in gameplay before production use",
+          "alphaBoundsInclusive": [
+            201,
+            87,
+            329,
+            363
+          ],
+          "visiblePixels": 19910,
+          "transparentPixels": 242234,
+          "sha256": "16881f3d363bbe838f0e4631927b339e1aedbaed7afb56dd5df78e9797f66c44"
+        },
+        {
+          "frame": 6,
+          "file": "frame-0006.png",
+          "phase": "release",
+          "sheet": 0,
+          "rect": [
+            1024,
+            512,
+            512,
+            512
+          ],
+          "sourceRect": [
+            949,
+            553,
+            315,
+            292
+          ],
+          "sourcePelvisEstimate": [
+            1091,
+            715
+          ],
+          "sourceTranslation": [
+            -835,
+            -427
+          ],
+          "attachmentPointEstimate": null,
+          "annotationAccuracy": "Visual estimate only; retarget and confirm in gameplay before production use",
+          "alphaBoundsInclusive": [
+            120,
+            132,
+            423,
+            411
+          ],
+          "visiblePixels": 25679,
+          "transparentPixels": 236465,
+          "sha256": "372937a92a6cb50a93a8c4dc132e385e6dc0406bfa797c3da7700408f24552df"
+        },
+        {
+          "frame": 7,
+          "file": "frame-0007.png",
+          "phase": "airborne-recovery",
+          "sheet": 0,
+          "rect": [
+            1536,
+            512,
+            512,
+            512
+          ],
+          "sourceRect": [
+            1478,
+            541,
+            231,
+            289
+          ],
+          "sourcePelvisEstimate": [
+            1558,
+            688
+          ],
+          "sourceTranslation": [
+            -1302,
+            -400
+          ],
+          "attachmentPointEstimate": null,
+          "annotationAccuracy": "Visual estimate only; retarget and confirm in gameplay before production use",
+          "alphaBoundsInclusive": [
+            182,
+            146,
+            401,
+            423
+          ],
+          "visiblePixels": 22595,
+          "transparentPixels": 239549,
+          "sha256": "c649ebcd4b0d0e298d6103356d5d028763ed346f6faf88c1fce3cac6eb659ce5"
+        }
+      ],
+      "sheets": [
+        {
+          "file": "sheet-00.png",
+          "width": 2048,
+          "height": 1024,
+          "sha256": "b6146d461df589734c2287feabf48cdeac25677c5e52a1011f69b935e54b81e5"
+        }
+      ],
+      "metadataSha256": "ac305e45e5259f44d222a3d693b22aca244401bc0defad7c6f4b11a2ce5ab43d"
+    },
+    {
+      "id": "swing_grapple",
+      "action": "SwingGrapple",
+      "category": "13-swing-grapple",
+      "frameCount": 8,
+      "directory": "frames/13-swing-grapple/swing_grapple",
+      "source": {
+        "file": "source/swing_grapple.png",
+        "width": 1774,
+        "height": 887,
+        "sha256": "cac6d2af3523b8295a964270caf56475f0f4bb6bbb6d65f3d8d48b6300ac5072"
+      },
+      "width": 512,
+      "height": 512,
+      "pivotPixels": [
+        256,
+        288
+      ],
+      "previewFps": 6,
+      "loop": false,
+      "frames": [
+        {
+          "frame": 0,
+          "file": "frame-0000.png",
+          "phase": "reach",
+          "sheet": 0,
+          "rect": [
+            0,
+            0,
+            512,
+            512
+          ],
+          "sourceRect": [
+            66,
+            52,
+            346,
+            370
+          ],
+          "sourcePelvisEstimate": [
+            222,
+            259
+          ],
+          "sourceTranslation": [
+            34,
+            29
+          ],
+          "attachmentPointEstimate": null,
+          "annotationAccuracy": "Visual estimate only; retarget and confirm in gameplay before production use",
+          "alphaBoundsInclusive": [
+            106,
+            86,
+            439,
+            444
+          ],
+          "visiblePixels": 26917,
+          "transparentPixels": 235227,
+          "sha256": "5ace59db9f9173bfaf7fc0ce45cd495f2e30a098926a03061bb96b333a3e1be1"
+        },
+        {
+          "frame": 1,
+          "file": "frame-0001.png",
+          "phase": "tension-acquire",
+          "sheet": 0,
+          "rect": [
+            512,
+            0,
+            512,
+            512
+          ],
+          "sourceRect": [
+            543,
+            31,
+            241,
+            404
+          ],
+          "sourcePelvisEstimate": [
+            669,
+            280
+          ],
+          "sourceTranslation": [
+            -413,
+            8
+          ],
+          "attachmentPointEstimate": [
+            343,
+            60
+          ],
+          "annotationAccuracy": "Visual estimate only; retarget and confirm in gameplay before production use",
+          "alphaBoundsInclusive": [
+            136,
+            44,
+            364,
+            437
+          ],
+          "visiblePixels": 26923,
+          "transparentPixels": 235221,
+          "sha256": "5e9276e7b7cd3aa1421bc678a86d5fa97fb64ae5971f3db00516017bc20fed2f"
+        },
+        {
+          "frame": 2,
+          "file": "frame-0002.png",
+          "phase": "backswing",
+          "sheet": 0,
+          "rect": [
+            1024,
+            0,
+            512,
+            512
+          ],
+          "sourceRect": [
+            961,
+            30,
+            298,
+            388
+          ],
+          "sourcePelvisEstimate": [
+            1140,
+            286
+          ],
+          "sourceTranslation": [
+            -884,
+            2
+          ],
+          "attachmentPointEstimate": [
+            348,
+            54
+          ],
+          "annotationAccuracy": "Visual estimate only; retarget and confirm in gameplay before production use",
+          "alphaBoundsInclusive": [
+            77,
+            38,
+            368,
+            413
+          ],
+          "visiblePixels": 29560,
+          "transparentPixels": 232584,
+          "sha256": "e10d5d4381bd8bd03ea046724f2d39d36d06feab724de115bfd32137f11d7ac6"
+        },
+        {
+          "frame": 3,
+          "file": "frame-0003.png",
+          "phase": "bottom-pass",
+          "sheet": 0,
+          "rect": [
+            1536,
+            0,
+            512,
+            512
+          ],
+          "sourceRect": [
+            1493,
+            24,
+            146,
+            407
+          ],
+          "sourcePelvisEstimate": [
+            1578,
+            291
+          ],
+          "sourceTranslation": [
+            -1322,
+            -3
+          ],
+          "attachmentPointEstimate": [
+            266,
+            42
+          ],
+          "annotationAccuracy": "Visual estimate only; retarget and confirm in gameplay before production use",
+          "alphaBoundsInclusive": [
+            177,
+            27,
+            310,
+            421
+          ],
+          "visiblePixels": 22253,
+          "transparentPixels": 239891,
+          "sha256": "98f8a6438054c569c7bf068ac44600ff9c77426b5217230e28e28148a8bbba76"
+        },
+        {
+          "frame": 4,
+          "file": "frame-0004.png",
+          "phase": "forward-swing",
+          "sheet": 0,
+          "rect": [
+            0,
+            512,
+            512,
+            512
+          ],
+          "sourceRect": [
+            115,
+            472,
+            353,
+            365
+          ],
+          "sourcePelvisEstimate": [
+            271,
+            714
+          ],
+          "sourceTranslation": [
+            -15,
+            -426
+          ],
+          "attachmentPointEstimate": [
+            128,
+            67
+          ],
+          "annotationAccuracy": "Visual estimate only; retarget and confirm in gameplay before production use",
+          "alphaBoundsInclusive": [
+            105,
+            51,
+            446,
+            404
+          ],
+          "visiblePixels": 28476,
+          "transparentPixels": 233668,
+          "sha256": "6f93f7b386e1b5538bd11b9835729105a04abd6ae4d89c210960817ccf65ccc8"
+        },
+        {
+          "frame": 5,
+          "file": "frame-0005.png",
+          "phase": "forward-apex",
+          "sheet": 0,
+          "rect": [
+            512,
+            512,
+            512,
+            512
+          ],
+          "sourceRect": [
+            580,
+            472,
+            250,
+            312
+          ],
+          "sourcePelvisEstimate": [
+            666,
+            698
+          ],
+          "sourceTranslation": [
+            -410,
+            -410
+          ],
+          "attachmentPointEstimate": [
+            199,
+            83
+          ],
+          "annotationAccuracy": "Visual estimate only; retarget and confirm in gameplay before production use",
+          "alphaBoundsInclusive": [
+            175,
+            67,
+            414,
+            367
+          ],
+          "visiblePixels": 23019,
+          "transparentPixels": 239125,
+          "sha256": "f1112e0340360297390ec01401a2a8cc9c6749d2062a08eacd41c78da711f223"
+        },
+        {
+          "frame": 6,
+          "file": "frame-0006.png",
+          "phase": "release",
+          "sheet": 0,
+          "rect": [
+            1024,
+            512,
+            512,
+            512
+          ],
+          "sourceRect": [
+            942,
+            483,
+            374,
+            351
+          ],
+          "sourcePelvisEstimate": [
+            1114,
+            698
+          ],
+          "sourceTranslation": [
+            -858,
+            -410
+          ],
+          "attachmentPointEstimate": null,
+          "annotationAccuracy": "Visual estimate only; retarget and confirm in gameplay before production use",
+          "alphaBoundsInclusive": [
+            89,
+            79,
+            452,
+            418
+          ],
+          "visiblePixels": 28816,
+          "transparentPixels": 233328,
+          "sha256": "4f132921b40ef49a5dda9f7ad7f410730e738573dd4dfad7c911fa466c4daa53"
+        },
+        {
+          "frame": 7,
+          "file": "frame-0007.png",
+          "phase": "free-flight",
+          "sheet": 0,
+          "rect": [
+            1536,
+            512,
+            512,
+            512
+          ],
+          "sourceRect": [
+            1397,
+            530,
+            323,
+            311
+          ],
+          "sourcePelvisEstimate": [
+            1533,
+            699
+          ],
+          "sourceTranslation": [
+            -1277,
+            -411
+          ],
+          "attachmentPointEstimate": null,
+          "annotationAccuracy": "Visual estimate only; retarget and confirm in gameplay before production use",
+          "alphaBoundsInclusive": [
+            125,
+            125,
+            437,
+            423
+          ],
+          "visiblePixels": 27495,
+          "transparentPixels": 234649,
+          "sha256": "0c179664ca984273185b86eaa2e6370e735a6c85257bc6198afcae9478bfa2a5"
+        }
+      ],
+      "sheets": [
+        {
+          "file": "sheet-00.png",
+          "width": 2048,
+          "height": 1024,
+          "sha256": "fc3862c8e28884346639c46c188102ec334da7cef4702506282a51e879fecc5c"
+        }
+      ],
+      "metadataSha256": "8eb7c46a7b8cbe9fa91a2f932723cbb87e8d1ec9b937e906f788fd131d555548"
+    }
+  ],
+  "summary": {
+    "clips": 3,
+    "frames": 24,
+    "spriteSheets": 3
+  },
+  "references": [
+    {
+      "file": "../../reference-assets/vector-character-animation/frames/01-stand-and-run/run/contact.png",
+      "role": "Style/proportion reference; no original animation frames reused as generated output",
+      "sha256": "60bb4ac7241113a706740f3144ddaa798e6931dfab3ef5622c1ecc70b635eb7d"
+    },
+    {
+      "file": "../../reference-assets/vector-character-animation/frames/04-vault-and-clearance/speed_vault/contact.png",
+      "role": "Style/proportion reference; no original animation frames reused as generated output",
+      "sha256": "15761305bb930d7627877adee6570073c2e732ccadae9a43c9c0852c14adc650"
+    }
+  ],
+  "validation": {
+    "result": "passed",
+    "sourceSheets": 3,
+    "largeSilhouettesPerSource": 8,
+    "rgbaFrames": 24,
+    "exactAtlasCellPixelComparisons": 24,
+    "marginPixels": 12,
+    "allFramesVisuallyReviewed": true,
+    "limitations": [
+      "Eight key poses per mechanic; no generated in-between frames",
+      "Estimated root and hand annotations need runtime verification",
+      "Actor proportions and anatomy vary slightly across generated poses",
+      "No animation blending, clip duration, contact event or seamless loop is qualified"
+    ]
+  }
+}

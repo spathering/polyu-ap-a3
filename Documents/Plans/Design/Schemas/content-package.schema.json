@@ -1,0 +1,1207 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Parkour content package",
+  "description": "Shared game/editor structural contract; scene action markers reference geometry rather than copy it.",
+  "type": "object",
+  "properties": {
+    "schemaVersion": {
+      "const": "1.2.0"
+    },
+    "contentRevision": {
+      "type": "string",
+      "minLength": 1
+    },
+    "physicsVersion": {
+      "type": "string",
+      "minLength": 1
+    },
+    "generatorVersion": {
+      "type": "string",
+      "minLength": 1
+    },
+    "rules": {
+      "$ref": "#/$defs/rules"
+    },
+    "profiles": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/profile"
+      },
+      "minItems": 4
+    },
+    "modules": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/module"
+      },
+      "minItems": 1
+    },
+    "finiteLevels": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/finiteLevel"
+      },
+      "minItems": 1
+    },
+    "endlessPresets": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/endlessPreset"
+      },
+      "minItems": 1
+    }
+  },
+  "required": [
+    "schemaVersion",
+    "contentRevision",
+    "physicsVersion",
+    "generatorVersion",
+    "rules",
+    "profiles",
+    "modules",
+    "finiteLevels",
+    "endlessPresets"
+  ],
+  "additionalProperties": false,
+  "$defs": {
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9_-]*$"
+    },
+    "vec2": {
+      "type": "array",
+      "prefixItems": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "number"
+        }
+      ],
+      "items": false,
+      "minItems": 2,
+      "maxItems": 2
+    },
+    "rect": {
+      "type": "array",
+      "prefixItems": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "number"
+        },
+        {
+          "type": "number",
+          "exclusiveMinimum": 0
+        },
+        {
+          "type": "number",
+          "exclusiveMinimum": 0
+        }
+      ],
+      "items": false,
+      "minItems": 4,
+      "maxItems": 4
+    },
+    "abilities": {
+      "type": "array",
+      "items": {
+        "enum": [
+          "jump",
+          "slide",
+          "vault",
+          "dashGrapple",
+          "swingGrapple",
+          "zipline",
+          "jumpPad"
+        ]
+      },
+      "minItems": 0,
+      "uniqueItems": true
+    },
+    "rules": {
+      "type": "object",
+      "properties": {
+        "fixedStepHz": {
+          "type": "integer",
+          "minimum": 30,
+          "maximum": 240
+        },
+        "gravity": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        },
+        "runSpeed": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        },
+        "jumpVelocity": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        },
+        "jumpBufferSeconds": {
+          "type": "number",
+          "minimum": 0
+        },
+        "coyoteSeconds": {
+          "type": "number",
+          "minimum": 0
+        },
+        "slideSeconds": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        },
+        "vaultMaxHeight": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        },
+        "bodySize": {
+          "type": "array",
+          "prefixItems": [
+            {
+              "type": "number",
+              "exclusiveMinimum": 0
+            },
+            {
+              "type": "number",
+              "exclusiveMinimum": 0
+            }
+          ],
+          "items": false,
+          "minItems": 2,
+          "maxItems": 2
+        },
+        "slideBodySize": {
+          "type": "array",
+          "prefixItems": [
+            {
+              "type": "number",
+              "exclusiveMinimum": 0
+            },
+            {
+              "type": "number",
+              "exclusiveMinimum": 0
+            }
+          ],
+          "items": false,
+          "minItems": 2,
+          "maxItems": 2
+        },
+        "enabledAbilities": {
+          "$ref": "#/$defs/abilities"
+        },
+        "bindings": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/binding"
+          },
+          "minItems": 1
+        },
+        "groundAcceleration": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        },
+        "airAcceleration": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        },
+        "maxHorizontalSpeed": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        },
+        "maxFallSpeed": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        },
+        "groundProbeDistance": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        },
+        "collisionSkin": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        },
+        "standClearancePadding": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        },
+        "vaultMaxWidth": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        },
+        "vaultAcquisitionDistance": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        },
+        "vaultDurationSeconds": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        },
+        "vaultExitSpeed": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        },
+        "landingRecoverySeconds": {
+          "type": "number",
+          "minimum": 0
+        },
+        "maxBufferedActions": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 128
+        },
+        "camera": {
+          "type": "object",
+          "properties": {
+            "targetScreenX": {
+              "type": "number",
+              "minimum": 0.1,
+              "maximum": 0.6
+            },
+            "lookAheadSeconds": {
+              "type": "number",
+              "minimum": 0
+            },
+            "minLookAhead": {
+              "type": "number",
+              "minimum": 0
+            },
+            "maxLookAhead": {
+              "type": "number",
+              "minimum": 0
+            },
+            "deadZoneSize": {
+              "type": "array",
+              "prefixItems": [
+                {
+                  "type": "number",
+                  "exclusiveMinimum": 0
+                },
+                {
+                  "type": "number",
+                  "exclusiveMinimum": 0
+                }
+              ],
+              "items": false,
+              "minItems": 2,
+              "maxItems": 2
+            },
+            "verticalLookAheadSeconds": {
+              "type": "number",
+              "minimum": 0
+            },
+            "maxVerticalOffset": {
+              "type": "number",
+              "minimum": 0
+            },
+            "smoothingSeconds": {
+              "type": "number",
+              "exclusiveMinimum": 0
+            },
+            "maxCatchUpSpeed": {
+              "type": "number",
+              "exclusiveMinimum": 0
+            },
+            "baseViewHeight": {
+              "type": "number",
+              "exclusiveMinimum": 0
+            },
+            "minViewHeight": {
+              "type": "number",
+              "exclusiveMinimum": 0
+            },
+            "maxViewHeight": {
+              "type": "number",
+              "exclusiveMinimum": 0
+            },
+            "zoomSmoothingSeconds": {
+              "type": "number",
+              "exclusiveMinimum": 0
+            },
+            "reactionBudgetSeconds": {
+              "type": "number",
+              "exclusiveMinimum": 0
+            }
+          },
+          "required": [
+            "targetScreenX",
+            "lookAheadSeconds",
+            "minLookAhead",
+            "maxLookAhead",
+            "deadZoneSize",
+            "verticalLookAheadSeconds",
+            "maxVerticalOffset",
+            "smoothingSeconds",
+            "maxCatchUpSpeed",
+            "baseViewHeight",
+            "minViewHeight",
+            "maxViewHeight",
+            "zoomSmoothingSeconds",
+            "reactionBudgetSeconds"
+          ],
+          "additionalProperties": false
+        },
+        "contextInputSeconds": {
+          "type": "number",
+          "exclusiveMinimum": 0,
+          "maximum": 2
+        },
+        "vaultTrajectory": {
+          "type": "array",
+          "minItems": 2,
+          "items": {
+            "type": "array",
+            "prefixItems": [
+              {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 1
+              },
+              {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 1
+              },
+              {
+                "type": "number",
+                "minimum": 0
+              }
+            ],
+            "items": false,
+            "minItems": 3,
+            "maxItems": 3
+          }
+        },
+        "gripOffset": {
+          "$ref": "#/$defs/vec2"
+        }
+      },
+      "required": [
+        "fixedStepHz",
+        "gravity",
+        "runSpeed",
+        "jumpVelocity",
+        "jumpBufferSeconds",
+        "coyoteSeconds",
+        "slideSeconds",
+        "vaultMaxHeight",
+        "bodySize",
+        "slideBodySize",
+        "enabledAbilities",
+        "bindings",
+        "groundAcceleration",
+        "airAcceleration",
+        "maxHorizontalSpeed",
+        "maxFallSpeed",
+        "groundProbeDistance",
+        "collisionSkin",
+        "standClearancePadding",
+        "vaultMaxWidth",
+        "vaultAcquisitionDistance",
+        "vaultDurationSeconds",
+        "vaultExitSpeed",
+        "landingRecoverySeconds",
+        "maxBufferedActions",
+        "camera",
+        "contextInputSeconds",
+        "vaultTrajectory",
+        "gripOffset"
+      ],
+      "additionalProperties": false
+    },
+    "profile": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "id": {
+              "$ref": "#/$defs/id"
+            },
+            "kind": {
+              "const": "dashGrapple"
+            },
+            "range": {
+              "type": "number",
+              "exclusiveMinimum": 0
+            },
+            "coneRadians": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 3.141592653589793
+            },
+            "speed": {
+              "type": "number",
+              "exclusiveMinimum": 0
+            },
+            "arrivalRadius": {
+              "type": "number",
+              "exclusiveMinimum": 0
+            },
+            "cooldownSeconds": {
+              "type": "number",
+              "minimum": 0
+            },
+            "exitSpeed": {
+              "type": "number",
+              "minimum": 0
+            }
+          },
+          "required": [
+            "id",
+            "kind",
+            "range",
+            "coneRadians",
+            "speed",
+            "arrivalRadius",
+            "cooldownSeconds",
+            "exitSpeed"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "id": {
+              "$ref": "#/$defs/id"
+            },
+            "kind": {
+              "const": "swingGrapple"
+            },
+            "range": {
+              "type": "number",
+              "exclusiveMinimum": 0
+            },
+            "minLength": {
+              "type": "number",
+              "exclusiveMinimum": 0
+            },
+            "maxLength": {
+              "type": "number",
+              "exclusiveMinimum": 0
+            },
+            "maxSpeed": {
+              "type": "number",
+              "exclusiveMinimum": 0
+            },
+            "cooldownSeconds": {
+              "type": "number",
+              "minimum": 0
+            },
+            "coneRadians": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 3.141592653589793
+            }
+          },
+          "required": [
+            "id",
+            "kind",
+            "range",
+            "minLength",
+            "maxLength",
+            "maxSpeed",
+            "cooldownSeconds",
+            "coneRadians"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "id": {
+              "$ref": "#/$defs/id"
+            },
+            "kind": {
+              "const": "zipline"
+            },
+            "captureRadius": {
+              "type": "number",
+              "exclusiveMinimum": 0
+            },
+            "speed": {
+              "type": "number",
+              "exclusiveMinimum": 0
+            },
+            "exitJumpVelocity": {
+              "type": "number",
+              "minimum": 0
+            }
+          },
+          "required": [
+            "id",
+            "kind",
+            "captureRadius",
+            "speed",
+            "exitJumpVelocity"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "id": {
+              "$ref": "#/$defs/id"
+            },
+            "kind": {
+              "const": "jumpPad"
+            },
+            "launchVelocity": {
+              "$ref": "#/$defs/vec2"
+            },
+            "rearmSeconds": {
+              "type": "number",
+              "minimum": 0
+            },
+            "velocityPolicy": {
+              "enum": [
+                "replace",
+                "add"
+              ]
+            }
+          },
+          "required": [
+            "id",
+            "kind",
+            "launchVelocity",
+            "rearmSeconds",
+            "velocityPolicy"
+          ],
+          "additionalProperties": false
+        }
+      ]
+    },
+    "entity": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "id": {
+              "$ref": "#/$defs/id"
+            },
+            "kind": {
+              "const": "surface"
+            },
+            "rect": {
+              "$ref": "#/$defs/rect"
+            },
+            "oneWay": {
+              "type": "boolean"
+            },
+            "vaultable": {
+              "type": "boolean"
+            }
+          },
+          "required": [
+            "id",
+            "kind",
+            "rect",
+            "oneWay",
+            "vaultable"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "id": {
+              "$ref": "#/$defs/id"
+            },
+            "kind": {
+              "const": "hazard"
+            },
+            "rect": {
+              "$ref": "#/$defs/rect"
+            }
+          },
+          "required": [
+            "id",
+            "kind",
+            "rect"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "id": {
+              "$ref": "#/$defs/id"
+            },
+            "kind": {
+              "const": "anchor"
+            },
+            "position": {
+              "$ref": "#/$defs/vec2"
+            },
+            "profileId": {
+              "$ref": "#/$defs/id"
+            }
+          },
+          "required": [
+            "id",
+            "kind",
+            "position",
+            "profileId"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "id": {
+              "$ref": "#/$defs/id"
+            },
+            "kind": {
+              "const": "zipline"
+            },
+            "points": {
+              "type": "array",
+              "items": {
+                "$ref": "#/$defs/vec2"
+              },
+              "minItems": 2
+            },
+            "profileId": {
+              "$ref": "#/$defs/id"
+            }
+          },
+          "required": [
+            "id",
+            "kind",
+            "points",
+            "profileId"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "id": {
+              "$ref": "#/$defs/id"
+            },
+            "kind": {
+              "const": "jumpPad"
+            },
+            "rect": {
+              "$ref": "#/$defs/rect"
+            },
+            "profileId": {
+              "$ref": "#/$defs/id"
+            }
+          },
+          "required": [
+            "id",
+            "kind",
+            "rect",
+            "profileId"
+          ],
+          "additionalProperties": false
+        }
+      ]
+    },
+    "socketContract": {
+      "type": "object",
+      "properties": {
+        "postures": {
+          "type": "array",
+          "items": {
+            "enum": [
+              "grounded",
+              "airborne"
+            ]
+          },
+          "minItems": 1,
+          "uniqueItems": true
+        },
+        "vxRange": {
+          "$ref": "#/$defs/vec2"
+        },
+        "vyRange": {
+          "$ref": "#/$defs/vec2"
+        },
+        "clearance": {
+          "type": "array",
+          "prefixItems": [
+            {
+              "type": "number",
+              "exclusiveMinimum": 0
+            },
+            {
+              "type": "number",
+              "exclusiveMinimum": 0
+            }
+          ],
+          "items": false,
+          "minItems": 2,
+          "maxItems": 2
+        },
+        "requiredAbilities": {
+          "$ref": "#/$defs/abilities"
+        }
+      },
+      "required": [
+        "postures",
+        "vxRange",
+        "vyRange",
+        "clearance",
+        "requiredAbilities"
+      ],
+      "additionalProperties": false
+    },
+    "socket": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/id"
+        },
+        "role": {
+          "enum": [
+            "entry",
+            "exit"
+          ]
+        },
+        "position": {
+          "$ref": "#/$defs/vec2"
+        },
+        "contract": {
+          "$ref": "#/$defs/socketContract"
+        }
+      },
+      "required": [
+        "id",
+        "role",
+        "position",
+        "contract"
+      ],
+      "additionalProperties": false
+    },
+    "witnessAction": {
+      "type": "object",
+      "properties": {
+        "tick": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "action": {
+          "enum": [
+            "jump",
+            "slide",
+            "dashGrapple",
+            "swingGrapple",
+            "zipline"
+          ]
+        },
+        "phase": {
+          "enum": [
+            "press",
+            "release"
+          ]
+        }
+      },
+      "required": [
+        "tick",
+        "action",
+        "phase"
+      ],
+      "additionalProperties": false
+    },
+    "route": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/id"
+        },
+        "entrySocketId": {
+          "$ref": "#/$defs/id"
+        },
+        "exitSocketId": {
+          "$ref": "#/$defs/id"
+        },
+        "requiredAbilities": {
+          "$ref": "#/$defs/abilities"
+        },
+        "witnessActions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/witnessAction"
+          },
+          "minItems": 0
+        },
+        "maxTicks": {
+          "type": "integer",
+          "minimum": 1
+        }
+      },
+      "required": [
+        "id",
+        "entrySocketId",
+        "exitSocketId",
+        "requiredAbilities",
+        "witnessActions",
+        "maxTicks"
+      ],
+      "additionalProperties": false
+    },
+    "module": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/id"
+        },
+        "size": {
+          "type": "array",
+          "prefixItems": [
+            {
+              "type": "number",
+              "exclusiveMinimum": 0
+            },
+            {
+              "type": "number",
+              "exclusiveMinimum": 0
+            }
+          ],
+          "items": false,
+          "minItems": 2,
+          "maxItems": 2
+        },
+        "difficulty": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "tags": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "minItems": 0
+        },
+        "entities": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/entity"
+          },
+          "minItems": 0
+        },
+        "sockets": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/socket"
+          },
+          "minItems": 2
+        },
+        "routes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/route"
+          },
+          "minItems": 1
+        },
+        "sceneActions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/sceneAction"
+          }
+        }
+      },
+      "required": [
+        "id",
+        "size",
+        "difficulty",
+        "tags",
+        "entities",
+        "sockets",
+        "routes"
+      ],
+      "additionalProperties": false
+    },
+    "instance": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/id"
+        },
+        "moduleId": {
+          "$ref": "#/$defs/id"
+        },
+        "position": {
+          "$ref": "#/$defs/vec2"
+        }
+      },
+      "required": [
+        "id",
+        "moduleId",
+        "position"
+      ],
+      "additionalProperties": false
+    },
+    "socketRef": {
+      "type": "object",
+      "properties": {
+        "instanceId": {
+          "$ref": "#/$defs/id"
+        },
+        "socketId": {
+          "$ref": "#/$defs/id"
+        }
+      },
+      "required": [
+        "instanceId",
+        "socketId"
+      ],
+      "additionalProperties": false
+    },
+    "connection": {
+      "type": "object",
+      "properties": {
+        "from": {
+          "$ref": "#/$defs/socketRef"
+        },
+        "to": {
+          "$ref": "#/$defs/socketRef"
+        }
+      },
+      "required": [
+        "from",
+        "to"
+      ],
+      "additionalProperties": false
+    },
+    "finiteLevel": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/id"
+        },
+        "instances": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/instance"
+          },
+          "minItems": 1
+        },
+        "connections": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/connection"
+          },
+          "minItems": 0
+        },
+        "spawn": {
+          "$ref": "#/$defs/socketRef"
+        },
+        "finish": {
+          "$ref": "#/$defs/socketRef"
+        }
+      },
+      "required": [
+        "id",
+        "instances",
+        "connections",
+        "spawn",
+        "finish"
+      ],
+      "additionalProperties": false
+    },
+    "poolEntry": {
+      "type": "object",
+      "properties": {
+        "moduleId": {
+          "$ref": "#/$defs/id"
+        },
+        "weight": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        },
+        "minDifficulty": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "maxDifficulty": {
+          "type": "integer",
+          "minimum": 0
+        }
+      },
+      "required": [
+        "moduleId",
+        "weight",
+        "minDifficulty",
+        "maxDifficulty"
+      ],
+      "additionalProperties": false
+    },
+    "endlessPreset": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/id"
+        },
+        "startModuleId": {
+          "$ref": "#/$defs/id"
+        },
+        "fallbackModuleId": {
+          "$ref": "#/$defs/id"
+        },
+        "modulePool": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/poolEntry"
+          },
+          "minItems": 1
+        },
+        "startTier": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "maxTier": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "tierEveryModules": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "repeatWindow": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "maxAttempts": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "lookaheadModules": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "maxActiveModules": {
+          "type": "integer",
+          "minimum": 2
+        },
+        "retireBehindDistance": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        }
+      },
+      "required": [
+        "id",
+        "startModuleId",
+        "fallbackModuleId",
+        "modulePool",
+        "startTier",
+        "maxTier",
+        "tierEveryModules",
+        "repeatWindow",
+        "maxAttempts",
+        "lookaheadModules",
+        "maxActiveModules",
+        "retireBehindDistance"
+      ],
+      "additionalProperties": false
+    },
+    "binding": {
+      "type": "object",
+      "properties": {
+        "action": {
+          "enum": [
+            "jump",
+            "slide",
+            "dashGrapple",
+            "swingGrapple",
+            "zipline",
+            "pause",
+            "retry"
+          ]
+        },
+        "keys": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "minItems": 1,
+          "uniqueItems": true
+        },
+        "behaviour": {
+          "enum": [
+            "press",
+            "hold"
+          ]
+        }
+      },
+      "required": [
+        "action",
+        "keys",
+        "behaviour"
+      ],
+      "additionalProperties": false
+    },
+    "sceneAction": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/id"
+        },
+        "entityId": {
+          "$ref": "#/$defs/id"
+        },
+        "kind": {
+          "enum": [
+            "jump",
+            "slide",
+            "vault",
+            "dashGrapple",
+            "swingGrapple",
+            "zipline",
+            "jumpPad"
+          ]
+        },
+        "input": {
+          "enum": [
+            "jump",
+            "slide",
+            "dashGrapple",
+            "swingGrapple",
+            "zipline",
+            "automatic"
+          ]
+        },
+        "edge": {
+          "enum": [
+            "start",
+            "end",
+            "center"
+          ]
+        },
+        "startOffset": {
+          "type": "number"
+        },
+        "leadDistance": {
+          "type": "number",
+          "minimum": 0
+        },
+        "lateDistance": {
+          "type": "number",
+          "minimum": 0
+        },
+        "priority": {
+          "type": "integer"
+        },
+        "heightRange": {
+          "$ref": "#/$defs/vec2"
+        }
+      },
+      "required": [
+        "id",
+        "entityId",
+        "kind",
+        "input",
+        "edge",
+        "startOffset",
+        "leadDistance",
+        "lateDistance",
+        "priority",
+        "heightRange"
+      ],
+      "additionalProperties": false
+    }
+  }
+}

@@ -1,0 +1,7 @@
+node_modules/
+coverage/
+.cache/
+.DS_Store
+
+# Extracted publisher artwork is local research material, not a redistribution grant.
+assets/local-reference/
