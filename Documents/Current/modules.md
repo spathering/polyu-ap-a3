@@ -60,7 +60,7 @@ Geometry is pre-matched before a semantic input edge selects timely or late. The
 
 Editor edits clone one candidate, run the shared validator and replace the frozen draft only on success. Layout instances reference shared modules by ID. Quick tests derive a frozen snapshot and use the same production classes; stop removes input listeners without copying simulation state into the draft. Schema validity and socket warnings do not prove playability. See [current editor](level-editor.md) and [scene synchronization](scene-action-synchronization.md).
 
-Original reference pages are hash-checked ignored local copies, not public release assets. Three generated sheets are versioned. There is no seeded generator, shared leaderboard or verified Pages publication.
+Original reference pages are hash-checked ignored local copies, not public release assets. Three generated sheets are versioned. There is no seeded generator or shared leaderboard. Pages is now live; see [deployment](deployment.md).
 
 [Small modules and terrain](micro-modules-and-terrain.md) document grounded low-ledge climb, auto markers, phase matching and context-preserving/practice-floor previews.
 
@@ -84,3 +84,5 @@ Original reference pages are hash-checked ignored local copies, not public relea
 `scene-performance.js` binds geometry, timing variants, prepared paths, sequence phases and shot data before input. `directed-camera.js` samples immutable shot/time data; `camera.js` handles smooth handoffs and returns to free follow. `Simulation` advances selected variants and owns all physical results, including `SceneFailure`. `animation.js` consumes the same fixed clock; `presentation.js` preserves discrete recipe/shot boundaries. Editor exposes the same recipes and checks sequence references. See [current choreography](scene-choreography.md). There are now 18 lab rehearsals plus six complete campaigns.
 
 The player menu stack now uses data-owned modes; six campaign and three training routes are separate. `game-flow.js` alone derives next/back URLs and prevents mode crossing. `studio.html` launches existing level and character tools independently. [Screen ownership](game-flow.md).
+
+Publication boundary: GitHub Pages serves the tracked static tree directly from main/root. No server-side runtime or new physics owner was added; source-relative asset paths and missing-art fallback remain shared. See [deployment](deployment.md).

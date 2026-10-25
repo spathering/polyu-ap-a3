@@ -66,7 +66,7 @@ flowchart LR
 
 102 Node tests pass. The original fifteen production rehearsals still cover 26/26 lab events and a full lap; low-ledge climb has separate integration/contact tests. Ten actual headless Edge CDP scenarios exercise native library drag/drop, placement ghosts and exact coordinates, H-scaled painting, real climb playtest, preview contexts, all fifteen module views, explicit legacy file conversion, storage recovery and compact layout, with zero exceptions. Export Blob/filename/content is tested before OS download, not OS download completion. Evidence: `.midwork/assignment3/lab-evidence/2026-10-25/micro-editor/`.
 
-Endless generation, graphical route/witness tools, universal reachability qualification, production art, other-person trial and Pages release remain pending. Read [micro-module behavior and limits](micro-modules-and-terrain.md), [editor contract](../Plans/Design/level-editor-requirements.md) and [TODO](../Plans/TODO.md).
+Endless generation, graphical route/witness tools, universal reachability qualification, production art, other-person trial remain pending. Read [micro-module behavior and limits](micro-modules-and-terrain.md), [editor contract](../Plans/Design/level-editor-requirements.md) and [TODO](../Plans/TODO.md).
 
 ## Explicit snapping, 25 October 2026
 

@@ -89,3 +89,7 @@ Research supports a possible GitHub-only, asynchronous score board using authent
 - Data owners, schema, semantic checks and production/editor simulation remain shared and authoritative.
 
 Suggested sequence: choose the stack and refine the movement proposal; build shared contracts/validation and a movement slice; add four traversal test modules; complete fixed layout authoring/editor; validate endless assembly; playtest, deploy and finish submission documents. Deadline: **1 November 2026, 23:59 Hong Kong time**.
+
+## Implemented delivery update, 25 October 2026
+
+GitHub Pages is enabled on main/root and the public HTTPS game is verified. The earlier URL is now live. Branch publishing supplies automatic future deployment without a custom workflow. Original release artwork and other pending product work remain separate. See [current deployment](../Current/deployment.md).

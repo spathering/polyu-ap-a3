@@ -38,3 +38,5 @@ Current full-scene play, six additional independent layouts and ledge/wall/roll 
 Current movement authority: [scene choreography and three timing outcomes](Current/scene-choreography.md). It supersedes earlier root-driven follow and input-first matching descriptions; shared preset editing and same-obstacle rehearsal steps are documented there.
 
 Player navigation now follows [main menu → mode → route → scene](Current/game-flow.md); **Game editor** is a separate workspace for the existing Level Studio and Motion Lab.
+
+Live release: [GitHub Pages configuration, online entry points, artwork limits and verification](Current/deployment.md).

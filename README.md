@@ -2,7 +2,7 @@
 
 A browser parkour game for Assignment 3: An interactive experience.
 
-**Status: player menus and separate editor workspace implemented, 25 October 2026.** Main menu → Mode select → Campaign (six authored routes) or Training (three focused routes) → Game scene. Endless is visibly unavailable. Game editor is a separate entry for Level Studio and Motion Lab. One 60 Hz simulator handles baseline movement, four traversal additions, ledge catch/mantle, wall rebound and buffered landing roll. Eighteen editor prefabs share the same content and collision rules. See [campaign/actions](Documents/Current/campaign-and-scene-actions.md), [flow](Documents/Current/game-flow.md), [3C](Documents/Current/reference-driven-3c.md) and [editor](Documents/Current/level-editor.md). Endless generation, final original art and verified Pages release remain pending.
+**Status: player menus and separate editor workspace implemented, 25 October 2026.** Main menu → Mode select → Campaign (six authored routes) or Training (three focused routes) → Game scene. Endless is visibly unavailable. Game editor is a separate entry for Level Studio and Motion Lab. One 60 Hz simulator handles baseline movement, four traversal additions, ledge catch/mantle, wall rebound and buffered landing roll. Eighteen editor prefabs share the same content and collision rules. See [campaign/actions](Documents/Current/campaign-and-scene-actions.md), [flow](Documents/Current/game-flow.md), [3C](Documents/Current/reference-driven-3c.md) and [editor](Documents/Current/level-editor.md). Endless generation and final original art remain pending.
 
 ## Assignment
 
@@ -23,7 +23,7 @@ npm run dev
 
 Open `http://127.0.0.1:4173/`. The first command only copies this workspace's existing research frames; omit it if no local archive is available and use the rig fallback. Space jumps, S slides, E dash-grapples, hold Q to swing, F uses the cable, Esc pauses and R retries. Choose Play → mode → route from the main menu. Open Game editor for Level Studio and Motion Lab. Direct station selection, tuning and rehearsals remain at `http://127.0.0.1:4173/lab.html`. Checks: `npm run check`, `npm test`, `npm run rehearse`. Stop serving with Ctrl+C.
 
-Planned address: `https://spathering.github.io/polyu-ap-a3/`. This address is inferred from the repository name and has **not** been verified as a live deployment.
+**Play online:** [Motion / Run](https://spathering.github.io/polyu-ap-a3/). GitHub Pages publishes `main` from `/(root)` over HTTPS. Visitors need no installation. Missing local research frames use the procedural rig; three generated sheets are included. See [deployment status and verification](Documents/Current/deployment.md).
 
 ## Documentation
 
@@ -55,7 +55,7 @@ All repository project documentation uses English. A Chinese counterpart with ma
 
 ## Known limitations
 
-153 automated tests and 24 deterministic recordings pass: 18 lab cases cover 30/30 required events and six complete finite courses. Scene recipes pre-match geometry before input, retain timely/late confirmation until playback and use directed scene/time cameras. Same-obstacle browser checks select three distinct clips; foundations keyboard completion, portrait play and editor preset edit/undo pass. Other-person trials and OS download completion remain unverified. Final original art/audio, endless generation, shared scores and verified Pages publication remain pending; ignored research pages have a procedural-rig fallback.
+153 automated tests and 24 deterministic recordings pass: 18 lab cases cover 30/30 required events and six complete finite courses. Scene recipes pre-match geometry before input, retain timely/late confirmation until playback and use directed scene/time cameras. Same-obstacle browser checks select three distinct clips; foundations keyboard completion, portrait play and editor preset edit/undo pass. Other-person trials and OS download completion remain unverified. Final original art/audio, endless generation and shared scores remain pending; ignored research pages have a procedural-rig fallback.
 
 ## Credits and tools
 

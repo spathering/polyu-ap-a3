@@ -143,7 +143,7 @@ These are optional project tasks, not additional course requirements. See [resea
 - [x] Explicit Snap on by default; absolute batch anchor, entry-pivot drop and H-scaled visible grid.
 - [x] Main menu, data-owned selection, three finite challenge views, ready/pause/retry/result/next/back and local best time.
 - [x] Preserve the complete lab at `lab.html`, shared runtime and missing-art fallback.
-- [ ] External-person trial, final original animation, distinct campaign scenery, certified endless generation, shared scores and verified Pages release.
+- [ ] External-person trial, final original animation, distinct campaign scenery, certified endless generation and shared scores.
 
 MOTION / RUN is a provisional title. Earlier unchecked complete-flow tasks are now implemented within these finite views; full product acceptance remains open.
 
@@ -154,7 +154,7 @@ MOTION / RUN is a provisional title. Earlier unchecked complete-flow tasks are n
 - [x] Match dedicated local pose frames, stable roll support and wrist contact; preserve rig fallback.
 - [x] Add six independent finite layouts, socket-derived checkpoints, editor access and complete recorded production routes.
 - [x] Nine-entry selection, 130 tests and 21 rehearsals; actual keyboard/pointer scene-action browser checks.
-- [ ] Other-person trial, final original art/animation/audio, certified endless generation, shared scores and verified public Pages release.
+- [ ] Other-person trial, final original art/animation/audio, certified endless generation and shared scores.
 
 ## Scene director correction, 25 October 2026
 
@@ -163,7 +163,7 @@ MOTION / RUN is a provisional title. Earlier unchecked complete-flow tasks are n
 - [x] Scene/time camera rails independent of instantaneous player roots; continuous approach/playback/recovery and secondary-action shots.
 - [x] Shared editor presets, clip/key validation, undo and production quick-test integration.
 - [x] Same-obstacle three-way witnesses; 149 tests and 24 qualified recordings cover 30/30 lab events and six finite completions.
-- [ ] Human feel trial, final original per-variant animation/in-betweens, arbitrary terrain/attachment composition qualification; endless generation and verified Pages release remain open.
+- [ ] Human feel trial, final original per-variant animation/in-betweens, arbitrary terrain/attachment composition qualification; endless generation remain open.
 
 ## Player menu organization, 25 October 2026
 
@@ -172,4 +172,12 @@ MOTION / RUN is a provisional title. Earlier unchecked complete-flow tasks are n
 - [x] Pause/restart/result and mode-local next/back; retain existing local best-time IDs.
 - [x] Separate Game editor launcher preserves Level Studio and Motion Lab diagnostics.
 - [x] 153 tests, unchanged 24 qualified recordings and ten menu browser scenarios.
-- [ ] Implement certified endless generation; external usability trial, original release art/audio and verified Pages release remain pending.
+- [ ] Implement certified endless generation; external usability trial, original release art/audio remain pending.
+
+## Verified Pages release, 25 October 2026
+
+- [x] Enable main/root branch publishing with HTTPS.
+- [x] Verify public menus, gameplay completion/progress, preserved editors and mobile layouts.
+- [x] Compare 21 public source/assets against committed Git bytes; record missing-art behavior.
+- [x] Fix restart-control visibility during ready/results.
+- [ ] Replace local-only reference character frames with final shareable production artwork; external trial and endless generation remain pending.

@@ -59,6 +59,10 @@ The controls dialog derives bindings from `parkour.json`, uses native modal focu
 
 ## Verification and limits
 
-153 Node tests and 24 deterministic recordings pass, retaining 30/30 required lab events and six complete finite routes. Four new mode tests cover membership, mode-bound next/back destinations, invalid authoring and legacy compatibility. Ten Edge scenarios cover main/help focus, mode gating, campaign pause/restart, actual foundations keyboard completion and 1/3 Training progress, bad URLs, direct links, both preserved editor tools, Pages-prefix links, 390-pixel layouts and missing-art fallback. No browser exceptions were observed. Automated checks are not an external usability trial. Endless generation, final original art/audio and verified public Pages publication remain pending.
+153 Node tests and 24 deterministic recordings pass, retaining 30/30 required lab events and six complete finite routes. Four new mode tests cover membership, mode-bound next/back destinations, invalid authoring and legacy compatibility. Ten Edge scenarios cover main/help focus, mode gating, campaign pause/restart, actual foundations keyboard completion and 1/3 Training progress, bad URLs, direct links, both preserved editor tools, Pages-prefix links, 390-pixel layouts and missing-art fallback. No browser exceptions were observed. Automated checks are not an external usability trial. Endless generation and final original art/audio remain pending.
 
 Player hints use action names, press-now/late-chance prompts, move-ready confirmation and timing feedback. Fixed-clock/alignment/scene-matching diagnostics remain in Motion Lab; player key labels derive from the same bindings.
+
+## Public release
+
+The full menu/game/editor flow is now live on [GitHub Pages](deployment.md). Restart run is explicitly hidden during ready/results and shown during pause/failure. Public browser tests cover actual Training completion and progress; original research sheets are absent and the playable rig fallback is expected.

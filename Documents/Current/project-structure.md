@@ -1,6 +1,6 @@
 # Project structure
 
-Updated **25 October 2026**. A static JavaScript/Canvas character lab is implemented. See [controls and test matrix](character-lab.md) and [module relationships](modules.md). The finite/prefab editor is implemented; endless product flow and Pages publication remain planned.
+Updated **25 October 2026**. A static JavaScript/Canvas character lab is implemented. See [controls and test matrix](character-lab.md) and [module relationships](modules.md). The finite/prefab editor is implemented; endless product flow remains planned.
 
 ```text
 polyu-ap-a3/
@@ -54,7 +54,7 @@ No runtime dependencies or bundler are required. `npm run dev` serves the reposi
 
 The English project documents are mirrored in Chinese at workspace `.midwork/assignment3/polyu-ap-a3/` with matching relative paths. Only documents and their supporting contract/image files are mirrored; runtime code, content and animation catalogues have one owner in this repository. Original source packs, generated masters, authoring tools and offscreen QA remain outside Git in `.midwork/assignment3/`.
 
-The root is the static browser output; `.nojekyll` is present. No release/deployment workflow or verified public play URL exists. Local reference art is intentionally absent from a clean clone; missing sprite images use the rig fallback and an explicit load status.
+The root is the static browser output; `.nojekyll` is present. GitHub Pages now publishes main/root automatically; see [deployment](deployment.md). Local reference art is intentionally absent from a clean clone; missing sprite images use the rig fallback and an explicit load status.
 
 New current guide: [scene action synchronization](scene-action-synchronization.md); new research: [reference runtime interaction](../Plans/Research/vector-runtime-interaction.md). Smoothed reference derivatives contain 516 poses on 12 pages, alongside three generated sheets.
 
@@ -69,7 +69,7 @@ New current guide: [scene action synchronization](scene-action-synchronization.m
 - `src/editor-snap.js`: absolute anchor snapping; `test/game-flow.test.js`: additional regressions.
 - [Game flow](game-flow.md) and [reference-driven 3C](reference-driven-3c.md): current behavior.
 
-These files extend the preceding lab/editor tree. Main/selection/finite result flow is implemented; endless generation and verified Pages release remain pending.
+These files extend the preceding lab/editor tree. Main/selection/finite result flow is implemented; endless generation remain pending.
 
 ## Full-scene and six-course additions
 
@@ -87,3 +87,7 @@ Current package is `motion-run-07-directed` / `lab-06-directed`; animation `lab-
 ## Player/editor navigation increment
 
 `modes.html` adds the mode screen; `studio.html` is the editor workspace launcher. `index.html`, `levels.html` and standalone `menu.css` now form the player menu stack. `menu.js` derives modes/levels/help from validated source data; `game-flow.js` owns mode lookup, membership and next/return destinations. `play.js` uses those helpers and adds full-run restart. `lab.html` and `editor.html` preserve the existing tools and link back to `studio.html`. `package.json` describes the complete game/editor. No geometry, physics or animation changes. See [navigation contract](game-flow.md).
+
+## Published static site
+
+[GitHub Pages](deployment.md) now serves the repository root from main with HTTPS enforced. The existing `.nojekyll` is sufficient; no new build folder, backend or workflow file was added. `play.css` explicitly honors the restart control's hidden state. The public build uses tracked generated sheets and the rig fallback for ignored local reference art.
