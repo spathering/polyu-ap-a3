@@ -1,0 +1,318 @@
+{
+  "version": "1.0.0",
+  "title": "MOTION / RUN",
+  "tagline": "Find your line.",
+  "description": "Read the city. Commit to the move. Keep your momentum.",
+  "levels": [
+    {
+      "id": "foundations",
+      "title": "First light",
+      "subtitle": "The foundations",
+      "description": "Clear the gap, stay low, then vault the rooftop barrier.",
+      "difficulty": "INTRODUCTORY",
+      "accent": "cyan",
+      "stationIds": [
+        "jump",
+        "slide",
+        "vault"
+      ],
+      "modeId": "training"
+    },
+    {
+      "id": "airways",
+      "title": "Open air",
+      "subtitle": "Beyond the rooftops",
+      "description": "Dash to an anchor, swing into space, ride a cable and catch a launch pad.",
+      "difficulty": "INTERMEDIATE",
+      "accent": "violet",
+      "stationIds": [
+        "dash",
+        "swing",
+        "cable",
+        "pad"
+      ],
+      "modeId": "training"
+    },
+    {
+      "id": "momentum",
+      "title": "Chain reaction",
+      "subtitle": "One continuous line",
+      "description": "Connect the launch pad, swing, dash and cable without losing your line.",
+      "difficulty": "ADVANCED",
+      "accent": "amber",
+      "stationIds": [
+        "chain"
+      ],
+      "modeId": "training"
+    },
+    {
+      "id": "roof-rhythm",
+      "title": "Rooftop rhythm",
+      "subtitle": "04 / Read the roof",
+      "description": "A gap, a tunnel, a vault and a low step. Find a rhythm between grounded actions.",
+      "difficulty": "INTRODUCTORY",
+      "accent": "cyan",
+      "levelId": "roof-rhythm",
+      "sections": [
+        {
+          "id": "roof-rhythm-1",
+          "name": "Gap & tunnel",
+          "hint": "SPACE at the gap mark; S before the low ceiling.",
+          "keys": "SPACE / S",
+          "from": {
+            "instanceId": "terrain",
+            "socketId": "entry"
+          },
+          "to": {
+            "instanceId": "terrain",
+            "socketId": "cp1"
+          }
+        },
+        {
+          "id": "roof-rhythm-2",
+          "name": "Vault & step",
+          "hint": "SPACE in each approach to vault, then climb the wide step.",
+          "keys": "SPACE",
+          "from": {
+            "instanceId": "terrain",
+            "socketId": "cp1"
+          },
+          "to": {
+            "instanceId": "terrain",
+            "socketId": "exit"
+          }
+        }
+      ],
+      "modeId": "campaign"
+    },
+    {
+      "id": "high-water",
+      "title": "High water",
+      "subtitle": "05 / Catch the edge",
+      "description": "Jump and hold to catch a high ledge. Press again to mantle, then link two low steps.",
+      "difficulty": "INTERMEDIATE",
+      "accent": "violet",
+      "levelId": "high-water",
+      "sections": [
+        {
+          "id": "high-water-1",
+          "name": "Catch & mantle",
+          "hint": "Hold SPACE through takeoff to catch the ledge. Release, then SPACE climbs; S drops.",
+          "keys": "HOLD SPACE \u2192 SPACE",
+          "from": {
+            "instanceId": "terrain",
+            "socketId": "entry"
+          },
+          "to": {
+            "instanceId": "terrain",
+            "socketId": "cp1"
+          }
+        },
+        {
+          "id": "high-water-2",
+          "name": "Step sequence",
+          "hint": "SPACE before each wide low platform. Keep the landing clear.",
+          "keys": "SPACE",
+          "from": {
+            "instanceId": "terrain",
+            "socketId": "cp1"
+          },
+          "to": {
+            "instanceId": "terrain",
+            "socketId": "exit"
+          }
+        }
+      ],
+      "modeId": "campaign"
+    },
+    {
+      "id": "wall-signal",
+      "title": "Wall signal",
+      "subtitle": "06 / Push away, rise higher",
+      "description": "Jump toward a marked wall, press again to rebound above it, then recover your landing.",
+      "difficulty": "ADVANCED",
+      "accent": "amber",
+      "levelId": "wall-signal",
+      "sections": [
+        {
+          "id": "wall-signal-1",
+          "name": "Wall rebound",
+          "hint": "SPACE at takeoff, then SPACE again near the marked wall to rebound.",
+          "keys": "SPACE \u2192 SPACE",
+          "from": {
+            "instanceId": "terrain",
+            "socketId": "entry"
+          },
+          "to": {
+            "instanceId": "terrain",
+            "socketId": "cp1"
+          }
+        },
+        {
+          "id": "wall-signal-2",
+          "name": "Return line",
+          "hint": "Vault the barrier, then rebound above a second wall.",
+          "keys": "SPACE",
+          "from": {
+            "instanceId": "terrain",
+            "socketId": "cp1"
+          },
+          "to": {
+            "instanceId": "terrain",
+            "socketId": "exit"
+          }
+        }
+      ],
+      "modeId": "campaign"
+    },
+    {
+      "id": "soft-landing",
+      "title": "Soft landing",
+      "subtitle": "07 / Turn impact into motion",
+      "description": "Run off the high roof and press S just before landing to roll. Then ride a launch pad.",
+      "difficulty": "INTERMEDIATE",
+      "accent": "cyan",
+      "levelId": "soft-landing",
+      "sections": [
+        {
+          "id": "soft-landing-1",
+          "name": "Drop & roll",
+          "hint": "Run off the roof. Press S shortly before the hard landing to roll; S again for the tunnel.",
+          "keys": "S / LANDING ROLL",
+          "from": {
+            "instanceId": "terrain",
+            "socketId": "entry"
+          },
+          "to": {
+            "instanceId": "terrain",
+            "socketId": "cp1"
+          }
+        },
+        {
+          "id": "soft-landing-2",
+          "name": "Launch & recover",
+          "hint": "The pad launches on foot contact. Press S before a hard landing to keep low.",
+          "keys": "AUTOMATIC PAD / S",
+          "from": {
+            "instanceId": "terrain",
+            "socketId": "cp1"
+          },
+          "to": {
+            "instanceId": "terrain",
+            "socketId": "exit"
+          }
+        }
+      ],
+      "modeId": "campaign"
+    },
+    {
+      "id": "cable-yard",
+      "title": "Cable yard",
+      "subtitle": "08 / Above the district",
+      "description": "Jump from the raised approach, capture the cable, then use a pad to clear the final gap.",
+      "difficulty": "INTERMEDIATE",
+      "accent": "violet",
+      "levelId": "cable-yard",
+      "sections": [
+        {
+          "id": "cable-yard-1",
+          "name": "Cable crossing",
+          "hint": "Climb the step, jump, then F near the cable. Ride to its endpoint.",
+          "keys": "SPACE / F",
+          "from": {
+            "instanceId": "terrain",
+            "socketId": "entry"
+          },
+          "to": {
+            "instanceId": "terrain",
+            "socketId": "cp1"
+          }
+        },
+        {
+          "id": "cable-yard-2",
+          "name": "Pad crossing",
+          "hint": "Run onto the pad and clear the gap. Press S before a hard landing to roll.",
+          "keys": "AUTOMATIC PAD / S",
+          "from": {
+            "instanceId": "terrain",
+            "socketId": "cp1"
+          },
+          "to": {
+            "instanceId": "terrain",
+            "socketId": "exit"
+          }
+        }
+      ],
+      "modeId": "campaign"
+    },
+    {
+      "id": "crosscurrent",
+      "title": "Crosscurrent",
+      "subtitle": "09 / Keep the chain alive",
+      "description": "Launch into a swing, release into a cable, then vault and catch the final high ledge.",
+      "difficulty": "ADVANCED",
+      "accent": "amber",
+      "levelId": "crosscurrent",
+      "sections": [
+        {
+          "id": "crosscurrent-1",
+          "name": "Aerial chain",
+          "hint": "Pad launches. Hold Q for the swing; release and use E or F to continue.",
+          "keys": "HOLD Q / E / F",
+          "from": {
+            "instanceId": "terrain",
+            "socketId": "entry"
+          },
+          "to": {
+            "instanceId": "terrain",
+            "socketId": "cp1"
+          }
+        },
+        {
+          "id": "crosscurrent-2",
+          "name": "Vault & final ledge",
+          "hint": "Vault the barrier. Hold SPACE at the ledge jump, then press again to mantle.",
+          "keys": "SPACE / HOLD SPACE",
+          "from": {
+            "instanceId": "terrain",
+            "socketId": "cp1"
+          },
+          "to": {
+            "instanceId": "terrain",
+            "socketId": "exit"
+          }
+        }
+      ],
+      "modeId": "campaign"
+    }
+  ],
+  "modes": [
+    {
+      "id": "campaign",
+      "title": "Campaign",
+      "subtitle": "THE ROOFTOP DISTRICT",
+      "description": "Six handcrafted routes. Read each obstacle, find the right timing and make it to the finish.",
+      "status": "available",
+      "kind": "finite",
+      "accent": "cyan"
+    },
+    {
+      "id": "training",
+      "title": "Training",
+      "subtitle": "FIND YOUR FOOTING",
+      "description": "Three focused routes to learn ground moves, aerial traversal and connected actions.",
+      "status": "available",
+      "kind": "finite",
+      "accent": "violet"
+    },
+    {
+      "id": "endless",
+      "title": "Endless",
+      "subtitle": "A CITY WITHOUT LIMITS",
+      "description": "An ever-changing route assembled from parkour modules. This mode is still in development.",
+      "status": "coming-soon",
+      "kind": "endless",
+      "accent": "amber"
+    }
+  ]
+}

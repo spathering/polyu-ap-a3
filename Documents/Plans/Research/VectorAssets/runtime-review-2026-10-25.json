@@ -1,0 +1,25 @@
+{
+  "reviewedOn": "2026-10-25",
+  "timezone": "Asia/Shanghai",
+  "scope": "Public browser sources; no claim about proprietary mobile/Steam code or a live full-game playthrough",
+  "referencePage": "https://vector.game/zh-Hans/",
+  "sources": [
+    {
+      "url": "https://vector.game/game/player.js",
+      "bytes": 54500,
+      "sha256": "d8a0bb9450a7bc4953acac13488d0549b47d2c74b07520294604d6bd9bc92796",
+      "httpStatus": 200,
+      "matchesArchiveCollectedOn": "2026-10-22"
+    },
+    {
+      "url": "https://vector.game/game/moves.json",
+      "bytes": 236280,
+      "sha256": "27e72f4dfc136d065df9198b6a38488bee8c075c3437f475c6e314e0bee326d5",
+      "httpStatus": 200,
+      "matchesArchiveCollectedOn": "2026-10-22"
+    }
+  ],
+  "method": "Read unchanged archive plus direct HTTPS byte/hash comparison; browser search endpoint open failed",
+  "sourceCodeCopiedIntoRuntime": false,
+  "publisherArtPolicy": "Ignored local research only"
+}

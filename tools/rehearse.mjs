@@ -1,7 +1,10 @@
 import fs from 'node:fs/promises';
-import {runRehearsal} from '../src/rehearsal.js';
+import {runRehearsal,runFiniteRehearsal} from '../src/rehearsal.js';
+import {createChallenge} from '../src/game-flow.js';
 const read=async n=>JSON.parse(await fs.readFile(new URL(n,import.meta.url),'utf8'));
 const [content,lab]=await Promise.all([read('../content/parkour.json'),read('../content/lab-course.json')]);
 const covered=new Set(),results=lab.witnesses.map(w=>{const result=runRehearsal(content,lab,w);for(const id of Object.keys(result.coverage))covered.add(id);const {sim,...record}=result;return record;});
-const missing=lab.coverage.filter(c=>!covered.has(c.id)).map(c=>c.id),passed=results.every(r=>!r.missing.length)&&!missing.length;
-console.log(JSON.stringify({passed,rehearsals:results.length,covered:covered.size,required:lab.coverage.length,missing,results},null,2));if(!passed)process.exitCode=1;
+const [schema,flow,fixtures]=await Promise.all([read('../Documents/Plans/Design/Schemas/content-package.schema.json'),read('../content/game-flow.json'),read('../test/fixtures/campaign-rehearsals.json')]);
+const campaign=fixtures.witnesses.map(w=>{const c=createChallenge(content,schema,lab,flow,w.levelId);return runFiniteRehearsal(c.content,c.lab,w);});
+const missing=lab.coverage.filter(c=>!covered.has(c.id)).map(c=>c.id),signatureMatches=fixtures.contentRevision===content.contentRevision&&fixtures.physicsVersion===content.physicsVersion,passed=signatureMatches&&results.every(r=>!r.missing.length)&&!missing.length&&campaign.every(r=>r.session==='Completed'&&!r.failures&&!r.missing.length);
+console.log(JSON.stringify({passed,rehearsals:results.length+campaign.length,labRehearsals:results.length,covered:lab.coverage.filter(c=>covered.has(c.id)).length,observedEvents:covered.size,required:lab.coverage.length,missing,signatureMatches,results,campaign},null,2));if(!passed)process.exitCode=1;

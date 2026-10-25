@@ -2,7 +2,7 @@
 
 A browser parkour game for Assignment 3: An interactive experience.
 
-**Status: character lab and Level Studio implemented, 25 October 2026.** Native JavaScript/Canvas, a fixed 60 Hz simulator, processed sprites and nine reusable movement prefabs support the lab and a floating-panel finite/prefab editor. Endless generation, final game flow, production art and Pages publication remain pending. See the [lab](Documents/Current/character-lab.md) and [editor guide](Documents/Current/level-editor.md).
+**Status: player menus and separate editor workspace implemented, 25 October 2026.** Main menu → Mode select → Campaign (six authored routes) or Training (three focused routes) → Game scene. Endless is visibly unavailable. Game editor is a separate entry for Level Studio and Motion Lab. One 60 Hz simulator handles baseline movement, four traversal additions, ledge catch/mantle, wall rebound and buffered landing roll. Eighteen editor prefabs share the same content and collision rules. See [campaign/actions](Documents/Current/campaign-and-scene-actions.md), [flow](Documents/Current/game-flow.md), [3C](Documents/Current/reference-driven-3c.md) and [editor](Documents/Current/level-editor.md). Endless generation, final original art and verified Pages release remain pending.
 
 ## Assignment
 
@@ -21,7 +21,7 @@ npm run prepare:reference
 npm run dev
 ```
 
-Open `http://127.0.0.1:4173/`. The first command only copies this workspace's existing research frames; omit it if no local archive is available and use the rig fallback. Space jumps, S slides, E dash-grapples, hold Q to swing, F uses the cable, Esc pauses and R retries. Select a station or watch the full rehearsal. Checks: `npm run check`, `npm test`, `npm run rehearse`. Stop serving with Ctrl+C.
+Open `http://127.0.0.1:4173/`. The first command only copies this workspace's existing research frames; omit it if no local archive is available and use the rig fallback. Space jumps, S slides, E dash-grapples, hold Q to swing, F uses the cable, Esc pauses and R retries. Choose Play → mode → route from the main menu. Open Game editor for Level Studio and Motion Lab. Direct station selection, tuning and rehearsals remain at `http://127.0.0.1:4173/lab.html`. Checks: `npm run check`, `npm test`, `npm run rehearse`. Stop serving with Ctrl+C.
 
 Planned address: `https://spathering.github.io/polyu-ap-a3/`. This address is inferred from the repository name and has **not** been verified as a live deployment.
 
@@ -55,7 +55,7 @@ All repository project documentation uses English. A Chinese counterpart with ma
 
 ## Known limitations
 
-82 automated tests pass; 15 deterministic rehearsals cover 26/26 events, including a complete lap. Twelve headless Edge CDP editor scenarios pass with zero browser exceptions, covering actual panels, canvas gestures, transactions, prefab editing, frozen playtest, export Blob and autosave recovery at desktop/compact sizes. OS download behaviour and other-person usability testing remain unverified. Endless generation, final animation/art, shared scores and Pages publication remain pending; original reference pages stay ignored with an explicit rig fallback.
+153 automated tests and 24 deterministic recordings pass: 18 lab cases cover 30/30 required events and six complete finite courses. Scene recipes pre-match geometry before input, retain timely/late confirmation until playback and use directed scene/time cameras. Same-obstacle browser checks select three distinct clips; foundations keyboard completion, portrait play and editor preset edit/undo pass. Other-person trials and OS download completion remain unverified. Final original art/audio, endless generation, shared scores and verified Pages publication remain pending; ignored research pages have a procedural-rig fallback.
 
 ## Credits and tools
 
@@ -63,4 +63,12 @@ The [assignment screenshot](Documents/Plans/Requirements/assignment3-source.png)
 
 Current input/animation rules: [scene actions and synchronization](Documents/Current/scene-action-synchronization.md). Press Space early in the marked vault approach; it executes at the start plane. Vaulting is no longer automatic.
 
-Open `http://127.0.0.1:4173/editor.html` or click **Level Studio**. The scene supports zoom/pan, box/Shift selection, batch movement/duplication/deletion, shared prefab/geometry editing, undo/redo, JSON import/export, local draft recovery and production-runtime quick tests. [Editor controls and limits](Documents/Current/level-editor.md).
+Open `http://127.0.0.1:4173/editor.html` or choose **Game editor → Level Studio**. The scene supports zoom/pan, box/Shift selection, batch movement/duplication/deletion, shared prefab/geometry editing, undo/redo, JSON import/export, local draft recovery and production-runtime quick tests. [Editor controls and limits](Documents/Current/level-editor.md).
+
+Small-module update: **B** draws blocks, **V** selects, and library modules drag directly to the scene. H follows the 1.2 m climb limit; the default H/4 grid is 0.3 m. Occupied bounds include intended approach/action/recovery. Schema 1.3 explicitly converts old 1.2 drafts. See [micro modules and terrain](Documents/Current/micro-modules-and-terrain.md) and the [reference implementation review](Documents/Plans/Research/vector-context-and-micro-modules.md).
+
+Open `modes.html` for modes, `levels.html?mode=campaign` for six fixed routes or `levels.html?mode=training` for three practice routes. `studio.html` is the separate editor launcher. Snap is explicitly on by default; dragged groups align an absolute anchor and retain relative spacing. [Public-runtime 3C review](Documents/Plans/Research/vector-3c-runtime-review.md).
+
+Gameplay now fills the viewport. Use the small floating panels; **?** expands Controls. Hold Space near a marked ledge, then press again to mantle; press Space near a marked wall to rebound; press S before a hard landing to roll. [Six new course guide](Documents/Current/campaign-and-scene-actions.md).
+
+Current 3C: [scene choreography](Documents/Current/scene-choreography.md). In the lab, compare `timing vault timely`, `timing vault late` and `timing vault missed` at the same obstacle. The camera follows the prepared scene timeline; Level Studio edits shared timing/clip/shot recipes.

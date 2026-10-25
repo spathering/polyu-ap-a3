@@ -1,0 +1,390 @@
+{
+  "contentRevision": "motion-run-07-directed",
+  "physicsVersion": "lab-06-directed",
+  "witnesses": [
+    {
+      "levelId": "roof-rhythm",
+      "frames": 805,
+      "actions": [
+        {
+          "frame": 98,
+          "action": "jump",
+          "phase": "press"
+        },
+        {
+          "frame": 99,
+          "action": "jump",
+          "phase": "release"
+        },
+        {
+          "frame": 252,
+          "action": "slide",
+          "phase": "press"
+        },
+        {
+          "frame": 253,
+          "action": "slide",
+          "phase": "release"
+        },
+        {
+          "frame": 420,
+          "action": "jump",
+          "phase": "press"
+        },
+        {
+          "frame": 421,
+          "action": "jump",
+          "phase": "release"
+        },
+        {
+          "frame": 586,
+          "action": "jump",
+          "phase": "press"
+        },
+        {
+          "frame": 587,
+          "action": "jump",
+          "phase": "release"
+        }
+      ],
+      "expect": [
+        "Jump",
+        "Slide",
+        "Vault",
+        "Climb",
+        "Completed"
+      ]
+    },
+    {
+      "levelId": "high-water",
+      "frames": 652,
+      "actions": [
+        {
+          "frame": 20,
+          "action": "jump",
+          "phase": "press"
+        },
+        {
+          "frame": 21,
+          "action": "jump",
+          "phase": "release"
+        },
+        {
+          "frame": 31,
+          "action": "jump",
+          "phase": "press"
+        },
+        {
+          "frame": 39,
+          "action": "jump",
+          "phase": "release"
+        },
+        {
+          "frame": 47,
+          "action": "jump",
+          "phase": "press"
+        },
+        {
+          "frame": 48,
+          "action": "jump",
+          "phase": "release"
+        },
+        {
+          "frame": 186,
+          "action": "slide",
+          "phase": "press"
+        },
+        {
+          "frame": 187,
+          "action": "slide",
+          "phase": "release"
+        },
+        {
+          "frame": 271,
+          "action": "jump",
+          "phase": "press"
+        },
+        {
+          "frame": 272,
+          "action": "jump",
+          "phase": "release"
+        },
+        {
+          "frame": 423,
+          "action": "jump",
+          "phase": "press"
+        },
+        {
+          "frame": 424,
+          "action": "jump",
+          "phase": "release"
+        }
+      ],
+      "expect": [
+        "LedgeGrab",
+        "Mantle",
+        "Climb",
+        "Completed"
+      ]
+    },
+    {
+      "levelId": "wall-signal",
+      "frames": 696,
+      "actions": [
+        {
+          "frame": 36,
+          "action": "jump",
+          "phase": "press"
+        },
+        {
+          "frame": 37,
+          "action": "jump",
+          "phase": "release"
+        },
+        {
+          "frame": 60,
+          "action": "jump",
+          "phase": "press"
+        },
+        {
+          "frame": 61,
+          "action": "jump",
+          "phase": "release"
+        },
+        {
+          "frame": 156,
+          "action": "slide",
+          "phase": "press"
+        },
+        {
+          "frame": 157,
+          "action": "slide",
+          "phase": "release"
+        },
+        {
+          "frame": 317,
+          "action": "jump",
+          "phase": "press"
+        },
+        {
+          "frame": 318,
+          "action": "jump",
+          "phase": "release"
+        },
+        {
+          "frame": 497,
+          "action": "jump",
+          "phase": "press"
+        },
+        {
+          "frame": 498,
+          "action": "jump",
+          "phase": "release"
+        },
+        {
+          "frame": 520,
+          "action": "jump",
+          "phase": "press"
+        },
+        {
+          "frame": 521,
+          "action": "jump",
+          "phase": "release"
+        },
+        {
+          "frame": 617,
+          "action": "slide",
+          "phase": "press"
+        },
+        {
+          "frame": 618,
+          "action": "slide",
+          "phase": "release"
+        }
+      ],
+      "expect": [
+        "WallJump",
+        "Vault",
+        "Completed"
+      ]
+    },
+    {
+      "levelId": "soft-landing",
+      "frames": 617,
+      "actions": [
+        {
+          "frame": 123,
+          "action": "slide",
+          "phase": "press"
+        },
+        {
+          "frame": 124,
+          "action": "slide",
+          "phase": "release"
+        },
+        {
+          "frame": 171,
+          "action": "slide",
+          "phase": "press"
+        },
+        {
+          "frame": 172,
+          "action": "slide",
+          "phase": "release"
+        },
+        {
+          "frame": 452,
+          "action": "slide",
+          "phase": "press"
+        },
+        {
+          "frame": 453,
+          "action": "slide",
+          "phase": "release"
+        }
+      ],
+      "expect": [
+        "Roll",
+        "Slide",
+        "JumpPad",
+        "Completed"
+      ]
+    },
+    {
+      "levelId": "cable-yard",
+      "frames": 723,
+      "actions": [
+        {
+          "frame": 61,
+          "action": "jump",
+          "phase": "press"
+        },
+        {
+          "frame": 62,
+          "action": "jump",
+          "phase": "release"
+        },
+        {
+          "frame": 113,
+          "action": "jump",
+          "phase": "press"
+        },
+        {
+          "frame": 114,
+          "action": "zipline",
+          "phase": "press"
+        },
+        {
+          "frame": 114,
+          "action": "jump",
+          "phase": "release"
+        },
+        {
+          "frame": 115,
+          "action": "zipline",
+          "phase": "release"
+        },
+        {
+          "frame": 469,
+          "action": "slide",
+          "phase": "press"
+        },
+        {
+          "frame": 470,
+          "action": "slide",
+          "phase": "release"
+        }
+      ],
+      "expect": [
+        "Climb",
+        "Zipline",
+        "JumpPad",
+        "Completed"
+      ]
+    },
+    {
+      "levelId": "crosscurrent",
+      "frames": 675,
+      "actions": [
+        {
+          "frame": 93,
+          "action": "swingGrapple",
+          "phase": "press"
+        },
+        {
+          "frame": 167,
+          "action": "swingGrapple",
+          "phase": "release"
+        },
+        {
+          "frame": 168,
+          "action": "zipline",
+          "phase": "press"
+        },
+        {
+          "frame": 320,
+          "action": "jump",
+          "phase": "press"
+        },
+        {
+          "frame": 320,
+          "action": "zipline",
+          "phase": "release"
+        },
+        {
+          "frame": 321,
+          "action": "jump",
+          "phase": "release"
+        },
+        {
+          "frame": 468,
+          "action": "jump",
+          "phase": "press"
+        },
+        {
+          "frame": 469,
+          "action": "jump",
+          "phase": "release"
+        },
+        {
+          "frame": 479,
+          "action": "jump",
+          "phase": "press"
+        },
+        {
+          "frame": 487,
+          "action": "jump",
+          "phase": "release"
+        },
+        {
+          "frame": 495,
+          "action": "jump",
+          "phase": "press"
+        },
+        {
+          "frame": 496,
+          "action": "jump",
+          "phase": "release"
+        },
+        {
+          "frame": 634,
+          "action": "slide",
+          "phase": "press"
+        },
+        {
+          "frame": 635,
+          "action": "slide",
+          "phase": "release"
+        }
+      ],
+      "expect": [
+        "SwingGrapple",
+        "Zipline",
+        "Vault",
+        "LedgeGrab",
+        "Mantle",
+        "Completed"
+      ]
+    }
+  ]
+}

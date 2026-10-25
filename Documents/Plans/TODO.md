@@ -8,9 +8,9 @@ Deadline: **1 November 2026, 23:59 Hong Kong time (UTC+8)**. Individual project;
 - [x] Nine-station return circuit with baseline actions and all four traversal additions.
 - [x] Native JavaScript/Canvas, one 60 Hz simulator, shared sweeps/input/camera and visible state feedback.
 - [x] Prepared reference/generated sprites as default, one animation catalogue, foot/grip alignment and missing-image fallback.
-- [x] 82 automated tests, 15 deterministic rehearsals, 26/26 events and a full lap.
+- [x] 102 automated tests, 15 deterministic rehearsals, 26/26 events and a full lap.
 - [x] Corresponding English/Chinese Current documents, PROCESS and history.
-- [x] Floating-panel finite/prefab editor, shared-runtime quick tests, local recovery and twelve actual-browser scenarios.
+- [x] Floating-panel finite/prefab editor, shared-runtime quick tests, local recovery and ten current micro-editor browser scenarios.
 - [ ] Endless generation, advanced editor tools, production animation, human feel/external trial and Pages release.
 
 The lab is not full product acceptance; broader product tasks remain below.
@@ -124,3 +124,52 @@ These are optional project tasks, not additional course requirements. See [resea
 - [x] Inspect archived reference action logic; implement detector volumes, expiring early input, alignment, contact and debug feedback.
 - [x] Local 60-Hz reference poses, slide entry/exit, scale/grip calibration and read-only presentation interpolation.
 - [ ] Full production generated-action loops/cross-clip skeletal blending and real browser feel trial.
+
+## Small-module increment, 25 October 2026
+
+- [x] Re-fetch public player/move sources, compare archive hashes and document phase/contact findings.
+- [x] Separate station-sized scenes into small action modules and shared terrain, with normalized entry pivots.
+- [x] Derive intended approach/action/recovery bounds without an authored fixed module-size field.
+- [x] Add native library drag/drop, placement ghosts, exact coordinates and an H-calibrated block brush.
+- [x] Match painted low blocks to swept vault/climb, retain next-marker inputs near action end and preserve captured target identity.
+- [x] Add real traversal velocity, stable camera focus/prediction, sequence clocks and landmark-matched gait re-entry.
+- [x] Prepare a hand-support climb interval with exact bounded contact and explicit legacy schema conversion.
+- [ ] Qualify arbitrary action/terrain compositions, all grapple-release envelopes and reusable generation patterns before enabling endless generation.
+
+## Main menu and public-runtime progress, 25 October 2026
+
+- [x] Inspect public player/moves/camera/view/pad and record exact hashes.
+- [x] Add acceleration-limited following, two-pose visual velocity stitching and blocked-approach eligibility.
+- [x] Explicit Snap on by default; absolute batch anchor, entry-pivot drop and H-scaled visible grid.
+- [x] Main menu, data-owned selection, three finite challenge views, ready/pause/retry/result/next/back and local best time.
+- [x] Preserve the complete lab at `lab.html`, shared runtime and missing-art fallback.
+- [ ] External-person trial, final original animation, distinct campaign scenery, certified endless generation, shared scores and verified Pages release.
+
+MOTION / RUN is a provisional title. Earlier unchecked complete-flow tasks are now implemented within these finite views; full product acceptance remains open.
+
+## Full-scene and six-course increment
+
+- [x] Replace the outer gameplay page with a viewport-filling scene and small floating HUD/control panels.
+- [x] Add deliberate ledge hang/mantle/drop/timeout, one-use wall rebound and buffered hard-landing roll with clearance-safe recovery.
+- [x] Match dedicated local pose frames, stable roll support and wrist contact; preserve rig fallback.
+- [x] Add six independent finite layouts, socket-derived checkpoints, editor access and complete recorded production routes.
+- [x] Nine-entry selection, 130 tests and 21 rehearsals; actual keyboard/pointer scene-action browser checks.
+- [ ] Other-person trial, final original art/animation/audio, certified endless generation, shared scores and verified public Pages release.
+
+## Scene director correction, 25 October 2026
+
+- [x] Prepare scene geometry/three branches before input; retain first confirmation until the selected playback slot.
+- [x] Timely vault, slower salvage vault and collision failure on the same unit; late/missed mappings for all seven marked action kinds.
+- [x] Scene/time camera rails independent of instantaneous player roots; continuous approach/playback/recovery and secondary-action shots.
+- [x] Shared editor presets, clip/key validation, undo and production quick-test integration.
+- [x] Same-obstacle three-way witnesses; 149 tests and 24 qualified recordings cover 30/30 lab events and six finite completions.
+- [ ] Human feel trial, final original per-variant animation/in-betweens, arbitrary terrain/attachment composition qualification; endless generation and verified Pages release remain open.
+
+## Player menu organization, 25 October 2026
+
+- [x] Main menu, mode select and mode-filtered level select, with keyboard/pointer navigation and mobile layouts.
+- [x] Six Campaign / three Training entries, disabled Endless; one catalogue-owned membership source.
+- [x] Pause/restart/result and mode-local next/back; retain existing local best-time IDs.
+- [x] Separate Game editor launcher preserves Level Studio and Motion Lab diagnostics.
+- [x] 153 tests, unchanged 24 qualified recordings and ten menu browser scenarios.
+- [ ] Implement certified endless generation; external usability trial, original release art/audio and verified Pages release remain pending.

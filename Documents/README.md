@@ -28,3 +28,13 @@ Generated art trial: [jump-pad, zipline and swing actions](Plans/Design/generate
 Current playable implementation: [character 3C and looping lab](Current/character-lab.md). Processed sprites are the default; the [finite/prefab editor](Current/level-editor.md) is implemented; endless generation remains planned.
 
 Scene synchronization: [current implementation](Current/scene-action-synchronization.md), [reference logic findings](Plans/Research/vector-runtime-interaction.md).
+
+Current small-module work: [terrain brush, placement, action space and climb](Current/micro-modules-and-terrain.md); research: [phase/contact review and source hashes](Plans/Research/vector-context-and-micro-modules.md). Shared schema/example are 1.3.0.
+
+Current entry: [main/selection/finite results](Current/game-flow.md), [3C follow-up](Current/reference-driven-3c.md), [public-runtime evidence](Plans/Research/vector-3c-runtime-review.md).
+
+Current full-scene play, six additional independent layouts and ledge/wall/roll behavior: [campaign and scene actions](Current/campaign-and-scene-actions.md).
+
+Current movement authority: [scene choreography and three timing outcomes](Current/scene-choreography.md). It supersedes earlier root-driven follow and input-first matching descriptions; shared preset editing and same-obstacle rehearsal steps are documented there.
+
+Player navigation now follows [main menu → mode → route → scene](Current/game-flow.md); **Game editor** is a separate workspace for the existing Level Studio and Motion Lab.

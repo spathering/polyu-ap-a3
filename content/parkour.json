@@ -1,5 +1,5 @@
 {
-  "schemaVersion": "1.2.0",
+  "schemaVersion": "1.3.0",
   "rules": {
     "fixedStepHz": 60,
     "gravity": 20,
@@ -24,7 +24,11 @@
       "dashGrapple",
       "swingGrapple",
       "zipline",
-      "jumpPad"
+      "jumpPad",
+      "climb",
+      "wallJump",
+      "ledgeGrab",
+      "roll"
     ],
     "bindings": [
       {
@@ -109,7 +113,9 @@
       "minViewHeight": 10,
       "maxViewHeight": 24,
       "zoomSmoothingSeconds": 0.3,
-      "reactionBudgetSeconds": 0.75
+      "reactionBudgetSeconds": 0.75,
+      "velocitySmoothingSeconds": 0.14,
+      "followAcceleration": 72
     },
     "contextInputSeconds": 0.5,
     "vaultTrajectory": [
@@ -142,7 +148,90 @@
     "gripOffset": [
       0,
       2.3
-    ]
+    ],
+    "climbMaxHeight": 1.2,
+    "climbDurationSeconds": 0.7,
+    "climbTrajectory": [
+      [
+        0,
+        0,
+        0
+      ],
+      [
+        0.3,
+        0.2,
+        0.8
+      ],
+      [
+        0.55,
+        0.3,
+        1.08
+      ],
+      [
+        0.8,
+        0.8,
+        1.02
+      ],
+      [
+        1,
+        1,
+        1
+      ]
+    ],
+    "contextApproachSeconds": 0.3,
+    "actionRecoverySeconds": 0.22,
+    "actionChainWindowSeconds": 0.15,
+    "sceneTraversal": {
+      "reach": 0.6,
+      "hangGripHeight": 1.45,
+      "catchTolerance": 0.28,
+      "maxHangSeconds": 4,
+      "mantleSeconds": 0.72,
+      "mantleTrajectory": [
+        [
+          0,
+          0,
+          0
+        ],
+        [
+          0.45,
+          0,
+          1.05
+        ],
+        [
+          0.75,
+          0.5,
+          1.08
+        ],
+        [
+          1,
+          1,
+          1
+        ]
+      ],
+      "wallJumpVelocity": [
+        -1.8,
+        11
+      ],
+      "dropVelocity": [
+        -1.8,
+        -1
+      ],
+      "regrabSeconds": 0.65,
+      "rollBufferSeconds": 0.3,
+      "rollMinImpact": 8,
+      "rollSeconds": 0.52,
+      "rollSpeed": 8
+    },
+    "performanceByKind": {
+      "jump": "scene-jump",
+      "slide": "scene-slide",
+      "vault": "scene-vault",
+      "climb": "scene-climb",
+      "dashGrapple": "scene-dash-grapple",
+      "swingGrapple": "scene-swing-grapple",
+      "zipline": "scene-zipline"
+    }
   },
   "profiles": [
     {
@@ -183,21 +272,17 @@
       "velocityPolicy": "replace"
     }
   ],
-  "contentRevision": "motion-lab-03-prefabs",
-  "physicsVersion": "lab-02",
+  "contentRevision": "motion-run-07-directed",
+  "physicsVersion": "lab-06-directed",
   "generatorVersion": "not-enabled",
   "modules": [
     {
       "id": "unit-jump",
-      "size": [
-        32,
-        18
-      ],
       "difficulty": 0,
       "tags": [
         "prefab",
+        "atomic",
         "jump",
-        "authored",
         "unqualified-for-endless"
       ],
       "entities": [
@@ -205,35 +290,13 @@
           "id": "floor-start",
           "kind": "surface",
           "rect": [
-            0,
+            -0.3,
             -2,
-            13,
+            4.3,
             2
           ],
           "oneWay": false,
           "vaultable": false
-        },
-        {
-          "id": "floor-middle",
-          "kind": "surface",
-          "rect": [
-            16,
-            -2,
-            16,
-            2
-          ],
-          "oneWay": false,
-          "vaultable": false
-        },
-        {
-          "id": "pit-marker",
-          "kind": "hazard",
-          "rect": [
-            0,
-            -8,
-            32,
-            1
-          ]
         }
       ],
       "sockets": [
@@ -241,7 +304,7 @@
           "id": "entry",
           "role": "entry",
           "position": [
-            2,
+            0,
             0
           ],
           "contract": {
@@ -267,7 +330,7 @@
           "id": "exit",
           "role": "exit",
           "position": [
-            32,
+            8.12,
             0
           ],
           "contract": {
@@ -310,63 +373,39 @@
           "input": "jump",
           "edge": "end",
           "startOffset": -2,
-          "leadDistance": 2.0,
+          "leadDistance": 2,
           "lateDistance": 0.35,
           "priority": 10,
           "heightRange": [
             -0.1,
             0.2
-          ]
+          ],
+          "performanceId": "scene-jump",
+          "required": true
         }
       ]
     },
     {
       "id": "unit-slide",
-      "size": [
-        32,
-        18
-      ],
       "difficulty": 0,
       "tags": [
         "prefab",
+        "atomic",
         "slide",
-        "authored",
         "unqualified-for-endless"
       ],
       "entities": [
         {
-          "id": "floor-middle",
-          "kind": "surface",
-          "rect": [
-            0,
-            -2,
-            32,
-            2
-          ],
-          "oneWay": false,
-          "vaultable": false
-        },
-        {
           "id": "low-tunnel",
           "kind": "surface",
           "rect": [
-            7,
+            3.6,
             1.12,
             10,
             1.15
           ],
           "oneWay": false,
           "vaultable": false
-        },
-        {
-          "id": "pit-marker",
-          "kind": "hazard",
-          "rect": [
-            0,
-            -8,
-            32,
-            1
-          ]
         }
       ],
       "sockets": [
@@ -400,7 +439,7 @@
           "id": "exit",
           "role": "exit",
           "position": [
-            32,
+            15.22,
             0
           ],
           "contract": {
@@ -449,57 +488,33 @@
           "heightRange": [
             -0.1,
             0.3
-          ]
+          ],
+          "performanceId": "scene-slide",
+          "required": true
         }
       ]
     },
     {
       "id": "unit-vault",
-      "size": [
-        32,
-        18
-      ],
       "difficulty": 0,
       "tags": [
         "prefab",
+        "atomic",
         "vault",
-        "authored",
         "unqualified-for-endless"
       ],
       "entities": [
         {
-          "id": "floor-middle",
-          "kind": "surface",
-          "rect": [
-            0,
-            -2,
-            32,
-            2
-          ],
-          "oneWay": false,
-          "vaultable": false
-        },
-        {
           "id": "vault-block",
           "kind": "surface",
           "rect": [
-            7,
+            3.8,
             0,
             1.25,
             0.85
           ],
           "oneWay": false,
           "vaultable": true
-        },
-        {
-          "id": "pit-marker",
-          "kind": "hazard",
-          "rect": [
-            0,
-            -8,
-            32,
-            1
-          ]
         }
       ],
       "sockets": [
@@ -533,7 +548,7 @@
           "id": "exit",
           "role": "exit",
           "position": [
-            32,
+            6.73,
             0
           ],
           "contract": {
@@ -582,66 +597,30 @@
           "heightRange": [
             -0.1,
             0.2
-          ]
+          ],
+          "performanceId": "scene-vault",
+          "required": true
         }
       ]
     },
     {
       "id": "unit-dash",
-      "size": [
-        32,
-        18
-      ],
       "difficulty": 0,
       "tags": [
         "prefab",
+        "atomic",
         "dash",
-        "authored",
         "unqualified-for-endless"
       ],
       "entities": [
         {
-          "id": "floor-middle",
-          "kind": "surface",
-          "rect": [
-            0,
-            -2,
-            13,
-            2
-          ],
-          "oneWay": false,
-          "vaultable": false
-        },
-        {
-          "id": "floor-dash-landing",
-          "kind": "surface",
-          "rect": [
-            23,
-            -2,
-            9,
-            2
-          ],
-          "oneWay": false,
-          "vaultable": false
-        },
-        {
           "id": "dash-anchor",
           "kind": "anchor",
           "position": [
-            21,
+            11.4,
             4
           ],
           "profileId": "dash-basic"
-        },
-        {
-          "id": "pit-marker",
-          "kind": "hazard",
-          "rect": [
-            0,
-            -8,
-            32,
-            1
-          ]
         }
       ],
       "sockets": [
@@ -675,7 +654,7 @@
           "id": "exit",
           "role": "exit",
           "position": [
-            32,
+            17.4048,
             0
           ],
           "contract": {
@@ -724,66 +703,30 @@
           "heightRange": [
             -0.5,
             4
-          ]
+          ],
+          "performanceId": "scene-dash-grapple",
+          "required": true
         }
       ]
     },
     {
       "id": "unit-swing",
-      "size": [
-        32,
-        18
-      ],
       "difficulty": 0,
       "tags": [
         "prefab",
+        "atomic",
         "swing",
-        "authored",
         "unqualified-for-endless"
       ],
       "entities": [
         {
-          "id": "floor-dash-landing",
-          "kind": "surface",
-          "rect": [
-            0,
-            -2,
-            8,
-            2
-          ],
-          "oneWay": false,
-          "vaultable": false
-        },
-        {
-          "id": "floor-swing-landing",
-          "kind": "surface",
-          "rect": [
-            20,
-            -2,
-            12,
-            2
-          ],
-          "oneWay": false,
-          "vaultable": false
-        },
-        {
           "id": "swing-anchor",
           "kind": "anchor",
           "position": [
-            14,
+            7.8,
             12
           ],
           "profileId": "swing-basic"
-        },
-        {
-          "id": "pit-marker",
-          "kind": "hazard",
-          "rect": [
-            0,
-            -8,
-            32,
-            1
-          ]
         }
       ],
       "sockets": [
@@ -817,7 +760,7 @@
           "id": "exit",
           "role": "exit",
           "position": [
-            32,
+            20.885,
             0
           ],
           "contract": {
@@ -867,41 +810,27 @@
           "heightRange": [
             -0.5,
             6
-          ]
+          ],
+          "performanceId": "scene-swing-grapple",
+          "required": true
         }
       ]
     },
     {
       "id": "unit-cable",
-      "size": [
-        32,
-        18
-      ],
       "difficulty": 0,
       "tags": [
         "prefab",
+        "atomic",
         "cable",
-        "authored",
         "unqualified-for-endless"
       ],
       "entities": [
         {
-          "id": "floor-swing-landing",
-          "kind": "surface",
-          "rect": [
-            0,
-            -2,
-            32,
-            2
-          ],
-          "oneWay": false,
-          "vaultable": false
-        },
-        {
           "id": "cable-approach",
           "kind": "surface",
           "rect": [
-            5,
+            2.1,
             0,
             5,
             1.2
@@ -914,29 +843,19 @@
           "kind": "zipline",
           "points": [
             [
-              6,
+              3.1,
               4
             ],
             [
-              16,
+              13.1,
               4.6
             ],
             [
-              27,
+              24.1,
               3
             ]
           ],
           "profileId": "zip-basic"
-        },
-        {
-          "id": "pit-marker",
-          "kind": "hazard",
-          "rect": [
-            0,
-            -8,
-            32,
-            1
-          ]
         }
       ],
       "sockets": [
@@ -970,7 +889,7 @@
           "id": "exit",
           "role": "exit",
           "position": [
-            32,
+            26.0049,
             0
           ],
           "contract": {
@@ -1020,80 +939,32 @@
           "heightRange": [
             0.5,
             6
-          ]
+          ],
+          "performanceId": "scene-zipline",
+          "required": true
         }
       ]
     },
     {
       "id": "unit-pad",
-      "size": [
-        32,
-        18
-      ],
       "difficulty": 0,
       "tags": [
         "prefab",
+        "atomic",
         "pad",
-        "authored",
         "unqualified-for-endless"
       ],
       "entities": [
         {
-          "id": "floor-swing-landing",
-          "kind": "surface",
-          "rect": [
-            0,
-            -2,
-            15,
-            2
-          ],
-          "oneWay": false,
-          "vaultable": false
-        },
-        {
-          "id": "floor-pad-landing",
-          "kind": "surface",
-          "rect": [
-            15,
-            -2,
-            7,
-            3
-          ],
-          "oneWay": false,
-          "vaultable": false
-        },
-        {
-          "id": "floor-home",
-          "kind": "surface",
-          "rect": [
-            22,
-            -2,
-            10,
-            2
-          ],
-          "oneWay": false,
-          "vaultable": false
-        },
-        {
           "id": "launch-pad",
           "kind": "jumpPad",
           "rect": [
-            10,
+            0.1,
             -0.2,
             1.8000000000000114,
             0.2
           ],
           "profileId": "pad-basic"
-        },
-        {
-          "id": "pit-marker",
-          "kind": "hazard",
-          "rect": [
-            0,
-            -8,
-            32,
-            1
-          ]
         }
       ],
       "sockets": [
@@ -1127,7 +998,7 @@
           "id": "exit",
           "role": "exit",
           "position": [
-            32,
+            8.332,
             0
           ],
           "contract": {
@@ -1181,88 +1052,23 @@
       ]
     },
     {
-      "id": "unit-chain",
-      "size": [
-        48,
-        18
-      ],
+      "id": "unit-chain-swing",
       "difficulty": 0,
       "tags": [
         "prefab",
-        "chain",
-        "authored",
+        "atomic",
+        "chain-swing",
         "unqualified-for-endless"
       ],
       "entities": [
         {
-          "id": "floor-home",
-          "kind": "surface",
-          "rect": [
-            0,
-            -2,
-            48,
-            2
-          ],
-          "oneWay": false,
-          "vaultable": false
-        },
-        {
-          "id": "chain-pad",
-          "kind": "jumpPad",
-          "rect": [
-            7,
-            -0.2,
-            1.8000000000000114,
-            0.2
-          ],
-          "profileId": "pad-basic"
-        },
-        {
           "id": "chain-swing",
           "kind": "anchor",
           "position": [
-            16,
+            5.5,
             10
           ],
           "profileId": "swing-basic"
-        },
-        {
-          "id": "chain-dash",
-          "kind": "anchor",
-          "position": [
-            26,
-            4
-          ],
-          "profileId": "dash-basic"
-        },
-        {
-          "id": "chain-cable",
-          "kind": "zipline",
-          "points": [
-            [
-              22,
-              4.2
-            ],
-            [
-              31,
-              3.9
-            ],
-            [
-              40,
-              2.8
-            ]
-          ],
-          "profileId": "zip-basic"
-        },
-        {
-          "id": "pit-marker",
-          "kind": "hazard",
-          "rect": [
-            0,
-            -8,
-            48,
-            1
-          ]
         }
       ],
       "sockets": [
@@ -1296,7 +1102,7 @@
           "id": "exit",
           "role": "exit",
           "position": [
-            48,
+            15.8718,
             0
           ],
           "contract": {
@@ -1325,31 +1131,13 @@
           "entrySocketId": "entry",
           "exitSocketId": "exit",
           "requiredAbilities": [
-            "jumpPad",
-            "swingGrapple",
-            "dashGrapple",
-            "zipline"
+            "swingGrapple"
           ],
           "witnessActions": [],
           "maxTicks": 6000
         }
       ],
       "sceneActions": [
-        {
-          "id": "chain-pad-contact",
-          "entityId": "chain-pad",
-          "kind": "jumpPad",
-          "input": "automatic",
-          "edge": "center",
-          "startOffset": 0,
-          "leadDistance": 1,
-          "lateDistance": 1,
-          "priority": 10,
-          "heightRange": [
-            -0.1,
-            0.2
-          ]
-        },
         {
           "id": "chain-swing-capture",
           "entityId": "chain-swing",
@@ -1363,108 +1151,30 @@
           "heightRange": [
             -0.5,
             6
-          ]
-        },
-        {
-          "id": "chain-dash-capture",
-          "entityId": "chain-dash",
-          "kind": "dashGrapple",
-          "input": "dashGrapple",
-          "edge": "start",
-          "startOffset": -8,
-          "leadDistance": 1.5,
-          "lateDistance": 2,
-          "priority": 10,
-          "heightRange": [
-            -0.5,
-            4
-          ]
-        },
-        {
-          "id": "chain-cable-capture",
-          "entityId": "chain-cable",
-          "kind": "zipline",
-          "input": "zipline",
-          "edge": "start",
-          "startOffset": -1.3,
-          "leadDistance": 1.5,
-          "lateDistance": 3,
-          "priority": 10,
-          "heightRange": [
-            0.5,
-            6
-          ]
+          ],
+          "performanceId": "scene-swing-grapple",
+          "required": false
         }
       ]
     },
     {
-      "id": "unit-recovery",
-      "size": [
-        50,
-        18
-      ],
+      "id": "unit-chain-dash",
       "difficulty": 0,
       "tags": [
         "prefab",
-        "recovery",
-        "authored",
+        "atomic",
+        "chain-dash",
         "unqualified-for-endless"
       ],
       "entities": [
         {
-          "id": "floor-home",
-          "kind": "surface",
-          "rect": [
-            0,
-            -2,
-            50,
-            2
-          ],
-          "oneWay": false,
-          "vaultable": false
-        },
-        {
-          "id": "thin-wall",
-          "kind": "surface",
-          "rect": [
-            7,
-            0,
-            0.12000000000000455,
-            1.3
-          ],
-          "oneWay": false,
-          "vaultable": false
-        },
-        {
-          "id": "one-way",
-          "kind": "surface",
-          "rect": [
-            21,
-            1.2,
-            5,
-            0.18
-          ],
-          "oneWay": true,
-          "vaultable": false
-        },
-        {
-          "id": "blocked-anchor",
+          "id": "chain-dash",
           "kind": "anchor",
           "position": [
-            12,
-            0.9
+            9.5,
+            4
           ],
           "profileId": "dash-basic"
-        },
-        {
-          "id": "pit-marker",
-          "kind": "hazard",
-          "rect": [
-            0,
-            -8,
-            50,
-            1
-          ]
         }
       ],
       "sockets": [
@@ -1498,7 +1208,232 @@
           "id": "exit",
           "role": "exit",
           "position": [
-            46,
+            15.5729,
+            0
+          ],
+          "contract": {
+            "postures": [
+              "grounded"
+            ],
+            "vxRange": [
+              0,
+              24
+            ],
+            "vyRange": [
+              0,
+              0
+            ],
+            "clearance": [
+              1,
+              2.5
+            ],
+            "requiredAbilities": []
+          }
+        }
+      ],
+      "routes": [
+        {
+          "id": "route",
+          "entrySocketId": "entry",
+          "exitSocketId": "exit",
+          "requiredAbilities": [
+            "dashGrapple"
+          ],
+          "witnessActions": [],
+          "maxTicks": 6000
+        }
+      ],
+      "sceneActions": [
+        {
+          "id": "chain-dash-capture",
+          "entityId": "chain-dash",
+          "kind": "dashGrapple",
+          "input": "dashGrapple",
+          "edge": "start",
+          "startOffset": -8,
+          "leadDistance": 1.5,
+          "lateDistance": 2,
+          "priority": 10,
+          "heightRange": [
+            -0.5,
+            4
+          ],
+          "performanceId": "scene-dash-grapple",
+          "required": false
+        }
+      ]
+    },
+    {
+      "id": "unit-chain-cable",
+      "difficulty": 0,
+      "tags": [
+        "prefab",
+        "atomic",
+        "chain-cable",
+        "unqualified-for-endless"
+      ],
+      "entities": [
+        {
+          "id": "chain-cable",
+          "kind": "zipline",
+          "points": [
+            [
+              2.8,
+              4.2
+            ],
+            [
+              11.8,
+              3.9
+            ],
+            [
+              20.8,
+              2.8
+            ]
+          ],
+          "profileId": "zip-basic"
+        }
+      ],
+      "sockets": [
+        {
+          "id": "entry",
+          "role": "entry",
+          "position": [
+            0,
+            0
+          ],
+          "contract": {
+            "postures": [
+              "grounded"
+            ],
+            "vxRange": [
+              0,
+              24
+            ],
+            "vyRange": [
+              0,
+              0
+            ],
+            "clearance": [
+              1,
+              2.5
+            ],
+            "requiredAbilities": []
+          }
+        },
+        {
+          "id": "exit",
+          "role": "exit",
+          "position": [
+            22.12,
+            0
+          ],
+          "contract": {
+            "postures": [
+              "grounded"
+            ],
+            "vxRange": [
+              0,
+              24
+            ],
+            "vyRange": [
+              0,
+              0
+            ],
+            "clearance": [
+              1,
+              2.5
+            ],
+            "requiredAbilities": []
+          }
+        }
+      ],
+      "routes": [
+        {
+          "id": "route",
+          "entrySocketId": "entry",
+          "exitSocketId": "exit",
+          "requiredAbilities": [
+            "zipline"
+          ],
+          "witnessActions": [],
+          "maxTicks": 6000
+        }
+      ],
+      "sceneActions": [
+        {
+          "id": "chain-cable-capture",
+          "entityId": "chain-cable",
+          "kind": "zipline",
+          "input": "zipline",
+          "edge": "start",
+          "startOffset": -1.3,
+          "leadDistance": 1.5,
+          "lateDistance": 3,
+          "priority": 10,
+          "heightRange": [
+            0.5,
+            6
+          ],
+          "performanceId": "scene-zipline",
+          "required": false
+        }
+      ]
+    },
+    {
+      "id": "unit-wall",
+      "difficulty": 0,
+      "tags": [
+        "prefab",
+        "terrain",
+        "wall",
+        "unqualified-for-endless"
+      ],
+      "entities": [
+        {
+          "id": "thin-wall",
+          "kind": "surface",
+          "rect": [
+            -0.3,
+            0,
+            0.12000000000000455,
+            1.3
+          ],
+          "oneWay": false,
+          "vaultable": false
+        }
+      ],
+      "sockets": [
+        {
+          "id": "entry",
+          "role": "entry",
+          "position": [
+            0,
+            0
+          ],
+          "contract": {
+            "postures": [
+              "grounded"
+            ],
+            "vxRange": [
+              0,
+              24
+            ],
+            "vyRange": [
+              0,
+              0
+            ],
+            "clearance": [
+              1,
+              2.5
+            ],
+            "requiredAbilities": []
+          }
+        },
+        {
+          "id": "exit",
+          "role": "exit",
+          "position": [
+            -0.48,
             0
           ],
           "contract": {
@@ -1534,6 +1469,1775 @@
         }
       ],
       "sceneActions": []
+    },
+    {
+      "id": "unit-platform",
+      "difficulty": 0,
+      "tags": [
+        "prefab",
+        "terrain",
+        "platform",
+        "unqualified-for-endless"
+      ],
+      "entities": [
+        {
+          "id": "one-way",
+          "kind": "surface",
+          "rect": [
+            -0.3,
+            1.2,
+            5,
+            0.18
+          ],
+          "oneWay": true,
+          "vaultable": false
+        }
+      ],
+      "sockets": [
+        {
+          "id": "entry",
+          "role": "entry",
+          "position": [
+            0,
+            0
+          ],
+          "contract": {
+            "postures": [
+              "grounded"
+            ],
+            "vxRange": [
+              0,
+              24
+            ],
+            "vyRange": [
+              0,
+              0
+            ],
+            "clearance": [
+              1,
+              2.5
+            ],
+            "requiredAbilities": []
+          }
+        },
+        {
+          "id": "exit",
+          "role": "exit",
+          "position": [
+            4.4,
+            0
+          ],
+          "contract": {
+            "postures": [
+              "grounded"
+            ],
+            "vxRange": [
+              0,
+              24
+            ],
+            "vyRange": [
+              0,
+              0
+            ],
+            "clearance": [
+              1,
+              2.5
+            ],
+            "requiredAbilities": []
+          }
+        }
+      ],
+      "routes": [
+        {
+          "id": "route",
+          "entrySocketId": "entry",
+          "exitSocketId": "exit",
+          "requiredAbilities": [],
+          "witnessActions": [],
+          "maxTicks": 6000
+        }
+      ],
+      "sceneActions": []
+    },
+    {
+      "id": "unit-blocked-anchor",
+      "difficulty": 0,
+      "tags": [
+        "prefab",
+        "atomic",
+        "blocked-anchor",
+        "unqualified-for-endless"
+      ],
+      "entities": [
+        {
+          "id": "blocked-anchor",
+          "kind": "anchor",
+          "position": [
+            13,
+            0.9
+          ],
+          "profileId": "dash-basic"
+        }
+      ],
+      "sockets": [
+        {
+          "id": "entry",
+          "role": "entry",
+          "position": [
+            0,
+            0
+          ],
+          "contract": {
+            "postures": [
+              "grounded"
+            ],
+            "vxRange": [
+              0,
+              24
+            ],
+            "vyRange": [
+              0,
+              0
+            ],
+            "clearance": [
+              1,
+              2.5
+            ],
+            "requiredAbilities": []
+          }
+        },
+        {
+          "id": "exit",
+          "role": "exit",
+          "position": [
+            13.52,
+            0
+          ],
+          "contract": {
+            "postures": [
+              "grounded"
+            ],
+            "vxRange": [
+              0,
+              24
+            ],
+            "vyRange": [
+              0,
+              0
+            ],
+            "clearance": [
+              1,
+              2.5
+            ],
+            "requiredAbilities": []
+          }
+        }
+      ],
+      "routes": [
+        {
+          "id": "route",
+          "entrySocketId": "entry",
+          "exitSocketId": "exit",
+          "requiredAbilities": [],
+          "witnessActions": [],
+          "maxTicks": 6000
+        }
+      ],
+      "sceneActions": []
+    },
+    {
+      "id": "unit-climb",
+      "difficulty": 0,
+      "tags": [
+        "prefab",
+        "atomic",
+        "climb",
+        "unqualified-for-endless"
+      ],
+      "entities": [
+        {
+          "id": "ledge",
+          "kind": "surface",
+          "rect": [
+            3.66,
+            0,
+            3,
+            1.2
+          ],
+          "oneWay": false,
+          "vaultable": false,
+          "traversal": "auto"
+        }
+      ],
+      "sockets": [
+        {
+          "id": "entry",
+          "role": "entry",
+          "position": [
+            0,
+            0
+          ],
+          "contract": {
+            "postures": [
+              "grounded"
+            ],
+            "vxRange": [
+              0,
+              24
+            ],
+            "vyRange": [
+              0,
+              0
+            ],
+            "clearance": [
+              1,
+              2.5
+            ],
+            "requiredAbilities": []
+          }
+        },
+        {
+          "id": "exit",
+          "role": "exit",
+          "position": [
+            6.36,
+            1.2
+          ],
+          "contract": {
+            "postures": [
+              "grounded"
+            ],
+            "vxRange": [
+              0,
+              24
+            ],
+            "vyRange": [
+              0,
+              0
+            ],
+            "clearance": [
+              1,
+              2.5
+            ],
+            "requiredAbilities": []
+          }
+        }
+      ],
+      "routes": [
+        {
+          "id": "route",
+          "entrySocketId": "entry",
+          "exitSocketId": "exit",
+          "requiredAbilities": [
+            "climb"
+          ],
+          "witnessActions": [],
+          "maxTicks": 6000
+        }
+      ],
+      "sceneActions": []
+    },
+    {
+      "id": "unit-ground",
+      "difficulty": 0,
+      "tags": [
+        "prefab",
+        "terrain",
+        "ground"
+      ],
+      "entities": [
+        {
+          "id": "ground",
+          "kind": "surface",
+          "rect": [
+            -0.3,
+            -1.2,
+            6,
+            1.2
+          ],
+          "oneWay": false,
+          "vaultable": false
+        }
+      ],
+      "sockets": [
+        {
+          "id": "entry",
+          "role": "entry",
+          "position": [
+            0,
+            0
+          ],
+          "contract": {
+            "postures": [
+              "grounded"
+            ],
+            "vxRange": [
+              0,
+              24
+            ],
+            "vyRange": [
+              0,
+              0
+            ],
+            "clearance": [
+              1,
+              2.5
+            ],
+            "requiredAbilities": []
+          }
+        },
+        {
+          "id": "exit",
+          "role": "exit",
+          "position": [
+            5.4,
+            0
+          ],
+          "contract": {
+            "postures": [
+              "grounded"
+            ],
+            "vxRange": [
+              0,
+              24
+            ],
+            "vyRange": [
+              0,
+              0
+            ],
+            "clearance": [
+              1,
+              2.5
+            ],
+            "requiredAbilities": []
+          }
+        }
+      ],
+      "routes": [
+        {
+          "id": "route",
+          "entrySocketId": "entry",
+          "exitSocketId": "exit",
+          "requiredAbilities": [],
+          "witnessActions": [],
+          "maxTicks": 6000
+        }
+      ],
+      "sceneActions": []
+    },
+    {
+      "id": "terrain-course",
+      "difficulty": 0,
+      "tags": [
+        "scene-terrain",
+        "course-base"
+      ],
+      "entities": [
+        {
+          "id": "jump-floor-start",
+          "kind": "surface",
+          "rect": [
+            0,
+            -2,
+            8.7,
+            2
+          ],
+          "oneWay": false,
+          "vaultable": false
+        },
+        {
+          "id": "jump-floor-middle",
+          "kind": "surface",
+          "rect": [
+            16,
+            -2,
+            16,
+            2
+          ],
+          "oneWay": false,
+          "vaultable": false
+        },
+        {
+          "id": "jump-pit-marker",
+          "kind": "hazard",
+          "rect": [
+            0,
+            -8,
+            32,
+            1
+          ]
+        },
+        {
+          "id": "slide-floor-middle",
+          "kind": "surface",
+          "rect": [
+            32,
+            -2,
+            32,
+            2
+          ],
+          "oneWay": false,
+          "vaultable": false
+        },
+        {
+          "id": "slide-pit-marker",
+          "kind": "hazard",
+          "rect": [
+            32,
+            -8,
+            32,
+            1
+          ]
+        },
+        {
+          "id": "vault-floor-middle",
+          "kind": "surface",
+          "rect": [
+            64,
+            -2,
+            32,
+            2
+          ],
+          "oneWay": false,
+          "vaultable": false
+        },
+        {
+          "id": "vault-pit-marker",
+          "kind": "hazard",
+          "rect": [
+            64,
+            -8,
+            32,
+            1
+          ]
+        },
+        {
+          "id": "dash-floor-middle",
+          "kind": "surface",
+          "rect": [
+            96,
+            -2,
+            13,
+            2
+          ],
+          "oneWay": false,
+          "vaultable": false
+        },
+        {
+          "id": "dash-floor-dash-landing",
+          "kind": "surface",
+          "rect": [
+            119,
+            -2,
+            9,
+            2
+          ],
+          "oneWay": false,
+          "vaultable": false
+        },
+        {
+          "id": "dash-pit-marker",
+          "kind": "hazard",
+          "rect": [
+            96,
+            -8,
+            32,
+            1
+          ]
+        },
+        {
+          "id": "swing-floor-dash-landing",
+          "kind": "surface",
+          "rect": [
+            128,
+            -2,
+            8,
+            2
+          ],
+          "oneWay": false,
+          "vaultable": false
+        },
+        {
+          "id": "swing-floor-swing-landing",
+          "kind": "surface",
+          "rect": [
+            148,
+            -2,
+            12,
+            2
+          ],
+          "oneWay": false,
+          "vaultable": false
+        },
+        {
+          "id": "swing-pit-marker",
+          "kind": "hazard",
+          "rect": [
+            128,
+            -8,
+            32,
+            1
+          ]
+        },
+        {
+          "id": "cable-floor-swing-landing",
+          "kind": "surface",
+          "rect": [
+            160,
+            -2,
+            32,
+            2
+          ],
+          "oneWay": false,
+          "vaultable": false
+        },
+        {
+          "id": "cable-pit-marker",
+          "kind": "hazard",
+          "rect": [
+            160,
+            -8,
+            32,
+            1
+          ]
+        },
+        {
+          "id": "pad-floor-swing-landing",
+          "kind": "surface",
+          "rect": [
+            192,
+            -2,
+            15,
+            2
+          ],
+          "oneWay": false,
+          "vaultable": false
+        },
+        {
+          "id": "pad-floor-pad-landing",
+          "kind": "surface",
+          "rect": [
+            207,
+            -2,
+            7,
+            3
+          ],
+          "oneWay": false,
+          "vaultable": false
+        },
+        {
+          "id": "pad-floor-home",
+          "kind": "surface",
+          "rect": [
+            214,
+            -2,
+            10,
+            2
+          ],
+          "oneWay": false,
+          "vaultable": false
+        },
+        {
+          "id": "pad-pit-marker",
+          "kind": "hazard",
+          "rect": [
+            192,
+            -8,
+            32,
+            1
+          ]
+        },
+        {
+          "id": "chain-floor-home",
+          "kind": "surface",
+          "rect": [
+            224,
+            -2,
+            48,
+            2
+          ],
+          "oneWay": false,
+          "vaultable": false
+        },
+        {
+          "id": "chain-pit-marker",
+          "kind": "hazard",
+          "rect": [
+            224,
+            -8,
+            48,
+            1
+          ]
+        },
+        {
+          "id": "recovery-floor-home",
+          "kind": "surface",
+          "rect": [
+            272,
+            -2,
+            50,
+            2
+          ],
+          "oneWay": false,
+          "vaultable": false
+        },
+        {
+          "id": "recovery-pit-marker",
+          "kind": "hazard",
+          "rect": [
+            272,
+            -8,
+            50,
+            1
+          ]
+        }
+      ],
+      "sockets": [
+        {
+          "id": "entry",
+          "role": "entry",
+          "position": [
+            2,
+            0
+          ],
+          "contract": {
+            "postures": [
+              "grounded"
+            ],
+            "vxRange": [
+              0,
+              24
+            ],
+            "vyRange": [
+              0,
+              0
+            ],
+            "clearance": [
+              1,
+              2.5
+            ],
+            "requiredAbilities": []
+          }
+        },
+        {
+          "id": "exit",
+          "role": "exit",
+          "position": [
+            318,
+            0
+          ],
+          "contract": {
+            "postures": [
+              "grounded"
+            ],
+            "vxRange": [
+              0,
+              24
+            ],
+            "vyRange": [
+              0,
+              0
+            ],
+            "clearance": [
+              1,
+              2.5
+            ],
+            "requiredAbilities": []
+          }
+        }
+      ],
+      "routes": [
+        {
+          "id": "route",
+          "entrySocketId": "entry",
+          "exitSocketId": "exit",
+          "requiredAbilities": [
+            "jump",
+            "slide",
+            "vault",
+            "dashGrapple",
+            "swingGrapple",
+            "zipline",
+            "jumpPad"
+          ],
+          "witnessActions": [],
+          "maxTicks": 6000
+        }
+      ],
+      "sceneActions": []
+    },
+    {
+      "id": "unit-ledge",
+      "difficulty": 0,
+      "tags": [
+        "prefab",
+        "atomic",
+        "ledge",
+        "unqualified-for-endless"
+      ],
+      "entities": [
+        {
+          "id": "approach",
+          "kind": "surface",
+          "rect": [
+            -0.3,
+            -1.2,
+            6.3,
+            1.2
+          ],
+          "oneWay": false,
+          "vaultable": false
+        },
+        {
+          "id": "ledge",
+          "kind": "surface",
+          "rect": [
+            6,
+            0,
+            7,
+            2.7
+          ],
+          "oneWay": false,
+          "vaultable": false,
+          "traversal": "ledge"
+        },
+        {
+          "id": "landing",
+          "kind": "surface",
+          "rect": [
+            13,
+            -1.2,
+            5,
+            1.2
+          ],
+          "oneWay": false,
+          "vaultable": false
+        }
+      ],
+      "sockets": [
+        {
+          "id": "entry",
+          "role": "entry",
+          "position": [
+            0,
+            0
+          ],
+          "contract": {
+            "postures": [
+              "grounded"
+            ],
+            "vxRange": [
+              0,
+              24
+            ],
+            "vyRange": [
+              0,
+              0
+            ],
+            "clearance": [
+              1,
+              2.5
+            ],
+            "requiredAbilities": []
+          }
+        },
+        {
+          "id": "exit",
+          "role": "exit",
+          "position": [
+            18,
+            0
+          ],
+          "contract": {
+            "postures": [
+              "grounded"
+            ],
+            "vxRange": [
+              0,
+              24
+            ],
+            "vyRange": [
+              0,
+              0
+            ],
+            "clearance": [
+              1,
+              2.5
+            ],
+            "requiredAbilities": []
+          }
+        }
+      ],
+      "routes": [
+        {
+          "id": "route",
+          "entrySocketId": "entry",
+          "exitSocketId": "exit",
+          "requiredAbilities": [],
+          "witnessActions": [],
+          "maxTicks": 6000
+        }
+      ],
+      "sceneActions": [
+        {
+          "id": "ledge-takeoff",
+          "entityId": "approach",
+          "kind": "jump",
+          "input": "jump",
+          "edge": "end",
+          "startOffset": -1.7,
+          "leadDistance": 2,
+          "lateDistance": 0.35,
+          "priority": 10,
+          "heightRange": [
+            -0.1,
+            0.2
+          ],
+          "performanceId": "scene-jump",
+          "required": true
+        }
+      ]
+    },
+    {
+      "id": "unit-wall-jump",
+      "difficulty": 0,
+      "tags": [
+        "prefab",
+        "atomic",
+        "wall-jump",
+        "unqualified-for-endless"
+      ],
+      "entities": [
+        {
+          "id": "approach",
+          "kind": "surface",
+          "rect": [
+            -0.3,
+            -1.2,
+            8.3,
+            1.2
+          ],
+          "oneWay": false,
+          "vaultable": false
+        },
+        {
+          "id": "wall",
+          "kind": "surface",
+          "rect": [
+            8,
+            0,
+            1.2,
+            2.8
+          ],
+          "oneWay": false,
+          "vaultable": false,
+          "traversal": "wall"
+        },
+        {
+          "id": "landing",
+          "kind": "surface",
+          "rect": [
+            9.2,
+            -1.2,
+            8.8,
+            1.2
+          ],
+          "oneWay": false,
+          "vaultable": false
+        }
+      ],
+      "sockets": [
+        {
+          "id": "entry",
+          "role": "entry",
+          "position": [
+            0,
+            0
+          ],
+          "contract": {
+            "postures": [
+              "grounded"
+            ],
+            "vxRange": [
+              0,
+              24
+            ],
+            "vyRange": [
+              0,
+              0
+            ],
+            "clearance": [
+              1,
+              2.5
+            ],
+            "requiredAbilities": []
+          }
+        },
+        {
+          "id": "exit",
+          "role": "exit",
+          "position": [
+            18,
+            0
+          ],
+          "contract": {
+            "postures": [
+              "grounded"
+            ],
+            "vxRange": [
+              0,
+              24
+            ],
+            "vyRange": [
+              0,
+              0
+            ],
+            "clearance": [
+              1,
+              2.5
+            ],
+            "requiredAbilities": []
+          }
+        }
+      ],
+      "routes": [
+        {
+          "id": "route",
+          "entrySocketId": "entry",
+          "exitSocketId": "exit",
+          "requiredAbilities": [],
+          "witnessActions": [],
+          "maxTicks": 6000
+        }
+      ],
+      "sceneActions": [
+        {
+          "id": "wall-takeoff",
+          "entityId": "approach",
+          "kind": "jump",
+          "input": "jump",
+          "edge": "end",
+          "startOffset": -2.2,
+          "leadDistance": 2,
+          "lateDistance": 0.35,
+          "priority": 10,
+          "heightRange": [
+            -0.1,
+            0.2
+          ],
+          "performanceId": "scene-jump",
+          "required": true
+        }
+      ]
+    },
+    {
+      "id": "unit-drop",
+      "difficulty": 0,
+      "tags": [
+        "prefab",
+        "atomic",
+        "drop",
+        "unqualified-for-endless"
+      ],
+      "entities": [
+        {
+          "id": "launch-roof",
+          "kind": "surface",
+          "rect": [
+            -0.3,
+            -4,
+            10.3,
+            4
+          ],
+          "oneWay": false,
+          "vaultable": false
+        },
+        {
+          "id": "landing",
+          "kind": "surface",
+          "rect": [
+            13,
+            -5.2,
+            13,
+            1.2
+          ],
+          "oneWay": false,
+          "vaultable": false
+        }
+      ],
+      "sockets": [
+        {
+          "id": "entry",
+          "role": "entry",
+          "position": [
+            0,
+            0
+          ],
+          "contract": {
+            "postures": [
+              "grounded"
+            ],
+            "vxRange": [
+              0,
+              24
+            ],
+            "vyRange": [
+              0,
+              0
+            ],
+            "clearance": [
+              1,
+              2.5
+            ],
+            "requiredAbilities": []
+          }
+        },
+        {
+          "id": "exit",
+          "role": "exit",
+          "position": [
+            26,
+            -4
+          ],
+          "contract": {
+            "postures": [
+              "grounded"
+            ],
+            "vxRange": [
+              0,
+              24
+            ],
+            "vyRange": [
+              0,
+              0
+            ],
+            "clearance": [
+              1,
+              2.5
+            ],
+            "requiredAbilities": []
+          }
+        }
+      ],
+      "routes": [
+        {
+          "id": "route",
+          "entrySocketId": "entry",
+          "exitSocketId": "exit",
+          "requiredAbilities": [],
+          "witnessActions": [],
+          "maxTicks": 6000
+        }
+      ],
+      "sceneActions": []
+    },
+    {
+      "id": "terrain-roof-rhythm",
+      "difficulty": 0,
+      "tags": [
+        "scene-terrain"
+      ],
+      "entities": [
+        {
+          "id": "left",
+          "kind": "surface",
+          "rect": [
+            0,
+            -1.2,
+            14,
+            1.2
+          ],
+          "oneWay": false,
+          "vaultable": false
+        },
+        {
+          "id": "right",
+          "kind": "surface",
+          "rect": [
+            17,
+            -1.2,
+            62,
+            1.2
+          ],
+          "oneWay": false,
+          "vaultable": false
+        }
+      ],
+      "sockets": [
+        {
+          "id": "entry",
+          "role": "entry",
+          "position": [
+            2,
+            0
+          ],
+          "contract": {
+            "postures": [
+              "grounded"
+            ],
+            "vxRange": [
+              0,
+              24
+            ],
+            "vyRange": [
+              0,
+              0
+            ],
+            "clearance": [
+              1,
+              2.5
+            ],
+            "requiredAbilities": []
+          }
+        },
+        {
+          "id": "exit",
+          "role": "exit",
+          "position": [
+            77,
+            0
+          ],
+          "contract": {
+            "postures": [
+              "grounded"
+            ],
+            "vxRange": [
+              0,
+              24
+            ],
+            "vyRange": [
+              0,
+              0
+            ],
+            "clearance": [
+              1,
+              2.5
+            ],
+            "requiredAbilities": []
+          }
+        },
+        {
+          "id": "cp1",
+          "role": "entry",
+          "position": [
+            39,
+            0
+          ],
+          "contract": {
+            "postures": [
+              "grounded"
+            ],
+            "vxRange": [
+              0,
+              24
+            ],
+            "vyRange": [
+              0,
+              0
+            ],
+            "clearance": [
+              1,
+              2.5
+            ],
+            "requiredAbilities": []
+          }
+        }
+      ],
+      "routes": [
+        {
+          "id": "route",
+          "entrySocketId": "entry",
+          "exitSocketId": "exit",
+          "requiredAbilities": [],
+          "witnessActions": [],
+          "maxTicks": 6000
+        }
+      ],
+      "sceneActions": []
+    },
+    {
+      "id": "terrain-high-water",
+      "difficulty": 0,
+      "tags": [
+        "scene-terrain"
+      ],
+      "entities": [
+        {
+          "id": "home",
+          "kind": "surface",
+          "rect": [
+            18,
+            -1.2,
+            40,
+            1.2
+          ],
+          "oneWay": false,
+          "vaultable": false
+        }
+      ],
+      "sockets": [
+        {
+          "id": "entry",
+          "role": "entry",
+          "position": [
+            2,
+            0
+          ],
+          "contract": {
+            "postures": [
+              "grounded"
+            ],
+            "vxRange": [
+              0,
+              24
+            ],
+            "vyRange": [
+              0,
+              0
+            ],
+            "clearance": [
+              1,
+              2.5
+            ],
+            "requiredAbilities": []
+          }
+        },
+        {
+          "id": "exit",
+          "role": "exit",
+          "position": [
+            56,
+            0
+          ],
+          "contract": {
+            "postures": [
+              "grounded"
+            ],
+            "vxRange": [
+              0,
+              24
+            ],
+            "vyRange": [
+              0,
+              0
+            ],
+            "clearance": [
+              1,
+              2.5
+            ],
+            "requiredAbilities": []
+          }
+        },
+        {
+          "id": "cp1",
+          "role": "entry",
+          "position": [
+            20,
+            0
+          ],
+          "contract": {
+            "postures": [
+              "grounded"
+            ],
+            "vxRange": [
+              0,
+              24
+            ],
+            "vyRange": [
+              0,
+              0
+            ],
+            "clearance": [
+              1,
+              2.5
+            ],
+            "requiredAbilities": []
+          }
+        }
+      ],
+      "routes": [
+        {
+          "id": "route",
+          "entrySocketId": "entry",
+          "exitSocketId": "exit",
+          "requiredAbilities": [],
+          "witnessActions": [],
+          "maxTicks": 6000
+        }
+      ],
+      "sceneActions": []
+    },
+    {
+      "id": "terrain-wall-signal",
+      "difficulty": 0,
+      "tags": [
+        "scene-terrain"
+      ],
+      "entities": [
+        {
+          "id": "middle",
+          "kind": "surface",
+          "rect": [
+            18,
+            -1.2,
+            44,
+            1.2
+          ],
+          "oneWay": false,
+          "vaultable": false
+        }
+      ],
+      "sockets": [
+        {
+          "id": "entry",
+          "role": "entry",
+          "position": [
+            2,
+            0
+          ],
+          "contract": {
+            "postures": [
+              "grounded"
+            ],
+            "vxRange": [
+              0,
+              24
+            ],
+            "vyRange": [
+              0,
+              0
+            ],
+            "clearance": [
+              1,
+              2.5
+            ],
+            "requiredAbilities": []
+          }
+        },
+        {
+          "id": "exit",
+          "role": "exit",
+          "position": [
+            60,
+            0
+          ],
+          "contract": {
+            "postures": [
+              "grounded"
+            ],
+            "vxRange": [
+              0,
+              24
+            ],
+            "vyRange": [
+              0,
+              0
+            ],
+            "clearance": [
+              1,
+              2.5
+            ],
+            "requiredAbilities": []
+          }
+        },
+        {
+          "id": "cp1",
+          "role": "entry",
+          "position": [
+            22,
+            0
+          ],
+          "contract": {
+            "postures": [
+              "grounded"
+            ],
+            "vxRange": [
+              0,
+              24
+            ],
+            "vyRange": [
+              0,
+              0
+            ],
+            "clearance": [
+              1,
+              2.5
+            ],
+            "requiredAbilities": []
+          }
+        }
+      ],
+      "routes": [
+        {
+          "id": "route",
+          "entrySocketId": "entry",
+          "exitSocketId": "exit",
+          "requiredAbilities": [],
+          "witnessActions": [],
+          "maxTicks": 6000
+        }
+      ],
+      "sceneActions": []
+    },
+    {
+      "id": "terrain-soft-landing",
+      "difficulty": 0,
+      "tags": [
+        "scene-terrain"
+      ],
+      "entities": [
+        {
+          "id": "home",
+          "kind": "surface",
+          "rect": [
+            26,
+            -1.2,
+            40,
+            1.2
+          ],
+          "oneWay": false,
+          "vaultable": false
+        }
+      ],
+      "sockets": [
+        {
+          "id": "entry",
+          "role": "entry",
+          "position": [
+            2,
+            4
+          ],
+          "contract": {
+            "postures": [
+              "grounded"
+            ],
+            "vxRange": [
+              0,
+              24
+            ],
+            "vyRange": [
+              0,
+              0
+            ],
+            "clearance": [
+              1,
+              2.5
+            ],
+            "requiredAbilities": []
+          }
+        },
+        {
+          "id": "exit",
+          "role": "exit",
+          "position": [
+            63,
+            0
+          ],
+          "contract": {
+            "postures": [
+              "grounded"
+            ],
+            "vxRange": [
+              0,
+              24
+            ],
+            "vyRange": [
+              0,
+              0
+            ],
+            "clearance": [
+              1,
+              2.5
+            ],
+            "requiredAbilities": []
+          }
+        },
+        {
+          "id": "cp1",
+          "role": "entry",
+          "position": [
+            34,
+            0
+          ],
+          "contract": {
+            "postures": [
+              "grounded"
+            ],
+            "vxRange": [
+              0,
+              24
+            ],
+            "vyRange": [
+              0,
+              0
+            ],
+            "clearance": [
+              1,
+              2.5
+            ],
+            "requiredAbilities": []
+          }
+        }
+      ],
+      "routes": [
+        {
+          "id": "route",
+          "entrySocketId": "entry",
+          "exitSocketId": "exit",
+          "requiredAbilities": [],
+          "witnessActions": [],
+          "maxTicks": 6000
+        }
+      ],
+      "sceneActions": []
+    },
+    {
+      "id": "terrain-cable-yard",
+      "difficulty": 0,
+      "tags": [
+        "scene-terrain"
+      ],
+      "entities": [
+        {
+          "id": "left",
+          "kind": "surface",
+          "rect": [
+            0,
+            -1.2,
+            22,
+            1.2
+          ],
+          "oneWay": false,
+          "vaultable": false
+        },
+        {
+          "id": "middle",
+          "kind": "surface",
+          "rect": [
+            31,
+            -1.2,
+            22,
+            1.2
+          ],
+          "oneWay": false,
+          "vaultable": false
+        },
+        {
+          "id": "right",
+          "kind": "surface",
+          "rect": [
+            55,
+            -1.2,
+            26,
+            1.2
+          ],
+          "oneWay": false,
+          "vaultable": false
+        }
+      ],
+      "sockets": [
+        {
+          "id": "entry",
+          "role": "entry",
+          "position": [
+            2,
+            0
+          ],
+          "contract": {
+            "postures": [
+              "grounded"
+            ],
+            "vxRange": [
+              0,
+              24
+            ],
+            "vyRange": [
+              0,
+              0
+            ],
+            "clearance": [
+              1,
+              2.5
+            ],
+            "requiredAbilities": []
+          }
+        },
+        {
+          "id": "exit",
+          "role": "exit",
+          "position": [
+            79,
+            0
+          ],
+          "contract": {
+            "postures": [
+              "grounded"
+            ],
+            "vxRange": [
+              0,
+              24
+            ],
+            "vyRange": [
+              0,
+              0
+            ],
+            "clearance": [
+              1,
+              2.5
+            ],
+            "requiredAbilities": []
+          }
+        },
+        {
+          "id": "cp1",
+          "role": "entry",
+          "position": [
+            40,
+            0
+          ],
+          "contract": {
+            "postures": [
+              "grounded"
+            ],
+            "vxRange": [
+              0,
+              24
+            ],
+            "vyRange": [
+              0,
+              0
+            ],
+            "clearance": [
+              1,
+              2.5
+            ],
+            "requiredAbilities": []
+          }
+        }
+      ],
+      "routes": [
+        {
+          "id": "route",
+          "entrySocketId": "entry",
+          "exitSocketId": "exit",
+          "requiredAbilities": [],
+          "witnessActions": [],
+          "maxTicks": 6000
+        }
+      ],
+      "sceneActions": []
+    },
+    {
+      "id": "terrain-crosscurrent",
+      "difficulty": 0,
+      "tags": [
+        "scene-terrain"
+      ],
+      "entities": [
+        {
+          "id": "home",
+          "kind": "surface",
+          "rect": [
+            0,
+            -1.2,
+            76,
+            1.2
+          ],
+          "oneWay": false,
+          "vaultable": false
+        }
+      ],
+      "sockets": [
+        {
+          "id": "entry",
+          "role": "entry",
+          "position": [
+            2,
+            0
+          ],
+          "contract": {
+            "postures": [
+              "grounded"
+            ],
+            "vxRange": [
+              0,
+              24
+            ],
+            "vyRange": [
+              0,
+              0
+            ],
+            "clearance": [
+              1,
+              2.5
+            ],
+            "requiredAbilities": []
+          }
+        },
+        {
+          "id": "exit",
+          "role": "exit",
+          "position": [
+            74,
+            0
+          ],
+          "contract": {
+            "postures": [
+              "grounded"
+            ],
+            "vxRange": [
+              0,
+              24
+            ],
+            "vyRange": [
+              0,
+              0
+            ],
+            "clearance": [
+              1,
+              2.5
+            ],
+            "requiredAbilities": []
+          }
+        },
+        {
+          "id": "cp1",
+          "role": "entry",
+          "position": [
+            42,
+            0
+          ],
+          "contract": {
+            "postures": [
+              "grounded"
+            ],
+            "vxRange": [
+              0,
+              24
+            ],
+            "vyRange": [
+              0,
+              0
+            ],
+            "clearance": [
+              1,
+              2.5
+            ],
+            "requiredAbilities": []
+          }
+        }
+      ],
+      "routes": [
+        {
+          "id": "route",
+          "entrySocketId": "entry",
+          "exitSocketId": "exit",
+          "requiredAbilities": [],
+          "witnessActions": [],
+          "maxTicks": 6000
+        }
+      ],
+      "sceneActions": []
     }
   ],
   "finiteLevels": [
@@ -1541,10 +3245,18 @@
       "id": "motion-lab",
       "instances": [
         {
+          "id": "terrain",
+          "moduleId": "terrain-course",
+          "position": [
+            0,
+            0
+          ]
+        },
+        {
           "id": "jump",
           "moduleId": "unit-jump",
           "position": [
-            0,
+            9,
             0
           ]
         },
@@ -1552,7 +3264,7 @@
           "id": "slide",
           "moduleId": "unit-slide",
           "position": [
-            32,
+            35.4,
             0
           ]
         },
@@ -1560,7 +3272,7 @@
           "id": "vault",
           "moduleId": "unit-vault",
           "position": [
-            64,
+            67.2,
             0
           ]
         },
@@ -1568,7 +3280,7 @@
           "id": "dash",
           "moduleId": "unit-dash",
           "position": [
-            96,
+            105.6,
             0
           ]
         },
@@ -1576,7 +3288,7 @@
           "id": "swing",
           "moduleId": "unit-swing",
           "position": [
-            128,
+            134.2,
             0
           ]
         },
@@ -1584,7 +3296,7 @@
           "id": "cable",
           "moduleId": "unit-cable",
           "position": [
-            160,
+            162.9,
             0
           ]
         },
@@ -1592,115 +3304,382 @@
           "id": "pad",
           "moduleId": "unit-pad",
           "position": [
-            192,
+            201.9,
             0
           ]
         },
         {
-          "id": "chain",
-          "moduleId": "unit-chain",
+          "id": "chain-swing",
+          "moduleId": "unit-chain-swing",
           "position": [
-            224,
+            234.5,
             0
           ]
         },
         {
-          "id": "recovery",
-          "moduleId": "unit-recovery",
+          "id": "chain-dash",
+          "moduleId": "unit-chain-dash",
           "position": [
-            272,
+            240.5,
+            0
+          ]
+        },
+        {
+          "id": "chain-cable",
+          "moduleId": "unit-chain-cable",
+          "position": [
+            243.2,
+            0
+          ]
+        },
+        {
+          "id": "chain-pad",
+          "moduleId": "unit-pad",
+          "position": [
+            230.9,
+            0
+          ]
+        },
+        {
+          "id": "thin-wall",
+          "moduleId": "unit-wall",
+          "position": [
+            279.3,
+            0
+          ]
+        },
+        {
+          "id": "one-way",
+          "moduleId": "unit-platform",
+          "position": [
+            293.3,
+            0
+          ]
+        },
+        {
+          "id": "blocked-anchor",
+          "moduleId": "unit-blocked-anchor",
+          "position": [
+            271,
             0
           ]
         }
       ],
-      "connections": [
-        {
-          "from": {
-            "instanceId": "jump",
-            "socketId": "exit"
-          },
-          "to": {
-            "instanceId": "slide",
-            "socketId": "entry"
-          }
-        },
-        {
-          "from": {
-            "instanceId": "slide",
-            "socketId": "exit"
-          },
-          "to": {
-            "instanceId": "vault",
-            "socketId": "entry"
-          }
-        },
-        {
-          "from": {
-            "instanceId": "vault",
-            "socketId": "exit"
-          },
-          "to": {
-            "instanceId": "dash",
-            "socketId": "entry"
-          }
-        },
-        {
-          "from": {
-            "instanceId": "dash",
-            "socketId": "exit"
-          },
-          "to": {
-            "instanceId": "swing",
-            "socketId": "entry"
-          }
-        },
-        {
-          "from": {
-            "instanceId": "swing",
-            "socketId": "exit"
-          },
-          "to": {
-            "instanceId": "cable",
-            "socketId": "entry"
-          }
-        },
-        {
-          "from": {
-            "instanceId": "cable",
-            "socketId": "exit"
-          },
-          "to": {
-            "instanceId": "pad",
-            "socketId": "entry"
-          }
-        },
-        {
-          "from": {
-            "instanceId": "pad",
-            "socketId": "exit"
-          },
-          "to": {
-            "instanceId": "chain",
-            "socketId": "entry"
-          }
-        },
-        {
-          "from": {
-            "instanceId": "chain",
-            "socketId": "exit"
-          },
-          "to": {
-            "instanceId": "recovery",
-            "socketId": "entry"
-          }
-        }
-      ],
+      "connections": [],
       "spawn": {
-        "instanceId": "jump",
+        "instanceId": "terrain",
         "socketId": "entry"
       },
       "finish": {
-        "instanceId": "recovery",
+        "instanceId": "terrain",
+        "socketId": "exit"
+      }
+    },
+    {
+      "id": "roof-rhythm",
+      "instances": [
+        {
+          "id": "terrain",
+          "moduleId": "terrain-roof-rhythm",
+          "position": [
+            0,
+            0
+          ]
+        },
+        {
+          "id": "takeoff",
+          "moduleId": "unit-jump",
+          "position": [
+            10,
+            0
+          ]
+        },
+        {
+          "id": "tunnel",
+          "moduleId": "unit-slide",
+          "position": [
+            25.4,
+            0
+          ]
+        },
+        {
+          "id": "vault",
+          "moduleId": "unit-vault",
+          "position": [
+            42.2,
+            0
+          ]
+        },
+        {
+          "id": "step",
+          "moduleId": "unit-climb",
+          "position": [
+            56.34,
+            0
+          ]
+        }
+      ],
+      "connections": [],
+      "spawn": {
+        "instanceId": "terrain",
+        "socketId": "entry"
+      },
+      "finish": {
+        "instanceId": "terrain",
+        "socketId": "exit"
+      }
+    },
+    {
+      "id": "high-water",
+      "instances": [
+        {
+          "id": "terrain",
+          "moduleId": "terrain-high-water",
+          "position": [
+            0,
+            0
+          ]
+        },
+        {
+          "id": "ledge",
+          "moduleId": "unit-ledge",
+          "position": [
+            0,
+            0
+          ]
+        },
+        {
+          "id": "step-a",
+          "moduleId": "unit-climb",
+          "position": [
+            22.34,
+            0
+          ]
+        },
+        {
+          "id": "step-b",
+          "moduleId": "unit-climb",
+          "position": [
+            34.34,
+            0
+          ]
+        }
+      ],
+      "connections": [],
+      "spawn": {
+        "instanceId": "terrain",
+        "socketId": "entry"
+      },
+      "finish": {
+        "instanceId": "terrain",
+        "socketId": "exit"
+      }
+    },
+    {
+      "id": "wall-signal",
+      "instances": [
+        {
+          "id": "terrain",
+          "moduleId": "terrain-wall-signal",
+          "position": [
+            0,
+            0
+          ]
+        },
+        {
+          "id": "wall",
+          "moduleId": "unit-wall-jump",
+          "position": [
+            0,
+            0
+          ]
+        },
+        {
+          "id": "vault",
+          "moduleId": "unit-vault",
+          "position": [
+            27.2,
+            0
+          ]
+        },
+        {
+          "id": "wall-b",
+          "moduleId": "unit-wall-jump",
+          "position": [
+            40,
+            0
+          ]
+        }
+      ],
+      "connections": [],
+      "spawn": {
+        "instanceId": "terrain",
+        "socketId": "entry"
+      },
+      "finish": {
+        "instanceId": "terrain",
+        "socketId": "exit"
+      }
+    },
+    {
+      "id": "soft-landing",
+      "instances": [
+        {
+          "id": "terrain",
+          "moduleId": "terrain-soft-landing",
+          "position": [
+            0,
+            0
+          ]
+        },
+        {
+          "id": "drop",
+          "moduleId": "unit-drop",
+          "position": [
+            0,
+            4
+          ]
+        },
+        {
+          "id": "tunnel",
+          "moduleId": "unit-slide",
+          "position": [
+            17.4,
+            0
+          ]
+        },
+        {
+          "id": "pad",
+          "moduleId": "unit-pad",
+          "position": [
+            40,
+            0
+          ]
+        }
+      ],
+      "connections": [],
+      "spawn": {
+        "instanceId": "terrain",
+        "socketId": "entry"
+      },
+      "finish": {
+        "instanceId": "terrain",
+        "socketId": "exit"
+      }
+    },
+    {
+      "id": "cable-yard",
+      "instances": [
+        {
+          "id": "terrain",
+          "moduleId": "terrain-cable-yard",
+          "position": [
+            0,
+            0
+          ]
+        },
+        {
+          "id": "step",
+          "moduleId": "unit-climb",
+          "position": [
+            5.34,
+            0
+          ]
+        },
+        {
+          "id": "cable",
+          "moduleId": "unit-cable",
+          "position": [
+            6.9,
+            0
+          ]
+        },
+        {
+          "id": "pad",
+          "moduleId": "unit-pad",
+          "position": [
+            48,
+            0
+          ]
+        }
+      ],
+      "connections": [],
+      "spawn": {
+        "instanceId": "terrain",
+        "socketId": "entry"
+      },
+      "finish": {
+        "instanceId": "terrain",
+        "socketId": "exit"
+      }
+    },
+    {
+      "id": "crosscurrent",
+      "instances": [
+        {
+          "id": "terrain",
+          "moduleId": "terrain-crosscurrent",
+          "position": [
+            0,
+            0
+          ]
+        },
+        {
+          "id": "pad",
+          "moduleId": "unit-pad",
+          "position": [
+            6.9,
+            0
+          ]
+        },
+        {
+          "id": "swing",
+          "moduleId": "unit-chain-swing",
+          "position": [
+            10.5,
+            0
+          ]
+        },
+        {
+          "id": "dash",
+          "moduleId": "unit-chain-dash",
+          "position": [
+            16.5,
+            0
+          ]
+        },
+        {
+          "id": "cable",
+          "moduleId": "unit-chain-cable",
+          "position": [
+            19.2,
+            0
+          ]
+        },
+        {
+          "id": "vault",
+          "moduleId": "unit-vault",
+          "position": [
+            42.2,
+            0
+          ]
+        },
+        {
+          "id": "ledge",
+          "moduleId": "unit-ledge",
+          "position": [
+            54,
+            0
+          ]
+        }
+      ],
+      "connections": [],
+      "spawn": {
+        "instanceId": "terrain",
+        "socketId": "entry"
+      },
+      "finish": {
+        "instanceId": "terrain",
         "socketId": "exit"
       }
     }
@@ -1708,11 +3687,11 @@
   "endlessPresets": [
     {
       "id": "not-certified",
-      "startModuleId": "unit-jump",
-      "fallbackModuleId": "unit-slide",
+      "startModuleId": "unit-ground",
+      "fallbackModuleId": "unit-ground",
       "modulePool": [
         {
-          "moduleId": "unit-jump",
+          "moduleId": "unit-ground",
           "weight": 1,
           "minDifficulty": 0,
           "maxDifficulty": 0
@@ -1726,6 +3705,422 @@
       "lookaheadModules": 1,
       "maxActiveModules": 3,
       "retireBehindDistance": 30
+    }
+  ],
+  "scenePerformances": [
+    {
+      "id": "scene-jump",
+      "kind": "jump",
+      "anticipationSeconds": 0.65,
+      "timelyEndOffset": 0,
+      "missSeconds": 1.2,
+      "lateJumpScale": 0.78,
+      "camera": {
+        "blendSeconds": 0.32,
+        "releaseSeconds": 0.45,
+        "heightScale": 1,
+        "knots": [
+          [
+            0,
+            0,
+            0
+          ],
+          [
+            0.5,
+            0.5,
+            0
+          ],
+          [
+            1,
+            1,
+            0
+          ]
+        ]
+      },
+      "variants": {
+        "timely": {
+          "sequence": "rise",
+          "durationScale": 1,
+          "lockInput": true
+        },
+        "late": {
+          "sequence": "jumpLate",
+          "durationScale": 1,
+          "lockInput": true
+        },
+        "missed": {
+          "sequence": "missJump",
+          "durationScale": 1,
+          "lockInput": true,
+          "cameraKnots": [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              1,
+              0.15,
+              0
+            ]
+          ]
+        }
+      }
+    },
+    {
+      "id": "scene-slide",
+      "kind": "slide",
+      "anticipationSeconds": 0.65,
+      "timelyEndOffset": 0,
+      "missSeconds": 0.6,
+      "lateJumpScale": 1,
+      "camera": {
+        "blendSeconds": 0.32,
+        "releaseSeconds": 0.45,
+        "heightScale": 1,
+        "knots": [
+          [
+            0,
+            0,
+            0
+          ],
+          [
+            0.5,
+            0.5,
+            0
+          ],
+          [
+            1,
+            1,
+            0
+          ]
+        ]
+      },
+      "variants": {
+        "timely": {
+          "sequence": "slide",
+          "durationScale": 1,
+          "lockInput": true
+        },
+        "late": {
+          "sequence": "slideLate",
+          "durationScale": 1.25,
+          "lockInput": true
+        },
+        "missed": {
+          "sequence": "obstacleHit",
+          "durationScale": 1,
+          "lockInput": true,
+          "cameraKnots": [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              1,
+              0.15,
+              0
+            ]
+          ]
+        }
+      }
+    },
+    {
+      "id": "scene-vault",
+      "kind": "vault",
+      "anticipationSeconds": 0.65,
+      "timelyEndOffset": 0,
+      "missSeconds": 0.6,
+      "lateJumpScale": 1,
+      "camera": {
+        "blendSeconds": 0.32,
+        "releaseSeconds": 0.45,
+        "heightScale": 1,
+        "knots": [
+          [
+            0,
+            0,
+            0
+          ],
+          [
+            0.5,
+            0.5,
+            0
+          ],
+          [
+            1,
+            1,
+            0
+          ]
+        ]
+      },
+      "variants": {
+        "timely": {
+          "sequence": "vault",
+          "durationScale": 1,
+          "lockInput": true
+        },
+        "late": {
+          "sequence": "vaultLate",
+          "durationScale": 1.25,
+          "lockInput": true
+        },
+        "missed": {
+          "sequence": "obstacleHit",
+          "durationScale": 1,
+          "lockInput": true,
+          "cameraKnots": [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              1,
+              0.15,
+              0
+            ]
+          ]
+        }
+      }
+    },
+    {
+      "id": "scene-climb",
+      "kind": "climb",
+      "anticipationSeconds": 0.65,
+      "timelyEndOffset": 0,
+      "missSeconds": 0.6,
+      "lateJumpScale": 1,
+      "camera": {
+        "blendSeconds": 0.32,
+        "releaseSeconds": 0.45,
+        "heightScale": 1,
+        "knots": [
+          [
+            0,
+            0,
+            0
+          ],
+          [
+            0.5,
+            0.5,
+            0
+          ],
+          [
+            1,
+            1,
+            0
+          ]
+        ]
+      },
+      "variants": {
+        "timely": {
+          "sequence": "climb",
+          "durationScale": 1,
+          "lockInput": true
+        },
+        "late": {
+          "sequence": "mantle",
+          "durationScale": 1.25,
+          "lockInput": true
+        },
+        "missed": {
+          "sequence": "obstacleHit",
+          "durationScale": 1,
+          "lockInput": true,
+          "cameraKnots": [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              1,
+              0.15,
+              0
+            ]
+          ]
+        }
+      }
+    },
+    {
+      "id": "scene-dash-grapple",
+      "kind": "dashGrapple",
+      "anticipationSeconds": 0.65,
+      "timelyEndOffset": 0,
+      "missSeconds": 0.6,
+      "lateJumpScale": 1,
+      "camera": {
+        "blendSeconds": 0.32,
+        "releaseSeconds": 0.45,
+        "heightScale": 1,
+        "knots": [
+          [
+            0,
+            0,
+            0
+          ],
+          [
+            0.5,
+            0.5,
+            0
+          ],
+          [
+            1,
+            1,
+            0
+          ]
+        ]
+      },
+      "variants": {
+        "timely": {
+          "sequence": "dash",
+          "durationScale": 1,
+          "lockInput": false
+        },
+        "late": {
+          "sequence": "dashLate",
+          "durationScale": 1,
+          "lockInput": false
+        },
+        "missed": {
+          "sequence": "missGrapple",
+          "durationScale": 1,
+          "lockInput": true,
+          "cameraKnots": [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              1,
+              0.15,
+              0
+            ]
+          ]
+        }
+      }
+    },
+    {
+      "id": "scene-swing-grapple",
+      "kind": "swingGrapple",
+      "anticipationSeconds": 0.65,
+      "timelyEndOffset": 0,
+      "missSeconds": 0.6,
+      "lateJumpScale": 1,
+      "camera": {
+        "blendSeconds": 0.32,
+        "releaseSeconds": 0.45,
+        "heightScale": 1,
+        "knots": [
+          [
+            0,
+            0,
+            0
+          ],
+          [
+            0.5,
+            0.5,
+            0
+          ],
+          [
+            1,
+            1,
+            0
+          ]
+        ]
+      },
+      "variants": {
+        "timely": {
+          "sequence": "swing",
+          "durationScale": 1,
+          "lockInput": false
+        },
+        "late": {
+          "sequence": "swingLate",
+          "durationScale": 1,
+          "lockInput": false
+        },
+        "missed": {
+          "sequence": "missGrapple",
+          "durationScale": 1,
+          "lockInput": true,
+          "cameraKnots": [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              1,
+              0.15,
+              0
+            ]
+          ]
+        }
+      },
+      "playSeconds": 1.8
+    },
+    {
+      "id": "scene-zipline",
+      "kind": "zipline",
+      "anticipationSeconds": 0.65,
+      "timelyEndOffset": 0,
+      "missSeconds": 0.6,
+      "lateJumpScale": 1,
+      "camera": {
+        "blendSeconds": 0.32,
+        "releaseSeconds": 0.45,
+        "heightScale": 1,
+        "knots": [
+          [
+            0,
+            0,
+            0
+          ],
+          [
+            0.5,
+            0.5,
+            0
+          ],
+          [
+            1,
+            1,
+            0
+          ]
+        ]
+      },
+      "variants": {
+        "timely": {
+          "sequence": "cable",
+          "durationScale": 1,
+          "lockInput": false
+        },
+        "late": {
+          "sequence": "cableLate",
+          "durationScale": 1,
+          "lockInput": false
+        },
+        "missed": {
+          "sequence": "missGrapple",
+          "durationScale": 1,
+          "lockInput": true,
+          "cameraKnots": [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              1,
+              0.15,
+              0
+            ]
+          ]
+        }
+      }
     }
   ]
 }

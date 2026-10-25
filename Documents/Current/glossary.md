@@ -116,3 +116,63 @@ See [3C](../Plans/Design/three-c-design.md), [state machine](../Plans/Design/cha
 | Frozen playtest | An immutable content snapshot running the production simulator while the editor draft remains untouched. |
 | Visual inertia | Simulation-time decay of bounded pelvis/rotation offsets across animation sequences, without moving the physical body or blending duplicate silhouettes. |
 | Autosave recovery | Explicit recovery of a browser-local draft; not a repository write, deployment or undo-history restore. |
+
+## Small-module terms
+
+| Term | Meaning |
+|---|---|
+| H | Shared `climbMaxHeight`, currently 1.2 m; brush grid/ruler unit, not an editor-only movement limit. |
+| Entry-normalized pivot | Local [0,0] entry of a small library module; drag/drop places this reference at the cursor. |
+| Intended occupied space | Derived AABB of geometry and modeled approach/action/recovery; not universal release/reachability certification. |
+| Automatic block detector | A marker compiled from `surface.traversal: auto`, geometry and shared rules; no second editable coordinate. |
+| Step-up climb | Grounded Space traversal onto a low surface, under the existing single Vault motion owner; not high-wall climbing. |
+| Gait-phase match | Choose a compatible run pose from normalized joint landmarks, then continue distance-driven phase without moving physics. |
+| Practice floor | Explicit frozen-preview scaffold for an unplaced module; excluded from the authored draft/export. |
+| Legacy conversion | Explicit, undoable 1.2-to-1.3 transformation preserving geometry and removing obsolete size fields. |
+
+## Game-flow terms
+
+| Term | Project meaning |
+|---|---|
+| Challenge view | Frozen finite runtime derived from consecutive existing stations, without a second geometry source. |
+| Completed | Finite session state that freezes at finish rather than looping through the lab gate. |
+| Absolute grid snap | Align one world anchor to a lattice while preserving selected relative spacing. |
+| Follow acceleration | Presentation-camera velocity-change limit, separate from character acceleration. |
+| Two-pose stitching | Preserve local displayed pelvis velocity across clips, decay correction and prioritize contact. |
+| Local best time | Best active simulation time stored only in this browser, not a shared/authenticated score. |
+
+## Scene-action terms
+
+| Term | Meaning |
+|---|---|
+| LedgeHang | Deliberate airborne catch that pins the body outside a clear corner until climb/drop/timeout. |
+| Mantle | Collision-checked pull-up onto a standing-clear ledge; a mode of Vault rather than a second solver. |
+| Wall rebound | One content-owned backward/upward impulse per marked wall per airborne period. |
+| Roll buffer | Expiring slide intent that can become Roll only on a sufficiently hard landing. |
+| Floating HUD | Small overlaid level/control/hint panels while the canvas fills the viewport. |
+| Authored course | An independent finite layout referenced by level ID; different from a training view of the original circuit. |
+
+## Scene choreography terms
+
+| Term | Project meaning |
+|---|---|
+| Scene performance | Shared geometry-bound recipe with three outcomes, entry slots, pose clock and camera rail; stored in `scenePerformances`. |
+| Pre-match | Prepare the scene and all outcomes before input; not a successful automatic action. |
+| Timely / late / missed | First confirmed input before timely plane / before final deadline / no confirmation; different authored clips and results. |
+| Playback slot | Outcome-specific spatial start plane; confirmation waits while running to it. |
+| Directed shot / camera rail | Prebound scene coordinates and normalized keys sampled from time independently of the live character root. |
+| SceneFailure | Simulator-owned collision/recoil playback before failure; never a successful auto-vault. |
+
+[Current scene contract](scene-choreography.md) defines the limits and examples.
+
+## Menu organization
+
+| Term | Meaning |
+|---|---|
+| Mode / `modeId` | A catalogue-owned grouping of playable routes; every route references one mode. |
+| Campaign | Six independently authored finite courses. |
+| Training | Three existing station-based challenges played through the normal game scene. |
+| Game editor workspace | `studio.html`, the separate launcher for Level Studio and Motion Lab; outside player mode/route flow. |
+| Mode-bound navigation | Level return, completion count and next route use canonical membership; next never enters another mode. |
+
+[Menu behavior](game-flow.md) also defines disabled Endless and legacy URL handling.

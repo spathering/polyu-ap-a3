@@ -1,0 +1,31 @@
+{
+  "reviewedOn": "2026-10-25",
+  "scope": "Public browser runtime. Analysis only; original source is not vendored.",
+  "sources": [
+    {
+      "url": "https://vector.game/game/player.js",
+      "bytes": 54500,
+      "sha256": "d8a0bb9450a7bc4953acac13488d0549b47d2c74b07520294604d6bd9bc92796"
+    },
+    {
+      "url": "https://vector.game/game/moves.json",
+      "bytes": 236280,
+      "sha256": "27e72f4dfc136d065df9198b6a38488bee8c075c3437f475c6e314e0bee326d5"
+    },
+    {
+      "url": "https://vector.game/game/camera.js",
+      "bytes": 1931,
+      "sha256": "ac33d8d74c28b47fcae4145b6ca0e0cf8210bf0660d6aa340a2e7fa7200b2151"
+    },
+    {
+      "url": "https://vector.game/game/camera-view.js",
+      "bytes": 740,
+      "sha256": "e494f070b6ae488232bcced51c95976d9c28dcc92f0bb680c605843eaeb1fc3c"
+    },
+    {
+      "url": "https://vector.game/game/pad.js",
+      "bytes": 2429,
+      "sha256": "990a60e70b1f7bfab7a67ca2084a4c1a8527d5aa2652f9e86babd1f0c78fc6ad"
+    }
+  ]
+}

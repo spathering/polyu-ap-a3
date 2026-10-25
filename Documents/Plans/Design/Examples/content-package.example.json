@@ -1,5 +1,5 @@
 {
-  "schemaVersion": "1.2.0",
+  "schemaVersion": "1.3.0",
   "contentRevision": "design-fixture-02-3c",
   "physicsVersion": "proposal-02",
   "generatorVersion": "proposal-01",
@@ -27,7 +27,8 @@
       "dashGrapple",
       "swingGrapple",
       "zipline",
-      "jumpPad"
+      "jumpPad",
+      "climb"
     ],
     "bindings": [
       {
@@ -112,7 +113,9 @@
       "minViewHeight": 10,
       "maxViewHeight": 18,
       "zoomSmoothingSeconds": 0.3,
-      "reactionBudgetSeconds": 0.75
+      "reactionBudgetSeconds": 0.75,
+      "velocitySmoothingSeconds": 0.14,
+      "followAcceleration": 72
     },
     "contextInputSeconds": 0.5,
     "vaultTrajectory": [
@@ -145,7 +148,39 @@
     "gripOffset": [
       0,
       2.3
-    ]
+    ],
+    "climbMaxHeight": 1.2,
+    "climbDurationSeconds": 0.7,
+    "climbTrajectory": [
+      [
+        0,
+        0,
+        0
+      ],
+      [
+        0.3,
+        0.2,
+        0.8
+      ],
+      [
+        0.55,
+        0.3,
+        1.08
+      ],
+      [
+        0.8,
+        0.8,
+        1.02
+      ],
+      [
+        1,
+        1,
+        1
+      ]
+    ],
+    "contextApproachSeconds": 0.3,
+    "actionRecoverySeconds": 0.22,
+    "actionChainWindowSeconds": 0.15
   },
   "profiles": [
     {
@@ -189,10 +224,6 @@
   "modules": [
     {
       "id": "safe-straight",
-      "size": [
-        24,
-        12
-      ],
       "difficulty": 0,
       "tags": [
         "schema-fixture",
@@ -279,10 +310,6 @@
     },
     {
       "id": "traversal-lab",
-      "size": [
-        48,
-        12
-      ],
       "difficulty": 0,
       "tags": [
         "schema-fixture",

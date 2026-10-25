@@ -1,6 +1,9 @@
 # Level data and endless generation
 
-**Implementation update, 24 October 2026:** baseline movement, four traversal additions, camera, semantic input, an authored circuit and prepared sprite mapping are implemented in the [character lab](../../Current/character-lab.md). See actual paths/owners in [modules](../../Current/modules.md). 66 tests pass; 15 rehearsals cover 26/26 events. This document retains the broader product contract; the editor, endless generation, streaming qualification and production animation blending remain pending.
+Implementation correction, **25 October 2026**: marked units now prepare all three timing outcomes before input, confirm once, wait for outcome-specific playback slots and use a scene/time camera rather than root-driven following. Optional `scenePerformances`, marker `performanceId`/`required` and `rules.performanceByKind` extend shared 1.3.0 authoring. Runtime/editor use the same validated recipes; older packages retain legacy behavior. The authoritative implemented scope is [scene choreography](../../Current/scene-choreography.md).
+
+
+**Implementation update, 25 October 2026:** the lab, finite/prefab editor, small-module terrain brush, automatic low-ledge climb and shared 1.3.0 data contract are implemented. 102 tests pass; the original 15 rehearsals cover 26/26 lab events. See [actual owners](../../Current/modules.md) and [micro-module behavior](../../Current/micro-modules-and-terrain.md). Endless generation, universal composition qualification and production skeletal blending remain planned.
 
 Status: proposed specification. The [JSON Schema](Schemas/content-package.schema.json) owns field shapes; the [example package](Examples/content-package.example.json) demonstrates them. Examples are not tuned defaults or proof of traversability. See [SSOT](data-driven-architecture.md) and [requirements](../Requirements/game-requirements.md).
 
@@ -16,7 +19,7 @@ Positions use module-local metres, +X forward and +Y up; time uses seconds, velo
 |---|---|---|
 | Rules | Fixed tick, gravity, run/jump values, timing tolerances, body sizes, enabled abilities and input bindings | Single owner of normal movement, collision dimensions and control mapping. |
 | Traversal profile | `id`, discriminated `kind`, typed settings | Dash acquisition/travel, swing constraint, zipline travel/exit, or pad launch/rearm. |
-| Module | `id`, `size`, `difficulty`, `tags`, `entities`, `sockets`, `routes` | A reusable authored scene; local coordinates and stable entity IDs. |
+| Module | `id`, `difficulty`, `tags`, `entities`, `sockets`, `routes`; occupied bounds are derived | A reusable authored scene; local coordinates and stable entity IDs. |
 | Surface/hazard | `kind`, `id`, `rect`; surfaces add one-way/vaultable flags | Authoritative gameplay geometry, also used for gameplay drawing. |
 | Anchor | `kind: anchor`, `id`, `position`, `profileId` | Profile kind determines dash versus swing compatibility and cue. No redundant anchor-mode field. |
 | Zipline | `kind: zipline`, `id`, `points`, `profileId` | Ordered polyline; profile owns capture/travel/exit parameters. |
@@ -97,4 +100,12 @@ Unknown versions fail with a useful message. Supported migrations create a new c
 
 ## Scene synchronization revision, 24 October 2026
 
-The shared contract is now 1.2.0, adding scene markers, context-input lifetime, grip offset and normalized vault trajectory. The previous 1.1.0 pair is archived locally. Space queues a vault in a matching approach and executes after start-plane validation, superseding the earlier automatic-vault assumption; normal jumping remains outside a matching context. Actual owners, reference evidence, smoothed assets and checks are in [current scene synchronization](../../Current/scene-action-synchronization.md).
+The previous 1.2.0 contract added scene markers, context-input lifetime, grip offset and normalized vault trajectory. The previous 1.1.0 pair is archived locally. Space queues a vault in a matching approach and executes after start-plane validation, superseding the earlier automatic-vault assumption; normal jumping remains outside a matching context. Actual owners, reference evidence, smoothed assets and checks are in [current scene synchronization](../../Current/scene-action-synchronization.md).
+
+## Schema 1.3: small-module composition
+
+Authored `module.size` is removed. Shared `module-space.js` derives intended motion/transition AABBs from geometry, detectors and canonical rules/profiles. Surface `traversal: auto` derives painted-block vault/climb markers at compile time; it is not duplicated editable detector data. H comes from `rules.climbMaxHeight`. Atomic definitions use entry [0,0], while terrain has one geometry owner. Layouts may be free compositions without socket links; declared links still validate roles and report seams. Old 1.2 files require explicit undoable conversion.
+
+The disabled endless preset now references starter ground; isolated action attachments are not qualified generator modules. Future endless patterns must compose terrain plus actions, prove entry/exit compatibility and rehearse through the shared simulator before activation. Intended editor envelopes do not certify every possible input, release or neighbor composition.
+
+Current extension: full-scene floating HUD, six independently authored finite layouts, LedgeHang/mantle, wall rebound and buffered landing Roll are implemented. Shared optional sceneTraversal data, surface modes, socket-referenced checkpoints and qualified recordings are specified in [current campaign/actions](../../Current/campaign-and-scene-actions.md). Endless generation and final original animation remain pending.

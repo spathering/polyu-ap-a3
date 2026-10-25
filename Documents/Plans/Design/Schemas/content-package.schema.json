@@ -1,11 +1,11 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "title": "Parkour content package",
-  "description": "Shared game/editor structural contract; scene action markers reference geometry rather than copy it.",
+  "description": "Shared game/editor contract: atomic modules, derived occupied space and automatic block traversal.",
   "type": "object",
   "properties": {
     "schemaVersion": {
-      "const": "1.2.0"
+      "const": "1.3.0"
     },
     "contentRevision": {
       "type": "string",
@@ -47,6 +47,13 @@
       "type": "array",
       "items": {
         "$ref": "#/$defs/endlessPreset"
+      },
+      "minItems": 1
+    },
+    "scenePerformances": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/scenePerformance"
       },
       "minItems": 1
     }
@@ -114,7 +121,11 @@
           "dashGrapple",
           "swingGrapple",
           "zipline",
-          "jumpPad"
+          "jumpPad",
+          "climb",
+          "wallJump",
+          "ledgeGrab",
+          "roll"
         ]
       },
       "minItems": 0,
@@ -322,6 +333,15 @@
             "reactionBudgetSeconds": {
               "type": "number",
               "exclusiveMinimum": 0
+            },
+            "velocitySmoothingSeconds": {
+              "type": "number",
+              "exclusiveMinimum": 0
+            },
+            "followAcceleration": {
+              "type": "number",
+              "exclusiveMinimum": 0,
+              "maximum": 1000
             }
           },
           "required": [
@@ -338,7 +358,8 @@
             "minViewHeight",
             "maxViewHeight",
             "zoomSmoothingSeconds",
-            "reactionBudgetSeconds"
+            "reactionBudgetSeconds",
+            "velocitySmoothingSeconds"
           ],
           "additionalProperties": false
         },
@@ -375,6 +396,172 @@
         },
         "gripOffset": {
           "$ref": "#/$defs/vec2"
+        },
+        "climbMaxHeight": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        },
+        "climbDurationSeconds": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        },
+        "climbTrajectory": {
+          "type": "array",
+          "minItems": 2,
+          "items": {
+            "type": "array",
+            "prefixItems": [
+              {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 1
+              },
+              {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 1
+              },
+              {
+                "type": "number",
+                "minimum": 0
+              }
+            ],
+            "items": false,
+            "minItems": 3,
+            "maxItems": 3
+          }
+        },
+        "contextApproachSeconds": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        },
+        "actionRecoverySeconds": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        },
+        "actionChainWindowSeconds": {
+          "type": "number",
+          "minimum": 0
+        },
+        "sceneTraversal": {
+          "type": "object",
+          "properties": {
+            "reach": {
+              "type": "number",
+              "exclusiveMinimum": 0
+            },
+            "hangGripHeight": {
+              "type": "number",
+              "exclusiveMinimum": 0
+            },
+            "catchTolerance": {
+              "type": "number",
+              "exclusiveMinimum": 0
+            },
+            "maxHangSeconds": {
+              "type": "number",
+              "exclusiveMinimum": 0
+            },
+            "mantleSeconds": {
+              "type": "number",
+              "exclusiveMinimum": 0
+            },
+            "regrabSeconds": {
+              "type": "number",
+              "exclusiveMinimum": 0
+            },
+            "rollBufferSeconds": {
+              "type": "number",
+              "exclusiveMinimum": 0
+            },
+            "rollMinImpact": {
+              "type": "number",
+              "exclusiveMinimum": 0
+            },
+            "rollSeconds": {
+              "type": "number",
+              "exclusiveMinimum": 0
+            },
+            "rollSpeed": {
+              "type": "number",
+              "exclusiveMinimum": 0
+            },
+            "wallJumpVelocity": {
+              "$ref": "#/$defs/vec2"
+            },
+            "dropVelocity": {
+              "$ref": "#/$defs/vec2"
+            },
+            "mantleTrajectory": {
+              "type": "array",
+              "minItems": 2,
+              "items": {
+                "type": "array",
+                "prefixItems": [
+                  {
+                    "type": "number",
+                    "minimum": 0,
+                    "maximum": 1
+                  },
+                  {
+                    "type": "number",
+                    "minimum": 0,
+                    "maximum": 1
+                  },
+                  {
+                    "type": "number",
+                    "minimum": 0
+                  }
+                ],
+                "items": false,
+                "minItems": 3,
+                "maxItems": 3
+              }
+            }
+          },
+          "required": [
+            "reach",
+            "hangGripHeight",
+            "catchTolerance",
+            "maxHangSeconds",
+            "mantleSeconds",
+            "regrabSeconds",
+            "rollBufferSeconds",
+            "rollMinImpact",
+            "rollSeconds",
+            "rollSpeed",
+            "wallJumpVelocity",
+            "dropVelocity",
+            "mantleTrajectory"
+          ],
+          "additionalProperties": false
+        },
+        "performanceByKind": {
+          "type": "object",
+          "properties": {
+            "jump": {
+              "$ref": "#/$defs/id"
+            },
+            "slide": {
+              "$ref": "#/$defs/id"
+            },
+            "vault": {
+              "$ref": "#/$defs/id"
+            },
+            "climb": {
+              "$ref": "#/$defs/id"
+            },
+            "dashGrapple": {
+              "$ref": "#/$defs/id"
+            },
+            "swingGrapple": {
+              "$ref": "#/$defs/id"
+            },
+            "zipline": {
+              "$ref": "#/$defs/id"
+            }
+          },
+          "additionalProperties": false
         }
       },
       "required": [
@@ -406,7 +593,13 @@
         "camera",
         "contextInputSeconds",
         "vaultTrajectory",
-        "gripOffset"
+        "gripOffset",
+        "climbMaxHeight",
+        "climbDurationSeconds",
+        "climbTrajectory",
+        "contextApproachSeconds",
+        "actionRecoverySeconds",
+        "actionChainWindowSeconds"
       ],
       "additionalProperties": false
     },
@@ -590,6 +783,15 @@
             },
             "vaultable": {
               "type": "boolean"
+            },
+            "traversal": {
+              "enum": [
+                "none",
+                "auto",
+                "ledge",
+                "wall",
+                "wall-ledge"
+              ]
             }
           },
           "required": [
@@ -848,22 +1050,6 @@
         "id": {
           "$ref": "#/$defs/id"
         },
-        "size": {
-          "type": "array",
-          "prefixItems": [
-            {
-              "type": "number",
-              "exclusiveMinimum": 0
-            },
-            {
-              "type": "number",
-              "exclusiveMinimum": 0
-            }
-          ],
-          "items": false,
-          "minItems": 2,
-          "maxItems": 2
-        },
         "difficulty": {
           "type": "integer",
           "minimum": 0
@@ -905,7 +1091,6 @@
       },
       "required": [
         "id",
-        "size",
         "difficulty",
         "tags",
         "entities",
@@ -1151,7 +1336,8 @@
             "dashGrapple",
             "swingGrapple",
             "zipline",
-            "jumpPad"
+            "jumpPad",
+            "climb"
           ]
         },
         "input": {
@@ -1187,6 +1373,12 @@
         },
         "heightRange": {
           "$ref": "#/$defs/vec2"
+        },
+        "performanceId": {
+          "$ref": "#/$defs/id"
+        },
+        "required": {
+          "type": "boolean"
         }
       },
       "required": [
@@ -1200,6 +1392,261 @@
         "lateDistance",
         "priority",
         "heightRange"
+      ],
+      "additionalProperties": false
+    },
+    "scenePerformance": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/id"
+        },
+        "kind": {
+          "enum": [
+            "jump",
+            "slide",
+            "vault",
+            "climb",
+            "dashGrapple",
+            "swingGrapple",
+            "zipline"
+          ]
+        },
+        "anticipationSeconds": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        },
+        "timelyEndOffset": {
+          "type": "number",
+          "maximum": 0
+        },
+        "missSeconds": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        },
+        "lateJumpScale": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        },
+        "camera": {
+          "type": "object",
+          "properties": {
+            "blendSeconds": {
+              "type": "number",
+              "exclusiveMinimum": 0
+            },
+            "releaseSeconds": {
+              "type": "number",
+              "exclusiveMinimum": 0
+            },
+            "heightScale": {
+              "type": "number",
+              "exclusiveMinimum": 0
+            },
+            "knots": {
+              "type": "array",
+              "minItems": 2,
+              "items": {
+                "type": "array",
+                "prefixItems": [
+                  {
+                    "type": "number",
+                    "minimum": 0,
+                    "maximum": 1
+                  },
+                  {
+                    "type": "number",
+                    "minimum": 0,
+                    "maximum": 1
+                  },
+                  {
+                    "type": "number",
+                    "minimum": 0
+                  }
+                ],
+                "items": false,
+                "minItems": 3,
+                "maxItems": 3
+              }
+            }
+          },
+          "required": [
+            "blendSeconds",
+            "releaseSeconds",
+            "heightScale",
+            "knots"
+          ],
+          "additionalProperties": false
+        },
+        "variants": {
+          "type": "object",
+          "properties": {
+            "timely": {
+              "type": "object",
+              "properties": {
+                "sequence": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "durationScale": {
+                  "type": "number",
+                  "exclusiveMinimum": 0
+                },
+                "lockInput": {
+                  "type": "boolean"
+                },
+                "cameraKnots": {
+                  "type": "array",
+                  "minItems": 2,
+                  "items": {
+                    "type": "array",
+                    "prefixItems": [
+                      {
+                        "type": "number",
+                        "minimum": 0,
+                        "maximum": 1
+                      },
+                      {
+                        "type": "number",
+                        "minimum": 0,
+                        "maximum": 1
+                      },
+                      {
+                        "type": "number",
+                        "minimum": 0
+                      }
+                    ],
+                    "items": false,
+                    "minItems": 3,
+                    "maxItems": 3
+                  }
+                }
+              },
+              "required": [
+                "sequence",
+                "durationScale",
+                "lockInput"
+              ],
+              "additionalProperties": false
+            },
+            "late": {
+              "type": "object",
+              "properties": {
+                "sequence": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "durationScale": {
+                  "type": "number",
+                  "exclusiveMinimum": 0
+                },
+                "lockInput": {
+                  "type": "boolean"
+                },
+                "cameraKnots": {
+                  "type": "array",
+                  "minItems": 2,
+                  "items": {
+                    "type": "array",
+                    "prefixItems": [
+                      {
+                        "type": "number",
+                        "minimum": 0,
+                        "maximum": 1
+                      },
+                      {
+                        "type": "number",
+                        "minimum": 0,
+                        "maximum": 1
+                      },
+                      {
+                        "type": "number",
+                        "minimum": 0
+                      }
+                    ],
+                    "items": false,
+                    "minItems": 3,
+                    "maxItems": 3
+                  }
+                }
+              },
+              "required": [
+                "sequence",
+                "durationScale",
+                "lockInput"
+              ],
+              "additionalProperties": false
+            },
+            "missed": {
+              "type": "object",
+              "properties": {
+                "sequence": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "durationScale": {
+                  "type": "number",
+                  "exclusiveMinimum": 0
+                },
+                "lockInput": {
+                  "type": "boolean"
+                },
+                "cameraKnots": {
+                  "type": "array",
+                  "minItems": 2,
+                  "items": {
+                    "type": "array",
+                    "prefixItems": [
+                      {
+                        "type": "number",
+                        "minimum": 0,
+                        "maximum": 1
+                      },
+                      {
+                        "type": "number",
+                        "minimum": 0,
+                        "maximum": 1
+                      },
+                      {
+                        "type": "number",
+                        "minimum": 0
+                      }
+                    ],
+                    "items": false,
+                    "minItems": 3,
+                    "maxItems": 3
+                  }
+                }
+              },
+              "required": [
+                "sequence",
+                "durationScale",
+                "lockInput"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "required": [
+            "timely",
+            "late",
+            "missed"
+          ],
+          "additionalProperties": false
+        },
+        "playSeconds": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        }
+      },
+      "required": [
+        "id",
+        "kind",
+        "anticipationSeconds",
+        "timelyEndOffset",
+        "missSeconds",
+        "lateJumpScale",
+        "camera",
+        "variants"
       ],
       "additionalProperties": false
     }

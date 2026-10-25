@@ -1,5 +1,8 @@
 # Level editor requirements
 
+Implementation correction, **25 October 2026**: marked units now prepare all three timing outcomes before input, confirm once, wait for outcome-specific playback slots and use a scene/time camera rather than root-driven following. Optional `scenePerformances`, marker `performanceId`/`required` and `rules.performanceByKind` extend shared 1.3.0 authoring. Runtime/editor use the same validated recipes; older packages retain legacy behavior. The authoritative implemented scope is [scene choreography](../../Current/scene-choreography.md).
+
+
 Status, **25 October 2026**: finite-layout and shared-prefab authoring implemented in [Level Studio](../../Current/level-editor.md). This document retains the complete target contract; endless-preview and advanced witness/route tools remain planned. Related: [product requirements](../Requirements/game-requirements.md), [data contract](level-data-and-generation.md), [SSOT](data-driven-architecture.md).
 
 ## Workspaces and layout
@@ -59,3 +62,9 @@ Initial interface should favour necessary authoring tools over a general scene e
 ## Implemented subset and remaining acceptance
 
 ED-01 covers finite/prefab selection, creation and validated undoable package import/export; preset workspace remains pending. ED-02 provides scene gestures, typed rectangle dimensions and batch transforms. ED-03 provides geometry/profile fields plus validated advanced module JSON for markers/sockets/routes; dedicated rules/profile/route graphical tools remain pending. ED-04 provides socket append/alignment and seam warnings. ED-05 provides atomic edits with reference cleanup/protection. ED-06 provides visible local save status and explicit recovery, but no persistent UI/undo history or last-export checkpoint comparison. ED-07 provides shared path/semantic errors and warnings, without error-to-object selection. ED-08 runs full layout, selected start and isolated prefab tests on frozen snapshots through production classes, restoring untouched editor state. ED-09 and ED-10 remain pending. No seed preview or reachability proof is implied.
+
+## Small-module implementation, 25 October 2026
+
+Native library drag/drop, entry ghosts and exact coordinate placement are implemented. B draws terrain in layout/shared-prefab mode; H/H2/H4 grid values derive from climb height, and strokes show an actor ruler. Occupied boxes derive from actual geometry plus intended approach/action/recovery; no fixed size field remains. ED-03 surface controls include automatic vault/climb selection; ED-08 preserves placed context or labels temporary practice floors. Explicit 1.2-to-1.3 file/recovery conversion is undoable. Reachability certification and endless/witness workspaces remain pending. See [delivered behavior](../../Current/micro-modules-and-terrain.md).
+
+Current extension: full-scene floating HUD, six independently authored finite layouts, LedgeHang/mantle, wall rebound and buffered landing Roll are implemented. Shared optional sceneTraversal data, surface modes, socket-referenced checkpoints and qualified recordings are specified in [current campaign/actions](../../Current/campaign-and-scene-actions.md). Endless generation and final original animation remain pending.

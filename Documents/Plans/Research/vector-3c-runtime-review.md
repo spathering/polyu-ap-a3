@@ -1,0 +1,18 @@
+# Vector public-browser 3C: second implementation pass
+
+Reviewed **25 October 2026**. Sources: [official entry](https://vector.game/zh-Hans/), public [player](https://vector.game/game/player.js), [moves](https://vector.game/game/moves.json), [camera](https://vector.game/game/camera.js), [camera view](https://vector.game/game/camera-view.js) and [input pad](https://vector.game/game/pad.js). Exact byte counts/SHA-256 are in the [receipt](VectorAssets/runtime-3c-review-2026-10-25.json). Re-fetched player/moves match the previous archive byte-for-byte. Camera/view/pad paths were discovered in actual public level imports. An initial camera read returned 403; ordinary browser User-Agent and same-site Referer headers succeeded.
+
+| Area | Observed public-runtime evidence | Application here |
+|---|---|---|
+| Action selection | `ft` filters by trigger, contact/inside state, slope and `Kn` dimension/relative-position/relative-velocity conditions; priority wins, prior trigger breaks ties. | Keep marker identity/priority, shape constraints and now swept approach eligibility. |
+| Detection/contact | `Kt`/`Gt` derive horizontal/vertical detector nodes with velocity anticipation. `dt` resolves the confirmed wall corner before `K` switches moves. | Keep geometry-owned alignment planes and metric body sweeps; an intervening wall must hide the unreachable contextual obstacle. This does not copy pose-node detector code. |
+| Transition | `S` retains two previous poses, selects the new pivot, optionally aligns named nodes and supports entry-velocity warp. `K` handles delayed end-trigger and stitch intervals. | Extend single-offset visual correction with bounded preceding-pose velocity and Hermite decay; hand/grip lock wins. Physics continues to own root movement. |
+| Camera | `makeCamera` retains a vector velocity. Each fixed step computes a change from target displacement, position error and current velocity, caps its magnitude, caps speed and integrates. Zoom uses a 30-step easing interval. `moves.config.Camera` specifies MinZoom .1, MaxZoom 1.3, CurrZoom .5, MaxSpeed 50, Fluency 2. | Reimplement velocity/acceleration-limited following in metres/seconds with small substeps; preserve our prediction, attachment framing and visibility guards. Source pixel/step constants are not copied into metric rules. |
+| Display camera | `camera-view.js` adds a separate bounded two-axis display offset with direction-sensitive filtering. | Keep presentation separate from authoritative motion. Do not stack another source filter onto existing interpolation without evidence it helps. |
+| Input | Player key lifetime and pad press accounting are separate from animation transitions; pad includes trigger-aware left/right/trick affordances. | Preserve semantic edges/holds and focus cleanup. Our four additional traversal mechanics and bindings remain project decisions. |
+
+These are public-browser findings, not private mobile/native code access. Original player/camera/parser/painter code is not imported into the runtime. Our raster pipeline does not reproduce the reference's full skeletal deformation, pose-node detection, ragdoll or move catalogue. Metre scale, terrain brush, added mechanics and challenge composition are our designs.
+
+Current follow acceleration is content-owned (72 m/s²). Existing 1.3 packages without this optional parameter derive a bound from existing speed/response rules. Pause freezes; retry clears camera momentum. Visibility guards may override acceleration to keep the body/attachment on screen.
+
+See [implemented 3C](../../Current/reference-driven-3c.md), [game flow](../../Current/game-flow.md) and the [preceding phase/contact review](vector-context-and-micro-modules.md).

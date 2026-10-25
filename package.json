@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "type": "module",
-  "description": "Data-driven parkour character and camera test circuit",
+  "description": "Data-driven parkour game with campaign, training and a separate editor workspace",
   "scripts": {
     "dev": "node tools/serve.mjs",
     "check": "node tools/check-content.mjs",

@@ -34,11 +34,17 @@ export function validateContent(content,schema,lab){
  const errors=validateSchema(content,schema),r=content.rules;if(errors.length)return errors;
  const ids=(list,label)=>{const seen=new Set();for(const x of list){if(seen.has(x.id))errors.push(`Duplicate ${label}: ${x.id}`);seen.add(x.id);}return seen;};
  const profiles=new Map(content.profiles.map(p=>[p.id,p]));ids(content.profiles,'profile');ids(content.modules,'module');ids(content.finiteLevels,'level');
+ ids(content.scenePerformances||[],'scene performance');const performanceById=new Map((content.scenePerformances||[]).map(p=>[p.id,p]));
+ for(const [kind,id]of Object.entries(r.performanceByKind||{}))if(performanceById.get(id)?.kind!==kind)errors.push(`Invalid default scene performance ${kind}`);
+ for(const p of content.scenePerformances||[])for(const [name,k]of [['base',p.camera.knots],...Object.entries(p.variants).filter(([,v])=>v.cameraKnots).map(([name,v])=>[name,v.cameraKnots])])if(k[0][0]!==0||k.at(-1)[0]!==1||k.some((v,i)=>i&&v[0]<=k[i-1][0]))errors.push(`Invalid scene camera track ${p.id}/${name}`);
  const c=r.camera;if(!(c.minViewHeight<=c.baseViewHeight&&c.baseViewHeight<=c.maxViewHeight))errors.push('Camera view height order');
  if(c.minLookAhead>c.maxLookAhead)errors.push('Camera lookahead order');
  if(c.maxCatchUpSpeed<r.maxHorizontalSpeed)errors.push('Camera catch-up must cover speed cap');
  if(r.slideBodySize[1]>=r.bodySize[1])errors.push('Crouched body must be shorter');
+ if(r.enabledAbilities.some(a=>['wallJump','ledgeGrab','roll'].includes(a))&&!r.sceneTraversal)errors.push('Scene traversal abilities require sceneTraversal rules');
+ if(r.sceneTraversal){const t=r.sceneTraversal,k=t.mantleTrajectory;if(t.hangGripHeight>=r.bodySize[1]||t.wallJumpVelocity[0]>=0||t.wallJumpVelocity[1]<=0||t.dropVelocity[1]>0)errors.push('Invalid wall/ledge motion limits');if(k[0].some(v=>v!==0)||k.at(-1).some(v=>v!==1)||k.some((v,i)=>i&&(v[0]<=k[i-1][0]||v[1]<k[i-1][1])))errors.push('Invalid mantle trajectory order/endpoints');}
  const knots=r.vaultTrajectory;if(knots[0][0]!==0||knots.at(-1)[0]!==1||knots[0][1]!==0||knots.at(-1)[1]!==1||knots[0][2]!==0||knots.at(-1)[2]!==0||knots.some((k,i)=>i&&(k[0]<=knots[i-1][0]||k[1]<knots[i-1][1])))errors.push('Invalid vault trajectory order/endpoints');
+ const climb=r.climbTrajectory;if(climb[0][0]!==0||climb[0][1]!==0||climb[0][2]!==0||climb.at(-1).some(v=>v!==1)||climb.some((k,i)=>i&&(k[0]<=climb[i-1][0]||k[1]<climb[i-1][1])))errors.push('Invalid climb trajectory order/endpoints');
  const keys=new Set(),actions=new Set();for(const b of r.bindings){if(actions.has(b.action))errors.push('Duplicate action binding');actions.add(b.action);for(const k of b.keys){if(keys.has(k))errors.push(`Key conflict ${k}`);keys.add(k);}}
  for(const p of content.profiles)if(p.kind==='swingGrapple'&&p.minLength>p.maxLength)errors.push('Rope length order');
  for(const m of content.modules){
@@ -47,7 +53,9 @@ export function validateContent(content,schema,lab){
   for(const role of ['entry','exit'])if(!m.sockets.some(s=>s.role===role))errors.push(`Missing ${role} socket in ${m.id}`);
   for(const s of m.sockets)for(const key of ['vxRange','vyRange'])if(s.contract[key][0]>s.contract[key][1])errors.push(`Invalid socket ${key}: ${m.id}/${s.id}`);
   ids(m.sceneActions||[],`${m.id} action marker`);
-  for(const a of m.sceneActions||[]){const e=m.entities.find(e=>e.id===a.entityId);if(!e||!(a.kind==='vault'?e.kind==='surface'&&e.vaultable:a.kind==='slide'||a.kind==='jump'?e.kind==='surface':a.kind==='jumpPad'?e.kind==='jumpPad':a.kind==='zipline'?e.kind==='zipline':e.kind==='anchor'&&profiles.get(e.profileId)?.kind===a.kind))errors.push(`Invalid scene action reference ${a.id}`);if(a.heightRange[0]>=a.heightRange[1])errors.push(`Invalid scene action height range ${a.id}`);if(a.input!==(a.kind==='vault'?'jump':a.kind==='jumpPad'?'automatic':a.kind))errors.push(`Scene action/input mismatch ${a.id}`);if(a.input!=='automatic'&&!r.bindings.some(b=>b.action===a.input))errors.push(`Unbound scene action ${a.id}`);}
+  for(const a of m.sceneActions||[])if(a.performanceId&&performanceById.get(a.performanceId)?.kind!==a.kind)errors.push(`Invalid scene performance reference ${m.id}/${a.id}`);
+  if((m.sceneActions||[]).every(a=>m.entities.some(e=>e.id===a.entityId)))ids(compileSceneActions(m,{id:'check',position:[0,0]},m.entities.map(e=>({...e,id:`check/${e.id}`})),r),`${m.id} compiled action marker`);
+  for(const a of m.sceneActions||[]){const e=m.entities.find(e=>e.id===a.entityId);if(!e||!(a.kind==='vault'?e.kind==='surface'&&(e.vaultable||e.traversal==='auto'):['slide','jump','climb'].includes(a.kind)?e.kind==='surface':a.kind==='jumpPad'?e.kind==='jumpPad':a.kind==='zipline'?e.kind==='zipline':e.kind==='anchor'&&profiles.get(e.profileId)?.kind===a.kind))errors.push(`Invalid scene action reference ${a.id}`);if(a.heightRange[0]>=a.heightRange[1])errors.push(`Invalid scene action height range ${a.id}`);if(a.input!==(['vault','climb'].includes(a.kind)?'jump':a.kind==='jumpPad'?'automatic':a.kind))errors.push(`Scene action/input mismatch ${a.id}`);if(a.input!=='automatic'&&!r.bindings.some(b=>b.action===a.input))errors.push(`Unbound scene action ${a.id}`);}
   for(const e of m.entities){if(e.profileId){const p=profiles.get(e.profileId);if(!p||!(e.kind==='anchor'?['dashGrapple','swingGrapple'].includes(p.kind):p.kind===e.kind))errors.push(`Profile mismatch ${m.id}/${e.id}`);}
    if(e.points)for(let i=1;i<e.points.length;i++)if(Math.hypot(e.points[i][0]-e.points[i-1][0],e.points[i][1]-e.points[i-1][1])<r.collisionSkin)errors.push(`Degenerate cable ${e.id}`);
   }
@@ -68,10 +76,11 @@ export function validateContent(content,schema,lab){
  return errors;
 }
 export function deepFreeze(v){if(v&&typeof v==='object'&&!Object.isFrozen(v)){Object.freeze(v);Object.values(v).forEach(deepFreeze);}return v;}
+export function resolveSocket(content,level,ref){const ins=level.instances.find(i=>i.id===ref.instanceId),module=content.modules.find(m=>m.id===ins?.moduleId),socket=module?.sockets.find(s=>s.id===ref.socketId);if(!socket)throw Error(`Missing socket ${ref.instanceId}/${ref.socketId}`);return socket.position.map((v,k)=>v+ins.position[k]);}
 export function compileWorld(content,lab){
  const level=content.finiteLevels.find(l=>l.id===lab.levelId),profiles=new Map(content.profiles.map(p=>[p.id,p])),entities=[];
  for(const ins of level.instances){const m=content.modules.find(m=>m.id===ins.moduleId),[x,y]=ins.position;for(const e of m.entities){const v={...e,id:`${ins.id}/${e.id}`,localId:e.id};if(e.rect)v.rect=[e.rect[0]+x,e.rect[1]+y,...e.rect.slice(2)];if(e.position)v.position=[e.position[0]+x,e.position[1]+y];if(e.points){v.points=e.points.map(p=>[p[0]+x,p[1]+y]);v.lengths=[];v.totalLength=0;for(let i=1;i<v.points.length;i++){const n=Math.hypot(v.points[i][0]-v.points[i-1][0],v.points[i][1]-v.points[i-1][1]);v.lengths.push(n);v.totalLength+=n;}}if(v.profileId)v.profile=profiles.get(v.profileId);entities.push(v);}}
- const endpoint=ref=>{const ins=level.instances.find(i=>i.id===ref.instanceId),module=content.modules.find(m=>m.id===ins.moduleId),socket=module.sockets.find(s=>s.id===ref.socketId);return [ins.position[0]+socket.position[0],ins.position[1]+socket.position[1]];};
- const sceneActions=level.instances.flatMap(ins=>compileSceneActions(content.modules.find(m=>m.id===ins.moduleId),ins,entities));
+ const endpoint=ref=>resolveSocket(content,level,ref);
+ const sceneActions=level.instances.flatMap(ins=>compileSceneActions(content.modules.find(m=>m.id===ins.moduleId),ins,entities,content.rules,content.scenePerformances||[]));
  return deepFreeze({entities,sceneActions,spawn:endpoint(level.spawn),finish:endpoint(level.finish),surfaces:entities.filter(e=>e.kind==='surface'),hazards:entities.filter(e=>e.kind==='hazard'),anchors:entities.filter(e=>e.kind==='anchor'),cables:entities.filter(e=>e.kind==='zipline'),pads:entities.filter(e=>e.kind==='jumpPad')});
 }

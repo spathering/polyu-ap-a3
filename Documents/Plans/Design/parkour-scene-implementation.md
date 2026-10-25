@@ -1,5 +1,8 @@
 # Parkour actions and scene implementation
 
+Implementation correction, **25 October 2026**: marked units now prepare all three timing outcomes before input, confirm once, wait for outcome-specific playback slots and use a scene/time camera rather than root-driven following. Optional `scenePerformances`, marker `performanceId`/`required` and `rules.performanceByKind` extend shared 1.3.0 authoring. Runtime/editor use the same validated recipes; older packages retain legacy behavior. The authoritative implemented scope is [scene choreography](../../Current/scene-choreography.md).
+
+
 **Implementation update, 24 October 2026:** baseline movement, four traversal additions, camera, semantic input, an authored circuit and prepared sprite mapping are implemented in the [character lab](../../Current/character-lab.md). See actual paths/owners in [modules](../../Current/modules.md). 66 tests pass; 15 rehearsals cover 26/26 events. This document retains the broader product contract; the editor, endless generation, streaming qualification and production animation blending remain pending.
 
 Status: broader design proposal; baseline recipes implemented in the character lab. This document owns action-to-geometry recipes; [3C](three-c-design.md) owns feel/framing/input intent and the [state machine](character-state-machine.md) owns transitions. Shared fields are defined once in the [content schema](Schemas/content-package.schema.json).
@@ -103,3 +106,9 @@ Required regression cases include thin walls, one-way upward/downward crossings,
 ## Scene synchronization revision, 24 October 2026
 
 The shared contract is now 1.2.0, adding scene markers, context-input lifetime, grip offset and normalized vault trajectory. The previous 1.1.0 pair is archived locally. Space queues a vault in a matching approach and executes after start-plane validation, superseding the earlier automatic-vault assumption; normal jumping remains outside a matching context. Actual owners, reference evidence, smoothed assets and checks are in [current scene synchronization](../../Current/scene-action-synchronization.md).
+
+## 25 October implementation note
+
+The [small-module revision](../../Current/micro-modules-and-terrain.md) implements grounded low-ledge climb as a mode of the single Vault owner, relative-height/clearance checks, end-of-action queued intent, captured-target stability, real traversal velocity, stable camera focus/prediction and phase-matched run recovery. Schema 1.3 also derives block detectors and intended occupied space from shared data. This adds no full high-wall/wall-run system or seeded generator.
+
+Current extension: full-scene floating HUD, six independently authored finite layouts, LedgeHang/mantle, wall rebound and buffered landing Roll are implemented. Shared optional sceneTraversal data, surface modes, socket-referenced checkpoints and qualified recordings are specified in [current campaign/actions](../../Current/campaign-and-scene-actions.md). Endless generation and final original animation remain pending.

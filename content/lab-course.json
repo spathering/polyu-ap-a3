@@ -62,7 +62,11 @@
         "ActionQueued",
         "ActionAligned",
         "Vault",
-        "Land"
+        "Land",
+        "SceneMatched",
+        "SceneTimely",
+        "SceneLate",
+        "SceneMissed"
       ],
       "cueX": 69
     },
@@ -295,6 +299,22 @@
     {
       "id": "ActionCancelled",
       "label": "Queue cancelled"
+    },
+    {
+      "id": "SceneMatched",
+      "label": "Scene prepared"
+    },
+    {
+      "id": "SceneTimely",
+      "label": "Timely input"
+    },
+    {
+      "id": "SceneLate",
+      "label": "Late input"
+    },
+    {
+      "id": "SceneMissed",
+      "label": "No input"
     }
   ],
   "witnesses": [
@@ -304,7 +324,7 @@
       "frames": 220,
       "actions": [
         {
-          "frame": 98,
+          "frame": 93,
           "action": "jump",
           "phase": "press"
         }
@@ -323,7 +343,7 @@
       "frames": 220,
       "actions": [
         {
-          "frame": 42,
+          "frame": 38,
           "action": "slide",
           "phase": "press"
         }
@@ -570,15 +590,15 @@
     {
       "id": "full-loop",
       "stationId": "jump",
-      "frames": 2897,
+      "frames": 2898,
       "actions": [
         {
-          "frame": 98,
+          "frame": 93,
           "action": "jump",
           "phase": "press"
         },
         {
-          "frame": 363,
+          "frame": 359,
           "action": "slide",
           "phase": "press"
         },
@@ -685,6 +705,53 @@
       "expect": [
         "ActionQueued",
         "ActionCancelled"
+      ]
+    },
+    {
+      "id": "timing-vault-timely",
+      "stationId": "vault",
+      "frames": 180,
+      "actions": [
+        {
+          "frame": 32,
+          "action": "jump",
+          "phase": "press"
+        }
+      ],
+      "expect": [
+        "SceneMatched",
+        "SceneTimely",
+        "Vault",
+        "Land"
+      ]
+    },
+    {
+      "id": "timing-vault-late",
+      "stationId": "vault",
+      "frames": 180,
+      "actions": [
+        {
+          "frame": 41,
+          "action": "jump",
+          "phase": "press"
+        }
+      ],
+      "expect": [
+        "SceneMatched",
+        "SceneLate",
+        "Vault",
+        "Land"
+      ]
+    },
+    {
+      "id": "timing-vault-missed",
+      "stationId": "vault",
+      "frames": 79,
+      "actions": [],
+      "expect": [
+        "SceneMatched",
+        "SceneMissed",
+        "Failed"
       ]
     }
   ],

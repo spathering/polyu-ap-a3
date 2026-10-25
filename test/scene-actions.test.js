@@ -18,8 +18,8 @@ test('early vault input waits while running, then starts at the geometry-derived
 test('a block never starts a vault without a deliberate input',()=>{
  const s=fresh();s.reset(2);for(let i=0;i<150;i++)s.step();assert.equal(s.coverage.Vault,undefined);assert.ok(s.p.x<71);
 });
-test('an early request expires without playing or falling back to a delayed jump',()=>{
- const c=structuredClone(content);c.rules.groundAcceleration=.01;const s=new Simulation(c,lab);s.reset(2);s.p.x=67.3;s.step({pressed:['jump']});assert.ok(s.pendingAction);for(let i=0;i<40;i++)s.step();assert.equal(s.pendingAction,null);assert.equal(s.coverage.ActionCancelled,1);assert.equal(s.coverage.Jump,undefined);assert.equal(s.coverage.Vault,undefined);
+test('a confirmed scene signal waits for its playback window instead of expiring as a free-jump buffer',()=>{
+ const c=structuredClone(content);c.rules.groundAcceleration=.01;const s=new Simulation(c,lab);s.reset(2);s.p.x=67.3;s.step({pressed:['jump']});assert.ok(s.pendingAction);for(let i=0;i<40;i++)s.step();assert.ok(s.pendingAction);assert.equal(s.pendingAction.performanceOutcome,'timely');assert.equal(s.coverage.Jump,undefined);assert.equal(s.coverage.Vault,undefined);s.p.x=s.world.sceneActions.find(m=>m.id===s.pendingAction.markerId).startX;s.step();assert.equal(s.p.state,'Vault');
 });
 test('captured marker identity is revalidated instead of switching to a new scene action',()=>{
  const s=fresh();s.reset(2);s.p.x=68;s.step({pressed:[{action:'jump',markerId:'another/marker'}]});assert.equal(s.coverage.Rejected,1);assert.equal(s.pendingAction,null);assert.equal(s.coverage.Jump,undefined);
@@ -31,7 +31,7 @@ test('pause and retry clear queued context input',()=>{
  const s=fresh();s.reset(2);s.p.x=68;s.step({pressed:['jump']});s.pause();assert.equal(s.pendingAction,null);s.resume();s.step({pressed:['jump']});assert.ok(s.pendingAction);s.retry();assert.equal(s.pendingAction,null);
 });
 test('moving referenced geometry moves the mark without editing another coordinate',()=>{
- const c=structuredClone(content),e=c.modules.find(m=>m.id==='unit-vault').entities.find(e=>e.id==='vault-block');e.rect[0]+=1.5;const s=new Simulation(c,lab),m=s.world.sceneActions.find(m=>m.kind==='vault');assert.equal(m.startX,64+e.rect[0]+c.modules.find(m=>m.id==='unit-vault').sceneActions.find(m=>m.kind==='vault').startOffset);
+ const c=structuredClone(content),e=c.modules.find(m=>m.id==='unit-vault').entities.find(e=>e.id==='vault-block');e.rect[0]+=1.5;const s=new Simulation(c,lab),m=s.world.sceneActions.find(m=>m.kind==='vault');assert.equal(m.startX,c.finiteLevels[0].instances.find(i=>i.moduleId==='unit-vault').position[0]+e.rect[0]+c.modules.find(m=>m.id==='unit-vault').sceneActions.find(m=>m.kind==='vault').startOffset);
 });
 test('invalid marker references and unordered action trajectories fail content validation',()=>{
  for(const mutate of [c=>c.modules[0].sceneActions[0].entityId='missing',c=>c.rules.vaultTrajectory[2][0]=.1,c=>c.modules[0].sceneActions.push({...c.modules[0].sceneActions[0]})]){const c=structuredClone(content);mutate(c);assert.ok(validateContent(c,schema,lab).length);}
@@ -63,5 +63,5 @@ test('vault hand placement reaches the obstacle contact during its locked phase'
  const snap=s.snapshot();snap.player.context.contact[0]+=100;assert.notEqual(s.p.context.contact[0],snap.player.context.contact[0]);
 });
 test('zipline attachment constrains the authoritative grip, independently of sprite proportions',()=>{
- const s=fresh();s.reset(5);s.p.x=165;s.p.y=1.7;s.p.state='Airborne';s.step({pressed:['zipline']});assert.equal(s.p.state,'Zipline');const cable=s.world.cables.find(e=>e.id===s.p.attachment.id),at=cableAt(cable,s.p.attachment.s).at;assert.ok(Math.hypot(s.grip()[0]-at[0],s.grip()[1]-at[1])<1e-8);
+ const s=fresh();s.reset(5);s.p.x=165;s.p.y=1.7;s.p.state='Airborne';assert.ok(s.acquire('zipline',{}));assert.equal(s.p.state,'Zipline');const cable=s.world.cables.find(e=>e.id===s.p.attachment.id),at=cableAt(cable,s.p.attachment.s).at;assert.ok(Math.hypot(s.grip()[0]-at[0],s.grip()[1]-at[1])<1e-8);
 });
