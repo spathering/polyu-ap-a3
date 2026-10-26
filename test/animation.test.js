@@ -9,14 +9,14 @@ const read=p=>JSON.parse(fs.readFileSync(new URL(p,import.meta.url)));
 const catalog=read('../assets/character/animations.json'),content=read('../content/parkour.json'),lab=read('../content/lab-course.json');
 const animation=new CharacterAnimation(catalog,content.rules);
 
-test('catalog ranges and crop rectangles fit prepared PNGs; generated sheets match provenance',()=>{
+test('all published atlas files exist, match hashes and contain every animation crop',()=>{
  for(const seq of Object.values(catalog.sequences)){
   const clip=catalog.clips.find(c=>c.id===seq.clip);assert.ok(clip);assert.ok(seq.fps>0);assert.ok(seq.range[0]>=0&&seq.range[1]<clip.frames.length);
  }
  for(const clip of catalog.clips){
   const dimensions=clip.sheets.map(sheet=>{
    const file=new URL('../'+sheet.file,import.meta.url);
-   if(!fs.existsSync(file)){assert.equal(clip.origin,'local-reference');return null;}
+   assert.ok(fs.existsSync(file),`Missing published atlas: ${sheet.file}`);
    const bytes=fs.readFileSync(file);assert.equal(createHash('sha256').update(bytes).digest('hex'),sheet.sha256);
    return [bytes.readUInt32BE(16),bytes.readUInt32BE(20)];
   });

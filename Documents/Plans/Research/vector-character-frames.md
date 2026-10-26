@@ -84,3 +84,7 @@ Primary sources: [game entry/configuration](https://vector.game/game/index.html)
 This extraction establishes the inspected browser build's asset representation and pose data. It does not establish mobile/Steam parity, complete runtime animation behaviour, or permission to redistribute these assets. The original reference bytes and derived images remain local research material, outside Git and Pages. Update, 24 October: selected derived frames now drive the local lab from ignored `assets/local-reference/`, without importing the original code. They remain excluded from Git and Pages. Dash grapple, swing grapple, zipline and jump pad still need our own animation design; similarly named source tricks do not prove those mechanics exist.
 
 The [3C](../Design/three-c-design.md), [state-machine](../Design/character-state-machine.md) and [scene recipes](../Design/parkour-scene-implementation.md) remain our proposed game design. Use these frames to study silhouette, anticipation, support and recovery without treating image bounds as authoritative collision geometry.
+
+## Runtime publication update, 26 October 2026
+
+The author explicitly requested publishing the already prepared runtime subset. Nineteen atlases (852 poses) are now tracked under `assets/character/reference/`, with Nekki / Vector credit and existing exact hashes/source ranges. The complete extraction, raw packs and parser/painter are not published. Earlier local-only statements apply to that original research phase and full archive. [Current release contract](../../Current/animation-assets.md).

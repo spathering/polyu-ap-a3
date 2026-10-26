@@ -1,6 +1,9 @@
 # Character 3C and looping test course
 
-Current motion revision: **`motion-run-07-directed` / `lab-06-directed`**. See [scene choreography](scene-choreography.md) for pre-input binding, timely/late/missed outcomes, directed camera and shared preset editing. Current totals: **153 tests, 24 recordings, 30/30 lab events; 852 local poses / 19 ignored pages plus three generated sheets**. Earlier increment counts below are historical.
+Current artwork, **26 October 2026**: [19 reference-derived atlases and three generated sheets](animation-assets.md) are bundled for local and public play. Earlier local-only/ignored-art descriptions and counts below describe prior increments.
+
+
+Current motion revision: **`motion-run-07-directed` / `lab-06-directed`**. See [scene choreography](scene-choreography.md) for pre-input binding, timely/late/missed outcomes, directed camera and shared preset editing. Current totals: **153 tests, 24 recordings, 30/30 lab events; 852 local poses / 19 bundled pages plus three generated sheets**. Earlier increment counts below are historical.
 
 
 Implemented **24 October 2026**. This is the current playable **laboratory prototype**, derived from the [3C](../Plans/Design/three-c-design.md), [state-machine](../Plans/Design/character-state-machine.md) and [scene](../Plans/Design/parkour-scene-implementation.md) designs. The final finite/endless game flow remains pending; the separate [Level Studio](level-editor.md) now provides finite/prefab authoring.

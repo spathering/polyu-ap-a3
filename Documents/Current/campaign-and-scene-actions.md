@@ -1,6 +1,9 @@
 # Full-scene play, six courses and scene traversal
 
-Current motion revision: **`motion-run-07-directed` / `lab-06-directed`**. See [scene choreography](scene-choreography.md) for pre-input binding, timely/late/missed outcomes, directed camera and shared preset editing. Current totals: **153 tests, 24 recordings, 30/30 lab events; 852 local poses / 19 ignored pages plus three generated sheets**. Earlier increment counts below are historical.
+Current artwork, **26 October 2026**: [19 reference-derived atlases and three generated sheets](animation-assets.md) are bundled for local and public play. Earlier local-only/ignored-art descriptions and counts below describe prior increments.
+
+
+Current motion revision: **`motion-run-07-directed` / `lab-06-directed`**. See [scene choreography](scene-choreography.md) for pre-input binding, timely/late/missed outcomes, directed camera and shared preset editing. Current totals: **153 tests, 24 recordings, 30/30 lab events; 852 local poses / 19 bundled pages plus three generated sheets**. Earlier increment counts below are historical.
 
 
 Implemented **25 October 2026**. The game has nine selectable entries: the original three training views plus six independently authored finite layouts. All six new courses have fixed semantic-input recordings that reach `Completed` with no failures using the production Simulation. These are automated rehearsals, not other-person usability trials.
@@ -51,7 +54,7 @@ stateDiagram-v2
 
 ## Presentation and verification
 
-The existing local research pipeline supplies `wall_jump` samples 27–45, a fixed `wall_cling` pose 41 for hang, `corner_cling_low` 12–32 for mantle and `landing_roll` 34–54. The initially tried high-corner entry was revised because its hand placement did not match a hanging start. Mantle support uses bounded wrist alignment from entry; hang uses exact wrist anchoring. Roll uses lowest visible alpha support instead of ankle height so inverted poses do not sink below the floor. Scale still uses the same skeletal-chain calibration. Total: **702 local poses / 16 ignored pages**, plus three existing generated sheets. Publisher source code/art remains local-only; missing research pages use the procedural rig.
+The existing local research pipeline supplies `wall_jump` samples 27–45, a fixed `wall_cling` pose 41 for hang, `corner_cling_low` 12–32 for mantle and `landing_roll` 34–54. The initially tried high-corner entry was revised because its hand placement did not match a hanging start. Mantle support uses bounded wrist alignment from entry; hang uses exact wrist anchoring. Roll uses lowest visible alpha support instead of ankle height so inverted poses do not sink below the floor. Scale still uses the same skeletal-chain calibration. Total: **702 local poses / 16 pages in that earlier increment**, plus three existing generated sheets. Publisher source code/art remains local-only; missing research pages use the procedural rig.
 
 `test/fixtures/campaign-rehearsals.json` owns six recorded inputs and expected events, stamped with content/physics revisions. `npm run rehearse` now runs **21** recordings: 15 original lab cases (26/26 original events) and six complete finite routes. **130** Node tests cover the campaign, intent/clearance/timeout/hazard/re-grab rules, roll recovery, animation/contact and camera aspects. Ten current Edge browser scenarios include actual keyboard completion of High water, wall rebound/roll, all six loads, prefixed navigation, eighteen editor prefabs, and real pointer hang/mantle at 390 pixels.
 

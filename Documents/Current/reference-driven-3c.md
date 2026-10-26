@@ -1,5 +1,8 @@
 # Reference-driven 3C implementation
 
+Current artwork, **26 October 2026**: [19 reference-derived atlases and three generated sheets](animation-assets.md) are bundled for local and public play. Earlier local-only/ignored-art descriptions and counts below describe prior increments.
+
+
 Updated **25 October 2026**. [Public-runtime observations/hashes](../Plans/Research/vector-3c-runtime-review.md) distinguish source findings from reimplementation. Native Vector equivalence is not claimed. The [scene choreography contract](scene-choreography.md) is the current authority for marked actions.
 
 - **Character:** One 60-Hz Simulation owns free locomotion, swept vault/climb paths, attachment solvers, LedgeHang/mantle/drop, one wall rebound per airborne wall, buffered landing Roll and collision failure. Intervening solids hide blocked scene candidates; target, exit support and headroom guards remain shared.

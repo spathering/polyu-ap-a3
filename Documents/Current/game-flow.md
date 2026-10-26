@@ -1,5 +1,8 @@
 # Player menus and editor workspace
 
+Current artwork, **26 October 2026**: [19 reference-derived atlases and three generated sheets](animation-assets.md) are bundled for local and public play. Earlier local-only/ignored-art descriptions and counts below describe prior increments.
+
+
 Implemented **25 October 2026**. Player navigation is **Main menu → Mode select → Level select → Game scene**. Authoring/testing lives under the separate **Game editor** entry. All URLs are static relative paths and work under `/polyu-ap-a3/`; no framework or build step was added.
 
 | Screen | URL | Behavior |

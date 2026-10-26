@@ -5,10 +5,10 @@ const COLORS={ink:'#142840',muted:'#91a6bb',cyan:'#13b9cf',swing:'#8b64d9',amber
 export class Renderer{
  constructor(canvas,world,lab,rules){this.canvas=canvas;this.ctx=canvas.getContext('2d');this.world=world;this.lab=lab;this.rules=rules;this.debug=false;this.useSprites=true;this.images=new Map();this.animation=null;this.artStatus='Loading processed sprites…';}
  async loadArt(){try{
-  const response=await fetch(this.lab.art.manifest);if(!response.ok)throw Error('Animation catalog unavailable');
+  const response=await fetch(this.lab.art.manifest,{cache:'no-cache'});if(!response.ok)throw Error('Animation catalog unavailable');
   const catalog=await response.json();this.animation=new CharacterAnimation(catalog,this.rules);this.poseTransition=new PoseTransition(catalog.timing);
   const sheets=catalog.clips.flatMap(c=>c.sheets);await Promise.all(sheets.map(async sheet=>{
-   const image=new Image();image.src=sheet.file;try{await image.decode();this.images.set(sheet.file,image);}catch{/* Missing local research art uses the rig fallback. */}
+   const image=new Image();image.src=sheet.file;try{await image.decode();this.images.set(sheet.file,image);}catch{/* Missing sprite sheets use the rig fallback. */}
   }));
   this.artStatus=this.images.size===sheets.length?'Processed sprites ready':`Sprites ${this.images.size}/${sheets.length} · missing frames use rig fallback`;
  }catch{this.artStatus='Sprite catalog unavailable · rig fallback';}}

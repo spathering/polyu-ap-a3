@@ -1,6 +1,9 @@
 # Level Studio
 
-Current motion revision: **`motion-run-07-directed` / `lab-06-directed`**. See [scene choreography](scene-choreography.md) for pre-input binding, timely/late/missed outcomes, directed camera and shared preset editing. Current totals: **153 tests, 24 recordings, 30/30 lab events; 852 local poses / 19 ignored pages plus three generated sheets**. Earlier increment counts below are historical.
+Current artwork, **26 October 2026**: [19 reference-derived atlases and three generated sheets](animation-assets.md) are bundled for local and public play. Earlier local-only/ignored-art descriptions and counts below describe prior increments.
+
+
+Current motion revision: **`motion-run-07-directed` / `lab-06-directed`**. See [scene choreography](scene-choreography.md) for pre-input binding, timely/late/missed outcomes, directed camera and shared preset editing. Current totals: **153 tests, 24 recordings, 30/30 lab events; 852 local poses / 19 bundled pages plus three generated sheets**. Earlier increment counts below are historical.
 
 
 Implemented **25 October 2026**. Open `http://127.0.0.1:4173/editor.html`, or choose **Level Studio** in the character lab. This static browser editor needs the same Node preview server as the game; no installation or backend is required.

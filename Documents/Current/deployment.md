@@ -27,7 +27,7 @@ Endless remains disabled. Best times, completion and editor drafts are local to 
 
 ## Published artwork
 
-The nineteen ignored `assets/local-reference/` research pages and offline publisher parser/painter remain outside Git and Pages. Their image requests return 404; the loader catches missing images and uses the procedural character rig. The home uses a code-native silhouette. The three tracked generated sheets remain available. Consequently the public game is playable, but it does not reproduce every local reference-frame animation. This is an explicit release limitation, not a failed deployment. Final shareable character animation/art remains pending.
+Updated **26 October 2026**: all nineteen selected reference-derived atlases are now tracked at `assets/character/reference/`, together with three generated sheets. Renderer/menu use the shared `lab-sprites-06-published` catalogue; normal public loading displays the prepared reference sprites. The rig/silhouette remains an error fallback. Raw source packs, publisher code and legacy/unselected exports stay outside the release. See [published animation assets](animation-assets.md). The earlier 25 October rig-only reference behavior is superseded by this release.
 
 ## Verification and maintenance
 

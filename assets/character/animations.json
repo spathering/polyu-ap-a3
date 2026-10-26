@@ -1,6 +1,6 @@
 {
-  "version": "lab-sprites-05-directed",
-  "credits": "Vector reference frames: Nekki, local research only; generated traversal key poses: built-in imagegen, 24 October 2026. See Documents/Plans/Research/vector-character-frames.md and Documents/Plans/Design/generated-character-actions.md.",
+  "version": "lab-sprites-06-published",
+  "credits": "Vector reference-derived character frames: Nekki; prepared from archived source data. Runtime atlas publication requested by the project author on 26 October 2026. Generated traversal key poses: built-in imagegen, 24 October 2026. See Documents/Plans/Research/vector-character-frames.md and Documents/Plans/Design/generated-character-actions.md.",
   "referenceStandingPixels": 154,
   "clips": [
     {
@@ -10,11 +10,11 @@
       "pixelsPerMetre": 85.54028932445168,
       "sheets": [
         {
-          "file": "assets/local-reference/stand-smooth/sheet-00.png",
+          "file": "assets/character/reference/stand-smooth/sheet-00.png",
           "sha256": "d530135ada7fcca9e62ce1bf6279e4b7862c9a6c55d9857f532dcd33a933bcf6"
         },
         {
-          "file": "assets/local-reference/stand-smooth/sheet-01.png",
+          "file": "assets/character/reference/stand-smooth/sheet-01.png",
           "sha256": "eff047391b4ab71294a44855a2d2814253aa8b0e872fdb56d2b67cf9689e57eb"
         }
       ],
@@ -3458,7 +3458,7 @@
       "pixelsPerMetre": 100.08617640554634,
       "sheets": [
         {
-          "file": "assets/local-reference/run-smooth/sheet-00.png",
+          "file": "assets/character/reference/run-smooth/sheet-00.png",
           "sha256": "58dfebc20cb88862f115589f0c0ea7c598b6d11bab1bc09d69ca4c0b17ca2cfa"
         }
       ],
@@ -5306,7 +5306,7 @@
       "pixelsPerMetre": 98.43063312346426,
       "sheets": [
         {
-          "file": "assets/local-reference/jump-smooth/sheet-00.png",
+          "file": "assets/character/reference/jump-smooth/sheet-00.png",
           "sha256": "66c69ac516cc74ba395234e9ab51f1f298f78cc7e7ff7ca60ca493031b27e91c"
         }
       ],
@@ -6356,7 +6356,7 @@
       "pixelsPerMetre": 98.90442988249876,
       "sheets": [
         {
-          "file": "assets/local-reference/fly-smooth/sheet-00.png",
+          "file": "assets/character/reference/fly-smooth/sheet-00.png",
           "sha256": "1e82a4cbf1fbdabc451184339fc67e1948deca5523c2d0d7971860e2879de51c"
         }
       ],
@@ -8318,7 +8318,7 @@
       "pixelsPerMetre": 98.92165151273291,
       "sheets": [
         {
-          "file": "assets/local-reference/run_fast_jump-smooth/sheet-00.png",
+          "file": "assets/character/reference/run_fast_jump-smooth/sheet-00.png",
           "sha256": "902859fbce12ab4f34777d2f26be30f95d53acd449a805ffbeb7df03e48c0a2d"
         }
       ],
@@ -10508,7 +10508,7 @@
       "pixelsPerMetre": 92.10083332394095,
       "sheets": [
         {
-          "file": "assets/local-reference/sliding_slide_loop-smooth/sheet-00.png",
+          "file": "assets/character/reference/sliding_slide_loop-smooth/sheet-00.png",
           "sha256": "ae0e635e5620fac04c4bf1200f547777d08fc27b813644c2ee5dfbd55ee4c7a3"
         }
       ],
@@ -12470,7 +12470,7 @@
       "pixelsPerMetre": 98.07406243942675,
       "sheets": [
         {
-          "file": "assets/local-reference/landing_middle-smooth/sheet-00.png",
+          "file": "assets/character/reference/landing_middle-smooth/sheet-00.png",
           "sha256": "1525d78a5b6e7e308f5c541e946fb2a406a39b46d97bceadb0fad18c02b2c9d6"
         }
       ],
@@ -13748,7 +13748,7 @@
       "pixelsPerMetre": 98.12157390080498,
       "sheets": [
         {
-          "file": "assets/local-reference/speed_vault-smooth/sheet-00.png",
+          "file": "assets/character/reference/speed_vault-smooth/sheet-00.png",
           "sha256": "d162ae229b166cea7fcfee65785c6320b261d1f823fc6bfeb32b3d488863d7d2"
         }
       ],
@@ -17285,7 +17285,7 @@
       ],
       "sheets": [
         {
-          "file": "assets/local-reference/slide_simple_entry-smooth/sheet-00.png",
+          "file": "assets/character/reference/slide_simple_entry-smooth/sheet-00.png",
           "sha256": "2ac1e541d3f62b0e9ae5856fad8d44bc84c0743833af12b2704c559ad25786a8"
         }
       ],
@@ -18563,7 +18563,7 @@
       ],
       "sheets": [
         {
-          "file": "assets/local-reference/slide_simple_exit-smooth/sheet-00.png",
+          "file": "assets/character/reference/slide_simple_exit-smooth/sheet-00.png",
           "sha256": "4644cb445c31284d3b2e89a0369436d993120121526e5500741db8b826eed6bb"
         }
       ],
@@ -20528,7 +20528,7 @@
       ],
       "sheets": [
         {
-          "file": "assets/local-reference/monkey_vault-smooth/sheet-00.png",
+          "file": "assets/character/reference/monkey_vault-smooth/sheet-00.png",
           "sha256": "03b8b83d74c7ef93dfbfc01281b37e84d720fa083c3b0eec6c3060582db463e2"
         }
       ],
@@ -22718,7 +22718,7 @@
       ],
       "sheets": [
         {
-          "file": "assets/local-reference/wall_jump-smooth/sheet-00.png",
+          "file": "assets/character/reference/wall_jump-smooth/sheet-00.png",
           "sha256": "72bd7a921b59d8a6297ec7bf4b9de4c5c0743e70ce755c40cffb4554f6c7c574"
         }
       ],
@@ -22856,7 +22856,7 @@
       ],
       "sheets": [
         {
-          "file": "assets/local-reference/wall_cling-smooth/sheet-00.png",
+          "file": "assets/character/reference/wall_cling-smooth/sheet-00.png",
           "sha256": "56b65b4ef17049acc1ddd7b34f84b5227a72af7ecf154dbb7a86b1fa8895ab9c"
         }
       ],
@@ -25274,7 +25274,7 @@
       ],
       "sheets": [
         {
-          "file": "assets/local-reference/landing_roll-smooth/sheet-00.png",
+          "file": "assets/character/reference/landing_roll-smooth/sheet-00.png",
           "sha256": "741086961ca91cefa399887d75baa0d034c01e06d7fbe63d88a0a21f0815fedb"
         }
       ],
@@ -27692,7 +27692,7 @@
       ],
       "sheets": [
         {
-          "file": "assets/local-reference/corner_cling_low-smooth/sheet-00.png",
+          "file": "assets/character/reference/corner_cling_low-smooth/sheet-00.png",
           "sha256": "85b0d124571d1187651154c7a7c08cf238a79e358700f3eb3011cb73e0be5433"
         }
       ],
@@ -29768,7 +29768,7 @@
       ],
       "sheets": [
         {
-          "file": "assets/local-reference/wall_collision_from_run_and_jump-smooth/sheet-00.png",
+          "file": "assets/character/reference/wall_collision_from_run_and_jump-smooth/sheet-00.png",
           "sha256": "0b35a067c334b28db5859491d2374bbf79d06fc9f4041c58126c7df3f6a88217"
         }
       ],
@@ -31046,7 +31046,7 @@
       ],
       "sheets": [
         {
-          "file": "assets/local-reference/jump_off-smooth/sheet-00.png",
+          "file": "assets/character/reference/jump_off-smooth/sheet-00.png",
           "sha256": "b5194af824e79dfa48042a527b47c0f18dc8b4f044deffb4921359f7e223e79e"
         }
       ],
@@ -33464,7 +33464,7 @@
       ],
       "sheets": [
         {
-          "file": "assets/local-reference/pop_vault_start-smooth/sheet-00.png",
+          "file": "assets/character/reference/pop_vault_start-smooth/sheet-00.png",
           "sha256": "42e4aa46ded0f37371ff317ab4eb8109452ead50a58c8ded23cb41eca9a3a000"
         }
       ],

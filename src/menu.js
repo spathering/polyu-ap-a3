@@ -1,5 +1,5 @@
 import {validateFlow,readProgress,gameModes,levelsForMode} from './game-flow.js';
-const $=id=>document.getElementById(id),read=async path=>{const r=await fetch(path);if(!r.ok)throw Error(`${path}: HTTP ${r.status}`);return r.json();};
+const $=id=>document.getElementById(id),read=async path=>{const r=await fetch(path,{cache:'no-cache'});if(!r.ok)throw Error(`${path}: HTTP ${r.status}`);return r.json();};
 const graphics=[
  '<path d="M0 128h60V105h36v23h54V76h25v52h95v-28h30"/><path d="M34 95q45-85 90 0m18-29q35-50 72 0" stroke-dasharray="4 6" fill="none"/>',
  '<path d="M0 126h65v20m150-20h85"/><path d="M70 30L120 86 190 26l90 24M190 26v-15" fill="none"/><circle cx="70" cy="30" r="5"/><circle cx="190" cy="26" r="5"/>',
@@ -40,5 +40,5 @@ if($('runner')){
   function paint(now){const r=canvas.getBoundingClientRect(),dpr=Math.min(devicePixelRatio||1,2);canvas.width=r.width*dpr;canvas.height=r.height*dpr;ctx.setTransform(dpr,0,0,dpr,0,0);const frame=clip.frames[seq.range[0]+(reduced?0:Math.floor(now/1000*seq.fps))%(seq.range[1]-seq.range[0]+1)],sheet=clip.sheets[frame.sheet],im=images.get(typeof sheet==='string'?sheet:sheet?.file)||images.get(frame.sheet),[sx,sy,w,h]=frame.rect,scale=Math.min(1.9,r.height*.47/(clip.pixelsPerMetre*1.8));
    if(im){document.querySelector('#runner-fallback').style.display='none';ctx.drawImage(im,sx,sy,w,h,r.width*.47-frame.anchor[0]*scale,r.height*.73-frame.anchor[1]*scale,w*scale,h*scale);}if(!reduced)requestAnimationFrame(paint);
   }requestAnimationFrame(paint);
- }catch{/* The menu remains usable if research artwork is unavailable. */}
+ }catch{/* The menu remains usable if sprite artwork is unavailable. */}
 }

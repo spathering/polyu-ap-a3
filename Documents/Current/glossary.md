@@ -1,5 +1,8 @@
 # Project glossary
 
+Current artwork, **26 October 2026**: [19 reference-derived atlases and three generated sheets](animation-assets.md) are bundled for local and public play. Earlier local-only/ignored-art descriptions and counts below describe prior increments.
+
+
 Updated: **24 October 2026**. These terms occur in current project documents. Their presence does not mean the corresponding feature or service is implemented. Add or revise entries as code, configuration and decisions change.
 
 ## Project and game terms
@@ -176,3 +179,5 @@ See [3C](../Plans/Design/three-c-design.md), [state machine](../Plans/Design/cha
 | Mode-bound navigation | Level return, completion count and next route use canonical membership; next never enters another mode. |
 
 [Menu behavior](game-flow.md) also defines disabled Endless and legacy URL handling.
+
+Published reference atlas: a hash-checked PNG page selected for runtime and tracked under `assets/character/reference/`. This differs from raw/unselected archived exports; `local-reference` remains a source-origin tag.

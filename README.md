@@ -17,13 +17,12 @@ A browser parkour game for Assignment 3: An interactive experience.
 Use Node.js 20 or newer. No package installation or build step is required. From the repository root:
 
 ```sh
-npm run prepare:reference
 npm run dev
 ```
 
-Open `http://127.0.0.1:4173/`. The first command only copies this workspace's existing research frames; omit it if no local archive is available and use the rig fallback. Space jumps, S slides, E dash-grapples, hold Q to swing, F uses the cable, Esc pauses and R retries. Choose Play → mode → route from the main menu. Open Game editor for Level Studio and Motion Lab. Direct station selection, tuning and rehearsals remain at `http://127.0.0.1:4173/lab.html`. Checks: `npm run check`, `npm test`, `npm run rehearse`. Stop serving with Ctrl+C.
+Open `http://127.0.0.1:4173/`. All required runtime atlases are bundled; no research archive or preparation step is required. `npm run prepare:reference` optionally verifies/restores the reference subset. Space jumps, S slides, E dash-grapples, hold Q to swing, F uses the cable, Esc pauses and R retries. Choose Play → mode → route from the main menu. Open Game editor for Level Studio and Motion Lab. Direct station selection, tuning and rehearsals remain at `http://127.0.0.1:4173/lab.html`. Checks: `npm run check`, `npm test`, `npm run rehearse`. Stop serving with Ctrl+C.
 
-**Play online:** [Motion / Run](https://spathering.github.io/polyu-ap-a3/). GitHub Pages publishes `main` from `/(root)` over HTTPS. Visitors need no installation. Missing local research frames use the procedural rig; three generated sheets are included. See [deployment status and verification](Documents/Current/deployment.md).
+**Play online:** [Motion / Run](https://spathering.github.io/polyu-ap-a3/). GitHub Pages publishes `main` from `/(root)` over HTTPS. Visitors need no installation. Nineteen reference-derived atlases and three generated sheets are included. See [deployment status and verification](Documents/Current/deployment.md).
 
 ## Documentation
 
@@ -55,11 +54,11 @@ All repository project documentation uses English. A Chinese counterpart with ma
 
 ## Known limitations
 
-153 automated tests and 24 deterministic recordings pass: 18 lab cases cover 30/30 required events and six complete finite courses. Scene recipes pre-match geometry before input, retain timely/late confirmation until playback and use directed scene/time cameras. Same-obstacle browser checks select three distinct clips; foundations keyboard completion, portrait play and editor preset edit/undo pass. Other-person trials and OS download completion remain unverified. Final original art/audio, endless generation and shared scores remain pending; ignored research pages have a procedural-rig fallback.
+153 automated tests and 24 deterministic recordings pass: 18 lab cases cover 30/30 required events and six complete finite courses. Scene recipes pre-match geometry before input, retain timely/late confirmation until playback and use directed scene/time cameras. Same-obstacle browser checks select three distinct clips; foundations keyboard completion, portrait play and editor preset edit/undo pass. Other-person trials and OS download completion remain unverified. Final original art/audio, endless generation and shared scores remain pending; the rig remains a missing-image fallback.
 
 ## Credits and tools
 
-The [assignment screenshot](Documents/Plans/Requirements/assignment3-source.png) and its English transcription come from the supplied course brief. [Vector](https://vector.game/zh-Hans/) is a design reference. Public official Steam screenshots are archived locally for study, with [source metadata](Documents/Plans/Research/vector-action-assets.md); they are not runtime/deployment assets. At the author's request, public browser animation packs and renderer/parser scripts were later archived locally to export original-data-derived character frames. Selected exported frames now drive local lab presentation from ignored `assets/local-reference/`; they are excluded from Git and public releases. No original parser/painter code or level layout was copied into the runtime. Three generated traversal sheets are versioned with provenance. OpenAI Codex assisted with research, translation, documentation and design; see [PROCESS](PROCESS.md).
+The [assignment screenshot](Documents/Plans/Requirements/assignment3-source.png) and its English transcription come from the supplied course brief. [Vector](https://vector.game/zh-Hans/) is a design reference. Public official Steam screenshots are archived locally for study, with [source metadata](Documents/Plans/Research/vector-action-assets.md); they are not runtime/deployment assets. At the author's request, public browser animation packs and renderer/parser scripts were later archived locally to export original-data-derived character frames. The author later requested publication of the selected runtime subset: nineteen prepared atlases are now tracked at `assets/character/reference/` and used by local and public play; raw/legacy exports remain excluded. No original parser/painter code or level layout was copied into the runtime. Three generated traversal sheets are versioned with provenance. OpenAI Codex assisted with research, translation, documentation and design; see [PROCESS](PROCESS.md).
 
 Current input/animation rules: [scene actions and synchronization](Documents/Current/scene-action-synchronization.md). Press Space early in the marked vault approach; it executes at the start plane. Vaulting is no longer automatic.
 
@@ -72,3 +71,5 @@ Open `modes.html` for modes, `levels.html?mode=campaign` for six fixed routes or
 Gameplay now fills the viewport. Use the small floating panels; **?** expands Controls. Hold Space near a marked ledge, then press again to mantle; press Space near a marked wall to rebound; press S before a hard landing to roll. [Six new course guide](Documents/Current/campaign-and-scene-actions.md).
 
 Current 3C: [scene choreography](Documents/Current/scene-choreography.md). In the lab, compare `timing vault timely`, `timing vault late` and `timing vault missed` at the same obstacle. The camera follows the prepared scene timeline; Level Studio edits shared timing/clip/shot recipes.
+
+Reference animation release, **26 October 2026**: [published atlas integration](Documents/Current/animation-assets.md). All 22 sheets are bundled and hash-checked; normal online play uses the prepared reference animations, with the rig reserved for image-load failures.

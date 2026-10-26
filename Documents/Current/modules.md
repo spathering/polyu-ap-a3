@@ -1,5 +1,8 @@
 # Modules and relationships
 
+Current artwork, **26 October 2026**: [19 reference-derived atlases and three generated sheets](animation-assets.md) are bundled for local and public play. Earlier local-only/ignored-art descriptions and counts below describe prior increments.
+
+
 Updated **25 October 2026**. The character lab and [Level Studio](level-editor.md) are implemented. Endless generation remains a design contract.
 
 | Owner | Responsibility / consumers |
@@ -86,3 +89,5 @@ Original reference pages are hash-checked ignored local copies, not public relea
 The player menu stack now uses data-owned modes; six campaign and three training routes are separate. `game-flow.js` alone derives next/back URLs and prevents mode crossing. `studio.html` launches existing level and character tools independently. [Screen ownership](game-flow.md).
 
 Publication boundary: GitHub Pages serves the tracked static tree directly from main/root. No server-side runtime or new physics owner was added; source-relative asset paths and missing-art fallback remain shared. See [deployment](deployment.md).
+
+The animation catalogue now points to tracked `assets/character/reference/` PNGs. Source origin is still `local-reference` for provenance; runtime availability is bundled. Content checks and the atlas/crop test reject missing files. The restoration tool verifies bundled pages without external archive access.

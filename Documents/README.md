@@ -40,3 +40,5 @@ Current movement authority: [scene choreography and three timing outcomes](Curre
 Player navigation now follows [main menu → mode → route → scene](Current/game-flow.md); **Game editor** is a separate workspace for the existing Level Studio and Motion Lab.
 
 Live release: [GitHub Pages configuration, online entry points, artwork limits and verification](Current/deployment.md).
+
+Current public character art: [bundled reference animation assets](Current/animation-assets.md).

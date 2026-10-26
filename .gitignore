@@ -3,5 +3,6 @@ coverage/
 .cache/
 .DS_Store
 
-# Extracted publisher artwork is local research material, not a redistribution grant.
+# Legacy/unselected local exports remain outside the release.
+# Selected runtime atlases are tracked at assets/character/reference/.
 assets/local-reference/

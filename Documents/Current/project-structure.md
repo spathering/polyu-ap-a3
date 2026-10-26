@@ -1,5 +1,8 @@
 # Project structure
 
+Current artwork, **26 October 2026**: [19 reference-derived atlases and three generated sheets](animation-assets.md) are bundled for local and public play. Earlier local-only/ignored-art descriptions and counts below describe prior increments.
+
+
 Updated **25 October 2026**. A static JavaScript/Canvas character lab is implemented. See [controls and test matrix](character-lab.md) and [module relationships](modules.md). The finite/prefab editor is implemented; endless product flow remains planned.
 
 ```text
@@ -28,8 +31,9 @@ polyu-ap-a3/
   assets/
     character/animations.json    # Canonical runtime frame, anchor and sequence catalogue
     character/README.md
+    character/reference/         # 19 tracked reference-derived runtime PNG atlases
     generated/                   # Three generated traversal sheets and credits
-    local-reference/             # Ignored local research pages; never part of Git/Pages
+    local-reference/             # Ignored legacy/unselected exports, not runtime assets
   tools/
     serve.mjs, check-content.mjs, rehearse.mjs, prepare-reference-art.mjs
   test/
@@ -50,7 +54,7 @@ polyu-ap-a3/
         GeneratedAssets/         # Generation provenance and exact prompts
 ```
 
-No runtime dependencies or bundler are required. `npm run dev` serves the repository; `npm run check`, `npm test` and `npm run rehearse` verify content and simulation. `npm run prepare:reference` copies hash-checked, already extracted pages from the workspace research archive into the ignored local directory. An optional argument supplies a different archive root. See [asset ownership](../../assets/character/README.md).
+No runtime dependencies or bundler are required. `npm run dev` serves the repository; `npm run check`, `npm test` and `npm run rehearse` verify content and simulation. `npm run prepare:reference` verifies bundled reference atlases; an optional archive argument restores the same selected files. See [asset ownership](../../assets/character/README.md).
 
 The English project documents are mirrored in Chinese at workspace `.midwork/assignment3/polyu-ap-a3/` with matching relative paths. Only documents and their supporting contract/image files are mirrored; runtime code, content and animation catalogues have one owner in this repository. Original source packs, generated masters, authoring tools and offscreen QA remain outside Git in `.midwork/assignment3/`.
 
@@ -73,7 +77,7 @@ These files extend the preceding lab/editor tree. Main/selection/finite result f
 
 ## Full-scene and six-course additions
 
-`src/scene-traversal.js`, `test/campaign.test.js` and `test/fixtures/campaign-rehearsals.json` add scene queries and qualified route recordings. Existing `parkour.json`, `game-flow.json`, play HTML/CSS/JS, menu and editor files own the six maps, nine-entry selection, viewport-filling canvas, small HUD panels and expanded traversal inspector. Reference-derived animation pages remain ignored; the catalogue now maps 702 local poses/16 pages and three generated sheets. See [current campaign/actions](campaign-and-scene-actions.md). No new dependencies or build stage.
+`src/scene-traversal.js`, `test/campaign.test.js` and `test/fixtures/campaign-rehearsals.json` add scene queries and qualified route recordings. Existing `parkour.json`, `game-flow.json`, play HTML/CSS/JS, menu and editor files own the six maps, nine-entry selection, viewport-filling canvas, small HUD panels and expanded traversal inspector. Reference-derived runtime pages are now bundled; the catalogue now maps 702 local poses/16 pages and three generated sheets. See [current campaign/actions](campaign-and-scene-actions.md). No new dependencies or build stage.
 
 ## Directed-scene files
 
@@ -82,7 +86,7 @@ These files extend the preceding lab/editor tree. Main/selection/finite result f
 - `test/scene-performance.test.js`: timing variants, deterministic paths, camera noise/rate independence, boundaries and authoring guards.
 - `Documents/Current/scene-choreography.md`: implemented contract and same-obstacle comparison procedure.
 
-Current package is `motion-run-07-directed` / `lab-06-directed`; animation `lab-sprites-05-directed` has 852 local poses on 19 ignored pages plus three generated sheets. No dependency or deployment structure changed. The module totals remain 25 definitions, 18 visible prefabs and 56 local entities. The optional 1.3.0 recipe contract is shared by runtime and editor.
+Current package is `motion-run-07-directed` / `lab-06-directed`; animation `lab-sprites-06-published` has 852 local poses on 19 bundled pages plus three generated sheets. No dependency or deployment structure changed. The module totals remain 25 definitions, 18 visible prefabs and 56 local entities. The optional 1.3.0 recipe contract is shared by runtime and editor.
 
 ## Player/editor navigation increment
 
@@ -90,4 +94,6 @@ Current package is `motion-run-07-directed` / `lab-06-directed`; animation `lab-
 
 ## Published static site
 
-[GitHub Pages](deployment.md) now serves the repository root from main with HTTPS enforced. The existing `.nojekyll` is sufficient; no new build folder, backend or workflow file was added. `play.css` explicitly honors the restart control's hidden state. The public build uses tracked generated sheets and the rig fallback for ignored local reference art.
+[GitHub Pages](deployment.md) now serves the repository root from main with HTTPS enforced. The existing `.nojekyll` is sufficient; no new build folder, backend or workflow file was added. `play.css` explicitly honors the restart control's hidden state. The public build now includes reference-derived and generated sheets; the rig is only an error fallback.
+
+`assets/character/reference/` now contains the selected 19 tracked PNG atlases; `assets/local-reference/` is only an ignored legacy/unselected cache. `tools/prepare-reference-art.mjs` verifies existing bundled files before consulting an optional local archive. `tools/check-content.mjs` and `test/animation.test.js` require every runtime atlas and matching hashes. `src/renderer.js`/`src/menu.js` revalidate catalogue JSON; physics ownership is unchanged.

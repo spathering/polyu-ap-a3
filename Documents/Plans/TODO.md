@@ -181,3 +181,10 @@ MOTION / RUN is a provisional title. Earlier unchecked complete-flow tasks are n
 - [x] Compare 21 public source/assets against committed Git bytes; record missing-art behavior.
 - [x] Fix restart-control visibility during ready/results.
 - [ ] Replace local-only reference character frames with final shareable production artwork; external trial and endless generation remain pending.
+
+## Reference atlas release, 26 October 2026
+
+- [x] Bundle the 19 catalogued reference atlases, retain source credit and publish them through Pages.
+- [x] Reuse canonical animation metadata for local and public rendering; no physics duplication.
+- [x] Require all 22 runtime sheets/hashes in content and crop checks; keep archive-free startup.
+- [ ] Final original production art/in-betweens, external trial and endless generation remain pending.
