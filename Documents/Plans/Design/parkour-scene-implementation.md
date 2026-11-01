@@ -5,7 +5,7 @@ Implementation correction, **25 October 2026**: marked units now prepare all thr
 
 **Implementation update, 24 October 2026:** baseline movement, four traversal additions, camera, semantic input, an authored circuit and prepared sprite mapping are implemented in the [character lab](../../Current/character-lab.md). See actual paths/owners in [modules](../../Current/modules.md). 66 tests pass; 15 rehearsals cover 26/26 events. This document retains the broader product contract; the editor, endless generation, streaming qualification and production animation blending remain pending.
 
-Status: broader design proposal; baseline recipes implemented in the character lab. This document owns action-to-geometry recipes; [3C](three-c-design.md) owns feel/framing/input intent and the [state machine](character-state-machine.md) owns transitions. Shared fields are defined once in the [content schema](Schemas/content-package.schema.json).
+Status: broader design proposal; baseline recipes implemented in the character lab. This document owns action-to-geometry recipes; [3C](three-c-design.md) owns feel/framing/input intent and the [state machine](character-state-machine.md) owns transitions. Shared fields are defined once in the [content schema](../../../content/content-package.schema.json).
 
 ## Evidence map
 

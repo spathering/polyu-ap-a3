@@ -9,18 +9,18 @@ import {PoseTransition} from '../src/pose-transition.js';
 import {compileWorld,validateContent} from '../src/content.js';
 import {rehearsalInput} from '../src/rehearsal.js';
 const read=p=>JSON.parse(fs.readFileSync(new URL(p,import.meta.url)));
-const content=read('../content/parkour.json'),schema=read('../Documents/Plans/Design/Schemas/content-package.schema.json'),lab=read('../content/lab-course.json'),flow=read('../content/game-flow.json');
-test('player modes partition all nine routes without copying geometry or enabling endless',()=>{
- const before=JSON.stringify(flow);assert.deepEqual(validateFlow(flow,lab,content),[]);assert.equal(levelsForMode(flow,'campaign').length,6);assert.equal(levelsForMode(flow,'training').length,3);assert.deepEqual(levelsForMode(flow,'endless'),[]);assert.deepEqual(levelsForMode(flow,'missing'),[]);assert.equal(gameModes(flow).find(m=>m.id==='endless').status,'coming-soon');assert.equal(new Set(gameModes(flow).flatMap(m=>levelsForMode(flow,m.id).map(l=>l.id))).size,9);assert.equal(JSON.stringify(flow),before);
+const content=read('../content/parkour.json'),schema=read('../content/content-package.schema.json'),lab=read('../content/lab-course.json'),flow=read('../content/game-flow.json');
+test('player modes partition all fifteen routes without copying geometry or enabling endless',()=>{
+ const before=JSON.stringify(flow);assert.deepEqual(validateFlow(flow,lab,content),[]);assert.equal(levelsForMode(flow,'campaign').length,12);assert.equal(levelsForMode(flow,'training').length,3);assert.deepEqual(levelsForMode(flow,'endless'),[]);assert.deepEqual(levelsForMode(flow,'missing'),[]);assert.equal(gameModes(flow).find(m=>m.id==='endless').status,'coming-soon');assert.equal(new Set(gameModes(flow).flatMap(m=>levelsForMode(flow,m.id).map(l=>l.id))).size,15);assert.equal(JSON.stringify(flow),before);
 });
 test('next and return navigation stay inside the current mode even at mode boundaries',()=>{
- assert.equal(nextLevel(flow,'foundations').id,'airways');assert.equal(nextLevel(flow,'momentum'),null);assert.equal(nextLevel(flow,'roof-rhythm').id,'high-water');assert.equal(nextLevel(flow,'crosscurrent'),null);assert.equal(nextLevel(flow,'unknown'),null);assert.equal(modeForLevel(flow,'high-water').id,'campaign');assert.equal(selectionUrl(flow,'foundations'),'levels.html?mode=training');assert.equal(selectionUrl(flow,'high-water'),'levels.html?mode=campaign');
+ assert.equal(nextLevel(flow,'foundations').id,'airways');assert.equal(nextLevel(flow,'momentum'),null);assert.equal(nextLevel(flow,'roof-rhythm').id,'high-water');assert.equal(nextLevel(flow,'district-marathon'),null);assert.equal(nextLevel(flow,'unknown'),null);assert.equal(modeForLevel(flow,'high-water').id,'campaign');assert.equal(selectionUrl(flow,'foundations'),'pages/levels.html?mode=training');assert.equal(selectionUrl(flow,'high-water'),'pages/levels.html?mode=campaign');
 });
 test('mode authoring rejects missing references, duplicate IDs and unavailable populated modes',()=>{
  for(const change of [f=>f.levels[0].modeId='missing',f=>f.modes[1].id=f.modes[0].id,f=>f.modes[0].status='coming-soon',f=>f.modes[2].status='available']){const f=structuredClone(flow);change(f);assert.ok(validateFlow(f,lab,content).length);}
 });
 test('legacy flow without mode metadata retains its original single catalogue navigation',()=>{
- const f=structuredClone(flow);delete f.modes;assert.deepEqual(validateFlow(f,lab,content),[]);assert.equal(levelsForMode(f,'finite').length,9);assert.equal(selectionUrl(f,'foundations'),'levels.html?mode=finite');assert.equal(nextLevel(f,'momentum').id,'roof-rhythm');
+ const f=structuredClone(flow);delete f.modes;assert.deepEqual(validateFlow(f,lab,content),[]);assert.equal(levelsForMode(f,'finite').length,15);assert.equal(selectionUrl(f,'foundations'),'pages/levels.html?mode=finite');assert.equal(nextLevel(f,'momentum').id,'roof-rhythm');
 });
 test('absolute grid snapping repairs an off-grid anchor and preserves batch spacing',()=>{
  const d=snappedTranslation([1.13,-.22],[.4,-.2],.3);assert.ok(Math.abs(1.13+d[0]-1.5)<1e-9);assert.ok(Math.abs(-.22+d[1]+.3)<1e-9);

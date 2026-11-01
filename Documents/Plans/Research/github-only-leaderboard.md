@@ -55,7 +55,7 @@ An even smaller prototype can rank validated public Issues directly without Acti
 
 ## Recommendation and open decisions
 
-For this assignment, finish the core playable loop first. If a shared board is still worthwhile, prototype **Issues as submission records**, then decide between direct public reading and an Actions-produced static snapshot. This is a project recommendation inferred from the documented capabilities and the assignment scope.
+For this game, finish the core playable loop first. If a shared board is still worthwhile, prototype **Issues as submission records**, then decide between direct public reading and an Actions-produced static snapshot. This is a project recommendation inferred from the documented capabilities and the project scope.
 
 Before implementation, decide whether GitHub sign-in and public submissions are acceptable; define score rules, validation, tie-breaking, retention and abuse handling; then test submission, concurrent updates, publishing, readback and failure behaviour. If anonymous one-click submission or immediate authoritative ranking is essential, revisit the GitHub-only restriction rather than embedding write credentials.
 

@@ -30,7 +30,7 @@ export class CharacterAnimation{
    else if(releaseAge>=0&&releaseAge<t.releaseSeconds){sequence=release.id==='SwingRelease'?'swingRelease':'cableRelease';phase=releaseAge/t.releaseSeconds;}
    else if(padAge>=0&&padAge<t.padMaxSeconds){sequence='pad';offset=p.vy>t.padRiseFast?1:p.vy>0?2:p.vy>t.padDescentFast?3:4;}
    else sequence=p.vy>0?'rise':'fall';
-  }else if(p.landLeft>0||since(recent('Land'))<this.rules.actionRecoverySeconds){sequence='land';phase=Number.isFinite(since(recent('Land')))?since(recent('Land'))/this.rules.actionRecoverySeconds:1-clamp(p.landLeft/this.rules.landingRecoverySeconds,0,1);}
+  }else if(p.landLeft>0||since(recent('Land'))<this.rules.actionRecoverySeconds&&since(recent('Land'))<since(recent('TraverseExit'))){sequence='land';phase=Number.isFinite(since(recent('Land')))?since(recent('Land'))/this.rules.actionRecoverySeconds:1-clamp(p.landLeft/this.rules.landingRecoverySeconds,0,1);}
   else if(since(recent('Stand'))<t.slideExitSeconds){sequence='slideExit';phase=since(recent('Stand'))/t.slideExitSeconds;}
   else sequence=Math.abs(p.vx)>.1?'run':'idle';
   const seq=c.sequences[sequence],clip=c.clips.find(c=>c.id===seq.clip),[start,end]=seq.range,count=end-start+1;

@@ -6,3 +6,5 @@
 .intent-status{font:10px ui-monospace,monospace;color:#8bdfe5;padding:8px 18px;border-bottom:1px solid #2b3b50;background:#142b3b}
 
 .editor-link{display:inline-flex;align-items:center;padding:8px 12px;border:1px solid #426777;border-radius:7px;font-size:12px;color:#86e3e9;white-space:nowrap}.editor-link:hover{background:#1d3b49}
+
+.audio-controls{position:relative;z-index:20;font:12px system-ui;color:inherit;padding:8px 12px;border:1px solid #8ca6b455;border-radius:8px;background:#e7eef1}.audio-controls summary{cursor:pointer;font-weight:700;letter-spacing:.08em;text-transform:uppercase}.audio-controls label{display:flex;align-items:center;gap:8px;margin-top:8px}.audio-controls input[type=range]{width:100px}.menu-footer .audio-controls{color:#142840}

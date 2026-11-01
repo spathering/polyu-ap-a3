@@ -18,7 +18,7 @@ The requested [official browser game](https://vector.game/zh-Hans/) publicly loa
 
 ## Local files and single source of truth
 
-The archive is outside the repository at workspace `.midwork/assignment3/reference-assets/vector-character-animation/`.
+The archive is outside the repository at workspace `external-research/reference-assets/vector-character-animation/`.
 
 ```text
 vector-character-animation/
@@ -41,7 +41,7 @@ Each source clip is stored/rendered once. `actions[].clip` and `sourceFrameRange
 
 ## Classification and examples
 
-Category assignment is a naming-based retrieval aid, not a verified gameplay taxonomy. Original names and capitalization remain unchanged. A shared clip can contain multiple logical phases.
+Category classification is a naming-based retrieval aid, not a verified gameplay taxonomy. Original names and capitalization remain unchanged. A shared clip can contain multiple logical phases.
 
 | Category directory | Clips | Purpose |
 |---|---:|---|
@@ -88,3 +88,5 @@ The [3C](../Design/three-c-design.md), [state-machine](../Design/character-state
 ## Runtime publication update, 26 October 2026
 
 The author explicitly requested publishing the already prepared runtime subset. Nineteen atlases (852 poses) are now tracked under `assets/character/reference/`, with Nekki / Vector credit and existing exact hashes/source ranges. The complete extraction, raw packs and parser/painter are not published. Earlier local-only statements apply to that original research phase and full archive. [Current release contract](../../Current/animation-assets.md).
+
+Archive identifiers beginning with `external-research/` refer to the private workspace archive; they are not distributable runtime paths.

@@ -119,8 +119,8 @@
         161,
         0
       ],
-      "hint": "Jump, then F near the cable. Try SPACE jump-off, F detach, and a fresh run to the cable endpoint.",
-      "keys": "SPACE → F",
+      "hint": "Jump, then Q near the cable. Try SPACE jump-off, Q detach, and a fresh run to the cable endpoint.",
+      "keys": "SPACE → Q",
       "checks": [
         "Zipline",
         "ZiplineJump",
@@ -161,8 +161,8 @@
         226,
         0
       ],
-      "hint": "Pad → Q swing → release → F cable. You can also try E toward the next anchor. Detach before acquiring another mode.",
-      "keys": "Q / E / F",
+      "hint": "Pad → Q swing → release → Q cable. You can also try E toward the next anchor. Detach before acquiring another mode.",
+      "keys": "Q / E / Q",
       "checks": [
         "JumpPad",
         "SwingGrapple",
@@ -590,7 +590,7 @@
     {
       "id": "full-loop",
       "stationId": "jump",
-      "frames": 2898,
+      "frames": 2911,
       "actions": [
         {
           "frame": 93,
@@ -623,47 +623,47 @@
           "phase": "press"
         },
         {
-          "frame": 1393,
+          "frame": 1398,
           "action": "swingGrapple",
           "phase": "release"
         },
         {
-          "frame": 1552,
+          "frame": 1562,
           "action": "jump",
           "phase": "press"
         },
         {
-          "frame": 1557,
+          "frame": 1567,
           "action": "zipline",
           "phase": "press"
         },
         {
-          "frame": 2170,
+          "frame": 2180,
           "action": "swingGrapple",
           "phase": "press"
         },
         {
-          "frame": 2244,
+          "frame": 2255,
           "action": "swingGrapple",
           "phase": "release"
         },
         {
-          "frame": 2245,
+          "frame": 2256,
           "action": "zipline",
           "phase": "press"
         },
         {
-          "frame": 2477,
+          "frame": 2490,
           "action": "dashGrapple",
           "phase": "press"
         },
         {
-          "frame": 2482,
+          "frame": 2495,
           "action": "jump",
           "phase": "press"
         },
         {
-          "frame": 2627,
+          "frame": 2640,
           "action": "jump",
           "phase": "press"
         }
@@ -762,5 +762,7 @@
   "diagnostics": {
     "historySize": 8,
     "wallWarningSeconds": 0.6
-  }
+  },
+  "contentRevision": "motion-run-08-districts",
+  "physicsVersion": "lab-07-flow"
 }

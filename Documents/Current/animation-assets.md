@@ -1,5 +1,8 @@
 # Published reference animation assets
 
+Current release, 1 November 2026: twelve campaign routes, three training routes, shared Q rope/cable input, direct climb-to-run recovery, idle ropes, layered city and bundled sound. Page entries are in `pages/` and the schema is in `content/`. Earlier dated check counts below are historical; current validation is 177 tests and 30 recordings. See [feedback update](player-feedback-update.md) and [structure](project-structure.md).
+
+
 Implemented **26 October 2026** at the author's request. The selected runtime reference atlases are now part of the public release. Catalogue **`lab-sprites-06-published`** remains the single owner of image paths, frame geometry, calibration, sequence mappings and SHA-256 hashes.
 
 | Asset group | Release contents | Runtime path |

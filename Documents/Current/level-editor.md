@@ -1,5 +1,8 @@
 # Level Studio
 
+Current release, 1 November 2026: twelve campaign routes, three training routes, shared Q rope/cable input, direct climb-to-run recovery, idle ropes, layered city and bundled sound. Page entries are in `pages/` and the schema is in `content/`. Earlier dated check counts below are historical; current validation is 177 tests and 30 recordings. See [feedback update](player-feedback-update.md) and [structure](project-structure.md).
+
+
 Current artwork, **26 October 2026**: [19 reference-derived atlases and three generated sheets](animation-assets.md) are bundled for local and public play. Earlier local-only/ignored-art descriptions and counts below describe prior increments.
 
 
@@ -67,7 +70,7 @@ flowchart LR
 
 ## Verification and limits
 
-102 Node tests pass. The original fifteen production rehearsals still cover 26/26 lab events and a full lap; low-ledge climb has separate integration/contact tests. Ten actual headless Edge CDP scenarios exercise native library drag/drop, placement ghosts and exact coordinates, H-scaled painting, real climb playtest, preview contexts, all fifteen module views, explicit legacy file conversion, storage recovery and compact layout, with zero exceptions. Export Blob/filename/content is tested before OS download, not OS download completion. Evidence: `.midwork/assignment3/lab-evidence/2026-10-25/micro-editor/`.
+102 Node tests pass. The original fifteen production rehearsals still cover 26/26 lab events and a full lap; low-ledge climb has separate integration/contact tests. Ten actual headless Edge CDP scenarios exercise native library drag/drop, placement ghosts and exact coordinates, H-scaled painting, real climb playtest, preview contexts, all fifteen module views, explicit legacy file conversion, storage recovery and compact layout, with zero exceptions. Export Blob/filename/content is tested before OS download, not OS download completion. Evidence: `external-research/lab-evidence/2026-10-25/micro-editor/`.
 
 Endless generation, graphical route/witness tools, universal reachability qualification, production art, other-person trial remain pending. Read [micro-module behavior and limits](micro-modules-and-terrain.md), [editor contract](../Plans/Design/level-editor-requirements.md) and [TODO](../Plans/TODO.md).
 
@@ -81,4 +84,4 @@ The finite selector now includes all six authored campaign layouts. The palette 
 
 Shared recipe workflow: select a prefab, open **Level settings → Shared scene performance**, choose its bound preset, edit JSON and Validate & apply. Sequence IDs must exist in the catalogue; preset IDs remain stable; camera base/variant keys must be ordered from 0 to 1. Edits are atomic, shared by all instances, exported with content and covered by undo. Quick test uses the same director.
 
-Access the tools from the main menu **Game editor → Level Studio** (`studio.html` → `editor.html`). The studio brand returns to that workspace; Motion Lab remains a separate full diagnostics tool, with a shortcut in the desktop bar. Player mode/level screens contain no authoring panels.
+Access the tools from the main menu **Game editor → Level Studio** (`pages/studio.html` → `pages/editor.html`). The studio brand returns to that workspace; Motion Lab remains a separate full diagnostics tool, with a shortcut in the desktop bar. Player mode/level screens contain no authoring panels.

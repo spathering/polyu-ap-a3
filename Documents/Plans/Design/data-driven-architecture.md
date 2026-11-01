@@ -5,7 +5,7 @@ Implementation correction, **25 October 2026**: marked units now prepare all thr
 
 **Implementation update, 25 October 2026:** the lab, finite/prefab editor, small-module terrain brush, automatic low-ledge climb and shared 1.3.0 data contract are implemented. 102 tests pass; the original 15 rehearsals cover 26/26 lab events. See [actual owners](../../Current/modules.md) and [micro-module behavior](../../Current/micro-modules-and-terrain.md). Endless generation, universal composition qualification and production skeletal blending remain planned.
 
-Status: broader design contract; shared content, lab simulation and finite/prefab editor implemented; endless generation pending. Product authority: [requirements](../Requirements/game-requirements.md). Structural contract: [content-package.schema.json](Schemas/content-package.schema.json). Examples are fixtures, not another source of defaults.
+Status: broader design contract; shared content, lab simulation and finite/prefab editor implemented; endless generation pending. Product authority: [requirements](../Requirements/game-requirements.md). Structural contract: [content-package.schema.json](../../../content/content-package.schema.json). Examples are fixtures, not another source of defaults.
 
 ## Rules
 

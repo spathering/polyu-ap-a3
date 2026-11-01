@@ -29,7 +29,7 @@ export function validateFlow(flow,lab,content=null){
 export function gameModes(flow){return flow.modes||[{id:'finite',title:'Finite lines',subtitle:'Choose a route',description:'Handcrafted parkour challenges.',status:'available',kind:'finite',accent:'cyan'}];}
 export function levelsForMode(flow,modeId){const mode=gameModes(flow).find(m=>m.id===modeId);return mode?.status==='available'?flow.levels.filter(l=>!flow.modes||l.modeId===modeId):[];}
 export function modeForLevel(flow,id){const entry=flow.levels.find(l=>l.id===id);return entry?gameModes(flow).find(m=>!flow.modes||m.id===entry.modeId):null;}
-export function selectionUrl(flow,id){const mode=modeForLevel(flow,id)||gameModes(flow).find(m=>m.status==='available');return `levels.html?mode=${encodeURIComponent(mode.id)}`;}
+export function selectionUrl(flow,id){const mode=modeForLevel(flow,id)||gameModes(flow).find(m=>m.status==='available');return `pages/levels.html?mode=${encodeURIComponent(mode.id)}`;}
 export function nextLevel(flow,id){const mode=modeForLevel(flow,id);if(!mode)return null;const levels=levelsForMode(flow,mode.id);return levels[levels.findIndex(l=>l.id===id)+1]||null;}
 // Challenges are immutable views of the authored circuit. No copied geometry,
 // checkpoint coordinates or action timing is authored in the menu catalogue.

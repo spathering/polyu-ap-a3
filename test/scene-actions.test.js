@@ -8,7 +8,7 @@ import {presentationSnapshot} from '../src/presentation.js';
 import {Renderer} from '../src/renderer.js';
 import {cableAt} from '../src/collision.js';
 const read=p=>JSON.parse(fs.readFileSync(new URL(p,import.meta.url)));
-const content=read('../content/parkour.json'),lab=read('../content/lab-course.json'),schema=read('../Documents/Plans/Design/Schemas/content-package.schema.json'),catalog=read('../assets/character/animations.json');
+const content=read('../content/parkour.json'),lab=read('../content/lab-course.json'),schema=read('../content/content-package.schema.json'),catalog=read('../assets/character/animations.json');
 const fresh=()=>new Simulation(structuredClone(content),lab);
 
 test('early vault input waits while running, then starts at the geometry-derived mark',()=>{

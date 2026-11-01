@@ -1,7 +1,7 @@
 {
   "manifestVersion": "1.0.0",
   "retrievedDate": "2026-10-22",
-  "archiveRoot": ".midwork/assignment3/reference-assets/vector",
+  "archiveRoot": "external-research/reference-assets/vector",
   "sourceMethod": "Official Steam page gallery, browser pageAssets export; every image visually reviewed",
   "sourcePage": "https://store.steampowered.com/app/248970/Vector/",
   "summary": {

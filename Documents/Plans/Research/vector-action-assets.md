@@ -8,7 +8,7 @@ The author later clarified that the intended material is character animation fra
 
 17 original JPEG images: **10 gameplay stills, 3 trick-card screens and 4 level/menu context screens**. Every image was opened and classified from visible content. Source bytes are preserved without crops, upscaling or watermark removal. The source filename's resolution suffix does not guarantee actual dimensions; measured dimensions are recorded.
 
-Image files are stored outside the repository at workspace `.midwork/assignment3/reference-assets/vector/`. Open its `gallery.html` for a filterable local contact gallery. Each image has one primary category and secondary manifest tags; no redundant image copies are created for multiple actions.
+Image files are stored outside the repository at workspace `external-research/reference-assets/vector/`. Open its `gallery.html` for a filterable local contact gallery. Each image has one primary category and secondary manifest tags; no redundant image copies are created for multiple actions.
 
 The canonical metadata is [asset-manifest.json](VectorAssets/asset-manifest.json), including source URL/page, original filename, date, dimensions, byte length, SHA-256, observed labels, interpretation limits and rights status. The local archive and Chinese tree contain identical read-only metadata copies. English/Chinese prose is not a second source of image identity.
 

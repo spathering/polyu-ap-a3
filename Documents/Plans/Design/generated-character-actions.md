@@ -6,7 +6,7 @@ Status: **24 October 2026, trial-01 art experiment**. The author requested PNG a
 
 ## Deliverables and naming
 
-The workspace archive is `.midwork/assignment3/generated-assets/parkour-character-animation/`, with a local `README.md`, `gallery.html`, unmodified generated sheets under `source/`, reproducible packing tools and derived frames. The three sheets are now copied byte-for-byte to runtime `assets/generated/`, with mapping in `assets/character/animations.json`; no Pages publication has occurred.
+The workspace archive is `external-research/generated-assets/parkour-character-animation/`, with a local `README.md`, `gallery.html`, unmodified generated sheets under `source/`, reproducible packing tools and derived frames. The three sheets are now copied byte-for-byte to runtime `assets/generated/`, with mapping in `assets/character/animations.json`; no Pages publication has occurred.
 
 | Action ID | Category and clip | Poses |
 |---|---|---:|

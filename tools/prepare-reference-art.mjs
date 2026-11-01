@@ -4,7 +4,7 @@ import path from 'node:path';
 import {fileURLToPath} from 'node:url';
 import {createHash} from 'node:crypto';
 const root=fileURLToPath(new URL('../',import.meta.url));
-const source=path.resolve(process.argv[2]||path.join(root,'../.midwork/assignment3/reference-assets/vector-character-animation/frames'));
+const source=path.resolve(process.argv[2]||path.join(root,'../.midwork/reference-assets/vector-character-animation/frames'));
 const catalog=JSON.parse(await fs.readFile(path.join(root,'assets/character/animations.json'),'utf8'));
 const hash=bytes=>createHash('sha256').update(bytes).digest('hex');let verified=0,restored=0;
 for(const clip of catalog.clips.filter(c=>c.origin==='local-reference')){

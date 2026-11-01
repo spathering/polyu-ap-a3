@@ -5,7 +5,7 @@ Implementation correction, **25 October 2026**: marked units now prepare all thr
 
 **Implementation update, 25 October 2026:** the lab, finite/prefab editor, small-module terrain brush, automatic low-ledge climb and shared 1.3.0 data contract are implemented. 102 tests pass; the original 15 rehearsals cover 26/26 lab events. See [actual owners](../../Current/modules.md) and [micro-module behavior](../../Current/micro-modules-and-terrain.md). Endless generation, universal composition qualification and production skeletal blending remain planned.
 
-Status: proposed specification. The [JSON Schema](Schemas/content-package.schema.json) owns field shapes; the [example package](Examples/content-package.example.json) demonstrates them. Examples are not tuned defaults or proof of traversability. See [SSOT](data-driven-architecture.md) and [requirements](../Requirements/game-requirements.md).
+Status: proposed specification. The [JSON Schema](../../../content/content-package.schema.json) owns field shapes; the [example package](Examples/content-package.example.json) demonstrates them. Examples are not tuned defaults or proof of traversability. See [SSOT](data-driven-architecture.md) and [requirements](../Requirements/game-requirements.md).
 
 ## Package and coordinates
 

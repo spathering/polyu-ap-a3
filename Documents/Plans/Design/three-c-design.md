@@ -42,7 +42,7 @@ Separate locomotion, animation phase and cosmetic trick IDs. A named flip or vau
 
 ### Framing and prediction
 
-Choose an orthographic-equivalent 2D follow camera. All tuning belongs to `rules.camera` in the [content schema](Schemas/content-package.schema.json); numeric example values are untested starting points.
+Choose an orthographic-equivalent 2D follow camera. All tuning belongs to `rules.camera` in the [content schema](../../../content/content-package.schema.json); numeric example values are untested starting points.
 
 Let `W` be the visible world width derived from view height and viewport aspect, `u` the configured `targetScreenX`, `x` the interpolated player foot position and `vx` its velocity:
 

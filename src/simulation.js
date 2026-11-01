@@ -31,6 +31,7 @@ export class Simulation{
  transition(state){if(this.p.state!==state){this.p.state=state;this.p.stateTime=0;if(['Run','Slide','CrouchHold','Vault','DashGrapple','SwingGrapple','Zipline'].includes(state))this.mark(state);}}
  reject(detail){this.mark('Rejected',detail);return false;}
  preview(kind){
+  if(kind==='zipline'&&this.p.state==='Zipline'&&this.p.attachment)return {id:this.p.attachment.id,point:this.grip()};
   if(kind==='jump'&&this.p.state==='LedgeHang')return mantlePlan(this.world,this.p,this.rules)?{id:this.p.ledge.id,point:this.p.context.contact}:null;
   const marker=detectSceneAction(this.world,this.p,kind,{rules:this.rules,allowLocked:true,preferredId:this.pendingAction?.markerId});
   if(marker&&this.rules.enabledAbilities.includes(marker.kind)&&!(this.cooldowns[kind]>0)&&!['done','missed'].includes(this.sceneMatches.get(marker.id)?.status))return {id:marker.entityId,markerId:marker.id,point:marker.point,ready:this.p.x>=marker.startX};
@@ -206,7 +207,7 @@ export class Simulation{
    const cuts=knots.slice(1,-1).map(k=>k[0]*v.duration).filter(t=>t>old&&t<v.elapsed);cuts.push(v.elapsed);p.context.progress=v.elapsed/v.duration;
    for(const t of cuts){const at=sample(t),out=this.applyMove(at[0]-p.x,at[1]-p.y);if(out.contacts.length){p.vault=null;p.context=null;this.transition('Airborne');this.reject('Vault path blocked');break;}}
    if(p.vault){p.vx=(p.x-oldX)/dt;p.vy=(p.y-oldY)/dt;}
-   if(p.vault&&v.elapsed>=v.duration-1e-9){p.vault=null;p.context=null;p.vx=Math.max(r.vaultExitSpeed,v.entryVx);p.vy=0;p.landLeft=r.landingRecoverySeconds;this.transition(clearBody(p,r.bodySize,this.world.surfaces,r.standClearancePadding)?'Run':'CrouchHold');this.mark('Land',`${v.kind} exit`);}
+   if(p.vault&&v.elapsed>=v.duration-1e-9){p.vault=null;p.context=null;p.vx=Math.max(r.vaultExitSpeed,v.entryVx);p.vy=0;p.landLeft=climbing?0:r.landingRecoverySeconds;this.transition(clearBody(p,r.bodySize,this.world.surfaces,r.standClearancePadding)?'Run':'CrouchHold');this.finishPerformance();this.mark(climbing?'TraverseExit':'Land',`${v.kind} exit`);}
   }else if(p.state==='DashGrapple'){
    const e=this.world.anchors.find(e=>e.id===p.attachment.id);if(!e)this.detach('missing anchor');else{
     const c=this.center(),dx=e.position[0]-c[0],dy=e.position[1]-c[1],distance=Math.hypot(dx,dy),f=e.profile,travel=Math.min(Math.max(0,distance-f.arrivalRadius),f.speed*dt),nx=dx/distance||0,ny=dy/distance||0;

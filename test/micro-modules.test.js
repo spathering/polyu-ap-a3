@@ -9,7 +9,7 @@ import {CharacterAnimation} from '../src/animation.js';
 import {Renderer} from '../src/renderer.js';
 import {FollowCamera} from '../src/camera.js';
 const read=p=>JSON.parse(fs.readFileSync(new URL(p,import.meta.url)));
-const content=read('../content/parkour.json'),schema=read('../Documents/Plans/Design/Schemas/content-package.schema.json'),lab=read('../content/lab-course.json'),catalog=read('../assets/character/animations.json');
+const content=read('../content/parkour.json'),schema=read('../content/content-package.schema.json'),lab=read('../content/lab-course.json'),catalog=read('../assets/character/animations.json');
 const fresh=()=>new EditorDocument(content,schema);
 test('small module space is data-derived, includes anticipation and recovery, and reacts to rule changes',()=>{
  const m=moduleOf(content,'unit-vault'),before=JSON.stringify(m),b=moduleSpace(content,m);assert.ok(b[2]<12&&b[3]<5);assert.ok(b[0]<m.entities[0].rect[0]-content.rules.runSpeed*content.rules.contextApproachSeconds);assert.ok(b[0]+b[2]>m.entities[0].rect[0]+m.entities[0].rect[2]);assert.equal(JSON.stringify(m),before);
@@ -32,7 +32,7 @@ test('drawing into a shared prefab updates every instance through one geometry o
  const d=fresh();d.paintBlock([1,0,2.4,heightUnit(content)],{moduleId:'unit-pad'});const result=d.playtest(lab),sim=new Simulation(result.content,result.lab);assert.ok(sim.world.sceneActions.some(a=>a.id.startsWith('pad/')&&a.kind==='climb'));assert.ok(sim.world.sceneActions.some(a=>a.id.startsWith('chain-pad/')&&a.kind==='climb'));
 });
 test('a drawn wide low ledge commits a swept climb and lands on its top',()=>{
- const d=fresh();d.newLevel('paint-test','unit-ground');d.paintBlock([2,0,2.4,heightUnit(content)]);const result=d.playtest(lab),sim=new Simulation(result.content,result.lab);sim.step({pressed:['jump']});for(let i=0;i<90&&!sim.coverage.Climb;i++)sim.step();assert.equal(sim.coverage.Climb,1);for(let i=0;i<60&&sim.p.state==='Vault';i++)sim.step();assert.equal(sim.p.state,'Run');assert.ok(Math.abs(sim.p.y-(heightUnit(content)+content.rules.collisionSkin))<1e-8);assert.ok(sim.coverage.Land);
+ const d=fresh();d.newLevel('paint-test','unit-ground');d.paintBlock([2,0,2.4,heightUnit(content)]);const result=d.playtest(lab),sim=new Simulation(result.content,result.lab);sim.step({pressed:['jump']});for(let i=0;i<90&&!sim.coverage.Climb;i++)sim.step();assert.equal(sim.coverage.Climb,1);for(let i=0;i<60&&sim.p.state==='Vault';i++)sim.step();assert.equal(sim.p.state,'Run');assert.ok(Math.abs(sim.p.y-(heightUnit(content)+content.rules.collisionSkin))<1e-8);assert.ok(sim.coverage.TraverseExit);
 });
 test('compact stacked one-H steps can chain climbs using relative height and the same input intent',()=>{
  const d=fresh();d.newLevel('compact-steps','unit-ground');d.paintBlock([2,0,2.4,1.2]);d.paintBlock([3.2,1.2,2.4,1.2]);const t=d.playtest(lab),s=new Simulation(t.content,t.lab);s.step({pressed:['jump']});for(let n=0;n<120&&!(s.p.context?.kind==='climb'&&s.p.context.progress>=.82);n++)s.step();s.step({pressed:['jump']});for(let n=0;n<90&&(s.coverage.Climb<2||s.p.state==='Vault');n++)s.step();assert.equal(s.coverage.Climb,2);assert.equal(s.p.state,'Run');assert.ok(Math.abs(s.p.y-2.42)<1e-8);assert.equal(s.p.attachment,null);

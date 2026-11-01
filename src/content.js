@@ -45,7 +45,7 @@ export function validateContent(content,schema,lab){
  if(r.sceneTraversal){const t=r.sceneTraversal,k=t.mantleTrajectory;if(t.hangGripHeight>=r.bodySize[1]||t.wallJumpVelocity[0]>=0||t.wallJumpVelocity[1]<=0||t.dropVelocity[1]>0)errors.push('Invalid wall/ledge motion limits');if(k[0].some(v=>v!==0)||k.at(-1).some(v=>v!==1)||k.some((v,i)=>i&&(v[0]<=k[i-1][0]||v[1]<k[i-1][1])))errors.push('Invalid mantle trajectory order/endpoints');}
  const knots=r.vaultTrajectory;if(knots[0][0]!==0||knots.at(-1)[0]!==1||knots[0][1]!==0||knots.at(-1)[1]!==1||knots[0][2]!==0||knots.at(-1)[2]!==0||knots.some((k,i)=>i&&(k[0]<=knots[i-1][0]||k[1]<knots[i-1][1])))errors.push('Invalid vault trajectory order/endpoints');
  const climb=r.climbTrajectory;if(climb[0][0]!==0||climb[0][1]!==0||climb[0][2]!==0||climb.at(-1).some(v=>v!==1)||climb.some((k,i)=>i&&(k[0]<=climb[i-1][0]||k[1]<climb[i-1][1])))errors.push('Invalid climb trajectory order/endpoints');
- const keys=new Set(),actions=new Set();for(const b of r.bindings){if(actions.has(b.action))errors.push('Duplicate action binding');actions.add(b.action);for(const k of b.keys){if(keys.has(k))errors.push(`Key conflict ${k}`);keys.add(k);}}
+ const keys=new Map(),actions=new Set();for(const b of r.bindings){if(actions.has(b.action))errors.push('Duplicate action binding');actions.add(b.action);for(const k of b.keys){const prior=keys.get(k);if(prior&&![prior,b.action].every(a=>['swingGrapple','zipline'].includes(a)))errors.push(`Key conflict ${k}`);keys.set(k,b.action);}}
  for(const p of content.profiles)if(p.kind==='swingGrapple'&&p.minLength>p.maxLength)errors.push('Rope length order');
  for(const m of content.modules){
   ids(m.entities,`${m.id} entity`);ids(m.sockets,`${m.id} socket`);

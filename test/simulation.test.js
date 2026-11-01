@@ -6,7 +6,7 @@ import {runRehearsal} from '../src/rehearsal.js';
 import {validateContent,deepFreeze} from '../src/content.js';
 import {bodyRect,overlaps,moveBody} from '../src/collision.js';
 import {FollowCamera} from '../src/camera.js';
-const content=JSON.parse(fs.readFileSync(new URL('../content/parkour.json',import.meta.url))),lab=JSON.parse(fs.readFileSync(new URL('../content/lab-course.json',import.meta.url))),schema=JSON.parse(fs.readFileSync(new URL('../Documents/Plans/Design/Schemas/content-package.schema.json',import.meta.url)));
+const content=JSON.parse(fs.readFileSync(new URL('../content/parkour.json',import.meta.url))),lab=JSON.parse(fs.readFileSync(new URL('../content/lab-course.json',import.meta.url))),schema=JSON.parse(fs.readFileSync(new URL('../content/content-package.schema.json',import.meta.url)));
 const fresh=()=>new Simulation(structuredClone(content),structuredClone(lab));
 test('canonical schema and cross-reference validation accept authored lab',()=>assert.deepEqual(validateContent(content,schema,lab),[]));
 for(const [name,mutate]of [

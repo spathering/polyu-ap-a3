@@ -1,5 +1,8 @@
 # Project glossary
 
+Current release, 1 November 2026: twelve campaign routes, three training routes, shared Q rope/cable input, direct climb-to-run recovery, idle ropes, layered city and bundled sound. Page entries are in `pages/` and the schema is in `content/`. Earlier dated check counts below are historical; current validation is 177 tests and 30 recordings. See [feedback update](player-feedback-update.md) and [structure](project-structure.md).
+
+
 Current artwork, **26 October 2026**: [19 reference-derived atlases and three generated sheets](animation-assets.md) are bundled for local and public play. Earlier local-only/ignored-art descriptions and counts below describe prior increments.
 
 
@@ -9,12 +12,12 @@ Updated: **24 October 2026**. These terms occur in current project documents. Th
 
 | Term | Meaning in this project | Current use |
 |---|---|---|
-| Interaction loop | Player input causes a meaningful program response and feedback that informs the next action. | Assignment requirement. |
+| Interaction loop | Player input causes a meaningful program response and feedback that informs the next action. | Core interaction requirement. |
 | Core mechanic | The central repeated interaction: timing and chaining parkour movement through a readable route. | Timing/chaining implemented in the lab; tuning provisional. |
 | Game state | Data describing the current game, such as phase, progress and score if applicable. | Owned by the lab simulator. |
 | Game loop | Repeated input/update/render work that drives a running game. | Native JavaScript fixed-step update and Canvas render. |
 | Feedback | Visible or audible evidence of what a player action changed. | State, motion, targets, logs and coverage visible in the lab. |
-| MVP | Minimum viable product: the smallest complete playable scope used to validate the core interaction. | Planning shorthand, not an extra assignment requirement. |
+| MVP | Minimum viable product: the smallest complete playable scope used to validate the core interaction. | Planning shorthand, planning shorthand. |
 | User trial / playtest | Another person tries the experience before receiving an explanation; observations inform a decision. | Required and pending. |
 | Module | A unit with a clear responsibility and dependency boundary; it need not be a separate package. | See actual source boundaries in modules.md. |
 | Mermaid | Text syntax used to describe diagrams within Markdown code blocks. | Used for document and candidate architecture diagrams. |
@@ -175,9 +178,20 @@ See [3C](../Plans/Design/three-c-design.md), [state machine](../Plans/Design/cha
 | Mode / `modeId` | A catalogue-owned grouping of playable routes; every route references one mode. |
 | Campaign | Six independently authored finite courses. |
 | Training | Three existing station-based challenges played through the normal game scene. |
-| Game editor workspace | `studio.html`, the separate launcher for Level Studio and Motion Lab; outside player mode/route flow. |
+| Game editor workspace | `pages/studio.html`, the separate launcher for Level Studio and Motion Lab; outside player mode/route flow. |
 | Mode-bound navigation | Level return, completion count and next route use canonical membership; next never enters another mode. |
 
 [Menu behavior](game-flow.md) also defines disabled Endless and legacy URL handling.
 
 Published reference atlas: a hash-checked PNG page selected for runtime and tracked under `assets/character/reference/`. This differs from raw/unselected archived exports; `local-reference` remains a source-origin tag.
+
+## New presentation and traversal terms
+
+| Term | Meaning |
+|---|---|
+| TraverseExit | Grounded climb/mantle completion; resumes running without an impact recovery clip. |
+| Contextual rope input | One physical control resolves cable or swing on press and preserves that identity through release. |
+| Idle rope | The visible resting tether and grip before a character attaches. |
+| Parallax | Background layers move at different fractions of camera motion to suggest depth. |
+| Audio event observer | Read-only consumer of simulation event serials; avoids duplicate effects and never changes motion. |
+| District course | A longer authored route composed from translated shared module instances. |

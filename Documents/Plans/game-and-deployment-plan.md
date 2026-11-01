@@ -1,13 +1,13 @@
 # Parkour game and GitHub Pages plan
 
-Date: **22 October 2026**. This is a plan, not an implementation report. See [TODO](TODO.md) and the [assignment brief](Requirements/assignment3-brief.md).
+Date: **22 October 2026**. This is a plan, not an implementation report. See [TODO](TODO.md) and the [game requirements](Requirements/game-requirements.md).
 
 ## Confirmed direction
 
 - Develop a small game in `polyu-ap-a3`, playable directly from a GitHub Pages link.
 - Focus on one complete input/response/feedback loop, understandable controls and a manageable scope.
 - Maintain root README, PROCESS and STANDARD, with Current, History and Plans documentation.
-- Keep repository project documentation in English, with a Chinese counterpart at workspace `.midwork/assignment3/polyu-ap-a3/` using the same relative paths.
+- Keep repository project documentation in English, with a Chinese counterpart at workspace `external-research/polyu-ap-a3/` using the same relative paths.
 - Keep current structure, modules and glossary aligned with every code/configuration change.
 - Use Vector as a reference for an original parkour game; add dash grapple, swing grapple, zipline and jump-pad environment interactions.
 - Deliver authored finite levels, rule-based endless assembly of preset modules and a level editor, with strict data-driven SSOT.
@@ -88,7 +88,6 @@ Research supports a possible GitHub-only, asynchronous score board using authent
 - All four requested traversal mechanics, finite and endless play and the editor pass their linked acceptance scenarios; no requirement is silently reduced to a stretch goal.
 - Data owners, schema, semantic checks and production/editor simulation remain shared and authoritative.
 
-Suggested sequence: choose the stack and refine the movement proposal; build shared contracts/validation and a movement slice; add four traversal test modules; complete fixed layout authoring/editor; validate endless assembly; playtest, deploy and finish submission documents. Deadline: **1 November 2026, 23:59 Hong Kong time**.
 
 ## Implemented delivery update, 25 October 2026
 

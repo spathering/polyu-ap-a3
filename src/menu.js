@@ -1,3 +1,5 @@
+import {mountAudio} from './audio.js';
+import {controlBindings} from './input.js';
 import {validateFlow,readProgress,gameModes,levelsForMode} from './game-flow.js';
 const $=id=>document.getElementById(id),read=async path=>{const r=await fetch(path,{cache:'no-cache'});if(!r.ok)throw Error(`${path}: HTTP ${r.status}`);return r.json();};
 const graphics=[
@@ -14,7 +16,7 @@ try{
   const count=document.createElement('span');count.className='mode-count';const levels=levelsForMode(flow,mode.id);count.textContent=mode.status==='available'?`${String(levels.length).padStart(2,'0')} ROUTES`:'IN DEVELOPMENT';
   const art=document.createElement('div');art.className='mode-symbol';art.setAttribute('aria-hidden','true');if(mode.kind==='endless')art.textContent='∞';else art.innerHTML=`<svg viewBox="0 0 300 150" fill="none" stroke="currentColor" stroke-width="3">${graphics[mode.id==='training'?1:0]}</svg>`;
   const body=document.createElement('div');body.className='mode-card-content';const small=document.createElement('small');small.textContent=mode.subtitle;const h=document.createElement('h2');h.textContent=mode.title;const desc=document.createElement('p');desc.textContent=mode.description;
-  const link=document.createElement(mode.status==='available'?'a':'button');link.className='button';if(mode.status==='available')link.href=`levels.html?mode=${encodeURIComponent(mode.id)}`;else{link.disabled=true;link.setAttribute('aria-disabled','true');}link.append(mode.status==='available'?'Select mode':'Coming soon',Object.assign(document.createElement('b'),{textContent:mode.status==='available'?'↗':'—'}));body.append(small,h,desc,link);card.append(count,art,body);return card;
+  const link=document.createElement(mode.status==='available'?'a':'button');link.className='button';if(mode.status==='available')link.href=`pages/levels.html?mode=${encodeURIComponent(mode.id)}`;else{link.disabled=true;link.setAttribute('aria-disabled','true');}link.append(mode.status==='available'?'Select mode':'Coming soon',Object.assign(document.createElement('b'),{textContent:mode.status==='available'?'↗':'—'}));body.append(small,h,desc,link);card.append(count,art,body);return card;
  }));
  if($('level-list')){
   const modeId=new URLSearchParams(location.search).get('mode')||gameModes(flow).find(m=>m.status==='available').id,mode=gameModes(flow).find(m=>m.id===modeId);if(!mode)throw Error('Unknown mode. Return to mode select to choose a route.');if(mode.status!=='available')throw Error(`${mode.title} is still in development. Choose Campaign or Training.`);
@@ -24,10 +26,10 @@ try{
    const card=document.createElement('article');card.className=`level-card ${level.accent}`;card.dataset.level=level.id;
    const art=document.createElement('div');art.className='level-art';art.setAttribute('aria-hidden','true');art.innerHTML=`<span class="card-number">${String(i+1).padStart(2,'0')} / ${(level.stationIds||level.sections).length} ${(level.stationIds||level.sections).length===1?'SECTION':'SECTIONS'}</span><svg class="route-graphic" viewBox="0 0 300 150" fill="none" stroke="currentColor" stroke-width="3">${graphics[i%graphics.length]}</svg>`;
    const body=document.createElement('div');body.className='level-card-content';const meta=document.createElement('div');meta.className='level-meta';meta.textContent=level.difficulty;const h=document.createElement('h2');h.textContent=level.title;const subtitle=document.createElement('span');subtitle.className='level-subtitle';subtitle.textContent=level.subtitle.replace(/^\d+ \/ /,'');const desc=document.createElement('p');desc.textContent=level.description;const best=document.createElement('div');best.className='level-best';const seconds=progress[level.id]?.bestSeconds;if(Number.isFinite(seconds)&&seconds>=0){completed++;best.textContent=`✓ COMPLETE · BEST ${seconds.toFixed(2)} s`;}else best.textContent='NOT COMPLETED YET';
-   const link=document.createElement('a');link.className='button';link.href=`play.html?level=${encodeURIComponent(level.id)}`;link.append('Start run',Object.assign(document.createElement('b'),{textContent:'↗'}));body.append(meta,h,subtitle,desc,best,link);card.append(art,body);return card;
+   const link=document.createElement('a');link.className='button';link.href=`pages/play.html?level=${encodeURIComponent(level.id)}`;link.append('Start run',Object.assign(document.createElement('b'),{textContent:'↗'}));body.append(meta,h,subtitle,desc,best,link);card.append(art,body);return card;
   }));$('completion-count').textContent=`${String(completed).padStart(2,'0')} / ${String(levels.length).padStart(2,'0')}`;
  }
- if($('menu-bindings'))for(const binding of content.rules.bindings){const row=document.createElement('div'),name=document.createElement('dt'),keys=document.createElement('dd');name.textContent={jump:'Jump / vault / climb',slide:'Slide / roll / drop',dashGrapple:'Dash grapple',swingGrapple:'Swing grapple',zipline:'Zipline',pause:'Pause',retry:'Retry section'}[binding.action]||binding.action;keys.textContent=(binding.action==='swingGrapple'?'HOLD ':'')+binding.keys.map(k=>({Space:'SPACE',ArrowUp:'↑',ArrowDown:'↓',Escape:'ESC'}[k]||k.replace('Key',''))).join(' / ');row.append(name,keys);$('menu-bindings').append(row);}
+ if($('menu-bindings'))for(const binding of controlBindings(content.rules.bindings)){const row=document.createElement('div'),name=document.createElement('dt'),keys=document.createElement('dd');name.textContent={jump:'Jump / vault / climb',slide:'Slide / roll / drop',dashGrapple:'Dash grapple',rope:'Hold to swing / press for cable',swingGrapple:'Swing grapple',zipline:'Zipline',pause:'Pause',retry:'Retry section'}[binding.action]||binding.action;keys.textContent=(binding.action==='swingGrapple'?'HOLD ':'')+binding.keys.map(k=>({Space:'SPACE',ArrowUp:'↑',ArrowDown:'↓',Escape:'ESC'}[k]||k.replace('Key',''))).join(' / ');row.append(name,keys);$('menu-bindings').append(row);}
  $('load-status').textContent='';
 }catch(e){$('load-status').textContent=`Could not load this menu. ${e.message}`;if($('level-summary'))$('level-summary').textContent='Return to mode select or reload to try again.';}
 const dialog=$('controls-dialog');if(dialog){dialog.addEventListener('close',()=>$('how-to-play').focus());$('how-to-play').onclick=()=>dialog.showModal();$('close-controls').onclick=$('guide-done').onclick=()=>dialog.close();dialog.addEventListener('click',e=>{if(e.target===dialog){const r=dialog.getBoundingClientRect();if(e.clientX<r.left||e.clientX>r.right||e.clientY<r.top||e.clientY>r.bottom)dialog.close();}});}
@@ -42,3 +44,5 @@ if($('runner')){
   }requestAnimationFrame(paint);
  }catch{/* The menu remains usable if sprite artwork is unavailable. */}
 }
+
+mountAudio(document.querySelector('.menu-footer')||document.body);

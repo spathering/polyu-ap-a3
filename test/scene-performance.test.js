@@ -9,7 +9,7 @@ import {directedCameraPose} from '../src/directed-camera.js';
 import {approachDistance,approachDuration,validatePerformanceSequences} from '../src/scene-performance.js';
 import {presentationSnapshot} from '../src/presentation.js';
 import {rehearsalInput} from '../src/rehearsal.js';
-const read=p=>JSON.parse(fs.readFileSync(new URL(p,import.meta.url))),content=read('../content/parkour.json'),schema=read('../Documents/Plans/Design/Schemas/content-package.schema.json'),lab=read('../content/lab-course.json'),catalog=read('../assets/character/animations.json');
+const read=p=>JSON.parse(fs.readFileSync(new URL(p,import.meta.url))),content=read('../content/parkour.json'),schema=read('../content/content-package.schema.json'),lab=read('../content/lab-course.json'),catalog=read('../assets/character/animations.json');
 const fresh=()=>{const s=new Simulation(structuredClone(content),lab);s.reset(2);s.p.vx=6;return s;};
 test('scene outcome clips and override camera tracks reject invalid authoring',()=>{
  assert.deepEqual(validatePerformanceSequences(content,catalog),[]);const bad=structuredClone(content);bad.scenePerformances[0].variants.late.sequence='unknown';assert.match(validatePerformanceSequences(bad,catalog).join(' '),/missing animation sequence unknown/);bad.scenePerformances[0].variants.missed.cameraKnots=[[0,0,0],[.8,.5,0],[.3,1,0],[1,1,0]];assert.ok(validateContent(bad,schema,lab).some(e=>e.includes('camera track')));

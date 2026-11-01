@@ -1,40 +1,16 @@
-# GitHub Pages deployment
+# Static deployment
 
-Deployed and verified **25 October 2026**. [Play Motion / Run](https://spathering.github.io/polyu-ap-a3/). Visitors need a browser and an internet connection; no account, Node installation or local server is required.
+The game is hosted at [Motion / Run](https://spathering.github.io/polyu-ap-a3/). GitHub Pages publishes the `main` branch from the repository root. `.nojekyll` keeps the source tree directly servable. No custom build, package install, API key or runtime backend is needed.
 
-## Published configuration
-
-| Setting | Value |
+| Entry | Path |
 |---|---|
-| Repository | `spathering/polyu-ap-a3` (public) |
-| Branch / folder | `main` / `/(root)` |
-| Pages build type | `legacy`, GitHub-managed branch publishing |
-| HTTPS | Enforced |
-| Entry point | Root `index.html` |
-| Static handling | Root `.nojekyll`; no bundler, dependency installation or custom workflow required |
-| Deployment trigger | Push a commit to `main`; GitHub builds and publishes the branch |
+| Main menu | `index.html` |
+| Modes / routes | `pages/modes.html`, `pages/levels.html?mode=campaign` |
+| Game | `pages/play.html?level=roof-rhythm` |
+| Editor workspace | `pages/studio.html`, `pages/editor.html`, `pages/lab.html` |
 
-The existing tracked HTML/CSS/JS, JSON contracts and generated PNGs are served directly. All game/menu data URLs remain relative to the repository subdirectory. `tools/serve.mjs` is only a local development server; it is not needed on Pages. The initial successful build published game commit `06a75c0`; subsequent deployment documentation and the overlay visibility fix use the same branch publishing configuration.
+All 22 character sheets and eight audio files are bundled. `content/audio.json` and `assets/character/animations.json` record their hashes. Reference research archives are not deployment prerequisites. Audio starts only after a user gesture. Best times and preferences are stored locally; shared scores and endless generation are not implemented.
 
-## User entry points
+The 1 November 2026 update moves all non-home HTML into `pages/` and CSS into `styles/`; internal links and relative base URLs follow that layout. Old root-level deep links have been replaced. Use the main menu to navigate. Local checks cover the repository URL prefix as well as the plain development root.
 
-- [Main menu](https://spathering.github.io/polyu-ap-a3/): Play → Mode select → Campaign or Training → route.
-- [Campaign](https://spathering.github.io/polyu-ap-a3/levels.html?mode=campaign): six independently authored finite routes.
-- [Training](https://spathering.github.io/polyu-ap-a3/levels.html?mode=training): three focused routes.
-- [Game editor](https://spathering.github.io/polyu-ap-a3/studio.html): separate Level Studio and Motion Lab launchers.
-
-Endless remains disabled. Best times, completion and editor drafts are local to each browser/origin; local `127.0.0.1` progress does not transfer to the public site. There is no shared score service or server-side editor storage.
-
-## Published artwork
-
-Updated **26 October 2026**: all nineteen selected reference-derived atlases are now tracked at `assets/character/reference/`, together with three generated sheets. Renderer/menu use the shared `lab-sprites-06-published` catalogue; normal public loading displays the prepared reference sprites. The rig/silhouette remains an error fallback. Raw source packs, publisher code and legacy/unselected exports stay outside the release. See [published animation assets](animation-assets.md). The earlier 25 October rig-only reference behavior is superseded by this release.
-
-## Verification and maintenance
-
-- GitHub Pages reports a successful build from `main` and HTTPS is enforced.
-- Public HTTPS returns 200 for 21 HTML/CSS/JS/content/schema/generated-image files; bytes were compared with committed Git objects (avoiding Windows working-tree newline differences).
-- Ten Edge scenarios run against the public URL: help/Escape/focus, mode gating, campaign pause/restart, actual keyboard foundations completion, saved 1/3 training progress and mode-local next/return, unavailable/bad URLs, direct navigation, both editor tools, repository-prefix paths, 390-pixel menus and missing-art fallback. No browser exceptions were observed.
-- Screenshot review found the restart control overriding its HTML `hidden` state. `play.css` now explicitly hides it on ready/results while retaining it on pause; preflight and public checks verify computed visibility.
-- Local shared-content validation and all 153 Node tests pass. The 24 qualified production recordings remain the gameplay regression baseline.
-
-Future releases: run `npm run check`, `npm test` and `npm run rehearse`; push to `main`; inspect the repository's [Actions](https://github.com/spathering/polyu-ap-a3/actions) and [Pages settings](https://github.com/spathering/polyu-ap-a3/settings/pages), then verify the public menu, representative run and changed assets. A successful Git push alone does not establish a successful deployment. GitHub's [branch-publishing guide](https://docs.github.com/en/pages/getting-started-with-github-pages/configuring-a-publishing-source-for-your-github-pages-site) describes the same source configuration. Credentials were used only in memory by the local deployment helper and were not written into project files or logs.
+Release procedure: run `npm run check`, `npm test` and `npm run rehearse`; verify menus, actions, audio and the editor in a browser; commit with an English message and push `main`; verify the Pages build and public content hashes. [Current update](player-feedback-update.md).

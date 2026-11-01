@@ -1,5 +1,8 @@
 # Scene choreography and timing outcomes
 
+Current release, 1 November 2026: twelve campaign routes, three training routes, shared Q rope/cable input, direct climb-to-run recovery, idle ropes, layered city and bundled sound. Page entries are in `pages/` and the schema is in `content/`. Earlier dated check counts below are historical; current validation is 177 tests and 30 recordings. See [feedback update](player-feedback-update.md) and [structure](project-structure.md).
+
+
 Current artwork, **26 October 2026**: [19 reference-derived atlases and three generated sheets](animation-assets.md) are bundled for local and public play. Earlier local-only/ignored-art descriptions and counts below describe prior increments.
 
 
@@ -46,7 +49,7 @@ A shot is sampled from prebound scene coordinates, normalized camera knots and s
 1. Select a placed unit or its library prefab in Level Studio. Open **Level settings → Shared scene performance**.
 2. Select its bound preset. Edit anticipation, timely boundary, each variant's sequence/duration/input lock and camera knots/blend/release. IDs and world geometry remain shared references. Changes affect every linked unit.
 3. Apply validates the whole candidate atomically, including clip existence, references and ordered camera keys. Undo restores the same document. Export uses the shared package; quick test uses the production simulator.
-4. Open `lab.html`, station **Context vault**, and choose `timing vault timely`, `timing vault late`, or `timing vault missed` under Scripted rehearsal. All start at the same obstacle. Live input takes control from a rehearsal.
+4. Open `pages/lab.html`, station **Context vault**, and choose `timing vault timely`, `timing vault late`, or `timing vault missed` under Scripted rehearsal. All start at the same obstacle. Live input takes control from a rehearsal.
 
 The seven recipe IDs are `scene-jump`, `scene-slide`, `scene-vault`, `scene-climb`, `scene-dash-grapple`, `scene-swing-grapple` and `scene-zipline`. `rules.performanceByKind` provides automatic painted-block defaults. Explicit marker `performanceId` overrides that mapping. `required: false` marks an optional branch. These are shared package fields, not separate editor defaults. Older 1.3 packages without recipes retain legacy behavior.
 

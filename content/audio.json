@@ -1,0 +1,97 @@
+{
+  "version": 1,
+  "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+  "stepMetres": 1.8,
+  "maxVoices": 8,
+  "tracks": {
+    "music": {
+      "file": "assets/audio/hyperton.mp3",
+      "gain": 0.17,
+      "author": "Sudocolon",
+      "source": "https://opengameart.org/content/hyperton",
+      "download": "https://opengameart.org/sites/default/files/Hyperton.mp3",
+      "license": "CC0-1.0",
+      "sha256": "a98dea8138f10ce8b595c63b3fd1652e672a8425c361486234265638932953e3"
+    },
+    "step": {
+      "file": "assets/audio/click_001.wav",
+      "gain": 0.14,
+      "author": "Kenney",
+      "source": "https://kenney.nl/assets/interface-sounds",
+      "download": "https://api.github.com/repos/Calinou/kenney-interface-sounds/contents/addons/kenney_interface_sounds/click_001.wav",
+      "license": "CC0-1.0",
+      "sha256": "ea67c9d78750e5a356bf53ef8c2063b52cc3ccdae6ae8afeec87f97f79ae692d"
+    },
+    "jump": {
+      "file": "assets/audio/maximize_003.wav",
+      "gain": 0.35,
+      "author": "Kenney",
+      "source": "https://kenney.nl/assets/interface-sounds",
+      "download": "https://api.github.com/repos/Calinou/kenney-interface-sounds/contents/addons/kenney_interface_sounds/maximize_003.wav",
+      "license": "CC0-1.0",
+      "sha256": "3233c5bad496e64a707177583e34f2ed786212e3da87c123e11ad4ae1e77dfee"
+    },
+    "slide": {
+      "file": "assets/audio/minimize_003.wav",
+      "gain": 0.3,
+      "author": "Kenney",
+      "source": "https://kenney.nl/assets/interface-sounds",
+      "download": "https://api.github.com/repos/Calinou/kenney-interface-sounds/contents/addons/kenney_interface_sounds/minimize_003.wav",
+      "license": "CC0-1.0",
+      "sha256": "1496cfd47fc89e499d94cea45747d10924c165774ea5f74b9e0787de56e87fbc"
+    },
+    "land": {
+      "file": "assets/audio/drop_004.wav",
+      "gain": 0.32,
+      "author": "Kenney",
+      "source": "https://kenney.nl/assets/interface-sounds",
+      "download": "https://api.github.com/repos/Calinou/kenney-interface-sounds/contents/addons/kenney_interface_sounds/drop_004.wav",
+      "license": "CC0-1.0",
+      "sha256": "8bec0bc73a2536c81467790f41529a0c335b3915baa2caf3d248b6ebacce93a2"
+    },
+    "grapple": {
+      "file": "assets/audio/switch_004.wav",
+      "gain": 0.4,
+      "author": "Kenney",
+      "source": "https://kenney.nl/assets/interface-sounds",
+      "download": "https://api.github.com/repos/Calinou/kenney-interface-sounds/contents/addons/kenney_interface_sounds/switch_004.wav",
+      "license": "CC0-1.0",
+      "sha256": "70826a511743c6683894b1040e939794e3b083b403ca750340546125fe1fe652"
+    },
+    "complete": {
+      "file": "assets/audio/confirmation_002.wav",
+      "gain": 0.45,
+      "author": "Kenney",
+      "source": "https://kenney.nl/assets/interface-sounds",
+      "download": "https://api.github.com/repos/Calinou/kenney-interface-sounds/contents/addons/kenney_interface_sounds/confirmation_002.wav",
+      "license": "CC0-1.0",
+      "sha256": "b23339f3fdcd9f54520ca73caa3a9ae93ecfb3675acdaf1468990feb5d55d5fa"
+    },
+    "fail": {
+      "file": "assets/audio/error_004.wav",
+      "gain": 0.35,
+      "author": "Kenney",
+      "source": "https://kenney.nl/assets/interface-sounds",
+      "download": "https://api.github.com/repos/Calinou/kenney-interface-sounds/contents/addons/kenney_interface_sounds/error_004.wav",
+      "license": "CC0-1.0",
+      "sha256": "3ac988f34d53623343c77060c950ee5671684eacd9bb382a32d145e011c44984"
+    }
+  },
+  "events": {
+    "Jump": "jump",
+    "WallJump": "jump",
+    "JumpPad": "jump",
+    "Slide": "slide",
+    "Roll": "slide",
+    "Climb": "grapple",
+    "Mantle": "grapple",
+    "Vault": "jump",
+    "SwingGrapple": "grapple",
+    "DashGrapple": "grapple",
+    "Zipline": "grapple",
+    "Land": "land",
+    "TraverseExit": "land",
+    "Failed": "fail",
+    "Completed": "complete"
+  }
+}

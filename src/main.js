@@ -1,8 +1,10 @@
+let audio;
+import {mountAudio} from './audio.js';
 import {validateContent,deepFreeze} from './content.js';
 import {Simulation} from './simulation.js';
 import {FollowCamera} from './camera.js';
 import {Renderer} from './renderer.js';
-import {SemanticInput} from './input.js';
+import {SemanticInput,controlBindings} from './input.js';
 import {rehearsalInput} from './rehearsal.js';
 import {presentationSnapshot} from './presentation.js';
 const $=id=>document.getElementById(id);
@@ -22,8 +24,8 @@ function buildControls(){
  $('stations').replaceChildren(...lab.stations.map((station,i)=>{const button=document.createElement('button');button.className='station-button';button.setAttribute('aria-label',`Station ${i+1}: ${station.name}`);const number=document.createElement('span');number.textContent=String(i+1).padStart(2,'0');button.append(number,station.name);button.onclick=()=>{demo=null;input.clear();accumulator=0;sim.reset(i);const witness=lab.witnesses.find(w=>w.stationId===station.id);if(witness)$('demo-select').value=witness.id;updateUI(sim.snapshot());$('game').focus({preventScroll:true});};return button;}));
  $('demo-select').replaceChildren(...lab.witnesses.filter(w=>w.id!=='session').map(w=>{const option=document.createElement('option');option.value=w.id;option.textContent=w.id==='full-loop'?'Full circuit / all traversal':w.id.replaceAll('-',' ');return option;}));
  $('coverage').replaceChildren(...lab.coverage.map(c=>{const item=document.createElement('span');item.className='coverage-item';item.dataset.check=c.id;item.textContent=c.label;return item;}));
- $('action-buttons').replaceChildren(...content.rules.bindings.filter(b=>!['pause','retry'].includes(b.action)).map(binding=>{
-  const button=document.createElement('button');button.className='action-key';button.dataset.action=binding.action;const key=document.createElement('kbd');key.textContent=keyLabel(binding.keys[0]);button.append(key,{jump:'Jump',slide:'Slide',dashGrapple:'Dash',swingGrapple:'Swing · hold',zipline:'Cable'}[binding.action]);button.setAttribute('aria-label',`${binding.action}${binding.behaviour==='hold'?' (hold)':''}`);
+ $('action-buttons').replaceChildren(...controlBindings(content.rules.bindings).filter(b=>!['pause','retry'].includes(b.action)).map(binding=>{
+  const button=document.createElement('button');button.className='action-key';button.dataset.action=binding.action;const key=document.createElement('kbd');key.textContent=keyLabel(binding.keys[0]);button.append(key,{jump:'Jump',slide:'Slide',dashGrapple:'Dash',rope:'Rope / cable',swingGrapple:'Swing · hold',zipline:'Cable'}[binding.action]);button.setAttribute('aria-label',`${binding.action}${binding.behaviour==='hold'?' (hold)':''}`);
   button.onpointerdown=e=>{e.preventDefault();$('game').focus({preventScroll:true});button.setPointerCapture(e.pointerId);input.holdAction(binding.action,true);};const release=()=>input.holdAction(binding.action,false);button.onpointerup=release;button.onpointercancel=release;button.onlostpointercapture=release;return button;
  }));
 }
@@ -41,7 +43,7 @@ function updateUI(s){
  for(const [i,button]of [...$('stations').children].entries()){button.classList.toggle('active',i===s.stationIndex);button.classList.toggle('complete',lab.stations[i].checks.every(c=>s.coverage[c]));button.setAttribute('aria-current',i===s.stationIndex?'step':'false');}
  const done=lab.coverage.filter(c=>s.coverage[c.id]).length;$('coverage-count').textContent=`${done} / ${lab.coverage.length}`;$('coverage-meter').style.width=`${done/lab.coverage.length*100}%`;
  for(const node of $('coverage').children)node.classList.toggle('done',!!s.coverage[node.dataset.check]);
- for(const button of $('action-buttons').children)button.classList.toggle('eligible',!!s.targets[button.dataset.action]);
+ for(const button of $('action-buttons').children)button.classList.toggle('eligible',!!(s.targets[button.dataset.action]||(button.dataset.action==='rope'&&(s.targets.swingGrapple||s.targets.zipline))));
  const top=s.events[0];if(top&&top.serial!==lastEvent){lastEvent=top.serial;$('events').replaceChildren(...s.events.map(e=>{const li=document.createElement('li');li.title=e.detail;const tick=document.createElement('span');tick.textContent=`t${e.tick}`;li.append(tick,e.id);return li;}));$('last-event').textContent=top.detail||top.id;}
  $('overlay').hidden=s.session==='Playing';if($('pause').dataset.session!==s.session){$('pause').dataset.session=s.session;$('pause').innerHTML=s.session==='Paused'?'Resume <kbd>ESC</kbd>':'Pause <kbd>ESC</kbd>';}
  if(s.session!=='Playing'){
@@ -61,7 +63,7 @@ function frame(now){
   let steps=0;while(accumulator>=sim.dt&&steps<lab.maxStepsPerFrame){const live=input.consume(content.rules.maxBufferedActions);if(live.pressed.length||live.released.length)demo=null;const controls=demo?rehearsalInput(demo.witness,demo.frame,demo.held):live;previousSnapshot=sim.snapshot();sim.step(controls);if(demo&&++demo.frame>=demo.witness.frames){demo=null;sim.pause('Scripted rehearsal complete. Resume for live controls, or choose another station.');}accumulator-=sim.dt;steps++;if(sim.session!=='Playing'){demo=null;input.clear();accumulator=0;break;}}
   if(steps===lab.maxStepsPerFrame)accumulator=Math.min(accumulator,sim.dt);
  }
- const s=sim.snapshot(),rect=$('game').getBoundingClientRect();const view=presentationSnapshot(previousSnapshot,s,accumulator/sim.dt);camera.update(view,elapsed,rect.width/rect.height,sim.world);renderer.draw(view,camera);
+ const s=sim.snapshot(),rect=$('game').getBoundingClientRect();const view=presentationSnapshot(previousSnapshot,s,accumulator/sim.dt);camera.update(view,elapsed,rect.width/rect.height,sim.world);renderer.draw(view,camera);audio?.update(s);
  if(now-lastUI>65){updateUI(s);lastUI=now;}requestAnimationFrame(frame);
 }
 function resumeOrRetry(){if(!sim)return;previousSnapshot=null;demo=null;input.clear();accumulator=0;if(sim.session==='Failed')sim.retry();else sim.resume();updateUI(sim.snapshot());$('game').focus({preventScroll:true});}
@@ -73,5 +75,7 @@ $('tuning').onsubmit=e=>{
 };
 $('export').onclick=()=>{if(!sim)return;const blob=new Blob([JSON.stringify(content,null,2)+'\n'],{type:'application/json'}),url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download='parkour-tuned.json';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);};
 try{
- [content,schema,lab]=await Promise.all([read('content/parkour.json'),read('Documents/Plans/Design/Schemas/content-package.schema.json'),read('content/lab-course.json')]);createRuntime(content);requestAnimationFrame(frame);
+ [content,schema,lab]=await Promise.all([read('content/parkour.json'),read('content/content-package.schema.json'),read('content/lab-course.json')]);createRuntime(content);requestAnimationFrame(frame);
 }catch(error){$('overlay-title').textContent='Content could not load.';$('overlay-detail').textContent=error.message;$('continue').textContent='Reload page';$('continue').onclick=()=>location.reload();$('build-status').textContent='LOAD ERROR';}
+
+mountAudio(document.getElementById('controls-panel')||document.querySelector('main'),{game:true}).then(value=>audio=value);

@@ -1,5 +1,8 @@
 # Character 3C and looping test course
 
+Current release, 1 November 2026: twelve campaign routes, three training routes, shared Q rope/cable input, direct climb-to-run recovery, idle ropes, layered city and bundled sound. Page entries are in `pages/` and the schema is in `content/`. Earlier dated check counts below are historical; current validation is 177 tests and 30 recordings. See [feedback update](player-feedback-update.md) and [structure](project-structure.md).
+
+
 Current artwork, **26 October 2026**: [19 reference-derived atlases and three generated sheets](animation-assets.md) are bundled for local and public play. Earlier local-only/ignored-art descriptions and counts below describe prior increments.
 
 
@@ -88,8 +91,8 @@ The nine stations now compose small action definitions with shared terrain: fift
 
 [Micro modules and terrain](micro-modules-and-terrain.md) add deliberate low-platform climb, shared automatic block detectors, late next-action queuing, stable captured targets, actual vault velocity, filtered camera prediction/standing focus and landmark-matched return to running. Original lab cues and 15 witnesses remain valid; climb is exercised in editor previews and integration tests. The reference subset now contains 516 poses on 12 pages.
 
-The original loop now opens at `lab.html`; root opens the main menu. Finite challenges share this controller and add a completion state. See [game flow](game-flow.md) and [latest 3C](reference-driven-3c.md).
+The original loop now opens at `pages/lab.html`; root opens the main menu. Finite challenges share this controller and add a completion state. See [game flow](game-flow.md) and [latest 3C](reference-driven-3c.md).
 
 The original nine-station loop and 26-event baseline remain unchanged. New ledge/mantle, wall rebound and roll are covered by six authored course recordings and isolated editor prefab tests. `npm run rehearse` now runs 21 cases in total. [New courses and test scope](campaign-and-scene-actions.md).
 
-The complete lab is now under **Game editor → Motion Lab** (`studio.html` → `lab.html`). Its station navigation, rehearsals, tuning, detectors and telemetry remain intact. The brand returns to the editor workspace. Players use the separate mode/route/game screens described in [game flow](game-flow.md).
+The complete lab is now under **Game editor → Motion Lab** (`pages/studio.html` → `pages/lab.html`). Its station navigation, rehearsals, tuning, detectors and telemetry remain intact. The brand returns to the editor workspace. Players use the separate mode/route/game screens described in [game flow](game-flow.md).

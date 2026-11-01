@@ -4,7 +4,7 @@ import fs from 'node:fs';
 import {EditorDocument,layoutWarnings,moduleOf,levelOf,socketPosition} from '../src/editor-model.js';
 import {Simulation} from '../src/simulation.js';
 const read=p=>JSON.parse(fs.readFileSync(new URL(p,import.meta.url)));
-const content=read('../content/parkour.json'),schema=read('../Documents/Plans/Design/Schemas/content-package.schema.json'),lab=read('../content/lab-course.json');
+const content=read('../content/parkour.json'),schema=read('../content/content-package.schema.json'),lab=read('../content/lab-course.json');
 const fresh=()=>new EditorDocument(content,schema);
 const linked=()=>{const c=structuredClone(content),span=moduleOf(c,'unit-ground').sockets.find(s=>s.role==='exit').position[0];c.finiteLevels[0]={id:'motion-lab',instances:['jump','slide','vault'].map((id,n)=>({id,moduleId:'unit-ground',position:[n*span,0]})),connections:[{from:{instanceId:'jump',socketId:'exit'},to:{instanceId:'slide',socketId:'entry'}},{from:{instanceId:'slide',socketId:'exit'},to:{instanceId:'vault',socketId:'entry'}}],spawn:{instanceId:'jump',socketId:'entry'},finish:{instanceId:'vault',socketId:'exit'}};return new EditorDocument(c,schema);};
 test('the authored circuit separates atomic action units from shared terrain',()=>{

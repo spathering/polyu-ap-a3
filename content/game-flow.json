@@ -217,8 +217,8 @@
         {
           "id": "cable-yard-1",
           "name": "Cable crossing",
-          "hint": "Climb the step, jump, then F near the cable. Ride to its endpoint.",
-          "keys": "SPACE / F",
+          "hint": "Climb the step, jump, then Q near the cable. Ride to its endpoint.",
+          "keys": "SPACE / Q",
           "from": {
             "instanceId": "terrain",
             "socketId": "entry"
@@ -257,8 +257,8 @@
         {
           "id": "crosscurrent-1",
           "name": "Aerial chain",
-          "hint": "Pad launches. Hold Q for the swing; release and use E or F to continue.",
-          "keys": "HOLD Q / E / F",
+          "hint": "Pad launches. Hold Q for the swing; release and use E or Q to continue.",
+          "keys": "HOLD Q / E / Q",
           "from": {
             "instanceId": "terrain",
             "socketId": "entry"
@@ -284,6 +284,498 @@
         }
       ],
       "modeId": "campaign"
+    },
+    {
+      "id": "skyline-relay",
+      "title": "Skyline relay",
+      "subtitle": "10 / Connected districts",
+      "description": "Gap, slide and vault rhythm leads into a high ledge and a pair of climbs.",
+      "difficulty": "INTERMEDIATE",
+      "accent": "cyan",
+      "levelId": "skyline-relay",
+      "sections": [
+        {
+          "id": "skyline-relay-roof-rhythm-1",
+          "name": "Gap & tunnel",
+          "hint": "SPACE at the gap mark; S before the low ceiling.",
+          "keys": "SPACE / S",
+          "from": {
+            "instanceId": "a-terrain",
+            "socketId": "entry"
+          },
+          "to": {
+            "instanceId": "a-terrain",
+            "socketId": "cp1"
+          }
+        },
+        {
+          "id": "skyline-relay-roof-rhythm-2",
+          "name": "Vault & step",
+          "hint": "SPACE in each approach to vault, then climb the wide step.",
+          "keys": "SPACE",
+          "from": {
+            "instanceId": "a-terrain",
+            "socketId": "cp1"
+          },
+          "to": {
+            "instanceId": "a-terrain",
+            "socketId": "exit"
+          }
+        },
+        {
+          "id": "skyline-relay-link",
+          "name": "District link",
+          "hint": "Keep moving into the next district. Your next checkpoint is ahead.",
+          "keys": "RUN",
+          "from": {
+            "instanceId": "a-terrain",
+            "socketId": "exit"
+          },
+          "to": {
+            "instanceId": "b-terrain",
+            "socketId": "entry"
+          }
+        },
+        {
+          "id": "skyline-relay-high-water-1",
+          "name": "Catch & mantle",
+          "hint": "Hold SPACE through takeoff to catch the ledge. Release, then SPACE climbs; S drops.",
+          "keys": "HOLD SPACE \u2192 SPACE",
+          "from": {
+            "instanceId": "b-terrain",
+            "socketId": "entry"
+          },
+          "to": {
+            "instanceId": "b-terrain",
+            "socketId": "cp1"
+          }
+        },
+        {
+          "id": "skyline-relay-high-water-2",
+          "name": "Step sequence",
+          "hint": "SPACE before each wide low platform. Keep the landing clear.",
+          "keys": "SPACE",
+          "from": {
+            "instanceId": "b-terrain",
+            "socketId": "cp1"
+          },
+          "to": {
+            "instanceId": "b-terrain",
+            "socketId": "exit"
+          }
+        }
+      ],
+      "modeId": "campaign"
+    },
+    {
+      "id": "antenna-run",
+      "title": "Antenna run",
+      "subtitle": "11 / Connected districts",
+      "description": "Climb through the first district, then rebound between the transmission towers.",
+      "difficulty": "ADVANCED",
+      "accent": "violet",
+      "levelId": "antenna-run",
+      "sections": [
+        {
+          "id": "antenna-run-high-water-1",
+          "name": "Catch & mantle",
+          "hint": "Hold SPACE through takeoff to catch the ledge. Release, then SPACE climbs; S drops.",
+          "keys": "HOLD SPACE \u2192 SPACE",
+          "from": {
+            "instanceId": "a-terrain",
+            "socketId": "entry"
+          },
+          "to": {
+            "instanceId": "a-terrain",
+            "socketId": "cp1"
+          }
+        },
+        {
+          "id": "antenna-run-high-water-2",
+          "name": "Step sequence",
+          "hint": "SPACE before each wide low platform. Keep the landing clear.",
+          "keys": "SPACE",
+          "from": {
+            "instanceId": "a-terrain",
+            "socketId": "cp1"
+          },
+          "to": {
+            "instanceId": "a-terrain",
+            "socketId": "exit"
+          }
+        },
+        {
+          "id": "antenna-run-link",
+          "name": "District link",
+          "hint": "Keep moving into the next district. Your next checkpoint is ahead.",
+          "keys": "RUN",
+          "from": {
+            "instanceId": "a-terrain",
+            "socketId": "exit"
+          },
+          "to": {
+            "instanceId": "b-terrain",
+            "socketId": "entry"
+          }
+        },
+        {
+          "id": "antenna-run-wall-signal-1",
+          "name": "Wall rebound",
+          "hint": "SPACE at takeoff, then SPACE again near the marked wall to rebound.",
+          "keys": "SPACE \u2192 SPACE",
+          "from": {
+            "instanceId": "b-terrain",
+            "socketId": "entry"
+          },
+          "to": {
+            "instanceId": "b-terrain",
+            "socketId": "cp1"
+          }
+        },
+        {
+          "id": "antenna-run-wall-signal-2",
+          "name": "Return line",
+          "hint": "Vault the barrier, then rebound above a second wall.",
+          "keys": "SPACE",
+          "from": {
+            "instanceId": "b-terrain",
+            "socketId": "cp1"
+          },
+          "to": {
+            "instanceId": "b-terrain",
+            "socketId": "exit"
+          }
+        }
+      ],
+      "modeId": "campaign"
+    },
+    {
+      "id": "harbor-express",
+      "title": "Harbor express",
+      "subtitle": "12 / Connected districts",
+      "description": "Ride the harbor cable, spring across the quay and sprint over the roofline.",
+      "difficulty": "INTERMEDIATE",
+      "accent": "amber",
+      "levelId": "harbor-express",
+      "sections": [
+        {
+          "id": "harbor-express-cable-yard-1",
+          "name": "Cable crossing",
+          "hint": "Climb the step, jump, then Q near the cable. Ride to its endpoint.",
+          "keys": "SPACE / Q",
+          "from": {
+            "instanceId": "a-terrain",
+            "socketId": "entry"
+          },
+          "to": {
+            "instanceId": "a-terrain",
+            "socketId": "cp1"
+          }
+        },
+        {
+          "id": "harbor-express-cable-yard-2",
+          "name": "Pad crossing",
+          "hint": "Run onto the pad and clear the gap. Press S before a hard landing to roll.",
+          "keys": "AUTOMATIC PAD / S",
+          "from": {
+            "instanceId": "a-terrain",
+            "socketId": "cp1"
+          },
+          "to": {
+            "instanceId": "a-terrain",
+            "socketId": "exit"
+          }
+        },
+        {
+          "id": "harbor-express-link",
+          "name": "District link",
+          "hint": "Keep moving into the next district. Your next checkpoint is ahead.",
+          "keys": "RUN",
+          "from": {
+            "instanceId": "a-terrain",
+            "socketId": "exit"
+          },
+          "to": {
+            "instanceId": "b-terrain",
+            "socketId": "entry"
+          }
+        },
+        {
+          "id": "harbor-express-roof-rhythm-1",
+          "name": "Gap & tunnel",
+          "hint": "SPACE at the gap mark; S before the low ceiling.",
+          "keys": "SPACE / S",
+          "from": {
+            "instanceId": "b-terrain",
+            "socketId": "entry"
+          },
+          "to": {
+            "instanceId": "b-terrain",
+            "socketId": "cp1"
+          }
+        },
+        {
+          "id": "harbor-express-roof-rhythm-2",
+          "name": "Vault & step",
+          "hint": "SPACE in each approach to vault, then climb the wide step.",
+          "keys": "SPACE",
+          "from": {
+            "instanceId": "b-terrain",
+            "socketId": "cp1"
+          },
+          "to": {
+            "instanceId": "b-terrain",
+            "socketId": "exit"
+          }
+        }
+      ],
+      "modeId": "campaign"
+    },
+    {
+      "id": "violet-circuit",
+      "title": "Violet circuit",
+      "subtitle": "13 / Connected districts",
+      "description": "Link a swing and cable, conquer the high ledge, then cross the entire cable yard.",
+      "difficulty": "ADVANCED",
+      "accent": "cyan",
+      "levelId": "violet-circuit",
+      "sections": [
+        {
+          "id": "violet-circuit-crosscurrent-1",
+          "name": "Aerial chain",
+          "hint": "Pad launches. Hold Q for the swing; release and use E or Q to continue.",
+          "keys": "HOLD Q / E / Q",
+          "from": {
+            "instanceId": "a-terrain",
+            "socketId": "entry"
+          },
+          "to": {
+            "instanceId": "a-terrain",
+            "socketId": "cp1"
+          }
+        },
+        {
+          "id": "violet-circuit-crosscurrent-2",
+          "name": "Vault & final ledge",
+          "hint": "Vault the barrier. Hold SPACE at the ledge jump, then press again to mantle.",
+          "keys": "SPACE / HOLD SPACE",
+          "from": {
+            "instanceId": "a-terrain",
+            "socketId": "cp1"
+          },
+          "to": {
+            "instanceId": "a-terrain",
+            "socketId": "exit"
+          }
+        },
+        {
+          "id": "violet-circuit-link",
+          "name": "District link",
+          "hint": "Keep moving into the next district. Your next checkpoint is ahead.",
+          "keys": "RUN",
+          "from": {
+            "instanceId": "a-terrain",
+            "socketId": "exit"
+          },
+          "to": {
+            "instanceId": "b-terrain",
+            "socketId": "entry"
+          }
+        },
+        {
+          "id": "violet-circuit-cable-yard-1",
+          "name": "Cable crossing",
+          "hint": "Climb the step, jump, then Q near the cable. Ride to its endpoint.",
+          "keys": "SPACE / Q",
+          "from": {
+            "instanceId": "b-terrain",
+            "socketId": "entry"
+          },
+          "to": {
+            "instanceId": "b-terrain",
+            "socketId": "cp1"
+          }
+        },
+        {
+          "id": "violet-circuit-cable-yard-2",
+          "name": "Pad crossing",
+          "hint": "Run onto the pad and clear the gap. Press S before a hard landing to roll.",
+          "keys": "AUTOMATIC PAD / S",
+          "from": {
+            "instanceId": "b-terrain",
+            "socketId": "cp1"
+          },
+          "to": {
+            "instanceId": "b-terrain",
+            "socketId": "exit"
+          }
+        }
+      ],
+      "modeId": "campaign"
+    },
+    {
+      "id": "gravity-shift",
+      "title": "Gravity shift",
+      "subtitle": "14 / Connected districts",
+      "description": "Roll out of a high drop, launch forward and switch to precision ledge climbing.",
+      "difficulty": "ADVANCED",
+      "accent": "violet",
+      "levelId": "gravity-shift",
+      "sections": [
+        {
+          "id": "gravity-shift-soft-landing-1",
+          "name": "Drop & roll",
+          "hint": "Run off the roof. Press S shortly before the hard landing to roll; S again for the tunnel.",
+          "keys": "S / LANDING ROLL",
+          "from": {
+            "instanceId": "a-terrain",
+            "socketId": "entry"
+          },
+          "to": {
+            "instanceId": "a-terrain",
+            "socketId": "cp1"
+          }
+        },
+        {
+          "id": "gravity-shift-soft-landing-2",
+          "name": "Launch & recover",
+          "hint": "The pad launches on foot contact. Press S before a hard landing to keep low.",
+          "keys": "AUTOMATIC PAD / S",
+          "from": {
+            "instanceId": "a-terrain",
+            "socketId": "cp1"
+          },
+          "to": {
+            "instanceId": "a-terrain",
+            "socketId": "exit"
+          }
+        },
+        {
+          "id": "gravity-shift-link",
+          "name": "District link",
+          "hint": "Keep moving into the next district. Your next checkpoint is ahead.",
+          "keys": "RUN",
+          "from": {
+            "instanceId": "a-terrain",
+            "socketId": "exit"
+          },
+          "to": {
+            "instanceId": "b-terrain",
+            "socketId": "entry"
+          }
+        },
+        {
+          "id": "gravity-shift-high-water-1",
+          "name": "Catch & mantle",
+          "hint": "Hold SPACE through takeoff to catch the ledge. Release, then SPACE climbs; S drops.",
+          "keys": "HOLD SPACE \u2192 SPACE",
+          "from": {
+            "instanceId": "b-terrain",
+            "socketId": "entry"
+          },
+          "to": {
+            "instanceId": "b-terrain",
+            "socketId": "cp1"
+          }
+        },
+        {
+          "id": "gravity-shift-high-water-2",
+          "name": "Step sequence",
+          "hint": "SPACE before each wide low platform. Keep the landing clear.",
+          "keys": "SPACE",
+          "from": {
+            "instanceId": "b-terrain",
+            "socketId": "cp1"
+          },
+          "to": {
+            "instanceId": "b-terrain",
+            "socketId": "exit"
+          }
+        }
+      ],
+      "modeId": "campaign"
+    },
+    {
+      "id": "district-marathon",
+      "title": "District marathon",
+      "subtitle": "15 / Connected districts",
+      "description": "Two wall rebounds feed into an aerial chain and a final high-ledge finish.",
+      "difficulty": "EXPERT",
+      "accent": "amber",
+      "levelId": "district-marathon",
+      "sections": [
+        {
+          "id": "district-marathon-wall-signal-1",
+          "name": "Wall rebound",
+          "hint": "SPACE at takeoff, then SPACE again near the marked wall to rebound.",
+          "keys": "SPACE \u2192 SPACE",
+          "from": {
+            "instanceId": "a-terrain",
+            "socketId": "entry"
+          },
+          "to": {
+            "instanceId": "a-terrain",
+            "socketId": "cp1"
+          }
+        },
+        {
+          "id": "district-marathon-wall-signal-2",
+          "name": "Return line",
+          "hint": "Vault the barrier, then rebound above a second wall.",
+          "keys": "SPACE",
+          "from": {
+            "instanceId": "a-terrain",
+            "socketId": "cp1"
+          },
+          "to": {
+            "instanceId": "a-terrain",
+            "socketId": "exit"
+          }
+        },
+        {
+          "id": "district-marathon-link",
+          "name": "District link",
+          "hint": "Keep moving into the next district. Your next checkpoint is ahead.",
+          "keys": "RUN",
+          "from": {
+            "instanceId": "a-terrain",
+            "socketId": "exit"
+          },
+          "to": {
+            "instanceId": "b-terrain",
+            "socketId": "entry"
+          }
+        },
+        {
+          "id": "district-marathon-crosscurrent-1",
+          "name": "Aerial chain",
+          "hint": "Pad launches. Hold Q for the swing; release and use E or Q to continue.",
+          "keys": "HOLD Q / E / Q",
+          "from": {
+            "instanceId": "b-terrain",
+            "socketId": "entry"
+          },
+          "to": {
+            "instanceId": "b-terrain",
+            "socketId": "cp1"
+          }
+        },
+        {
+          "id": "district-marathon-crosscurrent-2",
+          "name": "Vault & final ledge",
+          "hint": "Vault the barrier. Hold SPACE at the ledge jump, then press again to mantle.",
+          "keys": "SPACE / HOLD SPACE",
+          "from": {
+            "instanceId": "b-terrain",
+            "socketId": "cp1"
+          },
+          "to": {
+            "instanceId": "b-terrain",
+            "socketId": "exit"
+          }
+        }
+      ],
+      "modeId": "campaign"
     }
   ],
   "modes": [
@@ -291,7 +783,7 @@
       "id": "campaign",
       "title": "Campaign",
       "subtitle": "THE ROOFTOP DISTRICT",
-      "description": "Six handcrafted routes. Read each obstacle, find the right timing and make it to the finish.",
+      "description": "Twelve handcrafted routes, from short rooftop runs to connected district challenges. Read each obstacle and reach the finish.",
       "status": "available",
       "kind": "finite",
       "accent": "cyan"

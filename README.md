@@ -1,75 +1,61 @@
-# polyu-ap-a3
+# Motion / Run
 
-A browser parkour game for Assignment 3: An interactive experience.
+**Read the city. Commit to the move. Keep your momentum.** A side-view browser parkour game with twelve campaign routes, three training routes and a separate level editor.
 
-**Status: player menus and separate editor workspace implemented, 25 October 2026.** Main menu → Mode select → Campaign (six authored routes) or Training (three focused routes) → Game scene. Endless is visibly unavailable. Game editor is a separate entry for Level Studio and Motion Lab. One 60 Hz simulator handles baseline movement, four traversal additions, ledge catch/mantle, wall rebound and buffered landing roll. Eighteen editor prefabs share the same content and collision rules. See [campaign/actions](Documents/Current/campaign-and-scene-actions.md), [flow](Documents/Current/game-flow.md), [3C](Documents/Current/reference-driven-3c.md) and [editor](Documents/Current/level-editor.md). Endless generation and final original art remain pending.
+[Play now](https://spathering.github.io/polyu-ap-a3/) · [Level Studio](https://spathering.github.io/polyu-ap-a3/pages/editor.html) · [Development process](PROCESS.md)
 
-## Assignment
+![Motion / Run gameplay](Documents/Current/Images/gameplay.png)
 
-- Individual project; 15% of the course grade; marked out of 15.
-- Deadline: **1 November 2026, 23:59 Hong Kong time (UTC+8)**.
-- Submit the public repository URL on Canvas: [spathering/polyu-ap-a3](https://github.com/spathering/polyu-ap-a3).
-- Provide deliberate input, a meaningful response, clear feedback, sensible handling of one relevant error or interruption, and a trial with at least one other person before explaining the experience.
-- See the [original assignment brief](Documents/Plans/Requirements/assignment3-brief.md).
-
-## Play and run
-
-Use Node.js 20 or newer. No package installation or build step is required. From the repository root:
-
-```sh
-npm run dev
+```mermaid
+flowchart LR
+  Menu[Main menu] --> Mode[Mode select] --> Route[Choose a route] --> Run[Run and chain moves]
+  Run --> Result[Finish and local best time]
+  Run --> Retry[Retry current section] --> Run
+  Menu --> Studio[Game editor]
 ```
 
-Open `http://127.0.0.1:4173/`. All required runtime atlases are bundled; no research archive or preparation step is required. `npm run prepare:reference` optionally verifies/restores the reference subset. Space jumps, S slides, E dash-grapples, hold Q to swing, F uses the cable, Esc pauses and R retries. Choose Play → mode → route from the main menu. Open Game editor for Level Studio and Motion Lab. Direct station selection, tuning and rehearsals remain at `http://127.0.0.1:4173/lab.html`. Checks: `npm run check`, `npm test`, `npm run rehearse`. Stop serving with Ctrl+C.
-
-**Play online:** [Motion / Run](https://spathering.github.io/polyu-ap-a3/). GitHub Pages publishes `main` from `/(root)` over HTTPS. Visitors need no installation. Nineteen reference-derived atlases and three generated sheets are included. See [deployment status and verification](Documents/Current/deployment.md).
-
-## Documentation
-
-All repository project documentation uses English. A Chinese counterpart with matching relative paths is maintained locally at `.midwork/assignment3/polyu-ap-a3/`, outside this repository.
-
-| Document | Purpose |
+| Control | Action |
 |---|---|
-| [STANDARD](STANDARD.md) | Concise rules, language policy and documentation synchronisation. |
-| [PROCESS](PROCESS.md) | Development decisions, AI assistance, user trials and checks. |
-| [Documentation index](Documents/README.md) | Current, historical and planning documents. |
-| [Project structure](Documents/Current/project-structure.md) | Actual repository layout and status. |
-| [Modules](Documents/Current/modules.md) | Actual module status and Mermaid relationships. |
-| [Glossary](Documents/Current/glossary.md) | Project terms and their meanings. |
-| [Game and deployment plan](Documents/Plans/game-and-deployment-plan.md) | Confirmed direction and candidate architecture. |
-| [Game requirements](Documents/Plans/Requirements/game-requirements.md) | Parkour mechanics, modes, editor and acceptance criteria. |
-| [Reference analysis](Documents/Plans/Research/vector-reference-analysis.md) | Official Vector evidence, inspection limits and design inferences. |
-| [Data-driven architecture](Documents/Plans/Design/data-driven-architecture.md) | SSOT ownership and shared runtime/editor boundaries. |
-| [Level data and generation](Documents/Plans/Design/level-data-and-generation.md) | Modules, sockets, fixed layouts, seeded assembly, schema and example. |
-| [Editor requirements](Documents/Plans/Design/level-editor-requirements.md) | Workspaces, editing, validation, export and production playtest. |
-| [3C design](Documents/Plans/Design/three-c-design.md) | Character feel, predictive camera and semantic input. |
-| [Character state machine](Documents/Plans/Design/character-state-machine.md) | Session/locomotion layers, guards, interruption and event priority. |
-| [Action/scene implementation](Documents/Plans/Design/parkour-scene-implementation.md) | Shared collision queries and environment traversal recipes. |
-| [Vector action-image catalogue](Documents/Plans/Research/vector-action-assets.md) | Supplemental promotional stills; separate character-frame extraction linked below. |
-| [Original character frames](Documents/Plans/Research/vector-character-frames.md) | 226 rendered character clips, 15,192 transparent PNGs, 349 sheets and source/action mappings; local research only. |
-| [Generated traversal art](Documents/Plans/Design/generated-character-actions.md) | Jump-pad, zipline and swing trials: 24 transparent key-pose PNGs with matching names, metadata and prompts. |
-| [TODO](Documents/Plans/TODO.md) | Remaining tasks and acceptance criteria. |
-| [Leaderboard research](Documents/Plans/Research/github-only-leaderboard.md) | GitHub-only shared score storage: options, constraints and sources. |
-| [Change log](Documents/History/Changelog/2026-10.md) | Dated changes and verification evidence. |
+| Space / ↑ | Jump, vault or climb; hold to catch a ledge, release and press again to mantle |
+| S / ↓ | Slide; buffer a landing roll; drop from a ledge |
+| E | Dash grapple |
+| Q | Hold to swing, release to let go; near a cable, press to attach or detach |
+| Esc / R | Pause / retry current section |
 
-## Known limitations
+Forward running is automatic. Press in the marked approach; the move starts at alignment. Late and missed inputs have different outcomes. Touch controls are under **Controls**. **Sound** provides music/effects toggles and volume; playback starts after a gesture. Best times and sound preferences stay in this browser.
 
-153 automated tests and 24 deterministic recordings pass: 18 lab cases cover 30/30 required events and six complete finite courses. Scene recipes pre-match geometry before input, retain timely/late confirmation until playback and use directed scene/time cameras. Same-obstacle browser checks select three distinct clips; foundations keyboard completion, portrait play and editor preset edit/undo pass. Other-person trials and OS download completion remain unverified. Final original art/audio, endless generation and shared scores remain pending; the rig remains a missing-image fallback.
+## Run and develop
 
-## Credits and tools
+Node.js **20+**, a modern browser, no third-party packages and no build step.
 
-The [assignment screenshot](Documents/Plans/Requirements/assignment3-source.png) and its English transcription come from the supplied course brief. [Vector](https://vector.game/zh-Hans/) is a design reference. Public official Steam screenshots are archived locally for study, with [source metadata](Documents/Plans/Research/vector-action-assets.md); they are not runtime/deployment assets. At the author's request, public browser animation packs and renderer/parser scripts were later archived locally to export original-data-derived character frames. The author later requested publication of the selected runtime subset: nineteen prepared atlases are now tracked at `assets/character/reference/` and used by local and public play; raw/legacy exports remain excluded. No original parser/painter code or level layout was copied into the runtime. Three generated traversal sheets are versioned with provenance. OpenAI Codex assisted with research, translation, documentation and design; see [PROCESS](PROCESS.md).
+```sh
+npm run dev       # http://127.0.0.1:4173/
+npm run check    # content, atlas and audio integrity
+npm test         # simulation, input, presentation and editor
+npm run rehearse # recorded production routes
+```
 
-Current input/animation rules: [scene actions and synchronization](Documents/Current/scene-action-synchronization.md). Press Space early in the marked vault approach; it executes at the start plane. Vaulting is no longer automatic.
+```text
+index.html       Main menu
+pages/           Player screens, Level Studio, Motion Lab
+styles/          Page styles
+content/         Canonical rules, modules, routes, schema and audio catalogue
+src/             Shared simulation, editor, rendering and audio
+assets/          Bundled character art and audio
+test/           Regression tests and recorded routes
+tools/          Local server, validation and rehearsal commands
+Documents/       Current guides, history and plans
+```
 
-Open `http://127.0.0.1:4173/editor.html` or choose **Game editor → Level Studio**. The scene supports zoom/pan, box/Shift selection, batch movement/duplication/deletion, shared prefab/geometry editing, undo/redo, JSON import/export, local draft recovery and production-runtime quick tests. [Editor controls and limits](Documents/Current/level-editor.md).
+```mermaid
+flowchart LR
+  Data[Canonical JSON] --> Validate[Validate] --> Sim[60 Hz simulation]
+  Editor[Editor] --> Validate
+  Input[Semantic input] --> Sim
+  Sim --> Scene[Camera and sprite presentation]
+  Sim --> Audio[Event-driven sound]
+```
 
-Small-module update: **B** draws blocks, **V** selects, and library modules drag directly to the scene. H follows the 1.2 m climb limit; the default H/4 grid is 0.3 m. Occupied bounds include intended approach/action/recovery. Schema 1.3 explicitly converts old 1.2 drafts. See [micro modules and terrain](Documents/Current/micro-modules-and-terrain.md) and the [reference implementation review](Documents/Plans/Research/vector-context-and-micro-modules.md).
+The project targets readable, continuous parkour and reproducible static hosting. Scene recipes bind input windows, fixed animation and directed cameras to shared geometry. Editor tests use the production simulator; rendering never moves collision bodies. New district routes reference existing modules. See [architecture](Documents/Current/modules.md), [current features](Documents/Current/player-feedback-update.md) and [plans](Documents/Plans/TODO.md). Endless generation and shared online scores remain planned.
 
-Open `modes.html` for modes, `levels.html?mode=campaign` for six fixed routes or `levels.html?mode=training` for three practice routes. `studio.html` is the separate editor launcher. Snap is explicitly on by default; dragged groups align an absolute anchor and retain relative spacing. [Public-runtime 3C review](Documents/Plans/Research/vector-3c-runtime-review.md).
-
-Gameplay now fills the viewport. Use the small floating panels; **?** expands Controls. Hold Space near a marked ledge, then press again to mantle; press Space near a marked wall to rebound; press S before a hard landing to roll. [Six new course guide](Documents/Current/campaign-and-scene-actions.md).
-
-Current 3C: [scene choreography](Documents/Current/scene-choreography.md). In the lab, compare `timing vault timely`, `timing vault late` and `timing vault missed` at the same obstacle. The camera follows the prepared scene timeline; Level Studio edits shared timing/clip/shot recipes.
-
-Reference animation release, **26 October 2026**: [published atlas integration](Documents/Current/animation-assets.md). All 22 sheets are bundled and hash-checked; normal online play uses the prepared reference animations, with the rig reserved for image-load failures.
+**References & thanks:** [Vector / Nekki](https://vector.game/zh-Hans/) informed movement and supplies the credited reference-derived character atlases; three traversal sheets were generated with imagegen. [Hyperton — Sudocolon](https://opengameart.org/content/hyperton) and [Kenney Interface Sounds](https://kenney.nl/assets/interface-sounds) supply the bundled CC0 audio. [Asset details](Documents/Current/animation-assets.md) · [Audio sources](assets/audio/README.md). Codex assisted with implementation, research and verification; decisions and player feedback are recorded in [PROCESS](PROCESS.md).

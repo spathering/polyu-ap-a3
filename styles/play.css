@@ -2,3 +2,5 @@ html,body{width:100%;height:100%;margin:0;overflow:hidden;background:#172c3d}bod
 
 .overlay-restart{display:block;margin:12px auto 0;background:none;border:0;color:#a7c0cd;padding:7px 12px;font-size:11px}.overlay-navigation{display:flex;justify-content:center;gap:24px;padding-top:18px;margin-top:18px;border-top:1px solid #d6e6ec22}.overlay-navigation a{font-size:10px;color:#87a6b9}
 .overlay-restart[hidden]{display:none}
+
+.play-viewport>.audio-controls{position:absolute;z-index:6;right:20px;bottom:24px;color:#d8e8ef;background:#102433ed;min-width:84px;max-width:190px;border-color:#d6e6ec29}.play-viewport>.audio-controls input{accent-color:#b4e54e}@media(max-width:640px){.play-viewport>.audio-controls{right:10px;bottom:12px}.play-viewport>.audio-controls[open]{bottom:60px}.controls-float[open]{max-width:calc(100vw - 20px)}}

@@ -3,8 +3,8 @@
   "createdOn": "2026-10-24",
   "transparent_background": true,
   "references": [
-    "D:/Studies/Art Programming/Projs/.midwork/assignment3/reference-assets/vector-character-animation/frames/01-stand-and-run/run/contact.png",
-    "D:/Studies/Art Programming/Projs/.midwork/assignment3/reference-assets/vector-character-animation/frames/04-vault-and-clearance/speed_vault/contact.png"
+    "external-research/reference-assets/vector-character-animation/frames/01-stand-and-run/run/contact.png",
+    "external-research/reference-assets/vector-character-animation/frames/04-vault-and-clearance/speed_vault/contact.png"
   ],
   "prompts": [
     {

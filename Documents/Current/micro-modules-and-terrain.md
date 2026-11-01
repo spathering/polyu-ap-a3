@@ -1,5 +1,8 @@
 # Small modules, terrain and contextual traversal
 
+Current release, 1 November 2026: twelve campaign routes, three training routes, shared Q rope/cable input, direct climb-to-run recovery, idle ropes, layered city and bundled sound. Page entries are in `pages/` and the schema is in `content/`. Earlier dated check counts below are historical; current validation is 177 tests and 30 recordings. See [feedback update](player-feedback-update.md) and [structure](project-structure.md).
+
+
 Current artwork, **26 October 2026**: [19 reference-derived atlases and three generated sheets](animation-assets.md) are bundled for local and public play. Earlier local-only/ignored-art descriptions and counts below describe prior increments.
 
 
@@ -51,7 +54,7 @@ Placed prefab previews retain the scene's real terrain/context and derive start/
 
 A 1.2 import/recovered draft stays pending until **Convert explicitly to 1.3.0**. Conversion preserves geometry, removes obsolete fixed-size fields and obtains the new rule defaults from the current canonical package. Conversion/import is undoable; malformed or unknown-version files do not replace the active draft. Existing original files stay untouched.
 
-**102 tests pass**, including painted-block climb/top support, exact hand contact, captured-target stability, late queued chaining, gait matching, derived dimensions, shared brush definitions and legacy conversion. The original **15 production rehearsals still cover 26/26 lab events**, including a full lap; climb is separately tested. Ten actual Edge CDP scenarios cover native library drag/drop and ghost, exact coordinates, a 2.4 × 1.2 m stroke and climb, both preview modes, all fifteen module views, file conversion, local recovery and compact layout, with zero browser exceptions. Local evidence is in `.midwork/assignment3/lab-evidence/2026-10-25/micro-editor/`.
+**102 tests pass**, including painted-block climb/top support, exact hand contact, captured-target stability, late queued chaining, gait matching, derived dimensions, shared brush definitions and legacy conversion. The original **15 production rehearsals still cover 26/26 lab events**, including a full lap; climb is separately tested. Ten actual Edge CDP scenarios cover native library drag/drop and ghost, exact coordinates, a 2.4 × 1.2 m stroke and climb, both preview modes, all fifteen module views, file conversion, local recovery and compact layout, with zero browser exceptions. Local evidence is in `external-research/lab-evidence/2026-10-25/micro-editor/`.
 
 Selected runtime source derivatives are now bundled; raw research archives remain local. The climb adapts the hand-support portion of `monkey_vault` with a dedicated contact window; it is not a recovered original high-wall controller. Generated eight-pose traversal sheets remain provisional. Endless generation, composition qualification, graphical route editing, human trial remain pending.
 

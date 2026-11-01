@@ -10,14 +10,14 @@ import {CharacterAnimation} from '../src/animation.js';
 import {EditorDocument} from '../src/editor-model.js';
 import {FollowCamera} from '../src/camera.js';
 import {Renderer} from '../src/renderer.js';
-const read=p=>JSON.parse(fs.readFileSync(new URL(p,import.meta.url))),content=read('../content/parkour.json'),schema=read('../Documents/Plans/Design/Schemas/content-package.schema.json'),lab=read('../content/lab-course.json'),flow=read('../content/game-flow.json'),fixtures=read('./fixtures/campaign-rehearsals.json'),catalog=read('../assets/character/animations.json');
+const read=p=>JSON.parse(fs.readFileSync(new URL(p,import.meta.url))),content=read('../content/parkour.json'),schema=read('../content/content-package.schema.json'),lab=read('../content/lab-course.json'),flow=read('../content/game-flow.json'),fixtures=read('./fixtures/campaign-rehearsals.json'),catalog=read('../assets/character/animations.json');
 function create(id='high-water',candidate=content){const c=createChallenge(candidate,schema,lab,flow,id);return new Simulation(c.content,c.lab);}
 function hang(){const s=create();Object.assign(s.p,{x:5.5,y:1.25,state:'Airborne'});s.step({held:['jump']});assert.equal(s.p.state,'LedgeHang');return s;}
 
-test('six additional courses have distinct authored maps and share exact editor geometry',()=>{
- const courses=flow.levels.filter(l=>l.levelId);assert.equal(courses.length,6);assert.equal(flow.levels.length,9);const maps=new Set(),before=JSON.stringify(content);
+test('twelve courses have distinct authored maps and share exact editor geometry',()=>{
+ const courses=flow.levels.filter(l=>l.levelId);assert.equal(courses.length,12);assert.equal(flow.levels.length,15);const maps=new Set(),before=JSON.stringify(content);
  for(const course of courses){const c=createChallenge(content,schema,lab,flow,course.id),w=compileWorld(c.content,c.lab),d=new EditorDocument(content,schema,course.levelId),preview=d.playtest(lab);assert.deepEqual(w.entities,compileWorld(preview.content,preview.lab).entities);assert.deepEqual(w.spawn,compileWorld(preview.content,preview.lab).spawn);maps.add(JSON.stringify(w.entities));assert.equal(c.lab.stations.at(-1).range[1],w.finish[0]);}
- assert.equal(maps.size,6);assert.equal(JSON.stringify(content),before);
+ assert.equal(maps.size,12);assert.equal(JSON.stringify(content),before);
 });
 for(const witness of fixtures.witnesses)test(`finite course production replay: ${witness.levelId}`,()=>{
  assert.equal(fixtures.contentRevision,content.contentRevision);assert.equal(fixtures.physicsVersion,content.physicsVersion);const s=create(witness.levelId),held=new Set(),animation=new CharacterAnimation(catalog,s.rules),seen=new Set();
