@@ -1,5 +1,8 @@
 # Vector character animation frames
 
+Historical prototype record: these images are retired from the current release. See [open-art integration](../../Current/animation-assets.md) and [permission review](../Research/character-asset-license-review.md).
+
+
 Extracted **22 October 2026** after the author clarified that the requested images were the original character's animation frames. The earlier [17 promotional stills](vector-action-assets.md) are supplemental research and do not fulfil that request.
 
 ## Acquired material

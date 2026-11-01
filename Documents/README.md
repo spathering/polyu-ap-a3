@@ -11,3 +11,5 @@ Repository prose is English. Matching Chinese documents are maintained in the pr
 Current guides: [flow](Current/game-flow.md), [routes](Current/campaign-and-scene-actions.md), [choreography](Current/scene-choreography.md), [editor](Current/level-editor.md), [motion lab](Current/character-lab.md), [art](Current/animation-assets.md), [sound and scenery](Current/audio-and-scenery.md), [deployment](Current/deployment.md).
 
 The runtime contract is [content/content-package.schema.json](../content/content-package.schema.json). Research and proposed designs remain in Plans; their historical counts are not current release claims. Root [README](../README.md), [PROCESS](../PROCESS.md) and [STANDARD](../STANDARD.md) explain play, decisions and maintenance. Update Current and the local Chinese tree alongside implementation changes. External research identifiers describe private archives, not runtime dependencies.
+
+[Character permission review](Plans/Research/character-asset-license-review.md) records the current CC0 replacement and rejected sources.

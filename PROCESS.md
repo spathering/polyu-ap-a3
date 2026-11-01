@@ -1,40 +1,76 @@
 # Development process
 
-Motion / Run began as a small browser parkour game inspired by Vector. The goal is a complete input → response → feedback loop with finite routes, reusable traversal modules and an editor. [Earlier development notes](Documents/History/development-notes-2026-10.md) retain the detailed implementation history.
+## Initial idea
 
-| Decision | Reason and resulting behavior |
+I wanted to make a small parkour game that opens directly in a browser through GitHub Pages. Vector was the main reference for readable movement, obstacle timing and the feeling of continuous running. The intended player can learn a few inputs quickly, read the next obstacle and improve through short retries.
+
+I chose two modes for the long-term design: fixed, authored routes and an endless mode assembled from predefined modules. The current game implements twelve campaign routes and three training routes. Endless assembly and shared online scores remain plans, not completed features.
+
+## Design and implementation decisions
+
+I required a data-driven architecture with a single source of truth (SSOT). Movement rules, scene recipes, module geometry and level composition belong to canonical JSON; the game, editor and tests consume the same data. I also asked for a level editor with floating panels, prefab placement, terrain drawing, grid snapping, batch editing and quick testing.
+
+```mermaid
+flowchart LR
+  Idea[Browser parkour idea] --> Design[Shared data and reusable scenes]
+  Design --> Prototype[Character, controls and camera]
+  Prototype --> Trial[Player trial and author review]
+  Trial --> Decision[Keep, revise or replace]
+  Decision --> Prototype
+  Prototype --> Release[Verified GitHub Pages release]
+```
+
+| Design choice | Reason and result |
 |---|---|
-| Native JavaScript and Canvas; no build step | Run the same source locally and on GitHub Pages. |
-| Canonical JSON, shared schema and one 60 Hz simulator | Prevent editor/runtime drift and keep input recordings reproducible. |
-| Pre-matched scene recipes and directed cameras | Confirm input before alignment; play timely, late or missed outcomes without chasing animated root jitter. |
-| Foot/grip calibration and pose-matched run entry | Keep the sprite aligned with collision and authored contact points. |
-| Module references for expanded districts | Compose longer courses without duplicating obstacle geometry. |
-| Browser-local progress and audio preferences | Keep static hosting simple; shared scores and endless generation remain planned. |
+| JavaScript and Canvas with no build step | A checkout and the hosted game run the same source with no paid service or backend dependency. |
+| Character, controls and camera designed together | Input, motion, animation contacts and camera movement must describe one understandable action. |
+| Match the scene before accepting an action | A confirmed input waits for an authored playback window. Timely, late and missed inputs have different outcomes for the same obstacle. |
+| Directed action cameras | Following the animated root too closely produced shaking; camera paths now cooperate with the traversal instead. |
+| Reusable modules and smaller terrain units | Authored geometry can be combined into longer routes and edited precisely without copying obstacle definitions. |
+| Separate player menus and editor workspace | Players enter through home, mode and route selection; development panels remain in a separate workspace. |
+| Presentation separated from simulation | Sprite anchors, pose transitions, scenery and audio never move colliders or decide the physical outcome. |
+| Persistent music owner | Replacing an embedded screen keeps the same audio engine alive through navigation, pause and retry. |
 
-## Player trial and response — 1 November 2026
+## Changes guided by my review
 
-The author relayed feedback from players: a pause after climbing high geometry, too few combinations, a sparse city background, distant/invisible swing affordances, separate rope/cable keys and missing audio. This is a reported external trial; Codex did not observe the players directly and no identities or recordings were collected.
+I directed the scope and evaluated the results rather than accepting each implementation unchanged. I asked to replace the early animation presentation with prepared frames, then requested corrections for changing sprite size, jitter and poor contact with obstacles. I also corrected the interaction model: the scene should match first, input should confirm the action, and playback should begin when the runner reaches the designed window.
 
-- Removed the artificial landing recovery after climb/mantle completion. The swept traversal now hands off immediately to pose-matched running; ledge hang remains a deliberate, separately controlled state.
-- Added six connected district courses, increasing campaign content to twelve routes plus three training routes. The editor and game reference the same modules.
-- Added deterministic city layers, windows, rooftop structures, cranes, clouds and three palettes; decoration has no collision authority.
-- Lowered the standard swing anchor from 12 to 9.5 m and the chain anchor from 10 to 8.5 m. Idle ropes show the interaction before capture.
-- Unified swing and cable on Q and one touch button. A press resolves the eligible context; release keeps the original action identity.
-- Bundled Hyperton by Sudocolon and seven Kenney effects. Added gesture-unlocked music, event-driven effects, separate toggles and volume. Pause/hidden tabs stop sound; missing files do not block play.
-- Simplified public documentation and moved page/style entry points into dedicated directories. The runtime schema now belongs to content.
+I retained reusable scene modules, the looped motion lab, shared data and the editor's quick-test workflow. I required smaller placeable units, terrain drawing and default grid snapping when the original larger units limited composition. I changed the player-facing interface into conventional game menus and kept the old tools behind a separate editor entrance.
 
-Codex assisted with diagnosis, implementation, online audio research, English/Chinese documentation and automated/browser verification. We retained the player's shared-key and persistent-rope proposals. We revised the initial approach of treating climbing as a landing: grounded traversal exits now have a distinct event. Sound observes events instead of being added to the simulation. Longer routes reuse modules rather than copying their geometry.
+For climbing, I rejected the need for another input after a successful high-edge catch. A high climb now briefly settles at the grip and continues automatically; a low step keeps moving and returns directly to running. I also requested quick section retries instead of a failure popup. The permission review of character art is another release decision: earlier access to source frames and attribution do not establish redistribution permission, so unverified reference-derived art must be replaced in the public release.
 
-Validation: **177 automated tests**, **30 recorded scenarios** (18 lab, 12 campaign), all required lab events, and actual browser checks for menus, all campaign loads, held ledge/mantle, audio decoding/playback and portrait layout. Recordings were refreshed after swing geometry changed; assertions were preserved. See the [current update](Documents/Current/player-feedback-update.md). A follow-up player trial of these changes and subjective music/mix approval are pending; automated checks are not a substitute for them.
+## User testing and feedback
 
-## Follow-up trial response — 1 November 2026
+I collected and relayed feedback from people who tried the game. Codex did not observe those sessions directly, and this document does not invent participant identities, measurements or quotations.
 
-The author relayed a second player report: music restarted between screens, the track lacked speed, failures interrupted play, sliding into a high block could leave the runner stuck, and high-edge capture required another input. The screenshot supplied with the report informed the blocked-wall reproduction; this is reported feedback, not a newly observed trial.
+| Reported feedback or observed problem | Change made in response |
+|---|---|
+| Standing up after a high climb seemed to pause for one or two seconds | Removed extra landing recovery, connected the high grip to automatic mantle, and kept low climbs moving continuously. |
+| Too few combinations and a sparse city | Added six composed districts, bringing the campaign to twelve routes; added layered buildings, windows, rooftop details, cranes, clouds and city palettes. |
+| Swing points were distant and the intended rope action was hard to see | Lowered anchors and drew ropes before attachment. |
+| Separate swing and cable keys were inconvenient | Combined both on Q and one touch control, resolving the action from the nearby scene. |
+| Missing audio, music restarting between screens, and insufficient sense of speed | Added credited effects, selected a 140 BPM track and moved music to a persistent host. |
+| Failed moves interrupted play; sliding into a high block could leave the player stuck | Added blocked-front detection and automatic retry of the current section without a failure menu. |
 
-- Moved audio ownership into a persistent same-origin screen host. Menus, gameplay, pause and quick retry retain the same looping music source; explicit mute remains available. Replaced Hyperton with the original CC0 Racing Game Title by MintoDog (140 BPM), retaining the credited Kenney effects.
-- Added a 0.18-second automatic retry of the failed section without a failure overlay. A short forward collision sweep detects blocked approaches despite collision-skin micro-movement and fails them after 0.28 seconds.
-- Revised the previous separately controlled ledge hang: one deliberate jump can catch an eligible high edge, settle for 0.10 seconds and mantle automatically. A low climb now progresses continuously over 0.42 seconds and returns directly to running.
+The screenshot of the blocked runner was used to reproduce the wall-stall case. Keyboard and touch checks cover one-input high climbing, and browser checks confirm music-source continuity through menus, pause and retries. Automated verification currently includes 183 tests and 30 recorded scenarios. These checks establish reproducibility and catch regressions; they do not replace player judgment about rhythm, difficulty, animation quality or the sound mix. A further player review remains open.
 
-Codex assisted with implementation, online music sourcing, documentation and verification. We accepted the automatic high-climb proposal and retained manual pause and completed-run menus. We rejected elapsed-position restoration as a substitute for continuous music: one persistent source preserves actual playback through navigation. Geometry and retry timings remain content-owned; the diagnostic lab retains failure snapshots.
+I selected the openly licensed CC0 Agent pixel character after reviewing the style tradeoff. The reference-derived atlases and earlier generated traversal sheets are removed from the current release, and the new source is credited in both entry documents.
 
-Validation: **183 automated tests**, **30 production recordings** with all required lab events, and real browser checks of one music source across navigation/pause/retry/Back, one-tap keyboard and touch climbing, stuck-slide recovery without an overlay, editor access and explicit mute. Campaign recordings were regenerated through the actual simulator. No new human trial is claimed; perceived rhythm and the new mix still await player feedback. See [continuous play](Documents/Current/continuous-play.md).
+## AI use and responsibility
+
+I used Codex to investigate the reference, organize requirements, propose implementation options, write and revise code, prepare level data, diagnose bugs, research asset licenses, run checks and maintain the English documents and local Chinese counterparts. Image generation was used for experimental traversal poses. AI-produced code and artwork still required integration, calibration and review.
+
+My decisions defined the game, deployment target, SSOT requirement, scene-input model, editor workflow, menu organization and the changes requested after playtesting. Codex handled implementation details such as collision sweeps, interpolation, source ownership and regression checks. I accepted features that supported the intended flow and requested revisions when the camera shook, sprites did not match geometry, climbing stalled, controls were fragmented or failure UI interrupted play. The development record distinguishes my requests from implementation choices made by Codex; it does not present every AI suggestion as a decision I personally made.
+
+## Reference & Thanks
+
+| Resource / contributor | Use and credit |
+|---|---|
+| [Vector — Nekki](https://vector.game/zh-Hans/) | Parkour design reference; extracted artwork is not part of the current release. |
+| [Agent SMS — Chasersgaming](https://opengameart.org/content/adventure-series-character-agent-sms) | CC0 pixel character; selected source frames and project-authored action mappings. |
+| [Racing Game Title — MintoDog](https://opengameart.org/content/racing-game-title) | CC0 background music, 140 BPM. |
+| [Interface Sounds — Kenney](https://kenney.nl/assets/interface-sounds) | Seven CC0 sound effects. |
+| OpenAI Codex / image generation | Code, research, checks and documentation assistance; earlier generated art experiments are retired. |
+| Playtesters | Feedback on movement, controls, content, city scenery and audio. |
+
+[Character sources and adaptations](Documents/Current/animation-assets.md) · [Audio sources](assets/audio/README.md) · [Permission review](Documents/Plans/Research/character-asset-license-review.md).

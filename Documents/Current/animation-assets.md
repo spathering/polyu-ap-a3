@@ -1,30 +1,35 @@
-# Published reference animation assets
+# Open character animation assets
 
-Latest movement/audio rules: [continuous play, automatic high-edge climb and quick retry](continuous-play.md).
+The release uses **Adventure Series Character Agent SMS (free files)** by **Chasersgaming**, published under **CC0-1.0** on [OpenGameArt](https://opengameart.org/content/adventure-series-character-agent-sms). The author selected this open pixel-art replacement after the license review. Vector remains a design reference; its extracted character art is no longer in the current tree or runtime catalogue. The three earlier reference-guided imagegen sheets are also retired.
 
+| Release asset | Amount / location |
+|---|---|
+| Unmodified selected CC0 strips | 9 PNGs in `assets/character/cc0-agent/` |
+| Clip definitions / runtime sequences | 22 / 29 in `assets/character/animations.json` |
+| Provenance | Source URL, author, archive hash, original filenames, file hashes and CC0 identifier in the catalogue; local `LICENSE.txt` beside the PNGs |
+| Original source samples used | 29 available frames across the selected strips; 27 distinct samples selected at runtime |
+| Legacy extracted / experimental images | Outside the current public tree; previous Git commits are not rewritten |
 
-Current release, 1 November 2026: twelve campaign routes, three training routes, shared Q rope/cable input, direct climb-to-run recovery, idle ropes, layered city and bundled sound. Page entries are in `pages/` and the schema is in `content/`. Earlier dated check counts below are historical; current validation is 183 tests and 30 recordings. See [feedback update](player-feedback-update.md) and [structure](project-structure.md).
+## Mapping and calibration
 
+`animations.json` is the sole runtime owner of strips, crop rectangles, source-frame indices, sequence aliases, frame clocks, foot/pelvis/contact points, scale and transition settings. Frames are selected from the unchanged source PNGs. No Vector joint samples, body painter, frame anchors or pose signatures are used in the replacement catalogue. Generic existing timing and contact-window configuration remain project data.
 
-Implemented **26 October 2026** at the author's request. The selected runtime reference atlases are now part of the public release. Catalogue **`lab-sprites-06-published`** remains the single owner of image paths, frame geometry, calibration, sequence mappings and SHA-256 hashes.
+The source character is approximately 30 pixels tall. One common pixels-per-metre scale preserves size through all states. Grounded poses use annotated foot anchors; airborne poses use pelvis anchors. High-edge grip and rope/cable attachment use explicit hand points. Running phase still follows distance, and contact constraints take priority over presentation correction. Nearest-neighbor rendering preserves pixel edges. The menu sizes the runner from its physical height rather than a source-specific scale cap.
 
-| Asset group | Release contents | Runtime path |
-|---|---|---|
-| Reference-derived character | 18 clips, 19 PNG atlases, 852 poses; 2,121,658 bytes | `assets/character/reference/` |
-| Generated traversal poses | Three PNG atlases, 24 poses | `assets/generated/` |
-| Complete extraction / raw packs / parser | Outside Git and Pages | Workspace research archive |
-| Legacy and unselected local copies | Ignored; not used by the current catalogue | `assets/local-reference/` |
+| Game action | Open-art adaptation |
+|---|---|
+| Idle / run | Original idle and run cycles |
+| Jump / fall / wall rebound | Reach-jump and airborne samples |
+| Climb / mantle / timely vault | Side-hoist poses with shared contact windows |
+| Late vault / roll / pad launch | Selected somersault poses |
+| Slide / entry / exit | Low side-hoist pose and crouch/stand transitions |
+| Swing / cable | Stable grab/reach pose; movement and rotation follow the attachment |
+| Missed actions | Hurt/knockback poses with the existing failure behavior |
 
-The files are copied byte-for-byte from the hash-checked local runtime atlas subset; no new image generation, upscaling or clip retiming occurred. Source credit remains Nekki / Vector. Original source ranges and offline generation provenance remain linked in [character asset documentation](../../assets/character/README.md) and [extraction research](../Plans/Research/vector-character-frames.md). The `local-reference` origin tag is provenance, not an instruction to hide the current atlases. Publication follows the author's explicit instruction and does not change source ownership.
+These are adaptations of a compact pixel-art pack, not dedicated full-motion animations for every sport action. Four-frame running and selected held poses are visibly less detailed than the former reference animation. Slide, vault and grapple polish remain candidates for original open artwork; no claim of skeletal blending or generated in-betweens is made.
 
-## Integration and behavior
+## Verification and maintenance
 
-Renderer, Motion Lab, editor playtest and main-menu runner all read the same catalogue. Only the atlas path/version/credits changed; sequence IDs, frame rectangles, anchors, scale, motion rules, camera and scenario timing are unchanged. Menu JSON and renderer catalogue requests revalidate cached data. New release atlas paths avoid the previous missing-sheet URLs. A successful normal load reports **Processed sprites ready**, with all 22 sheets available; the procedural rig is now only an error fallback.
+A clean checkout includes every image. `npm run check:art` verifies release provenance and nine unique PNG hashes; `npm run check` validates content and assets. The renderer deduplicates shared strips, so menu, game, lab and editor read the same catalogue without falsely reporting missing images. The rig remains an error fallback. The old reference-restoration command is removed.
 
-The three same-obstacle witnesses retain distinct actual source clips: timely `speed_vault`, late `pop_vault_start`, missed `wall_collision_from_run_and_jump`. Wall rebound, ledge hold, mantle and roll likewise keep their prepared reference intervals. Generated swing/cable stable-pose limits and incomplete production in-betweens are unchanged.
-
-A clean checkout is sufficient. `npm run prepare:reference` verifies bundled reference hashes without a local archive; optional restoration still uses the catalogue's source directories. `npm run check` checks all 22 PNG hashes, and the existing crop test now requires every runtime file instead of allowing missing reference pages. No second atlas manifest or copied physics configuration was added.
-
-## Verification
-
-153 Node tests and all 24 deterministic recordings pass. Browser checks compare the three vault clips, foundations keyboard completion, portrait presentation, six finite maps, ledge/mantle/wall/roll controls and editor loading. Public release verification checks all atlas URLs/hashes and normal sprite-ready loading; an intentionally blocked-image check preserves the error fallback. A source-only export is checked without ignored files to demonstrate that the workspace research archive is unnecessary for normal use. See [deployment](deployment.md) for live release status. Automated checks are not an external user trial.
+183 tests and 30 production recordings pass. Browser checks cover keyboard/touch automatic mantle, section retry, persistent music and editor access. [Permission review](../Plans/Research/character-asset-license-review.md) records accepted and rejected sources. Follow-up human feedback on the new visual style remains pending.

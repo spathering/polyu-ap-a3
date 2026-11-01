@@ -17,7 +17,7 @@ export class CharacterAnimation{
   else if(p.state==='Roll'){sequence='roll';phase=clamp(p.stateTime/this.rules.sceneTraversal.rollSeconds,0,1);}
   else if(p.state==='SwingGrapple'){
    // One calibrated hanging pose rotates continuously with the rope, avoiding
-   // unrelated generated silhouettes switching at velocity thresholds.
+   // unrelated silhouettes switching at velocity thresholds.
    sequence='swing';offset=c.sequences.swing.holdFrame-c.sequences.swing.range[0];
   }else if(p.state==='Zipline'){
    sequence='cable';offset=c.sequences.cable.holdFrame-c.sequences.cable.range[0];

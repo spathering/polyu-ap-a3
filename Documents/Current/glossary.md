@@ -5,10 +5,6 @@ Latest movement/audio rules: [continuous play, automatic high-edge climb and qui
 
 Current release, 1 November 2026: twelve campaign routes, three training routes, shared Q rope/cable input, direct climb-to-run recovery, idle ropes, layered city and bundled sound. Page entries are in `pages/` and the schema is in `content/`. Earlier dated check counts below are historical; current validation is 183 tests and 30 recordings. See [feedback update](player-feedback-update.md) and [structure](project-structure.md).
 
-
-Current artwork, **26 October 2026**: [19 reference-derived atlases and three generated sheets](animation-assets.md) are bundled for local and public play. Earlier local-only/ignored-art descriptions and counts below describe prior increments.
-
-
 Updated: **24 October 2026**. These terms occur in current project documents. Their presence does not mean the corresponding feature or service is implemented. Add or revise entries as code, configuration and decisions change.
 
 ## Project and game terms
@@ -85,7 +81,7 @@ Definitions are developed in [requirements](../Plans/Requirements/game-requireme
 | Reference still / sprite sheet | A single research screenshot / a page of structured animation frames. The still archive is the former; the separate character archive now contains locally rendered sheets from original skeletal data, without a runtime redistribution grant. |
 | Skeletal sample / rasterized frame | Original joint-coordinate pose / transparent image generated from that pose by the original body painter. |
 | Pose step / declared FPS | Runtime sample advancement interval / the source parser's separate declared sample rate. |
-| Key pose / in-between | Deliberate action milestone / frames connecting milestones. The generated trial has eight key poses per clip and no qualified in-betweens. |
+| Key pose / in-between | Deliberate action milestone / frames connecting milestones. The current pixel pack uses short source cycles and adapted held poses; the older generated trial is retired. |
 | Estimated presentation anchor | Visually annotated pelvis or hand point for local image alignment; not an authoritative physics joint or collision body. |
 
 See [3C](../Plans/Design/three-c-design.md), [state machine](../Plans/Design/character-state-machine.md) and [image catalogue](../Plans/Research/vector-action-assets.md).
@@ -94,7 +90,7 @@ See [3C](../Plans/Design/three-c-design.md), [state machine](../Plans/Design/cha
 
 | Term | Meaning |
 |---|---|
-| Processed sprites | Default presentation using prepared reference and generated atlas frames. |
+| Processed sprites | Default presentation using openly licensed CC0 character strips. |
 | Animation catalogue | Canonical `assets/character/animations.json` crop, anchor, scale and sequence metadata. |
 | Rig fallback | Procedural silhouette used for missing images or selected debugging. |
 | Snapshot identity | Reset generation used to ignore earlier pad/release events after retry. |
@@ -186,7 +182,7 @@ See [3C](../Plans/Design/three-c-design.md), [state machine](../Plans/Design/cha
 
 [Menu behavior](game-flow.md) also defines disabled Endless and legacy URL handling.
 
-Published reference atlas: a hash-checked PNG page selected for runtime and tracked under `assets/character/reference/`. This differs from raw/unselected archived exports; `local-reference` remains a source-origin tag.
+Open release strip: an unchanged CC0 source PNG selected for runtime, with source, license and hash recorded in the animation catalogue.
 
 ## New presentation and traversal terms
 
@@ -206,3 +202,4 @@ Published reference atlas: a hash-checked PNG page selected for runtime and trac
 | Persistent screen host | The top-level page stays alive while embedded game/menu screens change, preserving the audio engine. |
 | Grip settle | The short automatic support interval between high-edge capture and mantle. |
 | Quick retry | A content-timed restart of the current failed section without a failure menu. |
+| CC0 | A public-domain dedication used by the replacement character and bundled audio; source and license evidence still remain recorded. |

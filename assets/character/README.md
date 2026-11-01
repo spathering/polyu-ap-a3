@@ -1,17 +1,9 @@
 # Character animation catalogue
 
-Updated **26 October 2026**. `animations.json` (`lab-sprites-06-published`) owns all crop rectangles, scale, anchors, sequences, timing and atlas hashes. The runtime and menu now use **19 tracked reference-derived PNG atlases** at `assets/character/reference/` (852 poses, 2,121,658 bytes), alongside three generated traversal sheets. Reference source attribution remains **Nekki / Vector**. These are prepared derivatives of the archived reference data, not original artwork created for this project.
+The current character is Chasersgaming's **Adventure Series Character Agent SMS**, free CC0 edition. [Source and license declaration](https://opengameart.org/content/adventure-series-character-agent-sms) · [Local notice](cc0-agent/LICENSE.txt).
 
-The author explicitly requested publication of the runtime atlas subset. Raw animation packs, full extraction archives, unselected/legacy exports and publisher parser/painter remain outside the release. `assets/local-reference/` stays ignored. The catalogue's `origin: local-reference` describes source provenance, not current availability; all currently referenced sheets are included in Git/Pages. [Published asset contract](../../Documents/Current/animation-assets.md).
+`animations.json` (`open-agent-01`) owns nine unmodified PNG strips, 22 calibrated clip definitions and 29 action sequences. It records the source archive hash, original filenames, per-file SHA-256 values and frame indices. All runtime art resides in `cc0-agent/`; the menu, game, lab and editor share this catalogue.
 
-## Calibration and ownership
+The project adapts hoist/crouch poses for climbing and sliding, somersaults for rolling/pads, and grab/reach poses for ropes. Fixed scale, foot/pelvis/hand anchors and distance-driven running keep presentation separate from collision. Pixel artwork uses nearest-neighbor sampling. See [the current asset guide](../../Documents/Current/animation-assets.md) for mapping and visual limitations.
 
-Nominal 20-Hz source samples were interpolated to 60 Hz before local rasterization with calibrated skeletal-chain scale, visible-support ground anchors and stable airborne pelvis. Generated sheets use estimated landmarks. Running phase uses distance; hand/grip windows lock contacts. Swing/cable use selected stable generated hanging poses, and pad/release remains discrete key-pose animation. One opaque sprite is rendered; complete skeletal blending/in-betweens remain pending. Animation never writes collider position or velocity.
-
-The current clip selection covers idle/run/jump/fall/landing, slide entry/loop/exit, vault/climb, wall rebound/hang/mantle/roll and timely/late/missed scene outcomes. Several outcome aliases reuse existing source intervals or generated poses. The exact source ranges, hashes and filenames remain in the catalogue; no second mapping file is maintained. [Scene choreography](../../Documents/Current/scene-choreography.md).
-
-## Verification and restoration
-
-A clean checkout includes every runtime PNG. `npm run dev` needs no research archive. `npm run prepare:reference` now verifies bundled hashes and optionally restores missing files from the local archive; an explicit archive argument rebuilds/restores the same catalogued subset. It performs no network access and copies no raw publisher source. `npm run check` and the atlas/crop test reject any missing or modified sheet; missing images at runtime still use the rig fallback as error handling.
-
-Provenance: [reference-frame extraction](../../Documents/Plans/Research/vector-character-frames.md), [generated sheets](../generated/README.md), and [timing/clip integration](../../Documents/Current/scene-action-synchronization.md). Publishing the prepared subset does not change source authorship or grant a new asset licence.
+The earlier extracted Vector atlases and reference-guided generated sheets have been removed from the current public tree. Their source attribution was not evidence of redistribution permission. Earlier commits remain historical; they were not rewritten. `npm run check:art` verifies the current open-art subset without a private archive or network access.

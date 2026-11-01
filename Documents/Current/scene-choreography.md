@@ -5,10 +5,6 @@ Latest movement/audio rules: [continuous play, automatic high-edge climb and qui
 
 Current release, 1 November 2026: twelve campaign routes, three training routes, shared Q rope/cable input, direct climb-to-run recovery, idle ropes, layered city and bundled sound. Page entries are in `pages/` and the schema is in `content/`. Earlier dated check counts below are historical; current validation is 183 tests and 30 recordings. See [feedback update](player-feedback-update.md) and [structure](project-structure.md).
 
-
-Current artwork, **26 October 2026**: [19 reference-derived atlases and three generated sheets](animation-assets.md) are bundled for local and public play. Earlier local-only/ignored-art descriptions and counts below describe prior increments.
-
-
 Implemented **25 October 2026**, content `motion-run-07-directed`, physics `lab-06-directed`, catalogue `lab-sprites-06-published`. This is the current scene-action contract; it supersedes earlier root-follow and expiring-input descriptions. Shared schema remains backward-compatible **1.3.0**.
 
 ## Order and ownership
@@ -39,7 +35,7 @@ stateDiagram-v2
 | Late | Confirm after that plane but before `startX + lateDistance`; wait for the late slot | `vaultLate` / `pop_vault_start` | Later, 1.25-times-duration salvage vault |
 | Missed | Reach the deadline without confirmation | `obstacleHit` / `wall_collision_from_run_and_jump` | Fixed collision/recoil, then failure; no automatic successful vault |
 
-All seven marked kinds have timely/late/missed sequence references. Late jump lowers its impulse; a missed gap runs off and falls. Slide has a compact tumble entry; climb uses the mantle recovery clip; dash/swing/cable use distinct late entry poses and missed-grapple response. Generated hanging sheets still use selected stable poses rather than production skeletal blending. High-edge capture automatically connects to mantle; wall rebound and roll retain deliberate controls. These secondary actions receive directed shots but are not three-outcome marker recipes. Release remains interactive for swing/cable. A held swing exits at its authored `playSeconds` limit (1.8 seconds in this package).
+All seven marked kinds have timely/late/missed sequence references. Late jump lowers its impulse; a missed gap runs off and falls. Slide has a compact tumble entry; climb uses the mantle recovery clip; dash/swing/cable use distinct late entry poses and missed-grapple response. CC0 grab/reach poses remain stable during attachment; they are not dedicated full grapple loops. High-edge capture automatically connects to mantle; wall rebound and roll retain deliberate controls. These secondary actions receive directed shots but are not three-outcome marker recipes. Release remains interactive for swing/cable. A held swing exits at its authored `playSeconds` limit (1.8 seconds in this package).
 
 ## Camera and presentation
 
@@ -60,4 +56,4 @@ The seven recipe IDs are `scene-jump`, `scene-slide`, `scene-vault`, `scene-clim
 
 153 Node tests and 24 deterministic recordings pass: 18 lab cases cover 30/30 required events, plus six completed campaign routes. New checks compare all three outcomes at one obstacle, confirm equal prepared paths for different early inputs, forbid late backward snapping, verify immutable snapshots and clock boundaries, and prove identical directed camera output despite injected root/velocity noise and across 30/60/120-Hz sampling. Browser checks cover three actual clips, editable shared presets, foundations completion and portrait play. These are automated checks, not another-person usability trials.
 
-Reference-derived runtime atlases are now bundled; the rig remains an error fallback. This implements an authored scene director inspired by the reference; it does not claim identical native Vector code or complete production animation quality. Endless generation, final original art/audio, external trials remain pending.
+Open CC0 character strips are bundled; the rig remains an error fallback. This is an authored scene director inspired by the reference, not identical native Vector code. Endless generation and further original animation polish remain planned.

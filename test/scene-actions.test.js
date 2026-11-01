@@ -44,7 +44,7 @@ test('run pose phase uses travelled distance and cannot rewind when speed change
 });
 test('hanging poses remain stable across time/velocity thresholds and share calibrated scale',()=>{
  const s=fresh(),a=new CharacterAnimation(catalog,content.rules);for(const [state,id]of [['SwingGrapple','swing'],['Zipline','cable']]){s.p.state=state;s.p.stateTime=.1;const one=a.sample(s.snapshot(),s.world);s.p.stateTime=8;s.p.vy=-12;assert.equal(a.sample(s.snapshot(),s.world).index,one.index);assert.equal(one.sequence,id);}
- for(const c of catalog.clips.filter(c=>c.origin==='generated'))for(const f of c.frames)assert.ok(Math.abs(Math.hypot(f.headEstimate[0]-f.pelvis[0],f.headEstimate[1]-f.pelvis[1])/f.pixelsPerMetre-.8)<1e-9);
+ for(const name of ['swing','cable']){const c=catalog.clips.find(c=>c.id===catalog.sequences[name].clip);assert.equal(c.pixelsPerMetre,catalog.referenceStandingPixels/catalog.calibration.referenceBodyHeightMetres);for(const f of c.frames)assert.ok(f.grip.every(Number.isFinite));}
 });
 test('presentation interpolation is continuous, read-only, and never crosses pause/reset boundaries',()=>{
  const s=fresh(),before=s.snapshot();s.step();const after=s.snapshot(),immutable=JSON.stringify(after),half=presentationSnapshot(before,after,.5);assert.equal(half.player.x,(before.player.x+after.player.x)/2);assert.equal(JSON.stringify(after),immutable);s.pause();const paused=s.snapshot();assert.equal(presentationSnapshot(after,paused,.5),paused);s.retry();const reset=s.snapshot();assert.equal(presentationSnapshot(after,reset,.5),reset);
@@ -53,8 +53,8 @@ test('presentation interpolation is continuous, read-only, and never crosses pau
 test('a queued action cannot skip its alignment plane at high speed',()=>{
  const c=structuredClone(content);c.modules.find(m=>m.id==='unit-vault').sceneActions.find(m=>m.kind==='vault').lateDistance=.01;const s=new Simulation(c,lab);s.reset(2);s.p.x=69.1;s.p.vx=24;s.step({pressed:['jump']});s.step();assert.equal(s.p.state,'Vault');assert.equal(s.p.vault.start[0],69.2);
 });
-test('prepared baseline clips contain 60-Hz interpolated poses with unchanged source ranges',()=>{
- for(const clip of catalog.clips.filter(c=>c.origin==='local-reference')){const seq=Object.values(catalog.sequences).find(s=>s.clip===clip.id);assert.equal(clip.sampling.outputPoseHz,60);assert.equal(seq.fps,60);assert.equal(clip.frames.length,(seq.sourceFrameRange[1]-seq.sourceFrameRange[0]+1)*3);assert.ok(Math.abs(clip.frames[1].sourceSampleIndex-clip.frames[0].sourceSampleIndex-1/3)<1e-10);}
+test('every release clip has an explicit open source, license and source-frame mapping',()=>{
+ assert.ok(catalog.clips.length>0);for(const clip of catalog.clips){assert.equal(clip.origin,'cc0');assert.equal(clip.license,'CC0-1.0');assert.ok(catalog.sources.some(s=>s.id===clip.source&&s.license===clip.license));for(const f of clip.frames){assert.ok(Number.isInteger(f.sourceFrame));assert.equal(f.poseSignature.length,catalog.timing.poseMatchWeights.length);assert.ok(f.poseSignature.every(Number.isFinite));}for(const sheet of clip.sheets)assert.ok(sheet.file.startsWith('assets/character/cc0-agent/'));}
 });
 test('vault hand placement reaches the obstacle contact during its locked phase',()=>{
  const s=fresh();s.reset(2);s.p.x=68;s.p.vx=6;s.step({pressed:['jump']});for(let i=0;i<80&&!(s.p.context?.progress>=.375);i++)s.step();assert.equal(s.p.state,'Vault');

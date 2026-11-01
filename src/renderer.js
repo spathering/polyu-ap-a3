@@ -8,7 +8,7 @@ export class Renderer{
  async loadArt(){try{
   const response=await fetch(this.lab.art.manifest,{cache:'no-cache'});if(!response.ok)throw Error('Animation catalog unavailable');
   const catalog=await response.json();this.animation=new CharacterAnimation(catalog,this.rules);this.poseTransition=new PoseTransition(catalog.timing);
-  const sheets=catalog.clips.flatMap(c=>c.sheets);await Promise.all(sheets.map(async sheet=>{
+  const sheets=[...new Map(catalog.clips.flatMap(c=>c.sheets).map(s=>[s.file,s])).values()];await Promise.all(sheets.map(async sheet=>{
    const image=new Image();image.src=sheet.file;try{await image.decode();this.images.set(sheet.file,image);}catch{/* Missing sprite sheets use the rig fallback. */}
   }));
   this.artStatus=this.images.size===sheets.length?'Processed sprites ready':`Sprites ${this.images.size}/${sheets.length} · missing frames use rig fallback`;
@@ -72,7 +72,7 @@ export class Renderer{
  }
  drawSprite(pose,opacity=1){
   const {image,sample,point,anchor,rotation,scale}=pose,[sx,sy,w,h]=sample.frame.rect,ctx=this.ctx;
-  if(opacity<=0)return;ctx.save();ctx.globalAlpha=opacity;ctx.translate(...point);ctx.rotate(rotation);ctx.imageSmoothingEnabled=true;
+  if(opacity<=0)return;ctx.save();ctx.globalAlpha=opacity;ctx.translate(...point);ctx.rotate(rotation);ctx.imageSmoothingEnabled=!this.animation.catalog.pixelArt;
   ctx.drawImage(image,sx,sy,w,h,-anchor[0]*scale,-anchor[1]*scale,w*scale,h*scale);ctx.restore();
  }
  drawBody(snapshot){

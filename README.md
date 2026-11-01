@@ -1,6 +1,6 @@
 # Motion / Run
 
-**Read the city. Commit to the move. Keep your momentum.** A side-view browser parkour game with twelve campaign routes, three training routes and a separate level editor.
+**Read the city. Commit to the move. Keep your momentum.** A pixel-art side-view browser parkour game with twelve campaign routes, three training routes and a separate level editor.
 
 [Play now](https://spathering.github.io/polyu-ap-a3/) · [Level Studio](https://spathering.github.io/polyu-ap-a3/pages/editor.html) · [Development process](PROCESS.md)
 
@@ -33,6 +33,7 @@ npm run dev       # http://127.0.0.1:4173/
 npm run check    # content, atlas and audio integrity
 npm test         # simulation, input, presentation and editor
 npm run rehearse # recorded production routes
+npm run check:art # CC0 provenance and PNG hashes
 ```
 
 ```text
@@ -58,4 +59,15 @@ flowchart LR
 
 The project targets readable, continuous parkour and reproducible static hosting. Scene recipes bind input windows, fixed animation and directed cameras to shared geometry. Editor tests use the production simulator; rendering never moves collision bodies. New district routes reference existing modules. See [architecture](Documents/Current/modules.md), [current features](Documents/Current/continuous-play.md) and [plans](Documents/Plans/TODO.md). Endless generation and shared online scores remain planned.
 
-**References & thanks:** [Vector / Nekki](https://vector.game/zh-Hans/) informed movement and supplies the credited reference-derived character atlases; three traversal sheets were generated with imagegen. [Racing Game Title — MintoDog, 140 BPM](https://opengameart.org/content/racing-game-title) and [Kenney Interface Sounds](https://kenney.nl/assets/interface-sounds) supply the bundled CC0 audio. [Asset details](Documents/Current/animation-assets.md) · [Audio sources](assets/audio/README.md). Codex assisted with implementation, research and verification; decisions and player feedback are recorded in [PROCESS](PROCESS.md).
+## Reference & Thanks
+
+| Resource / contributor | Use and credit |
+|---|---|
+| [Vector — Nekki](https://vector.game/zh-Hans/) | Parkour design reference; extracted artwork is not part of the current release. |
+| [Agent SMS — Chasersgaming](https://opengameart.org/content/adventure-series-character-agent-sms) | CC0 pixel character; selected source frames and project-authored action mappings. |
+| [Racing Game Title — MintoDog](https://opengameart.org/content/racing-game-title) | CC0 background music, 140 BPM. |
+| [Interface Sounds — Kenney](https://kenney.nl/assets/interface-sounds) | Seven CC0 sound effects. |
+| OpenAI Codex / image generation | Code, research, checks and documentation assistance; earlier generated art experiments are retired. |
+| Playtesters | Feedback on movement, controls, content, city scenery and audio. |
+
+[Character sources and adaptations](Documents/Current/animation-assets.md) · [Audio sources](assets/audio/README.md) · [Development decisions and AI use](PROCESS.md).

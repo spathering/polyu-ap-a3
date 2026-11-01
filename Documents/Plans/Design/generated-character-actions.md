@@ -1,5 +1,8 @@
 # Generated traversal character actions
 
+Historical prototype record: these images are retired from the current release. See [open-art integration](../../Current/animation-assets.md) and [permission review](../Research/character-asset-license-review.md).
+
+
 **Implementation update, 24 October 2026:** baseline movement, four traversal additions, camera, semantic input, an authored circuit and prepared sprite mapping are implemented in the [character lab](../../Current/character-lab.md). See actual paths/owners in [modules](../../Current/modules.md). 66 tests pass; 15 rehearsals cover 26/26 events. This document retains the broader product contract; the editor, endless generation, streaming qualification and production animation blending remain pending.
 
 Status: **24 October 2026, trial-01 art experiment**. The author requested PNG action assets for jump pads, ziplines and swings, using the existing silhouette material as a reference. These are newly AI-generated poses, separate from the [original-data character archive](../Research/vector-character-frames.md).

@@ -39,3 +39,5 @@ flowchart TD
 New district layouts reference existing modules with translated instances. They do not copy terrain entities into UI code. Audio and decorative palettes are presentation-only; neither affects recorded outcomes. [Structure](project-structure.md) · [Scene choreography](scene-choreography.md).
 
 `screen-route.js` owns URL conversion; `screen-host.js` routes direct entries and intercepts same-app navigation. `quick-retry.js` resets failed player sections after the content-owned delay. Music lifetime is independent of simulation session state.
+
+`assets/character/animations.json` owns the CC0 source provenance and every frame/anchor/sequence. Renderer image loading deduplicates shared strips; pixel sampling and menu size derive from the same catalogue.

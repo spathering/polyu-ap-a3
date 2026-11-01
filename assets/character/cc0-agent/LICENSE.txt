@@ -1,0 +1,9 @@
+Adventure Series Character Agent SMS (free files)
+Author: Chasersgaming
+License: Creative Commons Zero v1.0 Universal (CC0-1.0)
+Source: https://opengameart.org/content/adventure-series-character-agent-sms
+License: https://creativecommons.org/publicdomain/zero/1.0/
+
+The author designates the free files as CC0 on the source page.
+Selected PNGs in this directory are unmodified copies from the free archive.
+Clip choices and frame/contact metadata in animations.json are project adaptations.

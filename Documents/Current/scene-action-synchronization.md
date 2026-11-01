@@ -1,24 +1,15 @@
 # Scene action and animation synchronization
 
-Latest movement/audio rules: [continuous play, automatic high-edge climb and quick retry](continuous-play.md).
+The [scene choreography contract](scene-choreography.md) owns marked actions. The detector prepares geometry, input windows, timely/late/missed variants, sequences and camera shots. Input confirms a variant; playback begins when the runner reaches its slot. The simulator alone moves the body, using swept paths and exit checks. Generic free-jump buffers retain their expiry.
 
+The shot follows authored scene coordinates and time independently of animated root movement. Tick-boundary interpolation and bounded visual inertia keep transitions continuous. Hand/grip contacts override pelvis correction. Pause freezes clocks and cancels uncommitted intent; retry resets presentation memory. High-edge capture connects automatically to mantle, while low climbs retain forward progress; see [continuous play](continuous-play.md).
 
-Current release, 1 November 2026: twelve campaign routes, three training routes, shared Q rope/cable input, direct climb-to-run recovery, idle ropes, layered city and bundled sound. Page entries are in `pages/` and the schema is in `content/`. Earlier dated check counts below are historical; current validation is 183 tests and 30 recordings. See [feedback update](player-feedback-update.md) and [structure](project-structure.md).
+## Current art calibration
 
+The [CC0 character catalogue](animation-assets.md) owns original strip hashes, source indices, crops, scale, foot/pelvis/hand anchors and clocks. The same nine strips serve every screen. Running phase follows distance. Side-hoist poses supply climb/mantle, low poses supply sliding, somersaults supply roll/pad, and grab/reach poses remain stable during rope travel. One opaque pixel sprite is drawn with nearest-neighbor sampling. No reference skeletal data or generated trial sheets are loaded.
 
-Current artwork, **26 October 2026**: [19 reference-derived atlases and three generated sheets](animation-assets.md) are bundled for local and public play. Earlier local-only/ignored-art descriptions and counts below describe prior increments.
-
-
-Updated **25 October 2026**. The authoritative [scene choreography guide](scene-choreography.md) replaces the previous input-first/expiring-queue pipeline and root-driven camera. See the [reference interaction research](../Plans/Research/vector-runtime-interaction.md) for observations and inference boundaries.
-
-The shared scene detector first prepares geometry, three timing outcomes, playback slots, clips and shot. Input confirms a prepared variant; the runner reaches its slot before fixed playback starts. Vault/climb contact paths are prepared and swept; the simulator alone writes the body. Timely vault, late salvage and missed collision are different sequences and gameplay results. Generic unmarked jump buffers retain their existing expiry.
-
-The shot follows authored scene coordinates/time, independently of instantaneous root motion. Fixed pose clocks, tick-boundary interpolation and bounded visual inertia maintain presentation continuity. Hand/grip contact takes priority over pelvis correction. Pause freezes clocks and cancels uncommitted intent; retry resets all presentation memory.
-
-## Art calibration
-
-The catalogue owns crops, skeletal-chain scale, visible support/airborne pelvis anchors, sequence clocks and hand-lock windows. Running phase uses distance. Swing/cable retain stable generated hanging poses; pad/release remains key-pose animation. One opaque sprite is displayed; full skeletal blending and new production in-betweens remain pending. Local derivatives contain 852 poses on 19 bundled pages, plus three generated sheets. Missing research PNGs use the procedural rig and explicit status.
+The physical outcome and camera timing are unchanged by this asset replacement. The compact source pack does not supply a bespoke full cycle for every action; selected pose adaptations and their limitations are documented rather than presented as recovered reference animations.
 
 ## Verification
 
-153 tests and 24 deterministic recordings pass, including 30/30 required lab events and six complete finite routes. Dedicated tests verify three outcomes on one obstacle, fixed early-input paths, late slots, shot independence from injected root/velocity noise and equivalent 30/60/120-Hz camera sampling. Browser verification checks real clip selection, preset edit/undo, keyboard completion and portrait gameplay. [Current 3C scope](reference-driven-3c.md) and [campaign guards](campaign-and-scene-actions.md) distinguish this increment from pending production polish and external user trials.
+183 tests and 30 production recordings pass, covering all 30 required lab events and twelve campaign routes. Contact, pose-entry, fixed playback, read-only presentation and camera-noise checks remain. Browser tests cover real artwork, one-input high climbing, retry, audio continuity and editor access. New visual polish still needs player judgment.

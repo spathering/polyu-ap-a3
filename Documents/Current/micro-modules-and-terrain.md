@@ -5,13 +5,6 @@ Latest movement/audio rules: [continuous play, automatic high-edge climb and qui
 
 Current release, 1 November 2026: twelve campaign routes, three training routes, shared Q rope/cable input, direct climb-to-run recovery, idle ropes, layered city and bundled sound. Page entries are in `pages/` and the schema is in `content/`. Earlier dated check counts below are historical; current validation is 183 tests and 30 recordings. See [feedback update](player-feedback-update.md) and [structure](project-structure.md).
 
-
-Current artwork, **26 October 2026**: [19 reference-derived atlases and three generated sheets](animation-assets.md) are bundled for local and public play. Earlier local-only/ignored-art descriptions and counts below describe prior increments.
-
-
-Current motion revision: **`motion-run-07-directed` / `lab-06-directed`**. See [scene choreography](scene-choreography.md) for pre-input binding, timely/late/missed outcomes, directed camera and shared preset editing. Current totals: **153 tests, 24 recordings, 30/30 lab events; 852 local poses / 19 bundled pages plus three generated sheets**. Earlier increment counts below are historical.
-
-
 Implemented **25 October 2026**, schema **1.3.0**, content revision `motion-lab-04-micro`, physics `lab-03-context`. See [Level Studio](level-editor.md) for the full workflow and [reference analysis](../Plans/Research/vector-context-and-micro-modules.md) for evidence and implementation differences.
 
 ## One definition per fact
@@ -59,6 +52,6 @@ A 1.2 import/recovered draft stays pending until **Convert explicitly to 1.3.0**
 
 **102 tests pass**, including painted-block climb/top support, exact hand contact, captured-target stability, late queued chaining, gait matching, derived dimensions, shared brush definitions and legacy conversion. The original **15 production rehearsals still cover 26/26 lab events**, including a full lap; climb is separately tested. Ten actual Edge CDP scenarios cover native library drag/drop and ghost, exact coordinates, a 2.4 × 1.2 m stroke and climb, both preview modes, all fifteen module views, file conversion, local recovery and compact layout, with zero browser exceptions. Local evidence is in `external-research/lab-evidence/2026-10-25/micro-editor/`.
 
-Selected runtime source derivatives are now bundled; raw research archives remain local. The climb adapts the hand-support portion of `monkey_vault` with a dedicated contact window; it is not a recovered original high-wall controller. Generated eight-pose traversal sheets remain provisional. Endless generation, composition qualification, graphical route editing, human trial remain pending.
+Open CC0 strips now provide the character. Climbing adapts side-hoist poses with a dedicated contact window. The catalogue documents limited pose coverage. Endless generation, broader composition qualification and follow-up player review remain planned.
 
 The library now has eighteen prefabs: the previous fifteen plus `unit-ledge`, `unit-wall-jump`, `unit-drop`. Their intended spaces include wall rebound/catch/mantle/recovery from `sceneTraversal`; this is still an authoring envelope, not universal reachability proof. Six new terrain definitions and finite layouts are documented in [campaign/actions](campaign-and-scene-actions.md).

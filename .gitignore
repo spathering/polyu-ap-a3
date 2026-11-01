@@ -6,3 +6,9 @@ coverage/
 # Legacy/unselected local exports remain outside the release.
 # Selected runtime atlases are tracked at assets/character/reference/.
 assets/local-reference/
+
+# Retired character art without a recorded redistribution grant.
+assets/character/reference/
+assets/generated/jump_pad_launch.png
+assets/generated/swing_grapple.png
+assets/generated/zipline_traverse.png

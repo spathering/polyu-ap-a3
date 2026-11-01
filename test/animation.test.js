@@ -39,7 +39,7 @@ test('animation freezes with simulation time, and retry cannot reuse an old pad 
 
 test('vault frame progress uses the current movement rule rather than a copied duration',()=>{
  const rules={...content.rules,vaultDurationSeconds:.6},a=new CharacterAnimation(catalog,rules),sim=new Simulation(content,lab);
- sim.p.state='Vault';sim.p.stateTime=.3;assert.equal(a.sample(sim.snapshot(),sim.world).index,23);
+ sim.p.state='Vault';sim.p.stateTime=.3;const [start,end]=catalog.sequences.vault.range;assert.equal(a.sample(sim.snapshot(),sim.world).index,start+Math.floor((end-start)*.5));
 });
 test('interpolated presentation cannot consume a future launch or release event',()=>{
  const sim=new Simulation(content,lab);sim.p.state='Airborne';sim.p.vy=2;const snap=structuredClone(sim.snapshot());snap.time=99/60;snap.events=[{id:'JumpPad',snap:snap.snap,tick:100,serial:1}];assert.equal(animation.sample(snap,sim.world).sequence,'rise');snap.time=100/60;assert.equal(animation.sample(snap,sim.world).sequence,'pad');
