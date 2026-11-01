@@ -3,7 +3,7 @@
 Latest movement/audio rules: [continuous play, automatic high-edge climb and quick retry](continuous-play.md).
 
 
-Current release, 1 November 2026: twelve campaign routes, three training routes, shared Q rope/cable input, direct climb-to-run recovery, idle ropes, layered city and bundled sound. Page entries are in `pages/` and the schema is in `content/`. Earlier dated check counts below are historical; current validation is 183 tests and 30 recordings. See [feedback update](player-feedback-update.md) and [structure](project-structure.md).
+Current release, 1 November 2026: twelve campaign routes, three training routes, shared Q rope/cable input, direct climb-to-run recovery, idle ropes, layered city and bundled sound. Page entries are in `pages/` and the schema is in `content/`. Earlier dated check counts below are historical; current validation is 184 tests and 30 recordings. See [feedback update](player-feedback-update.md) and [structure](project-structure.md).
 
 Implemented **25 October 2026**, content `motion-run-07-directed`, physics `lab-06-directed`, catalogue `lab-sprites-06-published`. This is the current scene-action contract; it supersedes earlier root-follow and expiring-input descriptions. Shared schema remains backward-compatible **1.3.0**.
 

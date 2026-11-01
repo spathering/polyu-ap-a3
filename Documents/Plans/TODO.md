@@ -14,6 +14,8 @@
 - [x] Replace unverified reference art with the openly licensed CC0 Agent character.
 - [x] Rewrite PROCESS without concrete dates, recording the initial idea, author decisions, AI use and reported trials; list Reference & Thanks in both root guides.
 
+- [x] Correct the mislabeled run/idle exports and verify visible running poses in game and menu.
+
 ## Next work
 
 - [ ] Ask players to repeat the high-ledge, cable/swing and longer-district routes; record whether the reported pause and discoverability issues are resolved.

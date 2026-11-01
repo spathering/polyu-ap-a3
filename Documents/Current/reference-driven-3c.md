@@ -3,7 +3,7 @@
 Latest movement/audio rules: [continuous play, automatic high-edge climb and quick retry](continuous-play.md).
 
 
-Current release, 1 November 2026: twelve campaign routes, three training routes, shared Q rope/cable input, direct climb-to-run recovery, idle ropes, layered city and bundled sound. Page entries are in `pages/` and the schema is in `content/`. Earlier dated check counts below are historical; current validation is 183 tests and 30 recordings. See [feedback update](player-feedback-update.md) and [structure](project-structure.md).
+Current release, 1 November 2026: twelve campaign routes, three training routes, shared Q rope/cable input, direct climb-to-run recovery, idle ropes, layered city and bundled sound. Page entries are in `pages/` and the schema is in `content/`. Earlier dated check counts below are historical; current validation is 184 tests and 30 recordings. See [feedback update](player-feedback-update.md) and [structure](project-structure.md).
 
 Updated **25 October 2026**. [Public-runtime observations/hashes](../Plans/Research/vector-3c-runtime-review.md) distinguish source findings from reimplementation. Native Vector equivalence is not claimed. The [scene choreography contract](scene-choreography.md) is the current authority for marked actions.
 
@@ -14,4 +14,4 @@ Updated **25 October 2026**. [Public-runtime observations/hashes](../Plans/Resea
 
 The same recipes, validator, simulator, camera and renderer run in the lab, finite game and editor quick test. `scenePerformances` and the catalogue own authoring facts; editor changes are atomic and undoable. Finite `Completed` freezes results; the lab returns at its lap gate. The [play session](game-flow.md) owns cumulative active ticks through retries.
 
-183 tests, 30 recordings (18 lab / twelve campaign) and actual browser clip/edit/control checks pass. Root-noise injection cannot affect directed shots. These checks are not a human feel trial. Final original animations, arbitrary composition qualification, endless generation remains pending. [Scene-action guards](campaign-and-scene-actions.md) describe ledge/wall/landing behavior.
+184 tests, 30 recordings (18 lab / twelve campaign) and actual browser clip/edit/control checks pass. Root-noise injection cannot affect directed shots. These checks are not a human feel trial. Final original animations, arbitrary composition qualification, endless generation remains pending. [Scene-action guards](campaign-and-scene-actions.md) describe ledge/wall/landing behavior.

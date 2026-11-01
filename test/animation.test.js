@@ -9,6 +9,20 @@ const read=p=>JSON.parse(fs.readFileSync(new URL(p,import.meta.url)));
 const catalog=read('../assets/character/animations.json'),content=read('../content/parkour.json'),lab=read('../content/lab-course.json');
 const animation=new CharacterAnimation(catalog,content.rules);
 
+test('moving snapshots cycle the visually approved running strip, then freeze on pause',()=>{
+ // Upstream standalone filenames do not identify their visible animation reliably.
+ // Pin the reviewed running pixels so a filename-based remap cannot regress this.
+ const approvedRun='3c3c233aa4b5476bce8ce90f99536feb65c8b0d43f2b76107313dbd5b520de70';
+ const sim=new Simulation(content,lab),a=new CharacterAnimation(catalog,content.rules),seen=new Set();
+ for(let tick=0;tick<60;tick++){
+  sim.step();const pose=a.sample(sim.snapshot(),sim.world);
+  assert.equal(pose.sequence,'run');assert.equal(pose.clip.sheets[pose.frame.sheet].sha256,approvedRun);assert.deepEqual(pose.frame.rect,[176+pose.index*16,24,16,32]);seen.add(pose.index);
+ }
+ assert.equal(seen.size,4);const distance=sim.p.gaitDistance;sim.pause();const paused=a.sample(sim.snapshot(),sim.world);
+ for(let tick=0;tick<30;tick++)sim.step();assert.equal(sim.p.gaitDistance,distance);assert.deepEqual(a.sample(sim.snapshot(),sim.world),paused);
+ sim.retry();const idle=a.sample(sim.snapshot(),sim.world);assert.equal(idle.sequence,'idle');assert.notEqual(idle.clip.sheets[idle.frame.sheet].sha256,approvedRun);
+});
+
 test('all published atlas files exist, match hashes and contain every animation crop',()=>{
  for(const seq of Object.values(catalog.sequences)){
   const clip=catalog.clips.find(c=>c.id===seq.clip);assert.ok(clip);assert.ok(seq.fps>0);assert.ok(seq.range[0]>=0&&seq.range[1]<clip.frames.length);

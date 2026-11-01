@@ -15,7 +15,7 @@ content/game-flow.json              Mode and route metadata, section references
 content/lab-course.json             Training stations and recorded lab inputs
 content/audio.json                  Tracks, gains, hashes, sources and event mapping
 src/                               Simulation, geometry, input, presentation, UI and editor
-assets/character/                  Shared catalogue, nine CC0 strips and license notice
+assets/character/                  Shared catalogue, nine CC0 source images and license notice
 assets/generated/                  Retired experiment documentation only
 assets/audio/                      Music, seven effects and license evidence
 test/                              Unit/integration tests and campaign input recordings

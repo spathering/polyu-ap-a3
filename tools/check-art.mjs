@@ -13,4 +13,4 @@ for(const clip of catalog.clips){
  }
 }
 for(const [file,hash] of sheets){const bytes=await fs.readFile(new URL(file,root));if(createHash('sha256').update(bytes).digest('hex')!==hash)throw Error(`Atlas hash differs: ${file}`);}
-console.log(`Verified ${sheets.size} CC0 source strips and ${Object.keys(catalog.sequences).length} animation sequences. No private research files are required.`);
+console.log(`Verified ${sheets.size} CC0 source images and ${Object.keys(catalog.sequences).length} animation sequences. No private research files are required.`);

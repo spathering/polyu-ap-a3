@@ -52,9 +52,11 @@ I collected and relayed feedback from people who tried the game. Codex did not o
 | Missing audio, music restarting between screens, and insufficient sense of speed | Added credited effects, selected a 140 BPM track and moved music to a persistent host. |
 | Failed moves interrupted play; sliding into a high block could leave the player stuck | Added blocked-front detection and automatic retry of the current section without a failure menu. |
 
-The screenshot of the blocked runner was used to reproduce the wall-stall case. Keyboard and touch checks cover one-input high climbing, and browser checks confirm music-source continuity through menus, pause and retries. Automated verification currently includes 183 tests and 30 recorded scenarios. These checks establish reproducibility and catch regressions; they do not replace player judgment about rhythm, difficulty, animation quality or the sound mix. A further player review remains open.
+The screenshot of the blocked runner was used to reproduce the wall-stall case. Keyboard and touch checks cover one-input high climbing, and browser checks confirm music-source continuity through menus, pause and retries. Automated verification currently includes 184 tests and 30 recorded scenarios. These checks establish reproducibility and catch regressions; they do not replace player judgment about rhythm, difficulty, animation quality or the sound mix. A further player review remains open.
 
 I selected the openly licensed CC0 Agent pixel character after reviewing the style tradeoff. The reference-derived atlases and earlier generated traversal sheets are removed from the current release, and the new source is credited in both entry documents.
+
+In a subsequent review, I reported that the character appeared to move without running. Codex had relied on misleading source filenames, which selected standing poses for the run state. I requested the missing action; the mapping was corrected against the original master sheet, and browser checks now verify all four unarmed running crops in both game and menu. The earlier file-integrity checks alone had not established that a clip depicted the intended action.
 
 ## AI use and responsibility
 

@@ -1,5 +1,5 @@
 {
-  "version": "open-agent-01",
+  "version": "open-agent-02-run",
   "credits": "Character: Adventure Series Character Agent SMS, Chasersgaming, CC0-1.0. Selected source PNGs are unmodified; clip selection and contact annotations are project adaptations. No Vector-derived frames or experimental imagegen sheets are loaded.",
   "pixelArt": true,
   "referenceStandingPixels": 30,
@@ -24,175 +24,7 @@
       "pixelsPerMetre": 16.666666666666668,
       "sheets": [
         {
-          "file": "assets/character/cc0-agent/idle.png",
-          "sha256": "40d8b32b6f911c14c7a42e6b58e1497eb3b0857ce4f44cd25ee9ea7534066aba",
-          "sourceFile": "SMS_Adv_Idle_strip4.png"
-        }
-      ],
-      "frames": [
-        {
-          "sheet": 0,
-          "rect": [
-            0,
-            0,
-            24,
-            32
-          ],
-          "anchor": [
-            8,
-            31
-          ],
-          "pelvis": [
-            8,
-            17
-          ],
-          "contact": [
-            14,
-            13
-          ],
-          "poseSignature": [
-            0.2,
-            -0.133333,
-            0.0,
-            0.466667,
-            -0.16,
-            -0.333333,
-            0.16,
-            -0.333333,
-            -0.16,
-            0.166667,
-            0.16,
-            0.166667,
-            0.0,
-            0.466667
-          ],
-          "sourceFrame": 0
-        },
-        {
-          "sheet": 0,
-          "rect": [
-            24,
-            0,
-            24,
-            32
-          ],
-          "anchor": [
-            8,
-            31
-          ],
-          "pelvis": [
-            8,
-            17
-          ],
-          "contact": [
-            14,
-            13
-          ],
-          "poseSignature": [
-            0.2,
-            -0.133333,
-            0.0,
-            0.466667,
-            -0.16,
-            -0.333333,
-            0.16,
-            -0.333333,
-            -0.16,
-            0.166667,
-            0.16,
-            0.166667,
-            0.0,
-            0.466667
-          ],
-          "sourceFrame": 1
-        },
-        {
-          "sheet": 0,
-          "rect": [
-            48,
-            0,
-            24,
-            32
-          ],
-          "anchor": [
-            8,
-            31
-          ],
-          "pelvis": [
-            8,
-            17
-          ],
-          "contact": [
-            14,
-            13
-          ],
-          "poseSignature": [
-            0.2,
-            -0.133333,
-            0.0,
-            0.466667,
-            -0.16,
-            -0.333333,
-            0.16,
-            -0.333333,
-            -0.16,
-            0.166667,
-            0.16,
-            0.166667,
-            0.0,
-            0.466667
-          ],
-          "sourceFrame": 2
-        },
-        {
-          "sheet": 0,
-          "rect": [
-            72,
-            0,
-            24,
-            32
-          ],
-          "anchor": [
-            8,
-            31
-          ],
-          "pelvis": [
-            8,
-            17
-          ],
-          "contact": [
-            14,
-            13
-          ],
-          "poseSignature": [
-            0.2,
-            -0.133333,
-            0.0,
-            0.466667,
-            -0.16,
-            -0.333333,
-            0.16,
-            -0.333333,
-            -0.16,
-            0.166667,
-            0.16,
-            0.166667,
-            0.0,
-            0.466667
-          ],
-          "sourceFrame": 3
-        }
-      ]
-    },
-    {
-      "id": "run",
-      "origin": "cc0",
-      "license": "CC0-1.0",
-      "source": "agent-free",
-      "pixelsPerMetre": 16.666666666666668,
-      "sheets": [
-        {
-          "file": "assets/character/cc0-agent/run.png",
+          "file": "assets/character/cc0-agent/idle-cycle.png",
           "sha256": "652109b837b9733e44bdad5301dd71d74883b2f174d5a32283ef2664d1089b85",
           "sourceFile": "SMS_Adv_Run_strip4.png"
         }
@@ -350,7 +182,177 @@
           ],
           "sourceFrame": 3
         }
-      ]
+      ],
+      "selectionNote": "Standing poses verified against IDLE in the original master sheet; the matching standalone source is incorrectly named Run."
+    },
+    {
+      "id": "run",
+      "origin": "cc0",
+      "license": "CC0-1.0",
+      "source": "agent-free",
+      "pixelsPerMetre": 16.666666666666668,
+      "sheets": [
+        {
+          "file": "assets/character/cc0-agent/agent-sheet.png",
+          "sha256": "3c3c233aa4b5476bce8ce90f99536feb65c8b0d43f2b76107313dbd5b520de70",
+          "sourceFile": "SMS_Adv_Agent_Free_SpriteSheet.png"
+        }
+      ],
+      "frames": [
+        {
+          "sheet": 0,
+          "rect": [
+            176,
+            24,
+            16,
+            32
+          ],
+          "anchor": [
+            7,
+            31
+          ],
+          "pelvis": [
+            7,
+            17
+          ],
+          "contact": [
+            10,
+            12
+          ],
+          "poseSignature": [
+            0.1,
+            -0.166667,
+            -0.1,
+            -0.166667,
+            0.066667,
+            0.166667,
+            -0.1,
+            0.1,
+            -0.033333,
+            0.433333,
+            -0.166667,
+            0.133333,
+            0.033333,
+            -0.4
+          ],
+          "sourceFrame": 0
+        },
+        {
+          "sheet": 0,
+          "rect": [
+            192,
+            24,
+            16,
+            32
+          ],
+          "anchor": [
+            7,
+            31
+          ],
+          "pelvis": [
+            7,
+            17
+          ],
+          "contact": [
+            14,
+            12
+          ],
+          "poseSignature": [
+            0.233333,
+            -0.166667,
+            -0.1,
+            -0.166667,
+            0.066667,
+            0.166667,
+            -0.1,
+            0.1,
+            -0.166667,
+            0.433333,
+            0.033333,
+            0.2,
+            0.033333,
+            -0.4
+          ],
+          "sourceFrame": 1
+        },
+        {
+          "sheet": 0,
+          "rect": [
+            208,
+            24,
+            16,
+            32
+          ],
+          "anchor": [
+            7,
+            31
+          ],
+          "pelvis": [
+            7,
+            17
+          ],
+          "contact": [
+            10.5,
+            13
+          ],
+          "poseSignature": [
+            0.116667,
+            -0.133333,
+            -0.1,
+            -0.166667,
+            0.066667,
+            0.166667,
+            -0.1,
+            0.1,
+            0.0,
+            0.433333,
+            -0.2,
+            0.1,
+            0.033333,
+            -0.4
+          ],
+          "sourceFrame": 2
+        },
+        {
+          "sheet": 0,
+          "rect": [
+            224,
+            24,
+            16,
+            32
+          ],
+          "anchor": [
+            7,
+            31
+          ],
+          "pelvis": [
+            7,
+            17
+          ],
+          "contact": [
+            13,
+            12
+          ],
+          "poseSignature": [
+            0.2,
+            -0.166667,
+            -0.1,
+            -0.166667,
+            0.066667,
+            0.166667,
+            -0.1,
+            0.1,
+            -0.166667,
+            0.433333,
+            0.0,
+            0.3,
+            0.033333,
+            -0.4
+          ],
+          "sourceFrame": 3
+        }
+      ],
+      "selectionNote": "Use the four unarmed poses under RUN on the original master sheet. Standalone Run/Walk exports in the free archive contain idle poses; the standalone Idle export contains an armed run."
     },
     {
       "id": "jump",
