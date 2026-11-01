@@ -5,13 +5,15 @@
   "maxVoices": 8,
   "tracks": {
     "music": {
-      "file": "assets/audio/hyperton.mp3",
-      "gain": 0.17,
-      "author": "Sudocolon",
-      "source": "https://opengameart.org/content/hyperton",
-      "download": "https://opengameart.org/sites/default/files/Hyperton.mp3",
+      "file": "assets/audio/racing-game-title.mp3",
+      "gain": 0.22,
+      "author": "MintoDog",
+      "title": "Racing Game Title",
+      "bpm": 140,
+      "source": "https://opengameart.org/content/racing-game-title",
+      "download": "https://opengameart.org/sites/default/files/racing_game_title_bpm140.mp3",
       "license": "CC0-1.0",
-      "sha256": "a98dea8138f10ce8b595c63b3fd1652e672a8425c361486234265638932953e3"
+      "sha256": "8e1d2a066be0db1e2e5d11161095fbee58111a7bd6b40a1b503b66237e847c91"
     },
     "step": {
       "file": "assets/audio/click_001.wav",

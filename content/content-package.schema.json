@@ -517,6 +517,11 @@
                 "minItems": 3,
                 "maxItems": 3
               }
+            },
+            "gripSettleSeconds": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 0.5
             }
           },
           "required": [
@@ -562,6 +567,16 @@
             }
           },
           "additionalProperties": false
+        },
+        "blockedRetrySeconds": {
+          "type": "number",
+          "exclusiveMinimum": 0,
+          "maximum": 2
+        },
+        "failureRetrySeconds": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
         }
       },
       "required": [

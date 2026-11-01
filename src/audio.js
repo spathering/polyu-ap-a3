@@ -14,7 +14,7 @@ export class GameAudio{
  save(){try{this.storage?.setItem('motion-run.audio.v1',JSON.stringify(this.settings));}catch{}if(this.master)this.master.gain.setTargetAtTime(this.settings.volume,this.context.currentTime,.03);this.syncMusic();if(!this.settings.effects)this.stopEffects();}
  setActive(active){const changed=this.active!==active;this.active=active;this.syncMusic();if(changed&&!active)this.stopEffects();}
  syncMusic(){
-  const enabled=this.active&&this.settings.music&&this.context?.state==='running'&&this.buffers.has('music');
+  const enabled=this.settings.music&&this.context?.state==='running'&&this.buffers.has('music');
   if(enabled&&!this.music){const node=this.context.createBufferSource(),gain=this.context.createGain();node.buffer=this.buffers.get('music');node.loop=true;gain.gain.value=this.config.tracks.music.gain;node.connect(gain);gain.connect(this.master);node.start();this.music={node,gain};}
   else if(!enabled&&this.music){this.music.node.stop();this.music.node.disconnect();this.music.gain.disconnect();this.music=null;}
  }
@@ -33,11 +33,11 @@ export class GameAudio{
 }
 export async function mountAudio(host,{game=false}={}){
  const details=document.createElement('details');details.className='audio-controls';const summary=document.createElement('summary');summary.textContent='Sound';details.append(summary);host.append(details);
- try{const response=await fetch('content/audio.json');if(!response.ok)throw Error('Audio unavailable');let storage;try{storage=localStorage;}catch{}const audio=new GameAudio(await response.json(),{storage});
+ try{const response=await fetch('content/audio.json');if(!response.ok)throw Error('Audio unavailable');let storage;try{storage=localStorage;}catch{}const audio=window.parent!==window&&window.parent.motionRunAudio?await window.parent.motionRunAudio:new GameAudio(await response.json(),{storage});if(!audio)throw Error('Audio unavailable');
   for(const [key,title]of [['music','Music'],['effects','Effects']]){const label=document.createElement('label'),input=document.createElement('input');input.type='checkbox';input.checked=audio.settings[key];input.dataset.audio=key;input.onchange=()=>{audio.settings[key]=input.checked;audio.save();audio.unlock();};label.append(input,title);details.append(label);}
   const label=document.createElement('label'),volume=document.createElement('input');volume.type='range';volume.min=0;volume.max=1;volume.step=.05;volume.value=audio.settings.volume;volume.setAttribute('aria-label','Sound volume');volume.oninput=()=>{audio.settings.volume=Number(volume.value);audio.save();};label.append('Volume',volume);details.append(label);
   const unlock=()=>audio.unlock();document.addEventListener('pointerdown',unlock);document.addEventListener('keydown',unlock);
   document.addEventListener('visibilitychange',()=>{if(document.hidden){audio.setActive(false);audio.stopEffects();}else if(!game)audio.setActive(true);});
-  if(!game)audio.setActive(true);return audio;
+  if(!game)audio.setActive(true);audio.unlock();return audio;
  }catch{summary.textContent='Sound unavailable';return null;}
 }

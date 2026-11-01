@@ -4,7 +4,7 @@ Repository prose is English. Matching Chinese documents are maintained in the pr
 
 | Category | Purpose | Start here |
 |---|---|---|
-| Current | Implemented behavior and architecture | [Feedback update](Current/player-feedback-update.md), [structure](Current/project-structure.md), [modules](Current/modules.md), [glossary](Current/glossary.md) |
+| Current | Implemented behavior and architecture | [Continuous play](Current/continuous-play.md), [feedback update](Current/player-feedback-update.md), [structure](Current/project-structure.md), [modules](Current/modules.md), [glossary](Current/glossary.md) |
 | History | Dated changes and decisions | [October](History/Changelog/2026-10.md), [November](History/Changelog/2026-11.md) |
 | Plans | Requirements, research and unfinished work | [TODO](Plans/TODO.md), [requirements](Plans/Requirements/game-requirements.md), [architecture design](Plans/Design/data-driven-architecture.md) |
 

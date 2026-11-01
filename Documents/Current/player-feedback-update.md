@@ -1,5 +1,8 @@
 # Player feedback update
 
+Latest movement/audio rules: [continuous play, automatic high-edge climb and quick retry](continuous-play.md).
+
+
 Implemented 1 November 2026. Feedback was relayed by the author from players; follow-up subjective confirmation is pending.
 
 | Feedback | Current behavior | Verification |
@@ -11,7 +14,7 @@ Implemented 1 November 2026. Feedback was relayed by the author from players; fo
 | Separate rope and cable controls | One Q key and one touch button. Eligible cable takes precedence; otherwise hold/release swings. A held action never switches targets on key-up | Keyboard/touch ambiguity and release regression tests |
 | Missing sound | Bundled CC0 electronic loop and seven effects, event mapping, separate music/effects toggles and volume | Eight real files decode and play after a trusted gesture; pause/mute and storage fallback checks |
 
-The deliberate ledge-hang state still waits for release and a second jump press. It is separate from the fixed mantle playback. Camera motion remains scene-authored during traversal; neither sprites nor sound changes collision motion.
+High-edge capture now flows through a short grip settle directly into fixed mantle playback, without another input. See the [continuous-play follow-up](continuous-play.md). Camera motion remains scene-authored during traversal; neither sprites nor sound changes collision motion.
 
 Longer routes reference existing terrain and movement modules. Seams use continuous supported ground; section references cover the whole route. Twelve campaign recordings plus eighteen lab recordings exercise production simulation. The shared content, atlas and audio checker verifies published files and hashes.
 

@@ -14,7 +14,7 @@ test('one touch rope button resolves both actions and does not retarget during a
 });
 test('mantle has no stationary recovery tail or second landing animation',()=>{
  const ch=createChallenge(c,schema,lab,flow,'high-water'),s=new Simulation(ch.content,ch.lab),anim=new CharacterAnimation(catalog,s.rules);Object.assign(s.p,{x:5.5,y:1.25,state:'Airborne'});s.step({held:['jump']});assert.equal(s.p.state,'LedgeHang');s.step({pressed:['jump']});
- for(let n=0;n<100&&s.p.state==='Vault';n++){anim.sample(s.snapshot(),s.world);s.step();}
+ for(let n=0;n<100&&['Vault','LedgeHang'].includes(s.p.state);n++){anim.sample(s.snapshot(),s.world);s.step();}
  assert.equal(s.p.state,'Run');assert.equal(s.p.landLeft,0);assert.equal(s.performance,null);assert.equal(anim.sample(s.snapshot(),s.world).sequence,'run');const x=s.p.x;
  for(let n=0;n<12;n++){s.step();assert.equal(anim.sample(s.snapshot(),s.world).sequence,'run');}assert.ok(s.p.x-x>1.1);
 });

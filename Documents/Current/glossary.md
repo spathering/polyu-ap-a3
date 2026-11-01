@@ -1,6 +1,9 @@
 # Project glossary
 
-Current release, 1 November 2026: twelve campaign routes, three training routes, shared Q rope/cable input, direct climb-to-run recovery, idle ropes, layered city and bundled sound. Page entries are in `pages/` and the schema is in `content/`. Earlier dated check counts below are historical; current validation is 177 tests and 30 recordings. See [feedback update](player-feedback-update.md) and [structure](project-structure.md).
+Latest movement/audio rules: [continuous play, automatic high-edge climb and quick retry](continuous-play.md).
+
+
+Current release, 1 November 2026: twelve campaign routes, three training routes, shared Q rope/cable input, direct climb-to-run recovery, idle ropes, layered city and bundled sound. Page entries are in `pages/` and the schema is in `content/`. Earlier dated check counts below are historical; current validation is 183 tests and 30 recordings. See [feedback update](player-feedback-update.md) and [structure](project-structure.md).
 
 
 Current artwork, **26 October 2026**: [19 reference-derived atlases and three generated sheets](animation-assets.md) are bundled for local and public play. Earlier local-only/ignored-art descriptions and counts below describe prior increments.
@@ -195,3 +198,11 @@ Published reference atlas: a hash-checked PNG page selected for runtime and trac
 | Parallax | Background layers move at different fractions of camera motion to suggest depth. |
 | Audio event observer | Read-only consumer of simulation event serials; avoids duplicate effects and never changes motion. |
 | District course | A longer authored route composed from translated shared module instances. |
+
+## Continuous-play terms
+
+| Term | Meaning |
+|---|---|
+| Persistent screen host | The top-level page stays alive while embedded game/menu screens change, preserving the audio engine. |
+| Grip settle | The short automatic support interval between high-edge capture and mantle. |
+| Quick retry | A content-timed restart of the current failed section without a failure menu. |

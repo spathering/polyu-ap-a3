@@ -1,6 +1,9 @@
 # Reference-driven 3C implementation
 
-Current release, 1 November 2026: twelve campaign routes, three training routes, shared Q rope/cable input, direct climb-to-run recovery, idle ropes, layered city and bundled sound. Page entries are in `pages/` and the schema is in `content/`. Earlier dated check counts below are historical; current validation is 177 tests and 30 recordings. See [feedback update](player-feedback-update.md) and [structure](project-structure.md).
+Latest movement/audio rules: [continuous play, automatic high-edge climb and quick retry](continuous-play.md).
+
+
+Current release, 1 November 2026: twelve campaign routes, three training routes, shared Q rope/cable input, direct climb-to-run recovery, idle ropes, layered city and bundled sound. Page entries are in `pages/` and the schema is in `content/`. Earlier dated check counts below are historical; current validation is 183 tests and 30 recordings. See [feedback update](player-feedback-update.md) and [structure](project-structure.md).
 
 
 Current artwork, **26 October 2026**: [19 reference-derived atlases and three generated sheets](animation-assets.md) are bundled for local and public play. Earlier local-only/ignored-art descriptions and counts below describe prior increments.
@@ -9,7 +12,7 @@ Current artwork, **26 October 2026**: [19 reference-derived atlases and three ge
 Updated **25 October 2026**. [Public-runtime observations/hashes](../Plans/Research/vector-3c-runtime-review.md) distinguish source findings from reimplementation. Native Vector equivalence is not claimed. The [scene choreography contract](scene-choreography.md) is the current authority for marked actions.
 
 - **Character:** One 60-Hz Simulation owns free locomotion, swept vault/climb paths, attachment solvers, LedgeHang/mantle/drop, one wall rebound per airborne wall, buffered landing Roll and collision failure. Intervening solids hide blocked scene candidates; target, exit support and headroom guards remain shared.
-- **Controls:** Match geometry before input; one signal pins timely or late, then waits for its playback slot. Required obstacles without confirmation play a missed result. Generic free jump buffers still expire. Swing/cable permit interactive release; pause/focus clears uncommitted intent and holds. A second deliberate press mantles or rebounds where eligible.
+- **Controls:** Match geometry before input; one signal pins timely or late, then waits for its playback slot. Required obstacles without confirmation play a missed result. Generic free jump buffers still expire. Swing/cable permit interactive release; pause/focus clears uncommitted intent and holds. High-edge capture automatically mantles; a deliberate second press still triggers eligible wall rebounds.
 - **Camera:** Marked approach/playback/recovery samples a prepared scene rail from time, with authored framing, stable ground horizon, landing-height transitions and continuous handoffs. It ignores live root pose/velocity. Hang/mantle/rebound/roll receive directed shots. Free movement retains acceleration-limited follow, visibility guards and zoom bounds. Pause freezes and retry clears shot/blend memory.
 - **Animation:** Each selected outcome has a fixed sequence clock; the renderer interpolates it without exposing future tick state. Hand/grip contact overrides bounded pelvis/rotation inertia. Distance gait matching and calibrated anchors remain. Stable generated hanging poses are not full skeletal blending.
 

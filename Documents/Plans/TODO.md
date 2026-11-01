@@ -10,6 +10,9 @@
 - [x] Layered city scenery; bundled credited music/effects with independent toggles and volume.
 - [x] Concise game-only README, organized pages/styles/content and matching local Chinese documents.
 
+- [x] Persistent music across menus/pause/retry; 140 BPM racing track with source credit.
+- [x] Automatic high-edge mantle, continuous low climb and blocked-wall quick retry without failure UI.
+
 ## Next work
 
 - [ ] Ask players to repeat the high-ledge, cable/swing and longer-district routes; record whether the reported pause and discoverability issues are resolved.
@@ -19,3 +22,5 @@
 - [ ] Replace/refine provisional character art and generated key-pose transitions where needed.
 - [ ] Evaluate optional shared scores separately from browser-local records; never ship a repository-write credential to players.
 - [ ] Broaden device/browser testing and accessible input options.
+
+- [ ] Collect player feedback on one-tap high climbs, low-step rhythm, quick-retry pacing and the replacement music.

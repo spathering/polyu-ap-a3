@@ -1,6 +1,9 @@
 # Scene choreography and timing outcomes
 
-Current release, 1 November 2026: twelve campaign routes, three training routes, shared Q rope/cable input, direct climb-to-run recovery, idle ropes, layered city and bundled sound. Page entries are in `pages/` and the schema is in `content/`. Earlier dated check counts below are historical; current validation is 177 tests and 30 recordings. See [feedback update](player-feedback-update.md) and [structure](project-structure.md).
+Latest movement/audio rules: [continuous play, automatic high-edge climb and quick retry](continuous-play.md).
+
+
+Current release, 1 November 2026: twelve campaign routes, three training routes, shared Q rope/cable input, direct climb-to-run recovery, idle ropes, layered city and bundled sound. Page entries are in `pages/` and the schema is in `content/`. Earlier dated check counts below are historical; current validation is 183 tests and 30 recordings. See [feedback update](player-feedback-update.md) and [structure](project-structure.md).
 
 
 Current artwork, **26 October 2026**: [19 reference-derived atlases and three generated sheets](animation-assets.md) are bundled for local and public play. Earlier local-only/ignored-art descriptions and counts below describe prior increments.
@@ -36,7 +39,7 @@ stateDiagram-v2
 | Late | Confirm after that plane but before `startX + lateDistance`; wait for the late slot | `vaultLate` / `pop_vault_start` | Later, 1.25-times-duration salvage vault |
 | Missed | Reach the deadline without confirmation | `obstacleHit` / `wall_collision_from_run_and_jump` | Fixed collision/recoil, then failure; no automatic successful vault |
 
-All seven marked kinds have timely/late/missed sequence references. Late jump lowers its impulse; a missed gap runs off and falls. Slide has a compact tumble entry; climb uses the mantle recovery clip; dash/swing/cable use distinct late entry poses and missed-grapple response. Generated hanging sheets still use selected stable poses rather than production skeletal blending. Secondary ledge hang/mantle, wall rebound and roll keep their own deliberate controls and receive directed shots; they are not three-outcome marker recipes. Release remains interactive for swing/cable. A held swing exits at its authored `playSeconds` limit (1.8 seconds in this package).
+All seven marked kinds have timely/late/missed sequence references. Late jump lowers its impulse; a missed gap runs off and falls. Slide has a compact tumble entry; climb uses the mantle recovery clip; dash/swing/cable use distinct late entry poses and missed-grapple response. Generated hanging sheets still use selected stable poses rather than production skeletal blending. High-edge capture automatically connects to mantle; wall rebound and roll retain deliberate controls. These secondary actions receive directed shots but are not three-outcome marker recipes. Release remains interactive for swing/cable. A held swing exits at its authored `playSeconds` limit (1.8 seconds in this package).
 
 ## Camera and presentation
 

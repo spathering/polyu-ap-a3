@@ -1,5 +1,8 @@
 # Modules and ownership
 
+Latest movement/audio rules: [continuous play, automatic high-edge climb and quick retry](continuous-play.md).
+
+
 Updated 1 November 2026. The simulator is the only writer of character motion; canonical content owns gameplay facts.
 
 ```mermaid
@@ -19,6 +22,7 @@ flowchart TD
   Art --> Renderer
   City[city.js: deterministic scenery] --> Renderer
   Sim --> Audio[audio.js: event observer]
+  Host[shell.js: persistent owner] --> Audio
   Catalogue[audio.json: sources and event mapping] --> Audio
 ```
 
@@ -33,3 +37,5 @@ flowchart TD
 | `editor-*` / `module-space.js` | Shared-content editing, derived footprints, snapping, terrain, undo and production playtest |
 
 New district layouts reference existing modules with translated instances. They do not copy terrain entities into UI code. Audio and decorative palettes are presentation-only; neither affects recorded outcomes. [Structure](project-structure.md) · [Scene choreography](scene-choreography.md).
+
+`screen-route.js` owns URL conversion; `screen-host.js` routes direct entries and intercepts same-app navigation. `quick-retry.js` resets failed player sections after the content-owned delay. Music lifetime is independent of simulation session state.

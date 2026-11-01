@@ -89,7 +89,7 @@
       "id": "high-water",
       "title": "High water",
       "subtitle": "05 / Catch the edge",
-      "description": "Jump and hold to catch a high ledge. Press again to mantle, then link two low steps.",
+      "description": "Jump to catch the high ledge and climb automatically, then flow across two low steps.",
       "difficulty": "INTERMEDIATE",
       "accent": "violet",
       "levelId": "high-water",
@@ -97,8 +97,8 @@
         {
           "id": "high-water-1",
           "name": "Catch & mantle",
-          "hint": "Hold SPACE through takeoff to catch the ledge. Release, then SPACE climbs; S drops.",
-          "keys": "HOLD SPACE \u2192 SPACE",
+          "hint": "SPACE at takeoff catches the ledge. The grip flows straight into a climb.",
+          "keys": "SPACE",
           "from": {
             "instanceId": "terrain",
             "socketId": "entry"
@@ -271,8 +271,8 @@
         {
           "id": "crosscurrent-2",
           "name": "Vault & final ledge",
-          "hint": "Vault the barrier. Hold SPACE at the ledge jump, then press again to mantle.",
-          "keys": "SPACE / HOLD SPACE",
+          "hint": "Vault the barrier. SPACE at the ledge jump, the grip flows straight into a climb.",
+          "keys": "SPACE",
           "from": {
             "instanceId": "terrain",
             "socketId": "cp1"
@@ -339,8 +339,8 @@
         {
           "id": "skyline-relay-high-water-1",
           "name": "Catch & mantle",
-          "hint": "Hold SPACE through takeoff to catch the ledge. Release, then SPACE climbs; S drops.",
-          "keys": "HOLD SPACE \u2192 SPACE",
+          "hint": "SPACE at takeoff catches the ledge. The grip flows straight into a climb.",
+          "keys": "SPACE",
           "from": {
             "instanceId": "b-terrain",
             "socketId": "entry"
@@ -379,8 +379,8 @@
         {
           "id": "antenna-run-high-water-1",
           "name": "Catch & mantle",
-          "hint": "Hold SPACE through takeoff to catch the ledge. Release, then SPACE climbs; S drops.",
-          "keys": "HOLD SPACE \u2192 SPACE",
+          "hint": "SPACE at takeoff catches the ledge. The grip flows straight into a climb.",
+          "keys": "SPACE",
           "from": {
             "instanceId": "a-terrain",
             "socketId": "entry"
@@ -557,8 +557,8 @@
         {
           "id": "violet-circuit-crosscurrent-2",
           "name": "Vault & final ledge",
-          "hint": "Vault the barrier. Hold SPACE at the ledge jump, then press again to mantle.",
-          "keys": "SPACE / HOLD SPACE",
+          "hint": "Vault the barrier. SPACE at the ledge jump, the grip flows straight into a climb.",
+          "keys": "SPACE",
           "from": {
             "instanceId": "a-terrain",
             "socketId": "cp1"
@@ -667,8 +667,8 @@
         {
           "id": "gravity-shift-high-water-1",
           "name": "Catch & mantle",
-          "hint": "Hold SPACE through takeoff to catch the ledge. Release, then SPACE climbs; S drops.",
-          "keys": "HOLD SPACE \u2192 SPACE",
+          "hint": "SPACE at takeoff catches the ledge. The grip flows straight into a climb.",
+          "keys": "SPACE",
           "from": {
             "instanceId": "b-terrain",
             "socketId": "entry"
@@ -763,8 +763,8 @@
         {
           "id": "district-marathon-crosscurrent-2",
           "name": "Vault & final ledge",
-          "hint": "Vault the barrier. Hold SPACE at the ledge jump, then press again to mantle.",
-          "keys": "SPACE / HOLD SPACE",
+          "hint": "Vault the barrier. SPACE at the ledge jump, the grip flows straight into a climb.",
+          "keys": "SPACE",
           "from": {
             "instanceId": "b-terrain",
             "socketId": "cp1"

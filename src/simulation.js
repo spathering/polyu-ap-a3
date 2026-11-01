@@ -10,17 +10,18 @@ export class Simulation{
   this.content=content;this.lab=lab;this.rules=content.rules;this.dt=1/this.rules.fixedStepHz;this.world=compileWorld(content,lab);this.coverage={};this.events=[];this.serial=0;this.laps=0;this.failures=0;this.snap=0;this.stationIndex=0;this.reset(0);if(!playing)this.session='Ready';
  }
  mark(id,detail=''){
+  if(id==='Jump')this.ledgeIntentUntil=this.time+2*this.rules.jumpVelocity/this.rules.gravity;
   this.coverage[id]=(this.coverage[id]||0)+1;this.events.unshift(Object.freeze({id,detail,tick:this.tick,snap:this.snap,serial:++this.serial}));this.events.length=Math.min(this.events.length,this.lab.diagnostics.historySize);
  }
  reset(index=this.stationIndex,reason=''){
   this.stationIndex=clamp(index,0,this.lab.stations.length-1);const station=this.lab.stations[this.stationIndex],[x,y]=station.useLevelSpawn?this.world.spawn:station.spawn;
-  this.p={x,y:y+this.rules.collisionSkin,vx:0,vy:0,state:'Run',attachment:null,ledge:null,lowAir:false,slideLeft:0,vault:null,context:null,stateTime:0,landLeft:0,gaitDistance:0};this.pendingAction=null;this.wallJumps=new Set();this.ledgeReadyAt=0;this.rollUntil=-Infinity;
+  this.p={x,y:y+this.rules.collisionSkin,vx:0,vy:0,state:'Run',attachment:null,ledge:null,lowAir:false,slideLeft:0,vault:null,context:null,stateTime:0,landLeft:0,gaitDistance:0};this.pendingAction=null;this.wallJumps=new Set();this.ledgeReadyAt=0;this.rollUntil=-Infinity;this.ledgeIntentUntil=-Infinity;
   this.session='Playing';this.reason='';this.time=0;this.tick=0;this.cooldowns={dashGrapple:0,swingGrapple:0};this.padContacts=new Map();this.lastGround=0;this.jumpUntil=-Infinity;this.phase='';this.wallTime=0;this.snap++;this.sceneMatches=new Map();this.performance=null;this.sceneShot=null;this.lastSceneOutcome=null;this.sceneSerial=0;this.preparedMantle=null;
   if(reason==='retry')this.mark('Retry',this.lab.stations[this.stationIndex].name);
  }
  retry(){this.reset(this.currentStationIndex(),'retry');}
  pause(reason='Paused by player'){
-  if(this.session!=='Playing')return;this.session='Paused';this.reason=reason;this.jumpUntil=-Infinity;this.rollUntil=-Infinity;this.pendingAction=null;for(const s of this.sceneMatches.values())if(s.status==='confirmed'){s.status='matched';s.outcome=null;}this.mark('Paused',reason);
+  if(this.session!=='Playing')return;this.session='Paused';this.reason=reason;this.jumpUntil=-Infinity;this.ledgeIntentUntil=-Infinity;this.rollUntil=-Infinity;this.pendingAction=null;for(const s of this.sceneMatches.values())if(s.status==='confirmed'){s.status='matched';s.outcome=null;}this.mark('Paused',reason);
  }
  resume(){if(this.session==='Paused'||this.session==='Ready'){this.session='Playing';this.reason='';this.jumpUntil=-Infinity;}}
  fail(reason){if(this.session!=='Playing')return;this.session='Failed';this.reason=reason;this.failures++;this.p.attachment=null;this.p.ledge=null;this.p.vault=null;this.p.context=null;this.pendingAction=null;this.jumpUntil=-Infinity;this.mark('Failed',reason);}
@@ -181,7 +182,7 @@ export class Simulation{
   if(p.state==='Zipline'&&(has('jump')||has('zipline')))this.detach(has('jump')?'jump':'toggle',!!has('jump'));
   let committed=wasAttached&&p.attachment===null;
   if(p.state==='LedgeHang'){
-   committed=true;if(has('slide'))this.dropLedge('deliberate drop');else if(has('jump'))this.beginMantle();else if(p.stateTime>=r.sceneTraversal.maxHangSeconds)this.dropLedge('hang timeout');
+   committed=true;if(has('slide'))this.dropLedge('deliberate drop');else if(r.sceneTraversal.gripSettleSeconds!==undefined?p.stateTime>=r.sceneTraversal.gripSettleSeconds:has('jump')){if(!this.beginMantle())this.fail('Ledge exit blocked');}else if(p.stateTime>=r.sceneTraversal.maxHangSeconds)this.dropLedge('hang timeout');
   }
   if(!committed){commands=commands.filter(c=>c.action==='swingGrapple'&&!held.has('swingGrapple')||!this.queueContext(c));committed=this.commitContext(held);}
   if(this.pendingAction)commands=[];
@@ -251,13 +252,13 @@ export class Simulation{
    if(ground&&p.vy<=0){p.y=ground.rect[1]+ground.rect[3]+r.collisionSkin;p.vy=0;this.lastGround=this.time;this.wallJumps.clear();if(p.state==='Airborne'){const canStand=clearBody(p,r.bodySize,this.world.surfaces,r.standClearancePadding),roll=r.sceneTraversal&&r.enabledAbilities.includes('roll')&&this.rollUntil>=this.time&&Math.abs(impactVy)>=r.sceneTraversal.rollMinImpact;p.lowAir=false;p.context=null;this.transition(roll?'Roll':canStand?'Run':'CrouchHold');if(roll){p.slideLeft=r.sceneTraversal.rollSeconds;p.vx=Math.max(p.vx,r.sceneTraversal.rollSpeed);this.manualShot('slide',[p.x,p.y],[p.x+r.runSpeed*p.slideLeft,p.y],p.slideLeft);this.mark('Roll');}this.rollUntil=-Infinity;p.landLeft=r.landingRecoverySeconds;this.mark('Land',`impact ${Math.abs(impactVy).toFixed(1)} m/s`);}}
    else if(['Run','Slide','CrouchHold'].includes(p.state)){p.lowAir=LOW.has(p.state);this.transition('Airborne');}
   }
-  if(p.state==='Airborne'&&held.has('jump')&&this.time>=this.ledgeReadyAt){const e=wallCandidate(this.world,p,r,'ledgeGrab');if(e){const at=[e.rect[0]-r.bodySize[0]/2-r.collisionSkin,e.rect[1]+e.rect[3]-r.sceneTraversal.hangGripHeight];this.applyMove(at[0]-p.x,at[1]-p.y);p.vx=p.vy=0;p.ledge={id:e.id};p.context={kind:'ledge',contact:[e.rect[0],e.rect[1]+e.rect[3]]};this.pendingAction=null;this.jumpUntil=-Infinity;this.finishPerformance();this.preparedMantle=mantlePlan(this.world,p,r);this.manualShot('climb',[p.x,p.y],[p.x,p.y],r.sceneTraversal.maxHangSeconds);this.transition('LedgeHang');this.mark('LedgeGrab',e.id);}}
+  if(p.state==='Airborne'&&(held.has('jump')||this.time<=this.ledgeIntentUntil)&&this.time>=this.ledgeReadyAt){const e=wallCandidate(this.world,p,r,'ledgeGrab');if(e){const at=[e.rect[0]-r.bodySize[0]/2-r.collisionSkin,e.rect[1]+e.rect[3]-r.sceneTraversal.hangGripHeight];this.applyMove(at[0]-p.x,at[1]-p.y);p.vx=p.vy=0;p.ledge={id:e.id};p.context={kind:'ledge',contact:[e.rect[0],e.rect[1]+e.rect[3]]};this.pendingAction=null;this.jumpUntil=-Infinity;this.finishPerformance();this.preparedMantle=mantlePlan(this.world,p,r);this.manualShot('climb',[p.x,p.y],[p.x,p.y],r.sceneTraversal.maxHangSeconds);this.transition('LedgeHang');this.mark('LedgeGrab',e.id);}}
   if(p.state==='Airborne'||p.state==='SwingGrapple'){const phase=p.vy>0?'Rise':'Fall';if(phase!==this.phase){this.mark(phase);this.phase=phase;}}else this.phase='';
   if(p.state==='Run'&&!this.coverage.Run)this.mark('Run');
   if(p.state==='Run')p.context=null;
   this.updateScenePlayback();
   if(p.state==='Run'||LOW.has(p.state))p.gaitDistance+=Math.abs(p.x-oldX);
-  this.wallTime=this.wallHit?this.wallTime+dt:0;if(this.wallTime>=this.lab.diagnostics.wallWarningSeconds){this.reject('Wall ahead: jump or retry station');this.wallTime=-this.lab.diagnostics.wallWarningSeconds;}
+  const blocked=['Run','Slide','CrouchHold','Roll'].includes(p.state)&&Math.abs(p.x-oldX)<r.runSpeed*dt*.5&&sweepBody(p,this.bodySize(),r.collisionSkin*3,0,this.world.surfaces,r.collisionSkin)?.normal[0];this.wallTime=blocked?this.wallTime+dt:0;if(r.blockedRetrySeconds!==undefined&&this.wallTime>=r.blockedRetrySeconds){this.fail('Blocked at obstacle');return;}if(r.blockedRetrySeconds===undefined&&this.wallTime>=this.lab.diagnostics.wallWarningSeconds){this.reject('Wall ahead: jump or retry station');this.wallTime=-this.lab.diagnostics.wallWarningSeconds;}
   p.vx=clamp(p.vx,-r.maxHorizontalSpeed,r.maxHorizontalSpeed);p.vy=clamp(p.vy,-r.maxFallSpeed,r.maxFallSpeed);
   if(![p.x,p.y,p.vx,p.vy].every(Number.isFinite))this.fail('Invalid numeric motion state');
  }

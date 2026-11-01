@@ -33,8 +33,8 @@ try{
  $('load-status').textContent='';
 }catch(e){$('load-status').textContent=`Could not load this menu. ${e.message}`;if($('level-summary'))$('level-summary').textContent='Return to mode select or reload to try again.';}
 const dialog=$('controls-dialog');if(dialog){dialog.addEventListener('close',()=>$('how-to-play').focus());$('how-to-play').onclick=()=>dialog.showModal();$('close-controls').onclick=$('guide-done').onclick=()=>dialog.close();dialog.addEventListener('click',e=>{if(e.target===dialog){const r=dialog.getBoundingClientRect();if(e.clientX<r.left||e.clientX>r.right||e.clientY<r.top||e.clientY>r.bottom)dialog.close();}});}
-if($('menu-fullscreen'))$('menu-fullscreen').onclick=async()=>{try{if(document.fullscreenElement)await document.exitFullscreen();else await document.documentElement.requestFullscreen();}catch{$('menu-fullscreen').textContent='Fullscreen unavailable';}};
-document.addEventListener('keydown',e=>{if(e.key!=='Escape')return;if(dialog?.open){e.preventDefault();dialog.close();return;}const back=document.querySelector('.breadcrumbs a:last-of-type');if(back){e.preventDefault();location.href=back.href;}});
+if($('menu-fullscreen'))$('menu-fullscreen').onclick=async()=>{try{if(window.parent.document.fullscreenElement)await window.parent.document.exitFullscreen();else await (window.parent.document.documentElement||document.documentElement).requestFullscreen();}catch{$('menu-fullscreen').textContent='Fullscreen unavailable';}};
+document.addEventListener('keydown',e=>{if(e.key!=='Escape')return;if(dialog?.open){e.preventDefault();dialog.close();return;}const back=document.querySelector('.breadcrumbs a:last-of-type');if(back){e.preventDefault();window.parent.navigateScreen?window.parent.navigateScreen(back.href):location.assign(back.href);}});
 if($('runner')){
  try{
   const catalog=await read('assets/character/animations.json'),seq=catalog.sequences.run,clip=catalog.clips.find(c=>c.id===seq.clip),images=new Map();await Promise.all(clip.sheets.map(async sheet=>{const im=new Image();im.src=sheet.file;await im.decode();images.set(sheet.file,im);}));

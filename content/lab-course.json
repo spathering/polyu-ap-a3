@@ -101,7 +101,7 @@
         0
       ],
       "hint": "Jump just before the ledge. When the overhead Q target lights up, press and HOLD Q; release on the rising forward arc.",
-      "keys": "SPACE → HOLD Q → RELEASE",
+      "keys": "SPACE \u2192 HOLD Q \u2192 RELEASE",
       "checks": [
         "SwingGrapple",
         "SwingRelease"
@@ -120,7 +120,7 @@
         0
       ],
       "hint": "Jump, then Q near the cable. Try SPACE jump-off, Q detach, and a fresh run to the cable endpoint.",
-      "keys": "SPACE → Q",
+      "keys": "SPACE \u2192 Q",
       "checks": [
         "Zipline",
         "ZiplineJump",
@@ -161,7 +161,7 @@
         226,
         0
       ],
-      "hint": "Pad → Q swing → release → Q cable. You can also try E toward the next anchor. Detach before acquiring another mode.",
+      "hint": "Pad \u2192 Q swing \u2192 release \u2192 Q cable. You can also try E toward the next anchor. Detach before acquiring another mode.",
       "keys": "Q / E / Q",
       "checks": [
         "JumpPad",
@@ -763,6 +763,6 @@
     "historySize": 8,
     "wallWarningSeconds": 0.6
   },
-  "contentRevision": "motion-run-08-districts",
-  "physicsVersion": "lab-07-flow"
+  "contentRevision": "motion-run-09-continuous",
+  "physicsVersion": "lab-08-continuous"
 }

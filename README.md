@@ -10,19 +10,19 @@
 flowchart LR
   Menu[Main menu] --> Mode[Mode select] --> Route[Choose a route] --> Run[Run and chain moves]
   Run --> Result[Finish and local best time]
-  Run --> Retry[Retry current section] --> Run
+  Run --> Retry[Automatic section retry] --> Run
   Menu --> Studio[Game editor]
 ```
 
 | Control | Action |
 |---|---|
-| Space / ↑ | Jump, vault or climb; hold to catch a ledge, release and press again to mantle |
+| Space / ↑ | Jump, vault or climb; catch and automatically climb a high ledge |
 | S / ↓ | Slide; buffer a landing roll; drop from a ledge |
 | E | Dash grapple |
 | Q | Hold to swing, release to let go; near a cable, press to attach or detach |
 | Esc / R | Pause / retry current section |
 
-Forward running is automatic. Press in the marked approach; the move starts at alignment. Late and missed inputs have different outcomes. Touch controls are under **Controls**. **Sound** provides music/effects toggles and volume; playback starts after a gesture. Best times and sound preferences stay in this browser.
+Forward running is automatic. Press in the marked approach; the move starts at alignment. Late and missed inputs have different outcomes. Touch controls are under **Controls**. **Sound** provides music/effects toggles and volume; playback starts after a gesture and continues across menus, pause and retries. Failed moves quickly restart the section without a popup. Best times and sound preferences stay in this browser.
 
 ## Run and develop
 
@@ -36,7 +36,7 @@ npm run rehearse # recorded production routes
 ```
 
 ```text
-index.html       Main menu
+index.html       Persistent screen and music host
 pages/           Player screens, Level Studio, Motion Lab
 styles/          Page styles
 content/         Canonical rules, modules, routes, schema and audio catalogue
@@ -56,6 +56,6 @@ flowchart LR
   Sim --> Audio[Event-driven sound]
 ```
 
-The project targets readable, continuous parkour and reproducible static hosting. Scene recipes bind input windows, fixed animation and directed cameras to shared geometry. Editor tests use the production simulator; rendering never moves collision bodies. New district routes reference existing modules. See [architecture](Documents/Current/modules.md), [current features](Documents/Current/player-feedback-update.md) and [plans](Documents/Plans/TODO.md). Endless generation and shared online scores remain planned.
+The project targets readable, continuous parkour and reproducible static hosting. Scene recipes bind input windows, fixed animation and directed cameras to shared geometry. Editor tests use the production simulator; rendering never moves collision bodies. New district routes reference existing modules. See [architecture](Documents/Current/modules.md), [current features](Documents/Current/continuous-play.md) and [plans](Documents/Plans/TODO.md). Endless generation and shared online scores remain planned.
 
-**References & thanks:** [Vector / Nekki](https://vector.game/zh-Hans/) informed movement and supplies the credited reference-derived character atlases; three traversal sheets were generated with imagegen. [Hyperton — Sudocolon](https://opengameart.org/content/hyperton) and [Kenney Interface Sounds](https://kenney.nl/assets/interface-sounds) supply the bundled CC0 audio. [Asset details](Documents/Current/animation-assets.md) · [Audio sources](assets/audio/README.md). Codex assisted with implementation, research and verification; decisions and player feedback are recorded in [PROCESS](PROCESS.md).
+**References & thanks:** [Vector / Nekki](https://vector.game/zh-Hans/) informed movement and supplies the credited reference-derived character atlases; three traversal sheets were generated with imagegen. [Racing Game Title — MintoDog, 140 BPM](https://opengameart.org/content/racing-game-title) and [Kenney Interface Sounds](https://kenney.nl/assets/interface-sounds) supply the bundled CC0 audio. [Asset details](Documents/Current/animation-assets.md) · [Audio sources](assets/audio/README.md). Codex assisted with implementation, research and verification; decisions and player feedback are recorded in [PROCESS](PROCESS.md).

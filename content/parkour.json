@@ -150,7 +150,7 @@
       2.3
     ],
     "climbMaxHeight": 1.2,
-    "climbDurationSeconds": 0.7,
+    "climbDurationSeconds": 0.42,
     "climbTrajectory": [
       [
         0,
@@ -158,18 +158,13 @@
         0
       ],
       [
-        0.3,
-        0.2,
-        0.8
+        0.28,
+        0.28,
+        1.04
       ],
       [
-        0.55,
-        0.3,
-        1.08
-      ],
-      [
-        0.8,
-        0.8,
+        0.7,
+        0.7,
         1.02
       ],
       [
@@ -221,7 +216,8 @@
       "rollBufferSeconds": 0.3,
       "rollMinImpact": 8,
       "rollSeconds": 0.52,
-      "rollSpeed": 8
+      "rollSpeed": 8,
+      "gripSettleSeconds": 0.1
     },
     "performanceByKind": {
       "jump": "scene-jump",
@@ -231,7 +227,9 @@
       "dashGrapple": "scene-dash-grapple",
       "swingGrapple": "scene-swing-grapple",
       "zipline": "scene-zipline"
-    }
+    },
+    "blockedRetrySeconds": 0.28,
+    "failureRetrySeconds": 0.18
   },
   "profiles": [
     {
@@ -272,8 +270,8 @@
       "velocityPolicy": "replace"
     }
   ],
-  "contentRevision": "motion-run-08-districts",
-  "physicsVersion": "lab-07-flow",
+  "contentRevision": "motion-run-09-continuous",
+  "physicsVersion": "lab-08-continuous",
   "generatorVersion": "not-enabled",
   "modules": [
     {

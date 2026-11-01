@@ -1,10 +1,13 @@
 # Project structure
 
+Latest movement/audio rules: [continuous play, automatic high-edge climb and quick retry](continuous-play.md).
+
+
 Updated 1 November 2026. [README](../../README.md) is the player/developer entry; [modules](modules.md) explains dependencies.
 
 ```text
-index.html                         Main menu; only root HTML entry
-pages/                             modes, levels, play, studio, editor, lab
+index.html                         Persistent screen/audio host; only root HTML entry
+pages/                             home, modes, levels, play, studio, editor, lab
 styles/                            menu, play, editor, shared lab styles
 content/parkour.json                Rules, profiles, modules, finite layouts, scene recipes
 content/content-package.schema.json Canonical runtime/editor contract
@@ -25,3 +28,5 @@ package.json, .gitignore, .nojekyll  Project and static-host configuration
 ```
 
 Pages use a relative base URL so imports and assets work both locally and under the repository's GitHub Pages prefix. Internal navigation targets `pages/`; old root page URLs have been replaced. There is no generated distribution directory, package installation, runtime server or secret. Runtime data no longer depends on a design-document path. A matching Chinese document tree is maintained in the private workspace.
+
+[Navigation and audio lifetime](continuous-play.md): `screen-route.js`, `screen-host.js` and `shell.js` preserve the top-level document; `quick-retry.js` owns the player retry delay.
